@@ -157,20 +157,68 @@ function startFreshQuiz() {
     loadQuestion();
 }
 
+// Add a modal for UX-friendly continue/start fresh prompt
+function showContinueModal(onContinue, onStartFresh) {
+    // Remove existing modal if present
+    let oldModal = document.getElementById('continue-modal');
+    if (oldModal) oldModal.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'continue-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.background = 'rgba(0,0,0,0.4)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '9999';
+
+    modal.innerHTML = `
+        <div style="
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            text-align: center;
+            min-width: 280px;
+        ">
+            <h2 style="margin-bottom: 18px;">Resume Quiz?</h2>
+            <p style="margin-bottom: 24px;">You have an unfinished quiz. Would you like to continue where you left off or start a new quiz?</p>
+            <button id="continue-btn" style="margin-right: 12px; background: #007bff; color: #fff; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer;">Continue</button>
+            <button id="startfresh-btn" style="background: #e0e0e0; color: #333; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer;">Start Fresh</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.getElementById('continue-btn').onclick = () => {
+        modal.remove();
+        onContinue();
+    };
+    document.getElementById('startfresh-btn').onclick = () => {
+        modal.remove();
+        onStartFresh();
+    };
+}
+
 // On load, ask user if they want to continue or start fresh if state exists
 (function initQuiz() {
     if (loadState()) {
-        if (confirm('Continue where you left off?')) {
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                showResult();
+        showContinueModal(
+            function () {
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            },
+            function () {
+                startFreshQuiz();
             }
-            return;
-        } else {
-            startFreshQuiz();
-            return;
-        }
+        );
+        return;
     }
     // No saved state, start fresh
     loadQuestion();

@@ -101,3 +101,8 @@ button:hover {
     font-size: 1.1em;
     text-align: center;
 }
+
+#continue-modal {
+    /* Modal styles are set inline in JS for compatibility, but you can add more here if needed */
+    z-index: 9999;
+}
