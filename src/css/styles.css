@@ -2,7 +2,25 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#quiz-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    background: white;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -25,11 +43,31 @@ h1 {
 
 .answers {
     list-style-type: none;
-    padding: 0;
+    padding-left: 0;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.answers input[type="radio"] {
+    accent-color: #007bff;
+    margin-right: 8px;
+}
+
+.answers label {
+    cursor: pointer;
+    font-size: 1rem;
+    color: #222;
 }
 
 .answers li {
     margin: 10px 0;
+    list-style-type: none;
+}
+
+.answers button,
+.answers li button {
+    all: unset;
+    display: none;
 }
 
 button {

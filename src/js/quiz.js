@@ -12,9 +12,29 @@ let score = 0;
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
     questionsContainer.innerHTML = `<h2>${question.q}</h2>`;
-    answersContainer.innerHTML = question.options.map((option, index) => `
-        <button onclick="selectAnswer(${index})">${option}</button>
-    `).join('');
+    // Render answers as a <ul> with <li> and radio inputs
+    answersContainer.innerHTML = `
+        <form id="answers-form">
+            <ul class="answers">
+                ${question.options.map((option, index) => `
+                    <li>
+                        <label>
+                            <input type="radio" name="answer" value="${index}">
+                            ${option}
+                        </label>
+                    </li>
+                `).join('')}
+            </ul>
+            <button type="submit" id="submit-answer">Submit</button>
+        </form>
+    `;
+    document.getElementById('answers-form').onsubmit = function(e) {
+        e.preventDefault();
+        const selected = this.elements['answer'].value;
+        if (selected !== undefined && selected !== "") {
+            selectAnswer(Number(selected));
+        }
+    };
 }
 
 function selectAnswer(selectedIndex) {
