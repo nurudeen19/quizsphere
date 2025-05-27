@@ -9,6 +9,41 @@ let currentQuestionIndex = 0;
 let score = 0;
 let feedbackContainer = null;
 
+// State persistence keys
+const STORAGE_KEY = 'k8s_quiz_state';
+
+function saveState() {
+    const state = {
+        currentQuestionIndex,
+        score
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+    const state = localStorage.getItem(STORAGE_KEY);
+    if (state) {
+        try {
+            const parsed = JSON.parse(state);
+            if (
+                typeof parsed.currentQuestionIndex === 'number' &&
+                typeof parsed.score === 'number'
+            ) {
+                currentQuestionIndex = parsed.currentQuestionIndex;
+                score = parsed.score;
+                return true;
+            }
+        } catch (e) {
+            // ignore parse errors
+        }
+    }
+    return false;
+}
+
+function clearState() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
 // Use the correct format for your questions array
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
@@ -41,6 +76,7 @@ function loadQuestion() {
     };
     document.getElementById('next-question').onclick = function() {
         currentQuestionIndex++;
+        saveState();
         if (currentQuestionIndex < questions.length) {
             loadQuestion();
         } else {
@@ -73,6 +109,7 @@ function selectAnswer(selectedIndex) {
         feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer is: ${correctOptions}</span>`;
     }
     document.getElementById('next-question').style.display = 'inline-block';
+    saveState();
 }
 
 // Make selectAnswer globally accessible
@@ -84,6 +121,7 @@ function showResult() {
     resultContainer.innerHTML = `
         <h2>Your Score: ${score} out of ${questions.length}</h2>
         <button onclick="restartQuiz()">Restart Quiz</button>
+        <button onclick="startFreshQuiz()" style="margin-left:10px;">Start Fresh</button>
     `;
     if (!resultContainer.parentNode) {
         document.getElementById('quiz-container').appendChild(resultContainer);
@@ -94,6 +132,7 @@ function showResult() {
 function restartQuiz() {
     currentQuestionIndex = 0;
     score = 0;
+    saveState();
     questionsContainer.style.display = 'block';
     answersContainer.style.display = 'block';
     resultContainer.innerHTML = '';
@@ -101,5 +140,32 @@ function restartQuiz() {
     loadQuestion();
 }
 
-// Initialize the quiz
-loadQuestion();
+function startFreshQuiz() {
+    clearState();
+    currentQuestionIndex = 0;
+    score = 0;
+    questionsContainer.style.display = 'block';
+    answersContainer.style.display = 'block';
+    resultContainer.innerHTML = '';
+    resultContainer.style.display = 'none';
+    loadQuestion();
+}
+
+// On load, ask user if they want to continue or start fresh if state exists
+(function initQuiz() {
+    if (loadState()) {
+        if (confirm('Continue where you left off?')) {
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+            return;
+        } else {
+            startFreshQuiz();
+            return;
+        }
+    }
+    // No saved state, start fresh
+    loadQuestion();
+})();
