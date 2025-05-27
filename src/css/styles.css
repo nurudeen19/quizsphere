@@ -94,3 +94,10 @@ button:hover {
 .incorrect {
     color: red;
 }
+
+.feedback {
+    min-height: 24px;
+    margin-top: 10px;
+    font-size: 1.1em;
+    text-align: center;
+}

@@ -7,6 +7,7 @@ const answersContainer = document.getElementById('answers');
 const resultContainer = document.getElementById('result-container') || document.createElement('div');
 let currentQuestionIndex = 0;
 let score = 0;
+let feedbackContainer = null;
 
 // Use the correct format for your questions array
 function loadQuestion() {
@@ -27,12 +28,23 @@ function loadQuestion() {
             </ul>
             <button type="submit" id="submit-answer">Submit</button>
         </form>
+        <div id="feedback" class="feedback"></div>
+        <button id="next-question" style="display:none;margin-top:10px;">Next Question</button>
     `;
+    feedbackContainer = document.getElementById('feedback');
     document.getElementById('answers-form').onsubmit = function(e) {
         e.preventDefault();
         const selected = this.elements['answer'].value;
         if (selected !== undefined && selected !== "") {
             selectAnswer(Number(selected));
+        }
+    };
+    document.getElementById('next-question').onclick = function() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
         }
     };
 }
@@ -44,23 +56,23 @@ function selectAnswer(selectedIndex) {
         ? question.answers.includes(selectedIndex)
         : selectedIndex === question.answers;
 
+    // Disable all radios after answering
+    const radios = document.querySelectorAll('input[name="answer"]');
+    radios.forEach(r => r.disabled = true);
+    document.getElementById('submit-answer').disabled = true;
+
+    // Show feedback
     if (isCorrect) {
         score++;
-        alert('Correct!');
+        feedbackContainer.innerHTML = `<span class="correct">Correct!</span>`;
     } else {
         // Show all correct answers
         const correctOptions = Array.isArray(question.answers)
             ? question.answers.map(i => question.options[i]).join(', ')
             : question.options[question.answers];
-        alert(`Wrong! The correct answer is: ${correctOptions}`);
+        feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer is: ${correctOptions}</span>`;
     }
-
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-    } else {
-        showResult();
-    }
+    document.getElementById('next-question').style.display = 'inline-block';
 }
 
 // Make selectAnswer globally accessible
