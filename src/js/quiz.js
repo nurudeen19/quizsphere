@@ -47,20 +47,22 @@ function clearState() {
 // Use the correct format for your questions array
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
+    const isMultiple = Array.isArray(question.answers) && question.answers.length > 1;
     questionsContainer.innerHTML = `
         <div style="width:100%;text-align:right;font-size:0.95em;color:#666;margin-bottom:8px;">
             Question ${currentQuestionIndex + 1} of ${questions.length}
         </div>
         <h2>${question.q}</h2>
+        ${isMultiple ? '<div style="color:#888;font-size:0.95em;margin-bottom:8px;">(Select all that apply)</div>' : ''}
     `;
-    // Render answers as a <ul> with <li> and radio inputs
+    // Render answers as a <ul> with <li> and radio/checkbox inputs
     answersContainer.innerHTML = `
         <form id="answers-form">
             <ul class="answers">
                 ${question.options.map((option, index) => `
                     <li>
                         <label>
-                            <input type="radio" name="answer" value="${index}">
+                            <input type="${isMultiple ? 'checkbox' : 'radio'}" name="answer" value="${index}">
                             ${option}
                         </label>
                     </li>
@@ -74,9 +76,21 @@ function loadQuestion() {
     feedbackContainer = document.getElementById('feedback');
     document.getElementById('answers-form').onsubmit = function(e) {
         e.preventDefault();
-        const selected = this.elements['answer'].value;
-        if (selected !== undefined && selected !== "") {
-            selectAnswer(Number(selected));
+        let selected;
+        if (isMultiple) {
+            selected = Array.from(this.elements['answer'])
+                .filter(input => input.checked)
+                .map(input => Number(input.value));
+        } else {
+            selected = this.elements['answer'].value;
+            if (selected !== undefined && selected !== "") {
+                selected = [Number(selected)];
+            } else {
+                selected = [];
+            }
+        }
+        if (selected.length > 0) {
+            selectAnswer(selected, isMultiple);
         }
     };
     document.getElementById('next-question').onclick = function() {
@@ -90,28 +104,34 @@ function loadQuestion() {
     };
 }
 
-function selectAnswer(selectedIndex) {
+function selectAnswer(selectedIndices, isMultiple) {
     const question = questions[currentQuestionIndex];
-    // Support both single and multiple correct answers
-    const isCorrect = Array.isArray(question.answers)
-        ? question.answers.includes(selectedIndex)
-        : selectedIndex === question.answers;
+    const correctAnswers = Array.isArray(question.answers) ? question.answers : [question.answers];
 
-    // Disable all radios after answering
-    const radios = document.querySelectorAll('input[name="answer"]');
-    radios.forEach(r => r.disabled = true);
+    // Disable all inputs after answering
+    const inputs = document.querySelectorAll('input[name="answer"]');
+    inputs.forEach(r => r.disabled = true);
     document.getElementById('submit-answer').disabled = true;
+
+    // Evaluate correctness
+    let isCorrect;
+    if (isMultiple) {
+        // Must match all and only the correct answers (order doesn't matter)
+        const selectedSorted = [...selectedIndices].sort((a, b) => a - b);
+        const correctSorted = [...correctAnswers].sort((a, b) => a - b);
+        isCorrect = selectedSorted.length === correctSorted.length &&
+            selectedSorted.every((val, idx) => val === correctSorted[idx]);
+    } else {
+        isCorrect = correctAnswers.includes(selectedIndices[0]);
+    }
 
     // Show feedback
     if (isCorrect) {
         score++;
         feedbackContainer.innerHTML = `<span class="correct">Correct!</span>`;
     } else {
-        // Show all correct answers
-        const correctOptions = Array.isArray(question.answers)
-            ? question.answers.map(i => question.options[i]).join(', ')
-            : question.options[question.answers];
-        feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer is: ${correctOptions}</span>`;
+        const correctOptions = correctAnswers.map(i => question.options[i]).join(', ');
+        feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer${correctAnswers.length > 1 ? 's are' : ' is'}: ${correctOptions}</span>`;
     }
     document.getElementById('next-question').style.display = 'inline-block';
     saveState();
