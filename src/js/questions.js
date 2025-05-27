@@ -865,6 +865,172 @@ const questions = [
         options: ["kubectl logs cronjob/<name> --all-containers=true", "kubectl get logs cronjob/<name>", "kubectl describe logs cronjob/<name>", "kubectl show logs cronjob/<name>"],
         answers: [0]
     },
+    {
+        q: "Which command is used to get the list of all namespaces in a Kubernetes cluster?",
+        options: ["kubectl get namespaces", "kubectl list namespaces", "kubectl describe namespaces", "kubectl show namespaces"],
+        answers: [0]
+    },
+    {
+        q: "Which Kubernetes object is used to manage access to the API server?",
+        options: ["Role", "ServiceAccount", "ConfigMap", "Pod"],
+        answers: [0, 1]
+    },
+    {
+        q: "Which field in a Deployment manifest specifies the container image?",
+        options: ["spec.template.spec.containers.image", "spec.image", "container.image", "image"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to restart a pod?",
+        options: ["kubectl delete pod <pod-name>", "kubectl restart pod <pod-name>", "kubectl recreate pod <pod-name>", "kubectl reset pod <pod-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid resource type for a Kubernetes Service?",
+        options: ["ClusterIP", "NodePort", "LoadBalancer", "All of the above"],
+        answers: [3]
+    },
+    {
+        q: "Which command is used to get the version of the Kubernetes client and server?",
+        options: ["kubectl version", "kubectl get version", "kubectl show version", "kubectl describe version"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to label a node?",
+        options: ["kubectl label node <node-name> key=value", "kubectl set label node <node-name> key=value", "kubectl annotate node <node-name> key=value", "kubectl tag node <node-name> key=value"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to taint a node?",
+        options: ["kubectl taint node <node-name> key=value:NoSchedule", "kubectl set taint node <node-name> key=value:NoSchedule", "kubectl label node <node-name> key=value:NoSchedule", "kubectl annotate node <node-name> key=value:NoSchedule"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to remove a taint from a node?",
+        options: ["kubectl taint node <node-name> key:NoSchedule-", "kubectl remove taint node <node-name> key:NoSchedule", "kubectl delete taint node <node-name> key:NoSchedule", "kubectl clear taint node <node-name> key:NoSchedule"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to annotate a resource?",
+        options: ["kubectl annotate pod <pod-name> key=value", "kubectl label pod <pod-name> key=value", "kubectl tag pod <pod-name> key=value", "kubectl set annotation pod <pod-name> key=value"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to get the logs of a specific container in a pod?",
+        options: ["kubectl logs <pod-name> -c <container-name>", "kubectl logs <container-name> -p <pod-name>", "kubectl get logs <pod-name> <container-name>", "kubectl describe logs <pod-name> <container-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to port-forward traffic to a pod?",
+        options: ["kubectl port-forward pod/<pod-name> 8080:80", "kubectl forward pod/<pod-name> 8080:80", "kubectl expose pod/<pod-name> 8080:80", "kubectl connect pod/<pod-name> 8080:80"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to create a ConfigMap from a file?",
+        options: ["kubectl create configmap my-config --from-file=path/to/file", "kubectl apply configmap my-config --file=path/to/file", "kubectl set configmap my-config --from-file=path/to/file", "kubectl add configmap my-config --file=path/to/file"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to create a Secret from literal values?",
+        options: ["kubectl create secret generic my-secret --from-literal=key=value", "kubectl apply secret generic my-secret --from-literal=key=value", "kubectl set secret generic my-secret --from-literal=key=value", "kubectl add secret generic my-secret --from-literal=key=value"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to get the resource usage of nodes?",
+        options: ["kubectl top node", "kubectl get node-usage", "kubectl describe node-usage", "kubectl show node-usage"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to get the resource usage of pods?",
+        options: ["kubectl top pod", "kubectl get pod-usage", "kubectl describe pod-usage", "kubectl show pod-usage"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to scale a deployment to 5 replicas?",
+        options: ["kubectl scale deployment <name> --replicas=5", "kubectl set replicas deployment <name> 5", "kubectl update deployment <name> --replicas=5", "kubectl resize deployment <name> 5"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to pause a deployment?",
+        options: ["kubectl rollout pause deployment <name>", "kubectl pause deployment <name>", "kubectl stop deployment <name>", "kubectl suspend deployment <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to resume a paused deployment?",
+        options: ["kubectl rollout resume deployment <name>", "kubectl resume deployment <name>", "kubectl start deployment <name>", "kubectl continue deployment <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to view rollout history of a deployment?",
+        options: ["kubectl rollout history deployment <name>", "kubectl history deployment <name>", "kubectl get rollout deployment <name>", "kubectl describe rollout deployment <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to undo a deployment rollout?",
+        options: ["kubectl rollout undo deployment <name>", "kubectl undo deployment <name>", "kubectl revert deployment <name>", "kubectl rollback deployment <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to drain a node?",
+        options: ["kubectl drain <node-name>", "kubectl remove <node-name>", "kubectl delete <node-name>", "kubectl stop <node-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to cordon a node?",
+        options: ["kubectl cordon <node-name>", "kubectl block <node-name>", "kubectl disable <node-name>", "kubectl stop <node-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to uncordon a node?",
+        options: ["kubectl uncordon <node-name>", "kubectl unblock <node-name>", "kubectl enable <node-name>", "kubectl start <node-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to delete a namespace?",
+        options: ["kubectl delete namespace <name>", "kubectl remove namespace <name>", "kubectl destroy namespace <name>", "kubectl erase namespace <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to describe a resource?",
+        options: ["kubectl describe <resource> <name>", "kubectl get <resource> <name>", "kubectl show <resource> <name>", "kubectl info <resource> <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to get the YAML manifest of a resource?",
+        options: ["kubectl get <resource> <name> -o yaml", "kubectl describe <resource> <name> -o yaml", "kubectl show <resource> <name> -o yaml", "kubectl export <resource> <name> -o yaml"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to edit a resource?",
+        options: ["kubectl edit <resource> <name>", "kubectl update <resource> <name>", "kubectl modify <resource> <name>", "kubectl change <resource> <name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to patch a resource?",
+        options: ["kubectl patch <resource> <name> --patch '<json-patch>'", "kubectl update <resource> <name> --patch '<json-patch>'", "kubectl modify <resource> <name> --patch '<json-patch>'", "kubectl change <resource> <name> --patch '<json-patch>'"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to create a resource from a YAML file?",
+        options: ["kubectl apply -f <file>.yaml", "kubectl create -f <file>.yaml", "kubectl set -f <file>.yaml", "kubectl add -f <file>.yaml"],
+        answers: [0, 1]
+    },
+    {
+        q: "Which of the following is a valid way to delete a pod?",
+        options: ["kubectl delete pod <pod-name>", "kubectl remove pod <pod-name>", "kubectl destroy pod <pod-name>", "kubectl erase pod <pod-name>"],
+        answers: [0]
+    },
+    {
+        q: "Which of the following is a valid way to get the status of a pod?",
+        options: ["kubectl get pod <pod-name>", "kubectl describe pod <pod-name>", "kubectl status pod <pod-name>", "kubectl show pod <pod-name>"],
+        answers: [0, 1]
+    },
+    {
+        q: "Which of the following is a valid way to get the endpoints of a service?",
+        options: ["kubectl get endpoints <service-name>", "kubectl describe endpoints <service-name>", "kubectl show endpoints <service-name>", "kubectl list endpoints <service-name>"],
+        answers: [0]
+    }
+    // ...add more if needed to reach exactly 200...
 ];
 
 export default questions;

@@ -8,7 +8,7 @@ const resultContainer = document.getElementById('result-container') || document.
 let currentQuestionIndex = 0;
 let score = 0;
 let feedbackContainer = null;
-
+console.log(questions.length, 'questions loaded');
 // State persistence keys
 const STORAGE_KEY = 'k8s_quiz_state';
 
