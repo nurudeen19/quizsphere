@@ -39,7 +39,7 @@ README.md
 1. **Clone the repository:**
    ```sh
    git clone <repository-url>
-   cd kubernetes-quiz
+   cd k8s_mcq-quiz
    ```
 
 2. **Install dependencies (optional, for live-server):**
