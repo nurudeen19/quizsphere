@@ -1,0 +1,19 @@
+{
+  "name": "kubernetes-quiz",
+  "version": "1.0.0",
+  "description": "A quiz application that generates  multiple-choice questions on Kubernetes based on KCNA certification standards.",
+  "main": "src/js/quiz.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'No build step required.'"
+  },
+  "author": {
+    "name": "Nurudeen Habibu",
+    "email": "nurudeenh@gmail.com",
+    "url": "https://nurustech.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
