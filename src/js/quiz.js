@@ -154,7 +154,8 @@ function showResult() {
     }
     resultContainer.style.display = 'block';
 }
-
+// Make restartQuiz globally accessible
+window.restartQuiz = restartQuiz;
 function restartQuiz() {
     currentQuestionIndex = 0;
     score = 0;
@@ -176,6 +177,9 @@ function startFreshQuiz() {
     resultContainer.style.display = 'none';
     loadQuestion();
 }
+
+// Make startFreshQuiz globally accessible
+window.startFreshQuiz = startFreshQuiz;
 
 // Add a modal for UX-friendly continue/start fresh prompt
 function showContinueModal(onContinue, onStartFresh) {

@@ -1033,4 +1033,48 @@ const questions = [
     // ...add more if needed to reach exactly 200...
 ];
 
+// Shuffle options and update answers for each question to reduce predictability
+(function randomizeAnswers(questions) {
+    for (const q of questions) {
+        // Pair each option with its original index
+        const optionPairs = q.options.map((opt, idx) => ({ opt, idx }));
+        // Shuffle the pairs
+        for (let i = optionPairs.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionPairs[i], optionPairs[j]] = [optionPairs[j], optionPairs[i]];
+        }
+        // Build new options array
+        q.options = optionPairs.map(pair => pair.opt);
+        // Map old answer indices to new indices
+        const oldToNew = {};
+        optionPairs.forEach((pair, newIdx) => {
+            oldToNew[pair.idx] = newIdx;
+        });
+        if (Array.isArray(q.answers)) {
+            q.answers = q.answers.map(oldIdx => oldToNew[oldIdx]);
+        } else {
+            q.answers = [oldToNew[q.answers]];
+        }
+    }
+})(questions);
+
+// Uniqueness check utility (run once at the end of the file, not part of export)
+(function checkUniqueQuestions(questions) {
+    const seen = new Set();
+    let duplicates = 0;
+    questions.forEach((q, idx) => {
+        const key = q.q.trim().toLowerCase();
+        if (seen.has(key)) {
+            duplicates++;
+        } else {
+            seen.add(key);
+        }
+    });
+    if (duplicates > 0) {
+        console.warn('Duplicate questions found:', duplicates);
+    } else {
+        console.info('All questions are unique.');
+    }
+})(questions);
+
 export default questions;
