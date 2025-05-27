@@ -47,7 +47,12 @@ function clearState() {
 // Use the correct format for your questions array
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
-    questionsContainer.innerHTML = `<h2>${question.q}</h2>`;
+    questionsContainer.innerHTML = `
+        <div style="width:100%;text-align:right;font-size:0.95em;color:#666;margin-bottom:8px;">
+            Question ${currentQuestionIndex + 1} of ${questions.length}
+        </div>
+        <h2>${question.q}</h2>
+    `;
     // Render answers as a <ul> with <li> and radio inputs
     answersContainer.innerHTML = `
         <form id="answers-form">
@@ -120,6 +125,7 @@ function showResult() {
     answersContainer.style.display = 'none';
     resultContainer.innerHTML = `
         <h2>Your Score: ${score} out of ${questions.length}</h2>
+        <div style="margin-bottom:10px;">You answered ${currentQuestionIndex} out of ${questions.length} questions.</div>
         <button onclick="restartQuiz()">Restart Quiz</button>
         <button onclick="startFreshQuiz()" style="margin-left:10px;">Start Fresh</button>
     `;
