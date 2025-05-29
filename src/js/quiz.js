@@ -1,5 +1,5 @@
 // Import questionsPromise variable
-import questionsPromise from './questions.js';
+import { questionsPromise, nextPage, getCurrentPage, getMaxPage } from './questions.js';
 
 // Fucton to compare two array
 function arraysHaveSameElements(a, b) {
@@ -56,9 +56,12 @@ questionsPromise.then(questions => {
     function loadQuestion() {
         const question = questions[currentQuestionIndex];
         const inputType = question.answers.length === 1 ? "radio" : "checkbox";
+        // Show chapter (page) info
+        const chapterNumber = getCurrentPage() + 1;
+        const totalChapters = getMaxPage() + 1;
         questionsContainer.innerHTML = `
             <div style="width:100%;text-align:right;font-size:0.95em;color:#666;margin-bottom:8px;">
-                Question ${currentQuestionIndex + 1} of ${questions.length}
+                Chapter ${chapterNumber} of ${totalChapters} &mdash; Question ${currentQuestionIndex + 1} of ${questions.length}
             </div>
             <h2>${question.q}</h2>
         `;
@@ -128,16 +131,55 @@ questionsPromise.then(questions => {
     function showResult() {
         questionsContainer.style.display = 'none';
         answersContainer.style.display = 'none';
+        let hasNextPage = getCurrentPage() < getMaxPage();
+        const chapterNumber = getCurrentPage() + 1;
+        const totalChapters = getMaxPage() + 1;
         resultContainer.innerHTML = `
-            <h2>Your Score: ${score} out of ${questions.length}</h2>
+            <h2>Chapter ${chapterNumber} of ${totalChapters} Complete</h2>
+            <div style="margin-bottom:10px;">Your Score: ${score} out of ${questions.length}</div>
             <div style="margin-bottom:10px;">You answered ${currentQuestionIndex} out of ${questions.length} questions.</div>
-            <button onclick="restartQuiz()">Restart Quiz</button>
+            <button id="continue-quiz-btn">${hasNextPage ? 'Continue to Next Chapter' : 'Restart Quiz'}</button>
+            <button id="restart-chapter-btn" style="margin-left:10px;">Restart This Chapter</button>
             <button onclick="startFreshQuiz()" style="margin-left:10px;">Start Fresh</button>
         `;
         if (!resultContainer.parentNode) {
             document.getElementById('quiz-container').appendChild(resultContainer);
         }
         resultContainer.style.display = 'block';
+        document.getElementById('continue-quiz-btn').onclick = function() {
+            if (hasNextPage) {
+                // Load next page of questions
+                nextPage();
+                questionsPromise.then(() => {
+                    currentQuestionIndex = 0;
+                    score = 0;
+                    questionsContainer.style.display = 'block';
+                    answersContainer.style.display = 'block';
+                    resultContainer.innerHTML = '';
+                    resultContainer.style.display = 'none';
+                    loadQuestion();
+                });
+            } else {
+                // Restart from first page
+                currentQuestionIndex = 0;
+                score = 0;
+                questionsContainer.style.display = 'block';
+                answersContainer.style.display = 'block';
+                resultContainer.innerHTML = '';
+                resultContainer.style.display = 'none';
+                loadQuestion();
+            }
+        };
+        document.getElementById('restart-chapter-btn').onclick = function() {
+            currentQuestionIndex = 0;
+            score = 0;
+            saveState(); // Ensure state is reset for the chapter
+            questionsContainer.style.display = 'block';
+            answersContainer.style.display = 'block';
+            resultContainer.innerHTML = '';
+            resultContainer.style.display = 'none';
+            loadQuestion();
+        };
     }
     window.restartQuiz = restartQuiz;
     function restartQuiz() {
