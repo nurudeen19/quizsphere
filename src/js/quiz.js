@@ -1,5 +1,5 @@
 // Import questionsPromise variable
-import { questionsPromise, nextPage, getCurrentPage, getMaxPage } from './questions.js';
+import { questionsPromise, nextPage, prevPage, getCurrentPage, getMaxPage } from './questions.js';
 
 // Fucton to compare two array
 function arraysHaveSameElements(a, b) {
@@ -24,7 +24,9 @@ function saveState() {
         currentQuestionIndex,
         score,
         currentChapter,
-        overallScore
+        overallScore,
+        // Save chapter stats for resume
+        chapterStats: JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]')
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -42,6 +44,10 @@ function loadState() {
                 score = parsed.score;
                 currentChapter = typeof parsed.currentChapter === 'number' ? parsed.currentChapter : 0;
                 overallScore = typeof parsed.overallScore === 'number' ? parsed.overallScore : 0;
+                // Restore chapter stats if present
+                if (Array.isArray(parsed.chapterStats)) {
+                    localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(parsed.chapterStats));
+                }
                 return true;
             }
         } catch (e) {
@@ -60,6 +66,16 @@ questionsPromise.then(questions => {
     console.log(questions.length, 'questions loaded');
     // Use the correct format for your questions array
     function loadQuestion() {
+        // If resuming, set the correct page/chapter
+        if (getCurrentPage() !== currentChapter) {
+            // Move to the saved chapter
+            let diff = currentChapter - getCurrentPage();
+            if (diff > 0) {
+                for (let i = 0; i < diff; i++) nextPage();
+            } else if (diff < 0) {
+                for (let i = 0; i < -diff; i++) prevPage();
+            }
+        }
         const question = questions[currentQuestionIndex];
         const inputType = question.answers.length === 1 ? "radio" : "checkbox";
         // Show chapter (page) info
@@ -142,11 +158,40 @@ questionsPromise.then(questions => {
         let hasNextPage = getCurrentPage() < getMaxPage();
         const chapterNumber = getCurrentPage() + 1;
         const totalChapters = getMaxPage() + 1;
-        resultContainer.innerHTML = `
+        // Track last completed chapter
+        if (!hasNextPage) {
+            localStorage.setItem('k8s_quiz_last_chapter', totalChapters);
+        } else {
+            localStorage.setItem('k8s_quiz_last_chapter', chapterNumber);
+        }
+        let lastCompleted = localStorage.getItem('k8s_quiz_last_chapter') || chapterNumber;
+        let statsHtml = `
             <h2>Chapter ${chapterNumber} of ${totalChapters} Complete</h2>
             <div style="margin-bottom:10px;">Your Score: ${score} out of ${questions.length}</div>
             <div style="margin-bottom:10px;">Overall Score: ${overallScore}</div>
             <div style="margin-bottom:10px;">You answered ${currentQuestionIndex} out of ${questions.length} questions.</div>
+        `;
+        // If this is the last chapter, show per-chapter stats and overall stats
+        if (!hasNextPage) {
+            // Retrieve chapter scores from localStorage or session (or build a simple array in memory)
+            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            chapterStats[currentChapter] = score;
+            localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
+            let chaptersBreakdown = '<h3>Chapter Breakdown</h3><ul style="margin-bottom:10px;">';
+            for (let i = 0; i < chapterStats.length; i++) {
+                chaptersBreakdown += `<li>Chapter ${i+1}: ${chapterStats[i] || 0} / ${questions.length}</li>`;
+            }
+            chaptersBreakdown += '</ul>';
+            statsHtml += chaptersBreakdown;
+            statsHtml += `<div style="font-weight:bold;">Final Overall Score: ${overallScore} out of ${questions.length * chapterStats.length}</div>`;
+        } else {
+            // Save current chapter score for later
+            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            chapterStats[currentChapter] = score;
+            localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
+        }
+        resultContainer.innerHTML = `
+            ${statsHtml}
             <button id="continue-quiz-btn">${hasNextPage ? 'Continue to Next Chapter' : 'Restart Quiz'}</button>
             <button id="restart-chapter-btn" style="margin-left:10px;">Restart This Chapter</button>
             <button onclick="startFreshQuiz()" style="margin-left:10px;">Start Fresh</button>
@@ -157,7 +202,6 @@ questionsPromise.then(questions => {
         resultContainer.style.display = 'block';
         document.getElementById('continue-quiz-btn').onclick = function() {
             if (hasNextPage) {
-                // Load next page of questions
                 nextPage();
                 questionsPromise.then(() => {
                     currentQuestionIndex = 0;
@@ -171,7 +215,8 @@ questionsPromise.then(questions => {
                     loadQuestion();
                 });
             } else {
-                // Restart from first page
+                // Restart from first page and clear chapter stats
+                localStorage.removeItem('k8s_quiz_chapter_stats');
                 currentQuestionIndex = 0;
                 score = 0;
                 currentChapter = 0;
@@ -188,6 +233,10 @@ questionsPromise.then(questions => {
             // Subtract this chapter's score from overallScore
             overallScore -= score;
             if (overallScore < 0) overallScore = 0;
+            // Remove this chapter's score from chapterStats
+            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            chapterStats[currentChapter] = 0;
+            localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
             currentQuestionIndex = 0;
             score = 0;
             saveState();
@@ -269,6 +318,15 @@ questionsPromise.then(questions => {
         if (loadState()) {
             showContinueModal(
                 function () {
+                    // Restore chapter/page and question index
+                    if (getCurrentPage() !== currentChapter) {
+                        let diff = currentChapter - getCurrentPage();
+                        if (diff > 0) {
+                            for (let i = 0; i < diff; i++) nextPage();
+                        } else if (diff < 0) {
+                            for (let i = 0; i < -diff; i++) prevPage();
+                        }
+                    }
                     if (currentQuestionIndex < questions.length) {
                         loadQuestion();
                     } else {
