@@ -4,7 +4,7 @@
   "description": "A quiz application that generates  multiple-choice questions on Kubernetes based on KCNA certification standards.",
   "main": "src/js/quiz.js",
   "scripts": {
-    "start": "live-server src",
+    "start": "live-server --open=index.html .",
     "build": "echo 'No build step required.'"
   },
   "author": {

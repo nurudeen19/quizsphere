@@ -88,7 +88,7 @@ function getMaxPage() {
 }
 
 // Initial load
-const questionsPromise = fetch('../data/questions.json')
+const questionsPromise = fetch('./src/data/questions.json')
     .then(response => {
         if (!response.ok) throw new Error('Not found');
         return response.json();
@@ -105,23 +105,7 @@ const questionsPromise = fetch('../data/questions.json')
         return questions;
     })
     .catch(() => {
-        // Fallback to window.questionsData if fetch fails (for GitHub Pages or file://)
-        if (window.questionsData && Array.isArray(window.questionsData)) {
-            shuffleOptionsAndRemapAnswers(window.questionsData);
-            checkUniqueness(window.questionsData);
-            _allQuestions = window.questionsData;
-            _maxPage = Math.floor((_allQuestions.length - 1) / PAGE_SIZE);
-            preloadPage(0);
-            preloadPage(1);
-            setQuestionsPage(0);
-            return questions;
-        } else {
-            if (typeof document !== 'undefined') {
-                const qDiv = document.getElementById('question');
-                if (qDiv) qDiv.innerHTML = '<div style="color:red;">Failed to load questions. Please try again later.</div>';
-            }
-            throw new Error('No questions data found.');
-        }
+        throw new Error('No questions data found.');
     });
 
 export {

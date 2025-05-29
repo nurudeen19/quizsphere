@@ -3,15 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kubernetes Quiz</title>
+    <title>Kubernetes Quiz App | Free Kubernetes Practice Test & Certification Prep</title>
+    <meta name="description" content="Test your Kubernetes knowledge with this free, interactive Kubernetes quiz app. 200+ questions, instant feedback, chapter stats, and certification prep. No registration required!">
+    <meta name="keywords" content="Kubernetes, Kubernetes quiz, Kubernetes test, Kubernetes certification, KCNA, CKAD, CKA, Kubernetes practice, DevOps, Cloud Native, Kubernetes exam, Kubernetes questions, Kubernetes interview, Kubernetes MCQ, Kubernetes learning, Kubernetes tutorial, Kubernetes practice test, Kubernetes online quiz, Kubernetes beginner, Kubernetes advanced, Kubernetes training, Kubernetes study guide">
+    <meta name="author" content="Kubernetes Quiz App Contributors">
+    <meta property="og:title" content="Kubernetes Quiz App | Free Kubernetes Practice Test & Certification Prep">
+    <meta property="og:description" content="Test your Kubernetes knowledge with this free, interactive Kubernetes quiz app. 200+ questions, instant feedback, chapter stats, and certification prep. No registration required!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nurudeen19.github.io/k8s_mcq-quiz/">
+    <meta property="og:image" content="https://nurudeen19.github.io/k8s_mcq-quiz/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kubernetes Quiz App | Free Kubernetes Practice Test & Certification Prep">
+    <meta name="twitter:description" content="Test your Kubernetes knowledge with this free, interactive Kubernetes quiz app. 200+ questions, instant feedback, chapter stats, and certification prep. No registration required!">
+    <meta name="twitter:image" content="https://nurudeen19.github.io/k8s_mcq-quiz/og-image.png">
+    <link rel="canonical" href="https://nurudeen19.github.io/k8s_mcq-quiz/">
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/css/styles.css">
+    <!-- Favicon for branding -->
+    <link rel="icon" type="image/png" href="https://nurudeen19.github.io/k8s_mcq-quiz/favicon.png">
 </head>
 <body>
     <div id="quiz-container">
-        <h1>Kubernetes Quiz</h1>
+        <div style="text-align:center; margin-bottom: 1.5rem;">
+            <img src="https://cdn.jsdelivr.net/gh/kubernetes/kubernetes/logo/logo.png" alt="Kubernetes Logo" class="k8s-logo">
+            <h1 class="quiz-title">Kubernetes Quiz</h1>
+            <div class="quiz-subtitle">Free Practice Test & Certification Prep</div>
+        </div>
+        <div id="progress-bar">
+            <div id="progress-bar-inner"></div>
+        </div>
         <div id="question"></div>
         <div id="answers"></div>
-        <button id="next-button" style="display: none;">Next Question</button>
+        <button id="next-button">Next Question</button>
     </div>
     <script src="src/js/utils.js" type="module"></script>
     <script src="src/js/questions.js" type="module"></script>
