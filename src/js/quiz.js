@@ -14,13 +14,17 @@ const resultContainer = document.getElementById('result-container') || document.
 let currentQuestionIndex = 0;
 let score = 0;
 let feedbackContainer = null;
+let currentChapter = 0; // Track the current chapter (page)
+let overallScore = 0; // Track the overall score across all chapters
 // State persistence keys
 const STORAGE_KEY = 'k8s_quiz_state';
 
 function saveState() {
     const state = {
         currentQuestionIndex,
-        score
+        score,
+        currentChapter,
+        overallScore
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -36,6 +40,8 @@ function loadState() {
             ) {
                 currentQuestionIndex = parsed.currentQuestionIndex;
                 score = parsed.score;
+                currentChapter = typeof parsed.currentChapter === 'number' ? parsed.currentChapter : 0;
+                overallScore = typeof parsed.overallScore === 'number' ? parsed.overallScore : 0;
                 return true;
             }
         } catch (e) {
@@ -59,6 +65,7 @@ questionsPromise.then(questions => {
         // Show chapter (page) info
         const chapterNumber = getCurrentPage() + 1;
         const totalChapters = getMaxPage() + 1;
+        currentChapter = getCurrentPage();
         questionsContainer.innerHTML = `
             <div style="width:100%;text-align:right;font-size:0.95em;color:#666;margin-bottom:8px;">
                 Chapter ${chapterNumber} of ${totalChapters} &mdash; Question ${currentQuestionIndex + 1} of ${questions.length}
@@ -115,6 +122,7 @@ questionsPromise.then(questions => {
         // Show feedback
         if (arraysHaveSameElements(selectedValues, question.answers)) {
             score++;
+            overallScore++;
             feedbackContainer.innerHTML = `<span class="correct">Correct!</span>`;
         } else {
             // Show all correct answers
@@ -137,6 +145,7 @@ questionsPromise.then(questions => {
         resultContainer.innerHTML = `
             <h2>Chapter ${chapterNumber} of ${totalChapters} Complete</h2>
             <div style="margin-bottom:10px;">Your Score: ${score} out of ${questions.length}</div>
+            <div style="margin-bottom:10px;">Overall Score: ${overallScore}</div>
             <div style="margin-bottom:10px;">You answered ${currentQuestionIndex} out of ${questions.length} questions.</div>
             <button id="continue-quiz-btn">${hasNextPage ? 'Continue to Next Chapter' : 'Restart Quiz'}</button>
             <button id="restart-chapter-btn" style="margin-left:10px;">Restart This Chapter</button>
@@ -153,6 +162,8 @@ questionsPromise.then(questions => {
                 questionsPromise.then(() => {
                     currentQuestionIndex = 0;
                     score = 0;
+                    currentChapter = getCurrentPage();
+                    saveState();
                     questionsContainer.style.display = 'block';
                     answersContainer.style.display = 'block';
                     resultContainer.innerHTML = '';
@@ -163,6 +174,9 @@ questionsPromise.then(questions => {
                 // Restart from first page
                 currentQuestionIndex = 0;
                 score = 0;
+                currentChapter = 0;
+                overallScore = 0;
+                saveState();
                 questionsContainer.style.display = 'block';
                 answersContainer.style.display = 'block';
                 resultContainer.innerHTML = '';
@@ -171,9 +185,12 @@ questionsPromise.then(questions => {
             }
         };
         document.getElementById('restart-chapter-btn').onclick = function() {
+            // Subtract this chapter's score from overallScore
+            overallScore -= score;
+            if (overallScore < 0) overallScore = 0;
             currentQuestionIndex = 0;
             score = 0;
-            saveState(); // Ensure state is reset for the chapter
+            saveState();
             questionsContainer.style.display = 'block';
             answersContainer.style.display = 'block';
             resultContainer.innerHTML = '';
@@ -185,6 +202,8 @@ questionsPromise.then(questions => {
     function restartQuiz() {
         currentQuestionIndex = 0;
         score = 0;
+        currentChapter = 0;
+        overallScore = 0;
         saveState();
         questionsContainer.style.display = 'block';
         answersContainer.style.display = 'block';
@@ -196,6 +215,8 @@ questionsPromise.then(questions => {
         clearState();
         currentQuestionIndex = 0;
         score = 0;
+        currentChapter = 0;
+        overallScore = 0;
         questionsContainer.style.display = 'block';
         answersContainer.style.display = 'block';
         resultContainer.innerHTML = '';
