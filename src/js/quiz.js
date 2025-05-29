@@ -1,6 +1,15 @@
 // Import questions variable if using modules
 import questions from './questions.js';
 
+
+// Fucton to compare two array
+function arraysHaveSameElements(a, b) {
+  return a.length === b.length &&
+    [...a].sort().every((val, i) => val === [...b].sort()[i]);
+}
+
+
+
 // Replace 'questionsContainer' and 'resultContainer' to match your HTML IDs
 const questionsContainer = document.getElementById('question');
 const answersContainer = document.getElementById('answers');
@@ -47,22 +56,21 @@ function clearState() {
 // Use the correct format for your questions array
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
-    const isMultiple = Array.isArray(question.answers) && question.answers.length > 1;
+    const inputType = question.answers.length === 1 ? "radio" : "checkbox";
     questionsContainer.innerHTML = `
         <div style="width:100%;text-align:right;font-size:0.95em;color:#666;margin-bottom:8px;">
             Question ${currentQuestionIndex + 1} of ${questions.length}
         </div>
         <h2>${question.q}</h2>
-        ${isMultiple ? '<div style="color:#888;font-size:0.95em;margin-bottom:8px;">(Select all that apply)</div>' : ''}
     `;
-    // Render answers as a <ul> with <li> and radio/checkbox inputs
+    // Render answers as a <ul> with <li> and radio inputs
     answersContainer.innerHTML = `
         <form id="answers-form">
             <ul class="answers">
                 ${question.options.map((option, index) => `
                     <li>
                         <label>
-                            <input type="${isMultiple ? 'checkbox' : 'radio'}" name="answer" value="${index}">
+                            <input type="${inputType}" name="answer" value="${index}">
                             ${option}
                         </label>
                     </li>
@@ -76,21 +84,18 @@ function loadQuestion() {
     feedbackContainer = document.getElementById('feedback');
     document.getElementById('answers-form').onsubmit = function(e) {
         e.preventDefault();
-        let selected;
-        if (isMultiple) {
-            selected = Array.from(this.elements['answer'])
-                .filter(input => input.checked)
-                .map(input => Number(input.value));
-        } else {
-            selected = this.elements['answer'].value;
-            if (selected !== undefined && selected !== "") {
-                selected = [Number(selected)];
-            } else {
-                selected = [];
-            }
-        }
-        if (selected.length > 0) {
-            selectAnswer(selected, isMultiple);
+
+
+        const selectedValues = [];
+        const checkboxes = document.querySelectorAll('input[name="answer"]:checked');
+
+        checkboxes.forEach((checkbox) => {
+            selectedValues.push(1*checkbox.value);
+        });
+
+
+        if (selectedValues.length) {
+            selectAnswer(selectedValues);
         }
     };
     document.getElementById('next-question').onclick = function() {
@@ -104,34 +109,24 @@ function loadQuestion() {
     };
 }
 
-function selectAnswer(selectedIndices, isMultiple) {
+function selectAnswer(selectedValues) {
     const question = questions[currentQuestionIndex];
-    const correctAnswers = Array.isArray(question.answers) ? question.answers : [question.answers];
 
-    // Disable all inputs after answering
-    const inputs = document.querySelectorAll('input[name="answer"]');
-    inputs.forEach(r => r.disabled = true);
+    // Disable all radios after answering
+    const radios = document.querySelectorAll('input[name="answer"]');
+    radios.forEach(r => r.disabled = true);
     document.getElementById('submit-answer').disabled = true;
 
-    // Evaluate correctness
-    let isCorrect;
-    if (isMultiple) {
-        // Must match all and only the correct answers (order doesn't matter)
-        const selectedSorted = [...selectedIndices].sort((a, b) => a - b);
-        const correctSorted = [...correctAnswers].sort((a, b) => a - b);
-        isCorrect = selectedSorted.length === correctSorted.length &&
-            selectedSorted.every((val, idx) => val === correctSorted[idx]);
-    } else {
-        isCorrect = correctAnswers.includes(selectedIndices[0]);
-    }
-
     // Show feedback
-    if (isCorrect) {
+    if (arraysHaveSameElements(selectedValues, question.answers)) {
         score++;
         feedbackContainer.innerHTML = `<span class="correct">Correct!</span>`;
     } else {
-        const correctOptions = correctAnswers.map(i => question.options[i]).join(', ');
-        feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer${correctAnswers.length > 1 ? 's are' : ' is'}: ${correctOptions}</span>`;
+        // Show all correct answers
+        const correctOptions = question.answers.length>1
+            ? question.answers.map(i => question.options[i]).join(', ')
+            : question.options[question.answers];
+        feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer is: ${correctOptions}</span>`;
     }
     document.getElementById('next-question').style.display = 'inline-block';
     saveState();
