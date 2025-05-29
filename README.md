@@ -1,91 +1,69 @@
-# Kubernetes Quiz Application
+# Kubernetes Quiz App
 
-This is a browser-based quiz app to help you prepare for the Kubernetes and Cloud Native Associate (KCNA) certification. It features 200 randomized multiple-choice questions covering a wide range of Kubernetes concepts, best practices, and commands.
+A scalable, efficient, and user-friendly quiz application for Kubernetes concepts.
 
 ## Features
 
-- **200 KCNA-style questions**: Covers core Kubernetes concepts, objects, commands, and best practices.
-- **Randomized answers**: Answer options are shuffled for each question.
-- **Single and multiple correct answers**: Some questions may have more than one correct answer.
-- **Immediate feedback**: Inline feedback is shown after each answer, with the correct answer(s) highlighted.
-- **Modern UI**: Responsive, centered layout with accessible radio button selection.
-- **No backend required**: Runs entirely in your browser.
+- **Pagination & Chapters:** Questions are divided into chapters (pages) of 25 questions each. Only one chapter is loaded in memory at a time for performance.
+- **Background Caching:** Next/previous chapters are preloaded in the background for smooth navigation.
+- **Persistent State:** Quiz progress (current chapter, question, scores, and per-chapter stats) is saved in localStorage. Users can resume where they left off after a reload.
+- **Answer Bias Reduction:** Answer options are shuffled and remapped on load to reduce bias.
+- **Chapter Navigation:** Users can continue to the next chapter, restart the current chapter, or start the quiz fresh at any time.
+- **Overall & Per-Chapter Stats:** At the end of the quiz, users see a breakdown of their score per chapter and the overall score.
+- **Accessibility:** Keyboard navigation, ARIA labels, and focus management for a better user experience.
+- **Loading/Error Handling:** Loading indicator while fetching questions and user-friendly error messages if loading fails.
 
-## Project Structure
-
-```
-src/
-  index.html         # Main HTML file
-  css/
-    styles.css       # App styling
-  js/
-    questions.js     # All quiz questions (ES module)
-    quiz.js          # Quiz logic and UI (ES module)
-    utils.js         # (Optional) Utility functions
-.gitignore
-package.json         # For npm scripts and dev server
-README.md
-```
-
-## Getting Started
-
-### Prerequisites
-
-- A modern web browser (Chrome, Firefox, Edge, Safari)
-- (Recommended) A local web server for ES module support (e.g. [live-server](https://www.npmjs.com/package/live-server), Python's `http.server`, etc.)
-
-### Installation
+## Installation
 
 1. **Clone the repository:**
    ```sh
-   git clone <repository-url>
-   cd k8s_mcq-quiz
+   git clone <your-repo-url>
+   cd kubernetes-quiz
    ```
+2. **Install dependencies:**
+   - This app is pure HTML/JS/CSS and does not require Node.js or npm for basic usage.
+   - If you want to use a local server for development (recommended for fetch to work):
+     - You can use [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension in VS Code, or run:
+       ```sh
+       npx serve .
+       ```
+     - Or use Python's built-in server:
+       ```sh
+       python -m http.server
+       ```
 
-2. **Install dependencies (optional, for live-server):**
-   ```sh
-   npm install
-   ```
+## Dependencies
 
-3. **Start the local server (recommended):**
-   ```sh
-   npm start
-   ```
-   Or, from the `src` directory:
-   ```sh
-   python -m http.server 8000
-   ```
-   Then open [http://localhost:8000](http://localhost:8000) in your browser.
+- No runtime dependencies for the quiz app itself (vanilla JS, HTML, CSS only).
+- For development, you may use:
+  - [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) (VS Code extension)
+  - [serve](https://www.npmjs.com/package/serve) (Node.js static server)
+  - Python 3 (for `python -m http.server`)
 
-   > **Note:** Opening `index.html` directly from the filesystem may not work in all browsers due to ES module restrictions.
+## Usage
 
-## How to Use
-
-- The quiz displays one question at a time.
-- Select your answer using the radio buttons and click "Submit".
-- Feedback will appear below the answers.
-- Click "Next Question" to proceed.
-- At the end, your score will be displayed with an option to restart.
-
-## Customization
-
-- **Add/Edit Questions:**  
-  Edit `src/js/questions.js`. Each question supports single or multiple correct answers via the `answers` array.
-- **Styling:**  
-  Modify `src/css/styles.css` for custom styles.
-- **Quiz Logic:**  
-  Update `src/js/quiz.js` for new features or behavior.
+1. Open `index.html` in your browser (or use a local server as above).
+2. Answer questions in each chapter. You must complete all questions in a chapter before moving to the next.
+3. At the end of each chapter, you can:
+   - Continue to the next chapter
+   - Restart the current chapter (resets only that chapter's score)
+   - Start fresh (resets all progress and stats)
+4. If you reload or revisit the page, you will be prompted to resume or start fresh.
 
 ## Development
 
-- Uses ES module syntax (`import`/`export`).
-- No build step required.
-- All logic and data are client-side.
+- All questions are stored in `src/data/questions.json`.
+- Main logic is in `src/js/quiz.js` and `src/js/questions.js`.
+- To change the number of questions per chapter, update `PAGE_SIZE` in `questions.js`.
 
-## License
+## Recent Changes
 
-MIT License
+- Chapters are now 25 questions each.
+- Quiz state (chapter, question, scores) is fully persistent and robust to reloads.
+- Improved accessibility and keyboard navigation.
+- Loading indicator and error handling for question fetch.
+- Modularized and refactored code for maintainability.
 
 ---
 
-*Made with ❤️ for Kubernetes learners and the cloud native community.*
+For more details, see code comments in `src/js/quiz.js` and `src/js/questions.js`.
