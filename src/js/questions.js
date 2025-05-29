@@ -311,6 +311,156 @@ const questions = [
         answers: [3]
     },
     {
+        "question": "What is the command to scale a deployment in Kubernetes?",
+        "options": [
+        "kubectl resize",
+        "kubectl expand",
+        "kubectl grow",
+        "kubectl scale"
+        ],
+        "answers": [3]
+    },
+    {
+        "question": "What is the command to get a list of all pods in a Kubernetes cluster?",
+        "options": [
+        "kubectl describe pods",
+        "kubectl list pods",
+        "kubectl show pods",
+        "kubectl get pods"
+        ],
+        "answers": [3]
+    },
+    {
+        "question": "What fundamental concept allows Kubernetes to maintain the desired state declared by the user?",
+        "options": [
+        "Control Loop / Reconciliation",
+        "Imperative Commands",
+        "Manual Scaling",
+        "Direct Node Access"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "In which framework do the developers no longer have to deal with capacity, deployments, scaling and fault tolerance, and OS?",
+        "options": [
+        "Docker Swam",
+        "Kubernetes",
+        "Mesos",
+        "Serverless"
+        ],
+        "answers": [3]
+    },
+    {
+        "question": "What's the most cost-effective method to run 1000 compute jobs weekly in a cloud Kubernetes cluster?",
+        "options": [
+        "Run a group of nodes with the exact required size to complete the batch on time, and use a combination of taints, tolerations, and nodeSelectors to reserve these nodes to the batch jobs",
+        "Leverage the Kubernetes Cluster Autoscaler to automatically start and stop nodes as they're needed.",
+        "Commit to a specific level of spending to get discounted prices (with e.g. 'reserved instances' or similar mechanisms).",
+        "Use PriorityСlasses so that the weekly batch job gets priority over other workloads running on the cluster, and can be completed on time."
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "Which command is used to create a new namespace in Kubernetes?",
+        "options": [
+        "kubectl create deployment",
+        "kubectl create pod",
+        "kubectl create service",
+        "kubectl create namespace"
+        ],
+        "answers": [3]
+    },
+    {
+        "question": "Which OCI specification defines the format of a container image?",
+        "options": [
+        "Distribution Specification",
+        "Network Specification",
+        "Storage Specification",
+        "Image Specification"
+        ],
+        "answers": [3]
+    },
+    {
+        "question": "What does a liveness probe do in Kubernetes?",
+        "options": [
+        "Checks if a container is ready to receive traffic",
+        "Restarts containers that fail health checks",
+        "Monitors node status",
+        "Handles ingress traffic"
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "You have a Kubernetes cluster hosted in a public cloud provider. When trying to create a Service of type LoadBalancer, the external-ip is stuck in the 'Pending' state. Which Kubernetes component is failing?",
+        "options": [
+        "Cloud Controller Manager",
+        "Load Balancer Manager",
+        "Cloud Architecture Manager",
+        "Cloud Load Balancer Manager"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "Which tool is commonly used to collect and visualize metrics in Kubernetes?",
+        "options": [
+        "Helm",
+        "Prometheus",
+        "Docker",
+        "Kubectl"
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "The Kubernetes project work is carried primarily by SIGs. What does SIG stand for?",
+        "options": [
+        "Special Interest Group",
+        "Software Installation Guide",
+        "Support and Information Group",
+        "Strategy Implementation Group"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "Which concept is part of GitOps delivery in cloud-native apps?",
+        "options": [
+        "Manually SSHing into clusters",
+        "Declarative configuration managed via version control",
+        "Dynamic scaling without any code",
+        "Running builds only locally"
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "Which Kubernetes API object is used to manage external access to services in a cluster, typically HTTP/S?",
+        "options": [
+        "Service (LoadBalancer type)",
+        "NodePort Service",
+        "Ingress",
+        "ExternalName Service"
+        ],
+        "answers": [2]
+    },
+    {
+        "question": "How does Serverless (e.g., FaaS like AWS Lambda or Knative Serving) primarily differ from traditional PaaS offerings?",
+        "options": [
+        "Serverless does not use containers",
+        "Serverless applications cannot be stateful",
+        "Serverless abstracts away all underlying server management",
+        "PaaS does not offer auto-scaling capabilities"
+        ],
+        "answers": [2]
+    },
+    {
+        "question": "Which of the following statements is true regarding the Kubernetes networking model?",
+        "options": [
+        "Pods can communicate with all other pods on any other node without Network Address Translation (NAT).",
+        "Agents running on a node such as system daemons and kubelet can communicate with all pods on any node of the cluster.",
+        "Network Address Translation (NAT) is necessary for the pods to communicate with all other pods on any other node.",
+        "Agents on a node such as system daemons and kubelet must use CoreDNS to communicate with all pods on that node."
+        ],
+        "answers": [0]
+    },
+    {
         q: "Which Kubernetes resource is used to define resource limits for a namespace?",
         options: ["Pod", "Service", "ResourceQuota", "LimitRange"],
         answers: [2]
@@ -859,6 +1009,106 @@ const questions = [
         q: "Which of the following is a valid way to get the logs of all pods in a job?",
         options: ["kubectl logs job/<name> --all-containers=true", "kubectl get logs job/<name>", "kubectl describe logs job/<name>", "kubectl show logs job/<name>"],
         answers: [0]
+    },
+    {
+        "question": "In Prometheus, what is an 'exporter'?",
+        "options": [
+        "A piece of software that exposes metrics from third-party systems",
+        "A client library for instrumenting application code",
+        "A database that stores long-term metric data",
+        "A component that sends alerts to notification channels"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "What is the command to delete a pod in Kubernetes?",
+        "options": [
+        "kubectl destroy pod",
+        "kubectl delete pod",
+        "kubectl terminate pod",
+        "kubectl remove pod"
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "Why is container orchestration essential for managing microservices at scale?",
+        "options": [
+        "It simplifies writing microservice code",
+        "It automatically converts monolithic apps to microservices",
+        "It handles service discovery, scaling, and fault tolerance",
+        "It provides a centralized logging solution by default"
+        ],
+        "answers": [2]
+    },
+    {
+        "question": "Which group of container runtimes provides additional sandboxed isolation and elevated security?",
+        "options": [
+        "rune, cgroups",
+        "docker, containerd",
+        "runsc, kata",
+        "crun, cri-o"
+        ],
+        "answers": [2]
+    },
+    {
+        "question": "What are the initial namespaces that Kubernetes starts with?",
+        "options": [
+        "default, kube-system, kube-public, kube-node-lease",
+        "default, system, kube-public",
+        "kube-default, kube-system, kube-main, kube-node-lease",
+        "kube-default, system, kube-main, kube-primary"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "What is the command to apply a configuration to a resource in Kubernetes?",
+        "options": [
+        "kubectl apply",
+        "kubectl set",
+        "kubectl configure",
+        "kubectl update"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "What is observability in the context of cloud-native systems?",
+        "options": [
+        "Ability to view logs only",
+        "The capability to monitor only node health",
+        "The ability to measure internal states using outputs like logs, metrics, and traces",
+        "Monitoring the weather"
+        ],
+        "answers": [2]
+    },
+    {
+        "question": "We can extend the Kubernetes API with Kubernetes API Aggregation Layer and CRDs. What is CRD?",
+        "options": [
+        "Custom Resource Definition",
+        "Custom Restricted Definition",
+        "Customized RUST Definition",
+        "Custom RUST Definition"
+        ],
+        "answers": [0]
+    },
+    {
+        "question": "Which Kubernetes object is used to define a set of environment variables for a container?",
+        "options": [
+        "Secret",
+        "ConfigMap",
+        "Service",
+        "Volume"
+        ],
+        "answers": [1]
+    },
+    {
+        "question": "Which of these is NOT a principle of cloud-native computing?",
+        "options": [
+        "Declarative APIs",
+        "Loose coupling",
+        "Vertical scaling only",
+        "Observability"
+        ],
+        "answers": [2]
     },
     {
         q: "Which of the following is a valid way to get the logs of all pods in a cronjob?",
