@@ -88,8 +88,11 @@ function getMaxPage() {
 }
 
 // Initial load
-const questionsPromise = fetch('../data/questions.json')
-    .then(response => response.json())
+const questionsPromise = fetch('data/questions.json')
+    .then(response => {
+        if (!response.ok) throw new Error('Not found');
+        return response.json();
+    })
     .then(qs => {
         shuffleOptionsAndRemapAnswers(qs);
         checkUniqueness(qs);
@@ -100,14 +103,15 @@ const questionsPromise = fetch('../data/questions.json')
         preloadPage(1);
         setQuestionsPage(0);
         return questions;
+    })
+    .catch(() => {
+        throw new Error('No questions data found.');
     });
 
-export default questions;
 export {
     questionsPromise,
     nextPage,
     prevPage,
     getCurrentPage,
-    getMaxPage,
-    PAGE_SIZE
+    getMaxPage
 };
