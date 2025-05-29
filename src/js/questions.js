@@ -1,5 +1,5 @@
 // Efficiently load questions from JSON using fetch, with pagination and background caching
-const PAGE_SIZE = 10; // Number of questions per page
+const PAGE_SIZE = 25; // Number of questions per chapter
 let _allQuestions = [];
 let _cache = {};
 let _currentPage = 0;

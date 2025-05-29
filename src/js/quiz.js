@@ -1,13 +1,13 @@
 // Import questionsPromise variable
 import { questionsPromise, nextPage, prevPage, getCurrentPage, getMaxPage } from './questions.js';
 
-// Fucton to compare two array
+// Helper: compare two arrays for equality
 function arraysHaveSameElements(a, b) {
   return a.length === b.length &&
     [...a].sort().every((val, i) => val === [...b].sort()[i]);
 }
 
-// Replace 'questionsContainer' and 'resultContainer' to match your HTML IDs
+// DOM references
 const questionsContainer = document.getElementById('question');
 const answersContainer = document.getElementById('answers');
 const resultContainer = document.getElementById('result-container') || document.createElement('div');
@@ -19,14 +19,35 @@ let overallScore = 0; // Track the overall score across all chapters
 // State persistence keys
 const STORAGE_KEY = 'k8s_quiz_state';
 
+// DRY: Helper to go to a specific chapter (page)
+function goToChapter(targetChapter) {
+    let diff = targetChapter - getCurrentPage();
+    if (diff > 0) {
+        for (let i = 0; i < diff; i++) nextPage();
+    } else if (diff < 0) {
+        for (let i = 0; i < -diff; i++) prevPage();
+    }
+}
+
+// Clear all quiz-related state
+function clearState() {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('k8s_quiz_chapter_stats');
+    localStorage.removeItem('k8s_quiz_last_chapter');
+}
+
 function saveState() {
+    let chapterStats = [];
+    try {
+        chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+        if (!Array.isArray(chapterStats)) chapterStats = [];
+    } catch (e) { chapterStats = []; }
     const state = {
         currentQuestionIndex,
         score,
         currentChapter,
         overallScore,
-        // Save chapter stats for resume
-        chapterStats: JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]')
+        chapterStats
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -57,25 +78,14 @@ function loadState() {
     return false;
 }
 
-function clearState() {
-    localStorage.removeItem(STORAGE_KEY);
-}
-
 // All quiz logic is now inside the questionsPromise callback
+questionsContainer.innerHTML = '<div style="color:#007bff;">Loading questions...</div>';
 questionsPromise.then(questions => {
     console.log(questions.length, 'questions loaded');
     // Use the correct format for your questions array
     function loadQuestion() {
         // If resuming, set the correct page/chapter
-        if (getCurrentPage() !== currentChapter) {
-            // Move to the saved chapter
-            let diff = currentChapter - getCurrentPage();
-            if (diff > 0) {
-                for (let i = 0; i < diff; i++) nextPage();
-            } else if (diff < 0) {
-                for (let i = 0; i < -diff; i++) prevPage();
-            }
-        }
+        goToChapter(currentChapter);
         const question = questions[currentQuestionIndex];
         const inputType = question.answers.length === 1 ? "radio" : "checkbox";
         // Show chapter (page) info
@@ -95,19 +105,25 @@ questionsPromise.then(questions => {
                     ${question.options.map((option, index) => `
                         <li>
                             <label>
-                                <input type="${inputType}" name="answer" value="${index}">
+                                <input type="${inputType}" name="answer" value="${index}" aria-label="Answer option ${index + 1}">
                                 ${option}
                             </label>
                         </li>
                     `).join('')}
                 </ul>
-                <button type="submit" id="submit-answer">Submit</button>
+                <button type="submit" id="submit-answer" disabled>Submit</button>
             </form>
             <div id="feedback" class="feedback"></div>
-            <button id="next-question" style="display:none;margin-top:10px;">Next Question</button>
+            <button id="next-question" style="display:none;margin-top:10px;" aria-label="Next Question">Next Question</button>
         `;
         feedbackContainer = document.getElementById('feedback');
-        document.getElementById('answers-form').onsubmit = function(e) {
+        // Accessibility: Enable submit only when an answer is selected
+        const answersForm = document.getElementById('answers-form');
+        answersForm.onchange = function() {
+            const checked = document.querySelectorAll('input[name="answer"]:checked').length;
+            document.getElementById('submit-answer').disabled = !checked;
+        };
+        answersForm.onsubmit = function(e) {
             e.preventDefault();
             const selectedValues = [];
             const checkboxes = document.querySelectorAll('input[name="answer"]:checked');
@@ -134,23 +150,31 @@ questionsPromise.then(questions => {
         // Disable all radios after answering
         const radios = document.querySelectorAll('input[name="answer"]');
         radios.forEach(r => r.disabled = true);
-        document.getElementById('submit-answer').disabled = true;
+        const submitBtn = document.getElementById('submit-answer');
+        submitBtn.disabled = true; // Prevent double submission
         // Show feedback
         if (arraysHaveSameElements(selectedValues, question.answers)) {
             score++;
             overallScore++;
             feedbackContainer.innerHTML = `<span class="correct">Correct!</span>`;
         } else {
-            // Show all correct answers
-            const correctOptions = question.answers.length>1
+            const correctOptions = question.answers.length > 1
                 ? question.answers.map(i => question.options[i]).join(', ')
                 : question.options[question.answers];
             feedbackContainer.innerHTML = `<span class="incorrect">Wrong! The correct answer is: ${correctOptions}</span>`;
         }
-        document.getElementById('next-question').style.display = 'inline-block';
+        const nextBtn = document.getElementById('next-question');
+        nextBtn.style.display = 'inline-block';
+        nextBtn.focus(); // Keyboard accessibility
         saveState();
     }
     window.selectAnswer = selectAnswer;
+
+    // Error handling for data fetch
+    if (!questions || !Array.isArray(questions) || questions.length === 0) {
+        questionsContainer.innerHTML = '<div style="color:red;">Failed to load questions. Please try again later.</div>';
+        return;
+    }
 
     function showResult() {
         questionsContainer.style.display = 'none';
@@ -158,13 +182,6 @@ questionsPromise.then(questions => {
         let hasNextPage = getCurrentPage() < getMaxPage();
         const chapterNumber = getCurrentPage() + 1;
         const totalChapters = getMaxPage() + 1;
-        // Track last completed chapter
-        if (!hasNextPage) {
-            localStorage.setItem('k8s_quiz_last_chapter', totalChapters);
-        } else {
-            localStorage.setItem('k8s_quiz_last_chapter', chapterNumber);
-        }
-        let lastCompleted = localStorage.getItem('k8s_quiz_last_chapter') || chapterNumber;
         let statsHtml = `
             <h2>Chapter ${chapterNumber} of ${totalChapters} Complete</h2>
             <div style="margin-bottom:10px;">Your Score: ${score} out of ${questions.length}</div>
@@ -173,8 +190,11 @@ questionsPromise.then(questions => {
         `;
         // If this is the last chapter, show per-chapter stats and overall stats
         if (!hasNextPage) {
-            // Retrieve chapter scores from localStorage or session (or build a simple array in memory)
-            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            let chapterStats = [];
+            try {
+                chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+                if (!Array.isArray(chapterStats)) chapterStats = [];
+            } catch (e) { chapterStats = []; }
             chapterStats[currentChapter] = score;
             localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
             let chaptersBreakdown = '<h3>Chapter Breakdown</h3><ul style="margin-bottom:10px;">';
@@ -185,16 +205,19 @@ questionsPromise.then(questions => {
             statsHtml += chaptersBreakdown;
             statsHtml += `<div style="font-weight:bold;">Final Overall Score: ${overallScore} out of ${questions.length * chapterStats.length}</div>`;
         } else {
-            // Save current chapter score for later
-            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            let chapterStats = [];
+            try {
+                chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+                if (!Array.isArray(chapterStats)) chapterStats = [];
+            } catch (e) { chapterStats = []; }
             chapterStats[currentChapter] = score;
             localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
         }
         resultContainer.innerHTML = `
             ${statsHtml}
-            <button id="continue-quiz-btn">${hasNextPage ? 'Continue to Next Chapter' : 'Restart Quiz'}</button>
-            <button id="restart-chapter-btn" style="margin-left:10px;">Restart This Chapter</button>
-            <button onclick="startFreshQuiz()" style="margin-left:10px;">Start Fresh</button>
+            <button id="continue-quiz-btn" aria-label="Continue">${hasNextPage ? 'Continue to Next Chapter' : 'Restart Quiz'}</button>
+            <button id="restart-chapter-btn" style="margin-left:10px;" aria-label="Restart This Chapter">Restart This Chapter</button>
+            <button onclick="startFreshQuiz()" style="margin-left:10px;" aria-label="Start Fresh">Start Fresh</button>
         `;
         if (!resultContainer.parentNode) {
             document.getElementById('quiz-container').appendChild(resultContainer);
@@ -215,7 +238,6 @@ questionsPromise.then(questions => {
                     loadQuestion();
                 });
             } else {
-                // Restart from first page and clear chapter stats
                 localStorage.removeItem('k8s_quiz_chapter_stats');
                 currentQuestionIndex = 0;
                 score = 0;
@@ -230,15 +252,18 @@ questionsPromise.then(questions => {
             }
         };
         document.getElementById('restart-chapter-btn').onclick = function() {
-            // Subtract this chapter's score from overallScore
             overallScore -= score;
             if (overallScore < 0) overallScore = 0;
-            // Remove this chapter's score from chapterStats
-            let chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+            let chapterStats = [];
+            try {
+                chapterStats = JSON.parse(localStorage.getItem('k8s_quiz_chapter_stats') || '[]');
+                if (!Array.isArray(chapterStats)) chapterStats = [];
+            } catch (e) { chapterStats = []; }
             chapterStats[currentChapter] = 0;
             localStorage.setItem('k8s_quiz_chapter_stats', JSON.stringify(chapterStats));
             currentQuestionIndex = 0;
             score = 0;
+            goToChapter(currentChapter); // Ensure user is on the correct chapter
             saveState();
             questionsContainer.style.display = 'block';
             answersContainer.style.display = 'block';
@@ -266,6 +291,7 @@ questionsPromise.then(questions => {
         score = 0;
         currentChapter = 0;
         overallScore = 0;
+        goToChapter(0); // Ensure quiz starts from first chapter
         questionsContainer.style.display = 'block';
         answersContainer.style.display = 'block';
         resultContainer.innerHTML = '';
@@ -319,14 +345,7 @@ questionsPromise.then(questions => {
             showContinueModal(
                 function () {
                     // Restore chapter/page and question index
-                    if (getCurrentPage() !== currentChapter) {
-                        let diff = currentChapter - getCurrentPage();
-                        if (diff > 0) {
-                            for (let i = 0; i < diff; i++) nextPage();
-                        } else if (diff < 0) {
-                            for (let i = 0; i < -diff; i++) prevPage();
-                        }
-                    }
+                    goToChapter(currentChapter);
                     if (currentQuestionIndex < questions.length) {
                         loadQuestion();
                     } else {
