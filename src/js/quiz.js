@@ -143,6 +143,11 @@ questionsPromise.then(questions => {
                 showResult();
             }
         };
+        // Progress bar update
+        const progressBar = document.getElementById('progress-bar');
+        const progressBarInner = document.getElementById('progress-bar-inner');
+        progressBar.style.display = 'block';
+        progressBarInner.style.width = `${((currentQuestionIndex) / questions.length) * 100}%`;
     }
 
     function selectAnswer(selectedValues) {
