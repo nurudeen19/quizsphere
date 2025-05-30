@@ -1,19 +1,16 @@
 {
-  "name": "kubernetes-quiz",
+  "name": "quizsphere",
   "version": "1.0.0",
-  "description": "A quiz application that generates  multiple-choice questions on Kubernetes based on KCNA certification standards.",
-  "main": "src/js/quiz.js",
   "scripts": {
-    "start": "live-server --open=index.html .",
-    "build": "echo 'No build step required.'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "author": {
-    "name": "Nurudeen Habibu",
-    "email": "nurudeenh@gmail.com",
-    "url": "https://nurustech.com"
-  },
-  "license": "MIT",
   "dependencies": {
-    "live-server": "^1.2.1"
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "vite": "^6.3.5"
   }
 }

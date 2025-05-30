@@ -1,0 +1,52 @@
+[
+    {
+        "q": "What is Kubernetes?",
+        "options": [
+            "A programming language",
+            "A container orchestration platform",
+            "A web server",
+            "A database"
+        ],
+        "answers": [1]
+    },
+    {
+        "q": "Which component of Kubernetes is responsible for managing the state of the cluster?",
+        "options": [
+            "Kubelet",
+            "Scheduler",
+            "Controller Manager",
+            "Kube-Proxy"
+        ],
+        "answers": [2]
+    },
+    {
+        "q": "What is a Pod in Kubernetes?",
+        "options": [
+            "A type of service",
+            "The smallest deployable unit",
+            "A storage volume",
+            "A network policy"
+        ],
+        "answers": [1]
+    },
+    {
+        "q": "Which command is used to create a deployment in Kubernetes?",
+        "options": [
+            "kubectl run",
+            "kubectl start",
+            "kubectl apply",
+            "kubectl create deployment"
+        ],
+        "answers": [3]
+    },
+    {
+        "q": "What is the purpose of a Service in Kubernetes?",
+        "options": [
+            "To manage user permissions",
+            "To expose an application running on a set of Pods",
+            "To store data",
+            "To monitor cluster health"
+        ],
+        "answers": [1]
+    }
+]
