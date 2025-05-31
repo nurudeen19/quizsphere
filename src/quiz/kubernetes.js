@@ -1,7 +1,7 @@
 // Kubernetes Quiz logic (modularized for Vue)
 // This file will export quiz logic for use in Vue components
 
-import questionsData from '../data/kubernetes-questions.js';
+import questionsData from '../data/kubernetes.js';
 
 const PAGE_SIZE = 25;
 
