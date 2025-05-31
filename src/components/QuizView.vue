@@ -1,27 +1,36 @@
 <template>
-  <div v-if="questions.length" class="quiz">
-    <h2>{{ topicTitle }}</h2>
+  <div v-if="questions.length" class="max-w-xl mx-auto bg-[#232526] rounded-2xl shadow-lg p-8 pt-10 text-center animate-fadeIn">
+    <h2 class="text-cyan-400 mb-6 text-2xl flex items-center justify-center gap-2 font-bold drop-shadow"> <i class="fas fa-brain"></i> {{ topicTitle }}</h2>
     <div v-if="current < questions.length">
-      <div class="question">
-        <span>Question {{ current + 1 }} of {{ questions.length }}</span>
-        <p>{{ questions[current].q }}</p>
+      <div class="mb-6">
+        <span class="block text-gray-400 text-base mb-2">Question {{ current + 1 }} of {{ questions.length }}</span>
+        <p class="text-lg font-semibold mb-4 text-blue-50">{{ questions[current].q }}</p>
       </div>
-      <div class="options">
-        <button v-for="(opt, idx) in questions[current].options" :key="idx" :disabled="answered" @click="select(idx)">
-          {{ opt }}
+      <div class="mb-6">
+        <button v-for="(opt, idx) in questions[current].options" :key="idx" :disabled="answered"
+          @click="select(idx)"
+          class="flex items-center w-full my-2 px-5 py-3 text-base rounded-lg border border-cyan-300/30 bg-gradient-to-r from-[#232526] to-[#414345] text-blue-50 font-medium gap-3 shadow-sm transition-all duration-150 hover:from-[#232526] hover:to-cyan-900 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed">
+          <span class="font-bold text-cyan-400 mr-2">{{ String.fromCharCode(65 + idx) }}.</span> {{ opt }}
         </button>
       </div>
-      <div v-if="answered">
-        <p :class="{ correct: isCorrect, wrong: !isCorrect }">
-          {{ isCorrect ? 'Correct!' : 'Wrong!' }}
-        </p>
-        <button @click="next">Next</button>
-      </div>
+      <transition name="fade">
+        <div v-if="answered" class="mt-4">
+          <p :class="isCorrect ? 'text-cyan-400 font-bold flex items-center gap-2 text-lg' : 'text-red-500 font-bold flex items-center gap-2 text-lg'">
+            <i :class="isCorrect ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
+            {{ isCorrect ? 'Correct!' : 'Wrong!' }}
+          </p>
+          <button class="next-btn mt-5 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-semibold flex items-center gap-2 shadow transition-all hover:from-blue-600 hover:to-cyan-400 focus:outline-none" @click="next">
+            <i class="fas fa-arrow-right"></i> Next
+          </button>
+        </div>
+      </transition>
     </div>
-    <div v-else>
-      <h3>Quiz Complete!</h3>
-      <p>Your score: {{ score }} / {{ questions.length }}</p>
-      <button @click="$emit('back')">Back to Topics</button>
+    <div v-else class="quiz-complete mt-8">
+      <h3 class="text-2xl text-yellow-400 font-bold flex items-center justify-center gap-2 mb-4"><i class="fas fa-trophy"></i> Quiz Complete!</h3>
+      <p class="score text-lg mb-4 text-blue-50">Your score: <span class="text-cyan-400 font-bold text-xl">{{ score }}</span> / {{ questions.length }}</p>
+      <button class="back-btn px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-semibold flex items-center gap-2 shadow transition-all hover:from-blue-600 hover:to-cyan-400 focus:outline-none" @click="$emit('back')">
+        <i class="fas fa-arrow-left"></i> Back to Topics
+      </button>
     </div>
   </div>
 </template>
@@ -63,40 +72,24 @@ function next() {
 </script>
 
 <style scoped>
-.quiz {
-  max-width: 600px;
-  margin: 2rem auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #0001;
-  padding: 2rem;
-  text-align: center;
+/**** Custom CSS for animation and fallback ****/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
 }
-.question {
-  margin-bottom: 1.5rem;
+.animate-fadeIn {
+  animation: fadeIn 0.7s;
 }
-.options button {
-  display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background: #f8f8f8;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.options button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-.correct {
-  color: #42b983;
+/**** Keep only custom/fallback styles below ****/
+.score span {
+  color: #00c6ff;
   font-weight: bold;
+  font-size: 1.3rem;
 }
-.wrong {
-  color: #e74c3c;
-  font-weight: bold;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>
