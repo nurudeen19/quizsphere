@@ -17,6 +17,13 @@
         <p class="subtitle">Test your knowledge on Kubernetes and more topics coming soon.</p>
       </section>
       <section class="quiz-section">
+        <button
+          v-if="selectedTopic"
+          @click="selectedTopic = null"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-bold shadow-lg hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all mb-6 text-lg tracking-wide drop-shadow-md"
+        >
+          <i class="fas fa-arrow-left"></i> Back to Topics
+        </button>
         <TopicList v-if="!selectedTopic" @select="selectTopic" />
         <QuizView v-else :topic="selectedTopic" @back="selectedTopic = null" />
       </section>
