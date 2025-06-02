@@ -20,7 +20,7 @@
         <button
           v-if="selectedTopic"
           @click="selectedTopic = null"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-bold shadow-lg hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all mb-6 text-lg tracking-wide drop-shadow-md"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-bold shadow-lg hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all mb-6 text-lg tracking-wide drop-shadow-md border-2 border-transparent hover:border-cyan-400 cursor-pointer"
         >
           <i class="fas fa-arrow-left"></i> Back to Topics
         </button>
@@ -44,95 +44,3 @@ function selectTopic(topic) {
   selectedTopic.value = topic
 }
 </script>
-
-<style>
-#app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-}
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2.5vw;
-  background: #fff;
-  box-shadow: 0 2px 8px #0002;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00c6ff;
-}
-.logo img {
-  width: 36px;
-  margin-right: 0.7rem;
-  filter: drop-shadow(0 0 4px #00c6ff88);
-}
-nav {
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-link {
-  color: #222;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-}
-.nav-link.active, .nav-link:hover {
-  color: #00c6ff;
-}
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 2rem 0 3rem 0;
-}
-.welcome-section {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-.brand {
-  color: #00c6ff;
-  font-weight: bold;
-  text-shadow: 0 2px 8px #00c6ff33;
-}
-.subtitle {
-  color: #555;
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
-}
-.quiz-section {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-.main-footer {
-  background: #fff;
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 1rem;
-  color: #888;
-  box-shadow: 0 -2px 8px #0002;
-}
-.main-footer i.fa-heart {
-  color: #00c6ff;
-}
-@media (max-width: 600px) {
-  .main-header, .main-footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .quiz-section {
-    padding: 0 1rem;
-  }
-}
-</style>

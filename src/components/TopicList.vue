@@ -6,7 +6,21 @@
       </div>
       <h2 class="text-xl font-semibold text-gray-800 mb-1 text-center">{{ topic.title }}</h2>
       <p class="text-gray-500 text-sm mb-4 text-center min-h-[32px]">{{ topic.description || 'Test your knowledge on this topic.' }}</p>
-      <button @click="$emit('select', topic)" class="start-quiz-btn-new px-6 py-3 rounded-full font-bold text-base flex items-center justify-center gap-2 mt-auto transition-all mx-auto w-auto min-w-[140px]">
+      <button
+        v-if="getQuizState(topic.topic)"
+        @click="$emit('select', topic)"
+        class="start-quiz-btn-new px-6 py-3 rounded-full font-bold text-base flex items-center justify-center gap-2 mt-auto transition-all mx-auto w-auto min-w-[140px] bg-yellow-400 hover:bg-yellow-500 text-gray-900"
+      >
+        <span class="icon-wrapper-new flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-300 text-white shadow">
+          <i class="fas fa-play"></i>
+        </span>
+        <span>Continue Quiz</span>
+      </button>
+      <button
+        v-else
+        @click="$emit('select', topic)"
+        class="start-quiz-btn-new px-6 py-3 rounded-full font-bold text-base flex items-center justify-center gap-2 mt-auto transition-all mx-auto w-auto min-w-[140px]"
+      >
         <span class="icon-wrapper-new flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 text-white shadow">
           <i class="fas fa-play"></i>
         </span>
@@ -18,6 +32,18 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
+function getQuizState(topicKey) {
+  const stateStr = localStorage.getItem(`quizsphere-quiz-state-${topicKey}`)
+  if (!stateStr) return false
+  try {
+    const state = JSON.parse(stateStr)
+    // Only show continue if the quiz is for this topic and not finished
+    return state.topic === topicKey && state.current < (state.questions?.length || 0)
+  } catch {
+    return false
+  }
+}
 
 const topics = ref([])
 
