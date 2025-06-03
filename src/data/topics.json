@@ -2,6 +2,7 @@
     {
         "topic": "Kubernetes",
         "file": "/src/data/kubernetes.json",
-        "title": "Kubernetes"
+        "title": "Kubernetes",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg"
     }
 ]
