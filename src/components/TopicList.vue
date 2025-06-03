@@ -42,21 +42,8 @@ function getQuizState(topicKey) {
     if (state.topic !== topicKey) return false
     // If there are no questions, don't show continue
     if (!state.questions || !state.questions.length) return false
-    // Only show continue if the user has submitted at least one answer
-    if (typeof state.answered !== 'boolean' || state.current === 0) return false
-    // If the quiz is not finished (current < questions.length), show continue
-    if (state.current < state.questions.length) return true
-    // If chapters are used, check if any chapter is not completed
-    const chaptersStr = localStorage.getItem(`quizsphere-chapter-states-${topicKey}`)
-    if (chaptersStr) {
-      const chapters = JSON.parse(chaptersStr)
-      const totalChapters = Math.ceil(state.questions.length / (state.chapterSize || 10)) || 1
-      for (let i = 0; i < totalChapters; i++) {
-        if ((!chapters[i] || !chapters[i].completed) && (chapters[i]?.score > 0 || state.current > 0)) return true
-      }
-    }
-    // Otherwise, quiz is fully completed
-    return false
+    // If the user has ever started the quiz, show continue (even if completed)
+    return true
   } catch {
     return false
   }
