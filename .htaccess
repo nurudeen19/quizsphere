@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Redirect everything except existing files/folders to /dist/index.html
+  RewriteCond %{REQUEST_URI} !^/dist/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /dist/$1 [L]
+
+  # For SPA history mode: redirect all non-file requests in /dist to /dist/index.html
+  RewriteCond %{REQUEST_URI} ^/dist
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^dist/(.*)$ /dist/index.html [L]
+</IfModule>
