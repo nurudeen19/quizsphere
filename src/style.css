@@ -441,3 +441,49 @@ main {
   transform: translateY(-2px) scale(1.04);
   outline: none;
 }
+
+/* Congrats Section Styles */
+.confetti-wrapper {
+  min-height: 100px;
+  margin-bottom: 2.5rem;
+}
+.congrats-section {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 2.5rem;
+  padding-top: 2.5rem;
+}
+.confetti {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #fbbf24 0%, #22d3ee 100%);
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: confetti-fall 1.8s linear infinite;
+}
+.confetti:nth-child(2) {
+  left: 20%;
+  animation-delay: 0.2s;
+  background: linear-gradient(135deg, #f472b6 0%, #60a5fa 100%);
+}
+.confetti:nth-child(3) {
+  left: 40%;
+  animation-delay: 0.4s;
+  background: linear-gradient(135deg, #34d399 0%, #f59e42 100%);
+}
+.confetti:nth-child(4) {
+  left: 60%;
+  animation-delay: 0.6s;
+  background: linear-gradient(135deg, #a78bfa 0%, #fbbf24 100%);
+}
+.confetti:nth-child(5) {
+  left: 80%;
+  animation-delay: 0.8s;
+  background: linear-gradient(135deg, #f87171 0%, #38bdf8 100%);
+}
+@keyframes confetti-fall {
+  0% { top: 0; opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  80% { opacity: 0.85; }
+  100% { top: 100px; opacity: 0; transform: translateY(40px) scale(0.7) rotate(360deg); }
+}

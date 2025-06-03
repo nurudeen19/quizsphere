@@ -64,16 +64,42 @@
       </transition>
     </div>
     <div v-else class="quiz-complete">
-      <h3><i class="fas fa-trophy"></i> Chapter Complete!</h3>
+      <template v-if="isFinalChapter() && isAllChaptersComplete()">
+        <div class="congrats-section flex flex-col items-center justify-center">
+          <h3>
+            <i class="fas fa-trophy"></i>
+            🎉 Congratulations! 🎉
+          </h3>
+          <div class="confetti-wrapper relative w-full flex justify-center items-center mb-8" style="height: 100px;">
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+            <div class="confetti"></div>
+          </div>
+          <div class="text-2xl text-blue-800 font-bold mb-6 text-center leading-snug">
+            You have completed all chapters for <span class="font-extrabold underline decoration-green-400">{{ topicTitle }}</span>.<br>
+            <span class="block mt-2 text-xl text-blue-700 font-semibold">Thank you for putting in the effort to finish the entire set!</span>
+          </div>
+        </div>
+      </template>
+      <template v-else>
+        <h3>
+          <i class="fas fa-trophy"></i>
+          Chapter Complete!
+        </h3>
+      </template>
       <div class="chapter-stats mb-4 w-full flex justify-center">
         <table class="w-auto min-w-[320px] text-base border-collapse bg-white rounded-lg shadow-md">
           <tbody>
-            <tr>
-              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left" colspan="2">
-                Chapter {{ chapter + 1 }} Score
-              </th>
-              <td class="py-2 px-4 text-cyan-500 font-bold text-left" colspan="2">{{ score }} / {{ questions.length }}</td>
-            </tr>
+            <tr v-for="n in chapter + 1" :key="n" class="bg-blue-50 rounded-lg">
+                <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left bg-blue-100 rounded-l-lg">
+                  Chapter {{ n }} Score
+                </th>
+                <td class="py-2 px-4 text-cyan-500 font-bold text-left bg-white rounded-r-lg">
+                  {{ (n - 1) === chapter ? score : (chapterStates[n-1]?.score ?? 0) }} / {{ (n - 1) === chapter ? questions.length : (chapterStates[n-1]?.total ?? questions.length) }}
+                </td>
+              </tr>
             <tr>
               <td colspan="4" class="py-1"><hr class="border-t-2 border-gray-200 my-1"></td>
             </tr>
@@ -84,6 +110,8 @@
                 <span v-else>{{ getOverallScore().score }} / {{ getOverallScore().total }}</span>
               </td>
             </tr>
+            <tr>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -92,9 +120,21 @@
           <i class="fas fa-undo text-base pr-1"></i>
           <span>Restart Chapter</span>
         </button>
-        <button v-if="questions.length === CHAPTER_SIZE" @click="goToNextChapter" class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: #fff; min-width: 120px; min-height: 32px;">
+        <button
+          v-if="questions.length === CHAPTER_SIZE && !isFinalChapter()"
+          @click="goToNextChapter"
+          class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
+          style="font-size:unset;background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: #fff; min-width: 120px; min-height: 32px;">
           <i class="fas fa-arrow-right text-base pr-1"></i>
           <span>Continue to Next Chapter</span>
+        </button>
+        <button
+          v-if="questions.length === CHAPTER_SIZE && isFinalChapter()"
+          @click="startFresh"
+          class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
+          style="font-size:unset;background: linear-gradient(90deg, #06b6d4 0%, #1e40af 100%); color: #fff; min-width: 120px; min-height: 32px;">
+          <i class="fas fa-redo text-base pr-1"></i>
+          <span>Start Fresh</span>
         </button>
       </div>
     </div>
@@ -338,5 +378,25 @@ function isAllChaptersComplete() {
   return complete === totalChapters;
 }
 
+function isFinalChapter() {
+  const totalChapters = Math.ceil(questionsData.value.length / CHAPTER_SIZE) || 1;
+  return chapter.value === totalChapters - 1;
+}
+
+function startFresh() {
+  // Clear all quiz and chapter state for this topic
+  const topicKey = props.topic?.topic;
+  localStorage.removeItem(getQuizStateKey(topicKey));
+  localStorage.removeItem(getChaptersKey(topicKey));
+  chapter.value = 0;
+  questions.value = getChapterQuestions(0);
+  current.value = 0;
+  score.value = 0;
+  answered.value = false;
+  isCorrect.value = false;
+  selectedOptions.value = [];
+  chapterStates.value = {};
+  // Optionally, scroll to top or focus first question
+}
 // Remove this watcher to prevent clearing chapter state and quiz state on chapter completion
 </script>
