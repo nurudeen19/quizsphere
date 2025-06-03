@@ -1,7 +1,7 @@
 [
     {
         "topic": "Kubernetes",
-        "file": "kubernetes.json",
+        "file": "/src/data/kubernetes.json",
         "title": "Kubernetes"
     }
 ]

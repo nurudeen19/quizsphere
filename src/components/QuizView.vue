@@ -1,6 +1,21 @@
 <template>
   <div v-if="questions.length" class="quiz">
     <h2><i class="fas fa-brain"></i> {{ topicTitle }}</h2>
+    <div class="text-sm text-blue-900 mb-2 font-bold tracking-wide">
+      <div class="chapter-info">
+        Chapter {{ chapter + 1 }} of {{ Math.ceil(questionsData.length / CHAPTER_SIZE) || 1 }}
+      </div>
+    </div>
+    <!-- Animated Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner">
+      <div
+        class="progress-bar"
+        :style="{ width: ((current + 0) / questions.length * 100) + '%' }"
+      >
+        <span class="sr-only">Progress</span>
+      </div>
+    </div>
+    <!-- End Progress Bar -->
     <div v-if="isQuizActive">
       <div class="question">
         <span class="progress">Question {{ current + 1 }} of {{ questions.length }}</span>
@@ -153,12 +168,11 @@ watch(() => props.topic, async (newTopic) => {
   if (newTopic && newTopic.topic) {
     topicTitle.value = newTopic.title
     let data = []
-    const topicKey = newTopic.topic.toLowerCase()
-    if (topicKey === 'kubernetes') {
-      const res = await fetch('/src/data/kubernetes.json')
+    // Use the file path from the topic object
+    if (newTopic.file) {
+      const res = await fetch(newTopic.file)
       data = await res.json()
-    }   
-    // Add more topics here as needed
+    }
     // Filter out malformed/incomplete questions
     data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
     questionsData.value = data
@@ -275,24 +289,3 @@ watch(current, (val) => {
   }
 })
 </script>
-
-<!-- Styles moved to style.css -->
-<style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.25s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
-.feedback {
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.chapter-stats {
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-</style>

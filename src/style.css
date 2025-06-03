@@ -393,3 +393,25 @@ main {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: none; }
 }
+.progress-bar {
+  display: block;
+  height: 1.2rem !important;
+  min-width: 1px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 2px 8px 0 rgba(6,182,212,0.15), 0 1.5px 4px 0 rgba(37,99,235,0.10);
+  background-color: #06b6d4;
+  background-image: linear-gradient(90deg, #06b6d4 0%, #22d3ee 40%, #22c55e 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-radius: 9999px;
+  border: none;
+  z-index: 1;
+}
+.chapter-info {
+  color: #334155; /* slate-800, less vibrant and softer than black */
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
