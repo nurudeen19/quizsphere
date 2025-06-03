@@ -64,19 +64,37 @@
       </transition>
     </div>
     <div v-else class="quiz-complete">
-      <h3><i class="fas fa-trophy"></i> Quiz Complete!</h3>
-      <div class="chapter-stats mb-4">
-        <div class="text-lg font-semibold text-blue-700 mb-1">Chapter {{ chapter + 1 }} Score: <span class="text-cyan-500">{{ score }}</span> / {{ questions.length }}</div>
-        <div class="text-base text-gray-700">Overall Score: <span class="font-bold text-blue-600">{{ getOverallScore().score }}</span> / {{ getOverallScore().total }}</div>
+      <h3><i class="fas fa-trophy"></i> Chapter Complete!</h3>
+      <div class="chapter-stats mb-4 w-full flex justify-center">
+        <table class="w-auto min-w-[320px] text-base border-collapse bg-white rounded-lg shadow-md">
+          <tbody>
+            <tr>
+              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left" colspan="2">
+                Chapter {{ chapter + 1 }} Score
+              </th>
+              <td class="py-2 px-4 text-cyan-500 font-bold text-left" colspan="2">{{ score }} / {{ questions.length }}</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="py-1"><hr class="border-t-2 border-gray-200 my-1"></td>
+            </tr>
+            <tr>
+              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left">Overall</th>
+              <td class="py-2 px-4 text-blue-600 font-bold text-left" colspan="3">
+                <span v-if="!isAllChaptersComplete()">{{ getOverallScore().score }}</span>
+                <span v-else>{{ getOverallScore().score }} / {{ getOverallScore().total }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4">
-        <button v-if="questions.length === CHAPTER_SIZE" @click="goToNextChapter" class="next-btn flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all text-lg tracking-wide drop-shadow-md border-0 cursor-pointer">
-          <i class="fas fa-arrow-right text-xl pr-3"></i>
-          <span>Next Chapter</span>
-        </button>
-        <button @click="restartChapter" class="next-btn flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all text-lg tracking-wide drop-shadow-md border-0 cursor-pointer">
-          <i class="fas fa-undo text-xl pr-3"></i>
+      <div class="w-full flex flex-row justify-center items-center mt-4 gap-2">
+        <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); color: #fff; min-width: 120px; min-height: 32px;">
+          <i class="fas fa-undo text-base pr-1"></i>
           <span>Restart Chapter</span>
+        </button>
+        <button v-if="questions.length === CHAPTER_SIZE" @click="goToNextChapter" class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: #fff; min-width: 120px; min-height: 32px;">
+          <i class="fas fa-arrow-right text-base pr-1"></i>
+          <span>Continue to Next Chapter</span>
         </button>
       </div>
     </div>
@@ -95,7 +113,14 @@ const props = defineProps({
   topic: Object
 })
 
-const isQuizActive = computed(() => current.value < questions.value.length && !showChapterComplete())
+const isQuizActive = computed(() => {
+  // If the current chapter is completed but the next chapter hasn't started, show chapter complete page
+  const chapters = chapterStates.value;
+  const currentCompleted = chapters[chapter.value]?.completed;
+  const nextStarted = chapters[chapter.value + 1]?.score > 0 || chapters[chapter.value + 1]?.completed;
+  // Quiz is active if not completed, or if next chapter has started
+  return (current.value < questions.value.length && !currentCompleted) || nextStarted;
+})
 
 const questions = ref([])
 const current = ref(0)
@@ -244,12 +269,28 @@ function getLastCompletedChapter() {
 }
 
 function showChapterComplete() {
-  // Show chapter complete if current is past end, or if last completed chapter is not the current
-  const lastCompleted = getLastCompletedChapter()
-  return current.value >= questions.value.length || (lastCompleted >= 0 && lastCompleted === chapter.value)
+  // Show chapter complete if current is past end, or if last completed chapter is not the current, or if chapter is completed but next not started
+  const chapters = chapterStates.value;
+  const lastCompleted = getLastCompletedChapter();
+  const currentCompleted = chapters[chapter.value]?.completed;
+  const nextStarted = chapters[chapter.value + 1]?.score > 0 || chapters[chapter.value + 1]?.completed;
+  return (
+    current.value >= questions.value.length ||
+    (lastCompleted >= 0 && lastCompleted === chapter.value) ||
+    (currentCompleted && !nextStarted)
+  );
 }
 
 function goToNextChapter() {
+  // Save current chapter score as completed
+  let chapters = { ...chapterStates.value }
+  chapters[chapter.value] = {
+    score: score.value,
+    total: questions.value.length,
+    completed: true
+  }
+  chapterStates.value = chapters
+  saveQuizState()
   chapter.value++
   questions.value = getChapterQuestions(chapter.value)
   current.value = 0
@@ -257,7 +298,6 @@ function goToNextChapter() {
   selectedOptions.value = []
   isCorrect.value = false
   score.value = 0
-  saveQuizState()
 }
 
 function handleNext() {
@@ -273,19 +313,30 @@ function handleNext() {
 function restartChapter() {
   questions.value = getChapterQuestions(chapter.value)
   current.value = 0
-  score.value = 0
+  score.value = 0 // Reset score for this chapter
   answered.value = false
   selectedOptions.value = []
   isCorrect.value = false
   showNextBtn.value = true
+  // Remove chapter score from chapterStates
+  let chapters = { ...chapterStates.value }
+  if (chapters[chapter.value]) {
+    chapters[chapter.value].score = 0
+    chapters[chapter.value].completed = false
+  }
+  chapterStates.value = chapters
   saveQuizState()
 }
 
-// Clear state when quiz is completed or topic changes
-watch(current, (val) => {
-  if (questions.value.length && val >= questions.value.length) {
-    const topicKey = props.topic?.topic
-    localStorage.removeItem(getQuizStateKey(topicKey))
+function isAllChaptersComplete() {
+  const totalChapters = Math.ceil(questionsData.value.length / CHAPTER_SIZE) || 1;
+  let chapters = chapterStates.value;
+  let complete = 0;
+  for (let i = 0; i < totalChapters; i++) {
+    if (chapters[i]?.completed) complete++;
   }
-})
+  return complete === totalChapters;
+}
+
+// Remove this watcher to prevent clearing chapter state and quiz state on chapter completion
 </script>

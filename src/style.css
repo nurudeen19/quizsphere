@@ -415,3 +415,29 @@ main {
   margin-bottom: 0.5rem;
   opacity: 0.8;
 }
+.next-btn {
+  background: linear-gradient(90deg, #00c6ff 0%, #00e0ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  margin: 1.2rem auto 0 auto;
+  box-shadow: 0 2px 12px #00c6ff33;
+  letter-spacing: 0.5px;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: auto;
+  min-width: 160px;
+  justify-content: center;
+}
+.next-btn:hover,
+.next-btn:focus {
+  background: linear-gradient(90deg, #00e0ff 0%, #00c6ff 100%);
+  box-shadow: 0 4px 20px #00c6ff44;
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
+}
