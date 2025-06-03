@@ -37,6 +37,15 @@ body {
   box-shadow: 0 8px 32px #00c6ff22, 0 4px 16px #0001;
   transform: translateY(-4px) scale(1.03);
 }
+.avatar-img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 9999px;
+  border-width: 4px;
+  border-color: #dbeafe;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
 .avatar-wrapper {
   display: flex;
   align-items: center;
@@ -46,11 +55,6 @@ body {
   background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
   border-radius: 9999px;
   margin-bottom: 1rem;
-}
-.avatar-img {
-  border-radius: 9999px;
-  border: 4px solid #bae6fd;
-  background: #f1f5f9;
 }
 .start-quiz-btn-new {
   background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);

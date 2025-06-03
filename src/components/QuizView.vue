@@ -186,6 +186,7 @@ function getChapterQuestions(chapterNum) {
 function saveQuizState() {
   const topicKey = props.topic?.topic
   const state = {
+    version: 1,
     topic: topicKey,
     chapter: chapter.value,
     current: current.value,
@@ -199,6 +200,7 @@ function saveQuizState() {
   // Save per-chapter state
   let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}')
   chapters[chapter.value] = {
+    version: 1,
     score: score.value,
     total: questions.value.length,
     completed: current.value >= questions.value.length
@@ -229,14 +231,30 @@ function loadQuizState() {
   return false
 }
 
+function validateQuestions(data) {
+  if (!Array.isArray(data)) return false;
+  return data.every(q => q && typeof q.q === 'string' && Array.isArray(q.options) && Array.isArray(q.answers));
+}
+
 watch(() => props.topic, async (newTopic) => {
   if (newTopic && newTopic.topic) {
     topicTitle.value = newTopic.title
     let data = []
-    // Use the file path from the topic object
-    if (newTopic.file) {
-      const res = await fetch(newTopic.file)
+    // Use the file path from the topic object, ensure it works in production
+    let filePath = newTopic.file
+    if (filePath && !filePath.startsWith('/')) filePath = '/' + filePath
+    if (filePath && !filePath.startsWith('/src')) filePath = '/data/' + filePath
+    try {
+      const res = await fetch(filePath)
       data = await res.json()
+    } catch (e) {
+      data = []
+    }
+    if (!validateQuestions(data)) {
+      questionsData.value = []
+      // Show a user-friendly error message
+      topicTitle.value = 'Invalid or corrupt question data.'
+      return
     }
     // Filter out malformed/incomplete questions
     data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
@@ -398,5 +416,6 @@ function startFresh() {
   chapterStates.value = {};
   // Optionally, scroll to top or focus first question
 }
-// Remove this watcher to prevent clearing chapter state and quiz state on chapter completion
+// TODO: For a more dynamic confetti effect, consider using a JS confetti library or randomizing confetti properties for extra delight.
+// TODO: For internationalization, extract all user-facing strings to a localization file or use a library like vue-i18n.
 </script>
