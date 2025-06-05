@@ -304,6 +304,15 @@ body {
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
+.fade-slow-enter-active, .fade-slow-leave-active {
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-slow-enter-from, .fade-slow-leave-to {
+  opacity: 0;
+}
+.fade-slow-enter-to, .fade-slow-leave-from {
+  opacity: 1;
+}
 #app {
   min-height: 100vh;
   display: flex;
