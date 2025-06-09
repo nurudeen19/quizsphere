@@ -95,7 +95,14 @@ onMounted(async () => {
       try {
         // Try to fetch the questions file and count the questions
         if (t.file) {
-          const qRes = await fetch(t.file)
+          let filePath = t.file;
+          // Use correct base for dev/prod
+          if (import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/') {
+            if (!filePath.startsWith(import.meta.env.BASE_URL)) {
+              filePath = import.meta.env.BASE_URL.replace(/\/$/, '') + (filePath.startsWith('/') ? filePath : '/' + filePath);
+            }
+          }
+          const qRes = await fetch(filePath)
           if (qRes.ok) {
             const qData = await qRes.json()
             questionsCount = Array.isArray(qData) ? qData.length : 0

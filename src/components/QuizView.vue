@@ -267,9 +267,12 @@ watch(() => props.topic, async (newTopic) => {
     let data = []
     // Use the file path from the topic object, ensure it works in production
     let filePath = newTopic.file
-    if (filePath && !filePath.startsWith('/')) filePath = '/' + filePath
-    // Always serve from /data/ in public
-    if (!filePath.startsWith('/data/')) filePath = '/data/' + filePath.replace(/^.*[\\/]/, '')
+    // Dynamically prepend base URL for dev/prod compatibility
+    if (import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/') {
+      if (!filePath.startsWith(import.meta.env.BASE_URL)) {
+        filePath = import.meta.env.BASE_URL.replace(/\/$/, '') + (filePath.startsWith('/') ? filePath : '/' + filePath);
+      }
+    }
     try {
       const res = await fetch(filePath)
       data = await res.json()
