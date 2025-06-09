@@ -47,8 +47,8 @@ The production-ready files will be in the `dist/` folder.
 - `.htaccess` — Apache rewrite rules for SPA routing
 
 ## Customization
-- Add new topics in `src/data/topics.json` (with image URLs)
-- Add/modify questions in `src/data/`
+- Add new topics in `public/data/topics.json` (with image URLs)
+- Add/modify questions in `public/data/`
 - Update styles in `src/style.css` or via Tailwind
 
 ## Accessibility & i18n

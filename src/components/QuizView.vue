@@ -268,7 +268,8 @@ watch(() => props.topic, async (newTopic) => {
     // Use the file path from the topic object, ensure it works in production
     let filePath = newTopic.file
     if (filePath && !filePath.startsWith('/')) filePath = '/' + filePath
-    if (filePath && !filePath.startsWith('/src')) filePath = '/data/' + filePath
+    // Always serve from /data/ in public
+    if (!filePath.startsWith('/data/')) filePath = '/data/' + filePath.replace(/^.*[\\/]/, '')
     try {
       const res = await fetch(filePath)
       data = await res.json()
