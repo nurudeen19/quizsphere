@@ -7,8 +7,8 @@
         <span>QuizSphere</span>
       </div>
       <nav>
-        <a href="#" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-        <a href="https://github.com/nurudeen19/k8s_mcq-quiz" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a>
+        <a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+        <a href="https://github.com/nurudeen19/quizsphere" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a>
       </nav>
     </header>
     <main>

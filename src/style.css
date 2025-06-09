@@ -500,3 +500,66 @@ main {
   80% { opacity: 0.85; }
   100% { top: 100px; opacity: 0; transform: translateY(40px) scale(0.7) rotate(360deg); }
 }
+.topic-card-ghcert {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px #2563eb11, 0 1.5px 6px #06b6d411;
+  border: 1.5px solid #e0e7ef;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.18s, transform 0.14s;
+}
+.topic-card-ghcert:hover {
+  box-shadow: 0 8px 32px #2563eb22, 0 4px 16px #06b6d422;
+  transform: translateY(-4px) scale(1.025);
+}
+.topic-card-header {
+  background: linear-gradient(90deg, #e0f2fe 0%, #f0f9ff 100%);
+  border-bottom: 1.5px solid #e0e7ef;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.topic-card-header img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  border: 3px solid #dbeafe;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
+.topic-card-ghcert h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.15rem;
+}
+.topic-card-ghcert .badge {
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}
+.topic-card-ghcert .level {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.18rem 0.7rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}
+.topic-card-ghcert .questions {
+  background: #f1f5f9;
+  color: #2563eb;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.18rem 0.7rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}

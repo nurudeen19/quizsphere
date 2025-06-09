@@ -1,33 +1,63 @@
 <template>
   <div v-if="loadError" class="text-center text-red-600 font-bold py-8">{{ loadError }}</div>
   <div v-else class="topic-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 py-8 px-4">
-    <div v-for="topic in topics" :key="topic.topic" class="topic-card-new bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col items-center p-6 transition-transform duration-150 hover:-translate-y-1 hover:shadow-2xl">
-      <div class="avatar-wrapper mb-4">
-        <img :src="topic.image || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`" @error="onImageError($event, topic.title)" alt="Topic image" class="avatar-img w-20 h-20 object-cover rounded-full border-4 border-blue-100 shadow" />
+    <div v-for="topic in topics" :key="topic.topic" class="topic-card-ghcert bg-gradient-to-br from-cyan-50 via-blue-100 to-blue-200 rounded-2xl shadow-xl border border-blue-200 flex flex-col items-stretch p-0 transition-transform duration-150 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden max-w-[320px] w-full mx-auto">
+      <div class="topic-card-header flex flex-row items-center gap-4 p-6 pb-2 bg-gradient-to-r from-blue-200 via-cyan-100 to-white border-b border-blue-200">
+        <img :src="topic.image || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`" @error="onImageError($event, topic.title)" alt="Topic image" class="avatar-img w-16 h-16 object-cover rounded-full border-4 border-cyan-200 shadow" />
+        <div class="flex-1">
+          <h2 class="text-xl font-bold text-blue-900 mb-1 leading-tight">{{ topic.title }}</h2>
+          <div class="flex flex-row flex-wrap gap-2 mt-1">
+            <span v-if="topic.questions" class="inline-block bg-cyan-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded">{{ topic.questions }} Questions</span>
+            <span v-if="topic.level" class="inline-block bg-blue-100 text-cyan-700 text-xs font-semibold px-2 py-1 rounded">{{ topic.level }}</span>
+          </div>
+        </div>
       </div>
-      <h2 class="text-xl font-semibold text-gray-800 mb-1 text-center">{{ topic.title }}</h2>
-      <p class="text-gray-500 text-sm mb-4 text-center min-h-[32px]">{{ topic.description || 'Test your knowledge on this topic.' }}</p>
-      <QuizButton
-        v-if="getQuizState(topic.topic)"
-        :label="'Continue Quiz'"
-        colorClass="bg-yellow-400 hover:bg-yellow-500 text-gray-900"
-        :aria="`Continue quiz for ${topic.title}`"
-        :click="() => $emit('select', topic)"
-      />
-      <QuizButton
-        v-else
-        :label="'Start Quiz'"
-        colorClass="''"
-        :aria="`Start quiz for ${topic.title}`"
-        :click="() => $emit('select', topic)"
-      />
+      <div class="flex-1 flex flex-col justify-between p-6 pt-3 card-content-padding bg-white/80">
+        <p class="text-cyan-700 text-[15px] italic font-semibold mb-2 text-left min-h-[32px] tracking-wide drop-shadow-sm">
+          {{ topic.description || 'This quiz covers the following key areas:' }}
+        </p>
+        <ul v-if="topic.areas && topic.areas.length" class="topic-areas-animated list-none text-xs text-blue-800 mb-3 pl-0">
+          <li v-for="(area, idx) in topic.areas" :key="area" :style="{ animationDelay: (0.05 * idx) + 's' }" class="topic-area-bullet animate-fadein-left flex items-center">
+            <span class="custom-bullet mr-2"></span>{{ area }}
+          </li>
+        </ul>
+        <div class="flex flex-col gap-1 mt-auto items-start">
+          <span v-if="topic.questionsCount !== undefined" class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded mb-1">{{ topic.questionsCount }} Questions</span>
+          <div class="flex flex-row gap-2 w-full">
+            <QuizButton
+              v-if="getQuizState(topic.topic)"
+              :label="'Continue Quiz'"
+              colorClass="bg-yellow-400 hover:bg-yellow-500 text-gray-900"
+              :aria="`Continue quiz for ${topic.title}`"
+              :click="() => $emit('select', topic)"
+            />
+            <QuizButton
+              v-else
+              :label="'Start Quiz'"
+              colorClass="''"
+              :aria="`Start quiz for ${topic.title}`"
+              :click="() => $emit('select', topic)"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Remove the badge from the top right corner -->
+      <!-- <div class="absolute top-0 right-0 m-4">
+        <span v-if="topic.badge" class="inline-block bg-gradient-to-br from-blue-400 to-cyan-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">{{ topic.badge }}</span>
+      </div> -->
     </div>
   </div>
+  <footer class="w-full text-center py-6 mt-8 text-sm text-blue-800 bg-gradient-to-r from-cyan-50 via-blue-100 to-blue-200 border-t border-blue-200">
+    <span>
+      🚀 If you found QuizSphere helpful, please <a href="https://github.com/nurudeen19/quizsphere" target="_blank" rel="noopener" class="text-blue-700 underline font-semibold hover:text-blue-900">star our GitHub repo</a> and help others discover this free resource!
+    </span>
+  </footer>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import QuizButton from './QuizButton.vue'
+import { useHead } from '@vueuse/head'
 
 function onImageError(event, title) {
   // Fallback to Unsplash if Wikimedia fails
@@ -57,11 +87,132 @@ onMounted(async () => {
   try {
     const res = await fetch('/src/data/topics.json')
     if (!res.ok) throw new Error('Failed to load topics')
-    topics.value = await res.json()
+    const data = await res.json()
+    // For each topic, fetch the question count and add demo areas
+    topics.value = await Promise.all(data.map(async t => {
+      let questionsCount = 0
+      let areas = t.areas || []
+      try {
+        // Try to fetch the questions file and count the questions
+        if (t.file) {
+          const qRes = await fetch(t.file)
+          if (qRes.ok) {
+            const qData = await qRes.json()
+            questionsCount = Array.isArray(qData) ? qData.length : 0
+          }
+        }
+      } catch {}
+      // Demo: add some areas if not present
+      if (!areas.length) {
+        // Example: add default areas for known topics
+        if (t.topic.toLowerCase().includes('kubernetes')) {
+          areas = [
+            'Cluster Management',
+            'Pods & Deployments',
+            'Services & Networking',
+            'Storage & Volumes',
+            'Security & RBAC'
+          ]
+        } else if (t.topic.toLowerCase().includes('docker')) {
+          areas = [
+            'Images & Containers',
+            'Volumes & Networks',
+            'Docker Compose',
+            'Registry & Distribution',
+            'Security & Best Practices'
+          ]
+        } else if (t.topic.toLowerCase().includes('linux')) {
+          areas = [
+            'File System',
+            'Permissions',
+            'Processes & Signals',
+            'Networking',
+            'Shell Scripting'
+          ]
+        } else if (t.topic.toLowerCase().includes('git')) {
+          areas = [
+            'Commits & Branches',
+            'Merging & Rebasing',
+            'Remote Repositories',
+            'Tags & Releases',
+            'Conflict Resolution'
+          ]
+        }
+      }
+      return {
+        ...t,
+        questionsCount,
+        // badge: t.badge || 'Quiz', // Badge is no longer used
+        level: t.level || 'Intermediate',
+        description: t.description || 'This quiz covers the following key areas:',
+        areas
+      }
+    }))
   } catch (e) {
     loadError.value = 'Failed to load topics. Please try again later.'
   }
 })
+
+useHead({
+  title: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes',
+  meta: [
+    { name: 'description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications. Track your progress and boost your skills!' },
+    { name: 'keywords', content: 'quiz, quizzes, practice test, kubernetes, docker, linux, git, devops, cloud, certification, CKAD, CKA, CKS, IT, exam, study, learning, interactive, free, questions, answers, test, online, progress, skills' },
+    { name: 'author', content: 'QuizSphere Team' },
+    { property: 'og:title', content: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes' },
+    { property: 'og:description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://quizsphere.com/' },
+    { property: 'og:image', content: 'https://quizsphere.com/og-image.png' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes' },
+    { name: 'twitter:description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications.' },
+    { name: 'twitter:image', content: 'https://quizsphere.com/og-image.png' },
+    { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://quizsphere.com/' },
+    { rel: 'repository', href: 'https://github.com/nurudeen19/quizsphere' }
+  ]
+})
 </script>
 
-<!-- Styles moved to style.css -->
+<style>
+@keyframes fadein-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.topic-areas-animated .topic-area-bullet {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 0.25em;
+  opacity: 0;
+  animation: fadein-left 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.custom-bullet {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  min-width: 0.6em;
+  min-height: 0.6em;
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px #06b6d422;
+  margin-right: 0.5em;
+}
+.card-content-padding {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1.25rem !important;
+}
+</style>
+
+<!-- Add new styles for ghcertified-like card in style.css if needed -->
