@@ -2,13 +2,16 @@
   <div v-if="loadError" class="text-center text-red-600 font-bold py-8">{{ loadError }}</div>
   <div v-else class="grid grid-cols-4 gap-x-8 gap-y-8 my-16 mx-12">
     <div v-for="topic in topics" :key="topic.topic" class="topic-card-ghcert bg-gradient-to-br from-cyan-50 via-blue-100 to-blue-200 rounded-2xl shadow-xl border border-blue-200 flex flex-col h-full transition-transform duration-150 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden">
-      <div class="topic-card-header flex flex-row items-center gap-4 p-6 pb-2 bg-gradient-to-r from-blue-200 via-cyan-100 to-white border-b border-blue-200">
+      <div class="topic-card-header flex flex-row items-center gap-4 p-6 pb-2 pr-20 min-h-[88px] bg-gradient-to-r from-blue-200 via-cyan-100 to-white border-b border-blue-200">
         <img :src="topic.image || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`" @error="onImageError($event, topic.title)" alt="Topic image" class="avatar-img w-16 h-16 object-cover rounded-full border-4 border-cyan-200 shadow" />
-        <div class="flex-1">
+        <div class="flex-1 flex flex-col justify-center">
           <h2 class="text-xl font-bold text-blue-900 mb-1 leading-tight">{{ topic.title }}</h2>
+          <div class="flex flex-row items-center gap-2 mt-1">
+            <span v-if="topic.badge" class="inline-block bg-gradient-to-br from-blue-400 to-cyan-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow mb-2">{{ topic.badge }}</span>
+            <span v-if="topic.level" class="inline-block bg-blue-100 text-cyan-700 text-xs font-semibold px-2 py-1 rounded mb-2">{{ topic.level }}</span>
+          </div>
           <div class="flex flex-row flex-wrap gap-2 mt-1">
             <span v-if="topic.questions" class="inline-block bg-cyan-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded">{{ topic.questions }} Questions</span>
-            <span v-if="topic.level" class="inline-block bg-blue-100 text-cyan-700 text-xs font-semibold px-2 py-1 rounded">{{ topic.level }}</span>
           </div>
         </div>
       </div>
@@ -41,10 +44,6 @@
           </div>
         </div>
       </div>
-      <!-- Remove the badge from the top right corner -->
-      <!-- <div class="absolute top-0 right-0 m-4">
-        <span v-if="topic.badge" class="inline-block bg-gradient-to-br from-blue-400 to-cyan-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow">{{ topic.badge }}</span>
-      </div> -->
     </div>
   </div>
   <footer class="w-full text-center py-6 mt-8 text-sm text-blue-800 bg-gradient-to-r from-cyan-50 via-blue-100 to-blue-200 border-t border-blue-200">
@@ -58,6 +57,7 @@
 import { ref, onMounted } from 'vue'
 import QuizButton from './QuizButton.vue'
 import { useHead } from '@vueuse/head'
+import { topicAreasMap } from './topicAreas.js'
 
 function onImageError(event, title) {
   // Fallback to Unsplash if Wikimedia fails
@@ -92,6 +92,18 @@ onMounted(async () => {
     topics.value = await Promise.all(data.map(async t => {
       let questionsCount = 0
       let areas = t.areas || []
+      // Prefer explicit areasKey if present
+      if (!areas.length && t.areasKey && topicAreasMap[t.areasKey]) {
+        areas = topicAreasMap[t.areasKey]
+      } else if (!areas.length) {
+        // Fallback: legacy partial match for backward compatibility
+        const topicKey = Object.keys(topicAreasMap).find(key =>
+          t.topic && t.topic.toLowerCase().includes(key)
+        );
+        if (topicKey) {
+          areas = topicAreasMap[topicKey];
+        }
+      }
       try {
         // Try to fetch the questions file and count the questions
         if (t.file) {
@@ -109,47 +121,10 @@ onMounted(async () => {
           }
         }
       } catch {}
-      // Demo: add some areas if not present
-      if (!areas.length) {
-        // Example: add default areas for known topics
-        if (t.topic.toLowerCase().includes('kubernetes')) {
-          areas = [
-            'Cluster Management',
-            'Pods & Deployments',
-            'Services & Networking',
-            'Storage & Volumes',
-            'Security & RBAC'
-          ]
-        } else if (t.topic.toLowerCase().includes('docker')) {
-          areas = [
-            'Images & Containers',
-            'Volumes & Networks',
-            'Docker Compose',
-            'Registry & Distribution',
-            'Security & Best Practices'
-          ]
-        } else if (t.topic.toLowerCase().includes('linux')) {
-          areas = [
-            'File System',
-            'Permissions',
-            'Processes & Signals',
-            'Networking',
-            'Shell Scripting'
-          ]
-        } else if (t.topic.toLowerCase().includes('git')) {
-          areas = [
-            'Commits & Branches',
-            'Merging & Rebasing',
-            'Remote Repositories',
-            'Tags & Releases',
-            'Conflict Resolution'
-          ]
-        }
-      }
       return {
         ...t,
         questionsCount,
-        // badge: t.badge || 'Quiz', // Badge is no longer used
+        badge: t.badge || 'Quiz',
         level: t.level || 'Intermediate',
         description: t.description || 'This quiz covers the following key areas:',
         areas
