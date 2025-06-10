@@ -32,14 +32,14 @@
               :label="'Continue Quiz'"
               colorClass="bg-yellow-400 hover:bg-yellow-500 text-gray-900"
               :aria="`Continue quiz for ${topic.title}`"
-              :click="() => $emit('select', topic)"
+              :click="() => $emit('selectTopic', topic)"
             />
             <QuizButton
               v-else
               :label="'Start Quiz'"
               colorClass="''"
               :aria="`Start quiz for ${topic.title}`"
-              :click="() => $emit('select', topic)"
+              :click="() => $emit('selectTopic', topic)"
             />
           </div>
         </div>
@@ -56,9 +56,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import QuizButton from './QuizButton.vue'
-import { useHead } from '@vueuse/head'
-import { topicAreasMap } from './topicAreas.js'
+import { topicAreas } from './topicAreas.js'
 
+const emit = defineEmits(['selectTopic'])
 function onImageError(event, title) {
   // Fallback to Unsplash if Wikimedia fails
   event.target.src = `https://source.unsplash.com/featured/256x256/?${encodeURIComponent(title)}`;
@@ -92,16 +92,16 @@ onMounted(async () => {
     topics.value = await Promise.all(data.map(async t => {
       let questionsCount = 0
       let areas = t.areas || []
-      // Prefer explicit areasKey if present
-      if (!areas.length && t.areasKey && topicAreasMap[t.areasKey]) {
-        areas = topicAreasMap[t.areasKey]
+      // Use topic key to get areas from topicAreas mapping
+      if (!areas.length && topicAreas[t.topic]) {
+        areas = topicAreas[t.topic]
       } else if (!areas.length) {
         // Fallback: legacy partial match for backward compatibility
-        const topicKey = Object.keys(topicAreasMap).find(key =>
+        const topicKey = Object.keys(topicAreas).find(key =>
           t.topic && t.topic.toLowerCase().includes(key)
         );
         if (topicKey) {
-          areas = topicAreasMap[topicKey];
+          areas = topicAreas[topicKey];
         }
       }
       try {
@@ -135,29 +135,6 @@ onMounted(async () => {
   }
 })
 
-useHead({
-  title: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes',
-  meta: [
-    { name: 'description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications. Track your progress and boost your skills!' },
-    { name: 'keywords', content: 'quiz, quizzes, practice test, kubernetes, docker, linux, git, devops, cloud, certification, CKAD, CKA, CKS, IT, exam, study, learning, interactive, free, questions, answers, test, online, progress, skills' },
-    { name: 'author', content: 'QuizSphere Team' },
-    { property: 'og:title', content: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes' },
-    { property: 'og:description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications.' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: 'https://quizsphere.com/' },
-    { property: 'og:image', content: 'https://quizsphere.com/og-image.png' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'QuizSphere - Practice Cloud, DevOps, and IT Certification Quizzes' },
-    { name: 'twitter:description', content: 'Practice and master Kubernetes, Docker, Linux, Git, and more with QuizSphere. Free, interactive quizzes for cloud, DevOps, and IT certifications.' },
-    { name: 'twitter:image', content: 'https://quizsphere.com/og-image.png' },
-    { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
-  ],
-  link: [
-    { rel: 'canonical', href: 'https://quizsphere.com/' },
-    { rel: 'repository', href: 'https://github.com/nurudeen19/quizsphere' }
-  ]
-})
 </script>
 
 <style>

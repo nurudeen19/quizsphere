@@ -28,7 +28,7 @@
       <form class="options" @submit.prevent="submitOptions">
         <fieldset :aria-labelledby="'question-' + current" class="w-full border-0 p-0 m-0">
           <legend :id="'question-' + current" class="sr-only">Question {{ current + 1 }}</legend>
-          <div v-for="(opt, idx) in questions[current].options" :key="idx" class="option-row">
+          <div v-for="(opt, idx) in questions[current].options" :key="idx" class="option-row flex items-start text-left">
             <input
               v-if="questions[current].answers.length === 1"
               type="radio"
@@ -52,7 +52,7 @@
               :aria-checked="selectedOptions.includes(idx)"
               :tabindex="answered ? -1 : 0"
             />
-            <label :for="'option-' + idx" class="flex-1 cursor-pointer text-base font-medium flex items-center gap-2">
+            <label :for="'option-' + idx" class="flex-1 cursor-pointer text-base font-medium flex items-center gap-2 text-left">
               {{ opt }}
             </label>
           </div>

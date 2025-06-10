@@ -16,18 +16,20 @@
         <h1>Welcome to <span class="brand">QuizSphere</span>!</h1>
         <p class="subtitle">Explore various topics and test your knowledge!</p>
       </section>
-      <section v-if="selectedTopic" class="quiz-section">
+      <section v-if="selectedTopic" class="quiz-section animate-fade-in">
         <button
           @click="selectedTopic = null"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-bold shadow-lg hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all mb-6 text-lg tracking-wide drop-shadow-md border-2 border-transparent hover:border-cyan-400 cursor-pointer"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-200 text-blue-800 font-semibold shadow hover:from-cyan-200 hover:to-blue-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 transition-all mb-4 text-base tracking-wide drop-shadow border border-blue-200 cursor-pointer"
         >
-          <i class="fas fa-arrow-left"></i> Back to Topics
+          <i class="fas fa-arrow-left text-sm"></i> Back to Topics
         </button>
         <QuizView :topic="selectedTopic" @back="selectedTopic = null" />
       </section>
-      <section v-else class="w-full min-w-0 min-h-0">
-        <TopicList @select-topic="selectTopic" />        
-      </section>
+      <transition name="fade-slide" mode="out-in">
+        <section v-if="!selectedTopic" class="w-full min-w-0 min-h-0 animate-fade-in">
+          <TopicList @select-topic="selectTopic" />        
+        </section>
+      </transition>
     </main>
     <footer class="main-footer">
       <span>Made with <i class="fas fa-heart"></i> by QuizSphere Team &copy; {{ new Date().getFullYear() }}</span>
@@ -45,3 +47,29 @@ function selectTopic(topic) {
   selectedTopic.value = topic
 }
 </script>
+
+<style>
+/* ...existing styles... */
+
+.animate-fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-slide-enter-from, .fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.fade-slide-enter-to, .fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ...existing styles... */
+</style>

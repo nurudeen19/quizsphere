@@ -1,37 +1,22 @@
-export const topicAreasMap = {
+export const topicAreas = {
   kubernetes: [
-    'Cluster Management',
     'Pods & Deployments',
     'Services & Networking',
-    'Storage & Volumes',
-    'Security & RBAC'
+    'ConfigMaps & Secrets',
+    'Volumes & Storage',
+    'RBAC & Security',
+    'Helm & Operators',
+    'Cluster Architecture',
+    'Troubleshooting'
   ],
-  docker: [
-    'Images & Containers',
-    'Volumes & Networks',
-    'Docker Compose',
-    'Registry & Distribution',
-    'Security & Best Practices'
-  ],
-  linux: [
-    'File System',
-    'Permissions',
-    'Processes & Signals',
-    'Networking',
-    'Shell Scripting'
-  ],
-  git: [
-    'Commits & Branches',
-    'Merging & Rebasing',
-    'Remote Repositories',
-    'Tags & Releases',
-    'Conflict Resolution'
-  ],
-  copilot: [
+  'github-copilot': [
     'AI Code Suggestions',
+    'Editor Integrations',
     'Prompt Engineering',
-    'Copilot in VS Code',
-    'Copilot Labs & Chat',
-    'Security & Limitations'
+    'Copilot Labs',
+    'Security & Privacy',
+    'Supported Languages',
+    'Productivity Tips'
   ]
+  // Add more topics as needed
 };

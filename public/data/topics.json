@@ -1,20 +1,18 @@
 [
   {
-    "topic": "Kubernetes",
+    "topic": "kubernetes",
     "file": "/data/kubernetes.json",
     "title": "Kubernetes",
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
-    "areasKey": "kubernetes",
     "description": "Master Kubernetes concepts, architecture, and operations.",
     "level": "Intermediate",
     "badge": "Cloud Native"
   },
   {
-    "topic": "GitHub Copilot",
+    "topic": "github-copilot",
     "file": "/data/github-copilot.json",
     "title": "GitHub Copilot",
     "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    "areasKey": "copilot",
     "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
     "level": "Beginner",
     "badge": "AI Coding"
