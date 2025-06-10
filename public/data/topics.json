@@ -4,5 +4,11 @@
         "file": "/data/kubernetes.json",
         "title": "Kubernetes",
         "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg"
+    },
+    {
+        "topic": "GitHub Copilot",
+        "file": "/data/github-copilot.json",
+        "title": "GitHub Copilot",
+        "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
     }
 ]
