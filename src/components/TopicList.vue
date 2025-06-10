@@ -1,7 +1,7 @@
 <template>
   <div v-if="loadError" class="text-center text-red-600 font-bold py-8">{{ loadError }}</div>
-  <div v-else class="topic-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 py-8 px-4">
-    <div v-for="topic in topics" :key="topic.topic" class="topic-card-ghcert bg-gradient-to-br from-cyan-50 via-blue-100 to-blue-200 rounded-2xl shadow-xl border border-blue-200 flex flex-col items-stretch p-0 transition-transform duration-150 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden max-w-[320px] w-full mx-auto">
+  <div v-else class="grid grid-cols-4 gap-x-8 gap-y-8 my-16 mx-12">
+    <div v-for="topic in topics" :key="topic.topic" class="topic-card-ghcert bg-gradient-to-br from-cyan-50 via-blue-100 to-blue-200 rounded-2xl shadow-xl border border-blue-200 flex flex-col h-full transition-transform duration-150 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden">
       <div class="topic-card-header flex flex-row items-center gap-4 p-6 pb-2 bg-gradient-to-r from-blue-200 via-cyan-100 to-white border-b border-blue-200">
         <img :src="topic.image || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`" @error="onImageError($event, topic.title)" alt="Topic image" class="avatar-img w-16 h-16 object-cover rounded-full border-4 border-cyan-200 shadow" />
         <div class="flex-1">
@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="flex-1 flex flex-col justify-between p-6 pt-3 card-content-padding bg-white/80">
+      <div class="flex-1 flex flex-col justify-between p-6 pt-3 card-content-padding bg-white/80 h-full">
         <p class="text-cyan-700 text-[15px] italic font-semibold mb-2 text-left min-h-[32px] tracking-wide drop-shadow-sm">
           {{ topic.description || 'This quiz covers the following key areas:' }}
         </p>

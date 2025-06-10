@@ -14,18 +14,19 @@
     <main>
       <section class="welcome-section">
         <h1>Welcome to <span class="brand">QuizSphere</span>!</h1>
-        <p class="subtitle">Test your knowledge on Kubernetes and more topics coming soon.</p>
+        <p class="subtitle">Explore various topics and test your knowledge!</p>
       </section>
-      <section class="quiz-section">
+      <section v-if="selectedTopic" class="quiz-section">
         <button
-          v-if="selectedTopic"
           @click="selectedTopic = null"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-bold shadow-lg hover:from-cyan-400 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all mb-6 text-lg tracking-wide drop-shadow-md border-2 border-transparent hover:border-cyan-400 cursor-pointer"
         >
           <i class="fas fa-arrow-left"></i> Back to Topics
         </button>
-        <TopicList v-if="!selectedTopic" @select="selectTopic" />
-        <QuizView v-else :topic="selectedTopic" @back="selectedTopic = null" />
+        <QuizView :topic="selectedTopic" @back="selectedTopic = null" />
+      </section>
+      <section v-else class="w-full min-w-0 min-h-0">
+        <TopicList @select-topic="selectTopic" />        
       </section>
     </main>
     <footer class="main-footer">
