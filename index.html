@@ -5,17 +5,22 @@
     <link rel="icon" href="/quizsphere/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuizSphere</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C9218NS0PX"></script>
+    <!-- Google tag (gtag.js) - Only active in production -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-C9218NS0PX');
+      if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-C9218NS0PX';
+        document.head.appendChild(gtagScript);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C9218NS0PX');
+      }
     </script>
     <!-- The following script/style tags are for local development only. They will be ignored in production. -->
-    <script type="module" crossorigin src="/quizsphere/assets/index-x1EQTR3x.js"></script>
-    <link rel="stylesheet" crossorigin href="/quizsphere/assets/index-DXNhMKCT.css">
+    <script type="module" crossorigin src="/quizsphere/assets/index-CWnLdQz_.js"></script>
+    <link rel="stylesheet" crossorigin href="/quizsphere/assets/index-DKwzHHkB.css">
   </head>
   <body>
     <div id="app"></div>
