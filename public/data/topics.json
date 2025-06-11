@@ -1,7 +1,7 @@
 [
   {
     "topic": "kubernetes",
-    "file": "/data/kubernetes.json",
+    "file": "data/kubernetes.json",
     "title": "Kubernetes",
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
     "description": "Master Kubernetes concepts, architecture, and operations.",
@@ -10,11 +10,20 @@
   },
   {
     "topic": "github-copilot",
-    "file": "/data/github-copilot.json",
+    "file": "data/github-copilot.json",
     "title": "GitHub Copilot",
     "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
     "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
     "level": "Beginner",
     "badge": "AI Coding"
+  },
+  {
+    "topic": "kubernetes-advanced",
+    "file": "data/kubernetes-advanced.json",
+    "title": "Kubernetes Advanced",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
+    "description": "Tackle advanced Kubernetes topics, real-world scenarios, and troubleshooting.",
+    "level": "Advanced",
+    "badge": "Expert"
   }
 ]

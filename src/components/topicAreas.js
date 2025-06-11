@@ -9,6 +9,16 @@ export const topicAreas = {
     'Cluster Architecture',
     'Troubleshooting'
   ],
+  'kubernetes-advanced': [
+    'Advanced Scheduling',
+    'Security & Hardening',
+    'Multi-Cluster Management',
+    'Custom Controllers',
+    'Performance Tuning',
+    'Disaster Recovery',
+    'Networking Deep Dive',
+    'Real-World Scenarios'
+  ],
   'github-copilot': [
     'AI Code Suggestions',
     'Editor Integrations',

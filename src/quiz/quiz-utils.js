@@ -2,7 +2,7 @@
 // This file will export quiz logic for use in Vue components
 // Suggest renaming this file to quiz-utils.js or quiz-logic.js
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 25;
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -42,20 +42,38 @@ function getQuizQuestionsPage(questionsData, page = 0, pageSize = PAGE_SIZE) {
     return pageQuestions;
 }
 
-// Update import to use public/data path for production compatibility
-// You cannot import from public/data directly in JS, so use dynamic fetch instead of import
-// Remove or comment out the import line:
-// import questions from '../data/kubernetes-questions.js'
-
-// Add a function to fetch the questions dynamically
-export async function fetchKubernetesQuestions() {
-  const res = await fetch('/data/kubernetes-questions.js')
-  if (!res.ok) throw new Error('Failed to load kubernetes-questions.js')
-  // If the file exports as a JS variable, you may need to eval or parse it
-  // If it's JSON, use res.json()
-  // If it's JS, you may need to use import() with a relative path from /public
-  // For now, try to parse as JSON
-  return await res.json()
+// Remove topic-specific fetch function, and add a generic one for any topic file
+/**
+ * Dynamically fetch questions for any topic file in public/data.
+ * @param {string} file - The filename or relative path (e.g. 'kubernetes-advanced.json')
+ * @returns {Promise<Array>} - Array of question objects
+ */
+export async function fetchQuestions(file) {
+  let filePath = file;
+  if (filePath.startsWith('/quizsphere/data/')) {
+    // already correct
+  } else if (filePath.startsWith('/data/')) {
+    filePath = '/quizsphere' + filePath;
+  } else {
+    filePath = '/quizsphere/data/' + filePath.replace(/^\/+/, '').replace(/^data\//, '');
+  }
+  // Debug log
+  console.log('Fetching questions from:', filePath);
+  const res = await fetch(filePath);
+  if (!res.ok) {
+    const text = await res.text();
+    console.error('Fetch failed, response:', text);
+    throw new Error('Failed to load questions: ' + filePath);
+  }
+  let data;
+  try {
+    data = await res.json();
+  } catch (e) {
+    console.error('Failed to parse JSON:', e);
+    throw new Error('Invalid JSON in questions file: ' + filePath);
+  }
+  shuffleOptionsAndRemapAnswers(data);
+  return data;
 }
 
 export { getQuizQuestionsPage, shuffleArray, shuffleOptionsAndRemapAnswers, PAGE_SIZE };

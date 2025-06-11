@@ -70,6 +70,10 @@
                       <i :class="isCorrect ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
                       {{ isCorrect ? 'Correct!' : 'Wrong!' }}
                     </p>
+                    <p v-if="questions[current] && questions[current].explanation" class="explanation mt-3 text-base text-gray-700 bg-blue-50 border-l-4 border-blue-400 px-4 py-2 rounded shadow-sm w-full">
+                      <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                      {{ questions[current].explanation }}
+                    </p>
                     <button v-if="answered" class="next-btn-wrapper next-btn rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all text-2xl tracking-wide drop-shadow-md border-0 cursor-pointer mt-4" style="background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%); color: #fff; min-width: 180px; min-height: 52px;" @click="handleNext">
                       <i class="fas fa-arrow-right text-2xl pr-4"></i>
                       <span>Next</span>
@@ -166,7 +170,7 @@
 
 <script setup>
 import { ref, watch, nextTick, computed, onMounted } from 'vue'
-import { getQuizQuestionsPage, PAGE_SIZE } from '../quiz/quiz-utils.js'
+import { getQuizQuestionsPage, PAGE_SIZE, fetchQuestions } from '../quiz/quiz-utils.js'
 import confetti from 'canvas-confetti'
 
 const props = defineProps({
@@ -209,6 +213,8 @@ function saveQuizState() {
   if (saveTimeout) clearTimeout(saveTimeout)
   saveTimeout = setTimeout(() => {
     const topicKey = props.topic?.topic
+    // Prevent saving state if there are no valid questions
+    if (!questions.value.length) return;
     const state = {
       version: 1,
       topic: topicKey,
@@ -225,9 +231,9 @@ function saveQuizState() {
     let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}')
     chapters[chapter.value] = {
       version: 1,
-      score: score.value,
+      score: questions.value.length ? score.value : 0,
       total: questions.value.length,
-      completed: current.value >= questions.value.length
+      completed: questions.value.length ? (current.value >= questions.value.length) : false
     }
     localStorage.setItem(getChaptersKey(topicKey), JSON.stringify(chapters))
     chapterStates.value = chapters
@@ -265,46 +271,43 @@ watch(() => props.topic, async (newTopic) => {
   if (newTopic && newTopic.topic) {
     topicTitle.value = newTopic.title
     let data = []
-    // Use the file path from the topic object, ensure it works in production
-    let filePath = newTopic.file
-    // Dynamically prepend base URL for dev/prod compatibility
-    if (import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/') {
-      if (!filePath.startsWith(import.meta.env.BASE_URL)) {
-        filePath = import.meta.env.BASE_URL.replace(/\/$/, '') + (filePath.startsWith('/') ? filePath : '/' + filePath);
-      }
-    }
+    // Determine the correct file path for the topic   
     try {
-      const res = await fetch(filePath)
-      data = await res.json()
+      let filePath = ''
+      if (newTopic.file) {
+        filePath = newTopic.file
+      } else if (newTopic.topic) {
+        filePath = `${newTopic.topic}.json`
+      }
+      // Always ensure a single /data/ prefix, never double
+      filePath = filePath.replace(/^\/?data\//, ''); // remove any leading /data/
+      filePath = '/data/' + filePath.replace(/^\/+/, ''); // add single /data/
+      console.log(`Loading questions from: ${filePath}`)
+      data = await fetchQuestions(filePath)
     } catch (e) {
       data = []
+      // Optionally, show error in UI for debugging
+      topicTitle.value = 'Failed to load question data.'
     }
     if (!validateQuestions(data)) {
       questionsData.value = []
-      // Show a user-friendly error message
       topicTitle.value = 'Invalid or corrupt question data.'
       return
     }
-    // Filter out malformed/incomplete questions
     data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
     questionsData.value = data
-    // Try to load state, otherwise start fresh
     if (!loadQuizState()) {
       chapter.value = 0
       questions.value = getChapterQuestions(0)
-      console.log('Loaded questions:', questions.value)
       current.value = 0
       score.value = 0
       answered.value = false
       selectedOptions.value = []
-      // Load chapter states
       let chapters = JSON.parse(localStorage.getItem(getChaptersKey(newTopic.topic)) || '{}')
       chapterStates.value = chapters
     } else {
-      // If state loaded, ensure questions.value is not empty
       if (!questions.value.length) {
         questions.value = getChapterQuestions(chapter.value)
-        console.log('Loaded questions:', questions.value)
       }
     }
   }

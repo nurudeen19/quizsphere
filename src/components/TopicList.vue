@@ -57,6 +57,7 @@
 import { ref, onMounted } from 'vue'
 import QuizButton from './QuizButton.vue'
 import { topicAreas } from './topicAreas.js'
+import { fetchQuestions } from '../quiz/quiz-utils.js'
 
 const emit = defineEmits(['selectTopic'])
 function onImageError(event, title) {
@@ -105,21 +106,22 @@ onMounted(async () => {
         }
       }
       try {
-        // Try to fetch the questions file and count the questions
+        // Use the generic fetchQuestions utility for question count
+        let filePath = ''
         if (t.file) {
-          let filePath = t.file;
-          // Use correct base for dev/prod
-          if (import.meta.env && import.meta.env.BASE_URL && import.meta.env.BASE_URL !== '/') {
-            if (!filePath.startsWith(import.meta.env.BASE_URL)) {
-              filePath = import.meta.env.BASE_URL.replace(/\/$/, '') + (filePath.startsWith('/') ? filePath : '/' + filePath);
-            }
-          }
-          const qRes = await fetch(filePath)
-          if (qRes.ok) {
-            const qData = await qRes.json()
-            questionsCount = Array.isArray(qData) ? qData.length : 0
-          }
+          filePath = t.file
+        } else if (t.topic) {
+          filePath = `${t.topic}.json`
         }
+        // Ensure filePath is relative to 'data/' for fetchQuestions
+        if (!filePath.startsWith('data/')) {
+          filePath = 'data/' + filePath.replace(/^\/+/, '')
+        }
+        // Remove any leading slash for fetchQuestions (public/data/ is root for static assets)
+        filePath = filePath.replace(/^\/+/, '')
+        // Use absolute path for fetch (Vite/production expects '/data/filename.json')
+        const qData = await fetchQuestions('/' + filePath)
+        questionsCount = Array.isArray(qData) ? qData.length : 0
       } catch {}
       return {
         ...t,
