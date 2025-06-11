@@ -3,7 +3,7 @@
     <h2><i class="fas fa-brain"></i> {{ topicTitle }}</h2>
     <div class="text-sm text-blue-900 mb-2 font-bold tracking-wide">
       <div class="chapter-info">
-        Chapter {{ chapter + 1 }} of {{ Math.ceil(questionsData.length / CHAPTER_SIZE) || 1 }}
+        Chapter {{ chapter + 1 }} of {{ Math.ceil(totalQuestions / CHAPTER_SIZE) || 1 }}
       </div>
     </div>
     <!-- Animated Progress Bar -->
@@ -205,7 +205,8 @@ const getChaptersKey = (topicKey) => `quizsphere-chapter-states-${topicKey}`
 
 function getChapterQuestions(chapterNum) {
   if (!questionsData.value.length) return []
-  return getQuizQuestionsPage(questionsData.value, chapterNum, CHAPTER_SIZE)
+  // Use sessionKey for stable shuffling per session
+  return getQuizQuestionsPage(questionsData.value, chapterNum, CHAPTER_SIZE, getSessionKey())
 }
 
 let saveTimeout = null
@@ -267,11 +268,15 @@ function validateQuestions(data) {
   return data.every(q => q && typeof q.q === 'string' && Array.isArray(q.options) && Array.isArray(q.answers));
 }
 
+function getSessionKey() {
+  // Use topic key as sessionKey for shuffling
+  return props.topic?.topic ? `quizsphere-shuffle-${props.topic.topic}` : 'quizsphere-shuffle-default';
+}
+
 watch(() => props.topic, async (newTopic) => {
   if (newTopic && newTopic.topic) {
     topicTitle.value = newTopic.title
     let data = []
-    // Determine the correct file path for the topic   
     try {
       let filePath = ''
       if (newTopic.file) {
@@ -279,26 +284,40 @@ watch(() => props.topic, async (newTopic) => {
       } else if (newTopic.topic) {
         filePath = `${newTopic.topic}.json`
       }
-      // Always ensure a single /data/ prefix, never double
-      filePath = filePath.replace(/^\/?data\//, ''); // remove any leading /data/
-      filePath = '/data/' + filePath.replace(/^\/+/, ''); // add single /data/
+      filePath = filePath.replace(/^\/?.*data\//, '');
+      filePath = '/data/' + filePath.replace(/^\/+/, '');
       console.log(`Loading questions from: ${filePath}`)
-      data = await fetchQuestions(filePath)
+      let pagedData = []
+      let supportsPaging = false
+      try {
+        const pageParam = `?page=${chapter.value}&size=${CHAPTER_SIZE}`
+        // Pass sessionKey for stable shuffling
+        const pagedRes = await fetchQuestions(filePath + pageParam, { sessionKey: getSessionKey() })
+        if (Array.isArray(pagedRes)) {
+          pagedData = pagedRes
+          supportsPaging = true
+        }
+      } catch (e) {
+        // If paging not supported, fallback to full fetch
+      }
+      if (!supportsPaging) {
+        data = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
+        data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
+        pagedData = getQuizQuestionsPage(data, chapter.value, CHAPTER_SIZE, getSessionKey())
+      }
+      questionsData.value = data
+      questions.value = pagedData
     } catch (e) {
       data = []
-      // Optionally, show error in UI for debugging
       topicTitle.value = 'Failed to load question data.'
     }
-    if (!validateQuestions(data)) {
+    if (!validateQuestions(questions.value)) {
       questionsData.value = []
       topicTitle.value = 'Invalid or corrupt question data.'
       return
     }
-    data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
-    questionsData.value = data
     if (!loadQuizState()) {
       chapter.value = 0
-      questions.value = getChapterQuestions(0)
       current.value = 0
       score.value = 0
       answered.value = false
@@ -436,8 +455,13 @@ function restartChapter() {
   saveQuizState()
 }
 
+const totalQuestions = computed(() => {
+  // Use questionsCount from topic metadata if available, else fallback to questionsData length
+  return props.topic?.questionsCount || questionsData.value.length || 0;
+})
+
 function isAllChaptersComplete() {
-  const totalChapters = Math.ceil(questionsData.value.length / CHAPTER_SIZE) || 1;
+  const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
   let chapters = chapterStates.value;
   let complete = 0;
   for (let i = 0; i < totalChapters; i++) {
@@ -447,7 +471,7 @@ function isAllChaptersComplete() {
 }
 
 function isFinalChapter() {
-  const totalChapters = Math.ceil(questionsData.value.length / CHAPTER_SIZE) || 1;
+  const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
   return chapter.value === totalChapters - 1;
 }
 
