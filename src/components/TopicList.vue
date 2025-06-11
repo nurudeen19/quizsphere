@@ -105,24 +105,27 @@ onMounted(async () => {
           areas = topicAreas[topicKey];
         }
       }
-      try {
-        // Use the generic fetchQuestions utility for question count
-        let filePath = ''
-        if (t.file) {
-          filePath = t.file
-        } else if (t.topic) {
-          filePath = `${t.topic}.json`
+      // Use questionsCount from metadata if available
+      if (typeof t.questionsCount === 'number') {
+        questionsCount = t.questionsCount
+      } else {
+        try {
+          let filePath = ''
+          if (t.file) {
+            filePath = t.file
+          } else if (t.topic) {
+            filePath = `${t.topic}.json`
+          }
+          if (!filePath.startsWith('data/')) {
+            filePath = 'data/' + filePath.replace(/^\/+/, '')
+          }
+          filePath = filePath.replace(/^\/+/, '')
+          const qData = await fetchQuestions('/' + filePath)
+          questionsCount = Array.isArray(qData) ? qData.length : 0
+        } catch (e) {
+          // ignore error, leave questionsCount as 0
         }
-        // Ensure filePath is relative to 'data/' for fetchQuestions
-        if (!filePath.startsWith('data/')) {
-          filePath = 'data/' + filePath.replace(/^\/+/, '')
-        }
-        // Remove any leading slash for fetchQuestions (public/data/ is root for static assets)
-        filePath = filePath.replace(/^\/+/, '')
-        // Use absolute path for fetch (Vite/production expects '/data/filename.json')
-        const qData = await fetchQuestions('/' + filePath)
-        questionsCount = Array.isArray(qData) ? qData.length : 0
-      } catch {}
+      }
       return {
         ...t,
         questionsCount,

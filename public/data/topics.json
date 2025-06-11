@@ -6,7 +6,8 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
     "description": "Master Kubernetes concepts, architecture, and operations.",
     "level": "Intermediate",
-    "badge": "Cloud Native"
+    "badge": "Cloud Native",
+    "questionsCount": 218
   },
   {
     "topic": "github-copilot",
@@ -15,7 +16,8 @@
     "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
     "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
     "level": "Beginner",
-    "badge": "AI Coding"
+    "badge": "AI Coding",
+    "questionsCount": 111
   },
   {
     "topic": "kubernetes-advanced",
@@ -24,6 +26,7 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
     "description": "Tackle advanced Kubernetes topics, real-world scenarios, and troubleshooting.",
     "level": "Advanced",
-    "badge": "Expert"
+    "badge": "Expert",
+    "questionsCount": 121
   }
 ]
