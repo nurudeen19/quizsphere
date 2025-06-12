@@ -27,6 +27,21 @@ export const topicAreas = {
     'Security & Privacy',
     'Supported Languages',
     'Productivity Tips'
+  ],
+  'github-copilot-exam': [
+    'Copilot Fundamentals',
+    'Prompt Engineering',
+    'Copilot in Practice',
+    'Security and Privacy',
+    'Capabilities and Limitations',
+    'IDE Integration',
+    'Test Generation',
+    'Data Handling',
+    'Vulnerability Awareness',
+    'Prompt Structure',
+    'Prompt Refinement',
+    'Team & Collaboration',
+    'Licensing & Compliance'
   ]
   // Add more topics as needed
 };
