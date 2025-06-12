@@ -16,11 +16,11 @@
         </div>
       </div>
       <div class="flex-1 flex flex-col justify-between p-6 pt-3 card-content-padding bg-white/80 h-full">
-        <p class="text-cyan-700 text-[15px] italic font-semibold mb-2 text-left min-h-[32px] tracking-wide drop-shadow-sm">
+        <p class="topic-description text-cyan-700 text-[15px] italic font-semibold mb-2 text-left min-h-[40px] tracking-wide drop-shadow-sm flex items-center">
           {{ topic.description || 'This quiz covers the following key areas:' }}
         </p>
-        <ul v-if="topic.areas && topic.areas.length" class="topic-areas-animated list-none text-xs text-blue-800 mb-3 pl-0">
-          <li v-for="(area, idx) in topic.areas" :key="area" :style="{ animationDelay: (0.05 * idx) + 's' }" class="topic-area-bullet animate-fadein-left flex items-center">
+        <ul v-if="topic.areas && topic.areas.length" class="topic-areas-animated list-none text-xs text-blue-800 mb-3 pl-0 min-h-[48px] flex flex-wrap items-start">
+          <li v-for="(area, idx) in topic.areas" :key="area" :style="{ animationDelay: (0.05 * idx) + 's' }" class="topic-area-bullet animate-fadein-left flex items-center w-full sm:w-1/2 md:w-full lg:w-1/2 xl:w-full">
             <span class="custom-bullet mr-2"></span>{{ area }}
           </li>
         </ul>
@@ -142,41 +142,4 @@ onMounted(async () => {
 
 </script>
 
-<style>
-@keyframes fadein-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-16px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-.topic-areas-animated .topic-area-bullet {
-  position: relative;
-  padding-left: 0;
-  margin-bottom: 0.25em;
-  opacity: 0;
-  animation: fadein-left 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
-}
-.custom-bullet {
-  display: inline-block;
-  width: 0.6em;
-  height: 0.6em;
-  min-width: 0.6em;
-  min-height: 0.6em;
-  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-  border-radius: 50%;
-  box-shadow: 0 1px 4px #06b6d422;
-  margin-right: 0.5em;
-}
-.card-content-padding {
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-  padding-top: 1rem !important;
-  padding-bottom: 1.25rem !important;
-}
-</style>
-
-<!-- Add new styles for ghcertified-like card in style.css if needed -->
+<!-- Styles moved to style.css -->

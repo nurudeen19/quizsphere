@@ -563,3 +563,98 @@ main {
   border-radius: 9999px;
   margin-left: 0.5rem;
 }
+@keyframes fadein-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.topic-areas-animated .topic-area-bullet {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 0.25em;
+  opacity: 0;
+  animation: fadein-left 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.custom-bullet {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  min-width: 0.6em;
+  min-height: 0.6em;
+  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px #06b6d422;
+  margin-right: 0.5em;
+}
+.card-content-padding {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1.25rem !important;
+}
+.topic-card-header {
+  min-height: 104px;
+  height: 104px;
+  /* Ensures all headers are the same height regardless of content */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.25rem 0.5rem 1.5rem;
+  box-sizing: border-box;
+}
+.topic-description {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+.topic-areas-animated {
+  min-height: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+@media (max-width: 1024px) {
+  .topic-card-header {
+    min-height: 96px;
+    height: 96px;
+    padding: 1.25rem 1rem 0.5rem 1.25rem;
+  }
+  .topic-description {
+    min-height: 32px;
+  }
+  .topic-areas-animated {
+    min-height: 32px;
+  }
+}
+@media (max-width: 768px) {
+  .topic-card-header {
+    min-height: 80px;
+    height: 80px;
+    padding: 1rem 0.75rem 0.5rem 1rem;
+  }
+  .topic-description {
+    min-height: 24px;
+  }
+  .topic-areas-animated {
+    min-height: 24px;
+  }
+}
+@media (max-width: 640px) {
+  .topic-card-header {
+    min-height: 64px;
+    height: 64px;
+    padding: 0.75rem 0.5rem 0.5rem 0.75rem;
+  }
+  .topic-description {
+    min-height: 16px;
+  }
+  .topic-areas-animated {
+    min-height: 16px;
+  }
+}
