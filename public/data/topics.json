@@ -48,5 +48,15 @@
     "level": "Intermediate",
     "badge": "Container",
     "questionsCount": 129
+  },
+  {
+    "topic": "cloud-computing",
+    "file": "data/cloud-computing.json",
+    "title": "Cloud Computing",
+    "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
+    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
+    "level": "Intermediate",
+    "badge": "Cloud",
+    "questionsCount": 10
   }
 ]

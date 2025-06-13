@@ -53,6 +53,18 @@ export const topicAreas = {
     'Troubleshooting',
     'Certifications',
     'Interview & Real-World'
+  ],
+  'cloud-computing': [
+    'Cloud Concepts',
+    'Service Models (IaaS, PaaS, SaaS)',
+    'Deployment Models (Public, Private, Hybrid, Multi-Cloud)',
+    'Cloud Providers',
+    'Serverless & Managed Services',
+    'Storage & Databases',
+    'Networking & Security',
+    'Cost Management',
+    'Compliance & Governance',
+    'Real-World Scenarios'
   ]
   // Add more topics as needed
 };

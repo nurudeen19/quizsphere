@@ -1,0 +1,222 @@
+[
+  {
+    "question": "What is cloud computing?",
+    "options": [
+      "A way to run applications on a local server only.",
+      "The delivery of computing services over the internet.",
+      "A type of hardware device.",
+      "A programming language."
+    ],
+    "answer": [1],
+    "explanation": "Cloud computing is the delivery of computing services (servers, storage, databases, networking, software, analytics, etc.) over the internet."
+  },
+  {
+    "question": "Which of the following is NOT a cloud service model?",
+    "options": [
+      "IaaS",
+      "PaaS",
+      "SaaS",
+      "CaaS"
+    ],
+    "answer": [3],
+    "explanation": "CaaS (Container as a Service) is a real model, but the main three are IaaS, PaaS, and SaaS."
+  },
+  {
+    "question": "Which cloud deployment model provides resources exclusively for a single organization?",
+    "options": [
+      "Public Cloud",
+      "Private Cloud",
+      "Hybrid Cloud",
+      "Community Cloud"
+    ],
+    "answer": [1],
+    "explanation": "A private cloud is dedicated to a single organization."
+  },
+  {
+    "question": "What is the main benefit of elasticity in cloud computing?",
+    "options": [
+      "Fixed resource allocation",
+      "Automatic scaling of resources based on demand",
+      "Manual server provisioning",
+      "Increased hardware costs"
+    ],
+    "answer": [1],
+    "explanation": "Elasticity allows resources to scale up or down automatically as needed."
+  },
+  {
+    "question": "Which of the following is a leading public cloud provider?",
+    "options": [
+      "AWS",
+      "Cisco",
+      "Dell",
+      "Oracle Database"
+    ],
+    "answer": [0],
+    "explanation": "Amazon Web Services (AWS) is a leading public cloud provider."
+  },
+  {
+    "question": "What does 'serverless' mean in cloud computing?",
+    "options": [
+      "No servers are used at all.",
+      "Developers do not manage the underlying infrastructure.",
+      "Servers are managed manually.",
+      "Applications run only on physical machines."
+    ],
+    "answer": [1],
+    "explanation": "Serverless means the cloud provider manages the infrastructure, and developers focus on code."
+  },
+  {
+    "question": "Which service is typically used for scalable object storage in the cloud?",
+    "options": [
+      "Amazon S3",
+      "Amazon EC2",
+      "Amazon RDS",
+      "Amazon VPC"
+    ],
+    "answer": [0],
+    "explanation": "Amazon S3 is a scalable object storage service."
+  },
+  {
+    "question": "What is a key advantage of using a hybrid cloud?",
+    "options": [
+      "No on-premises resources",
+      "Combining private and public cloud resources for flexibility",
+      "Only public cloud resources",
+      "No scalability"
+    ],
+    "answer": [1],
+    "explanation": "Hybrid cloud combines private and public resources for greater flexibility."
+  },
+  {
+    "question": "Which of the following best describes 'multi-cloud'?",
+    "options": [
+      "Using multiple cloud services from the same provider.",
+      "Using services from multiple cloud providers.",
+      "Using only on-premises resources.",
+      "Using a single cloud provider."
+    ],
+    "answer": [1],
+    "explanation": "Multi-cloud means using services from more than one cloud provider."
+  },
+  {
+    "question": "Which security concept is critical in cloud computing?",
+    "options": [
+      "Least privilege",
+      "Open access",
+      "No encryption",
+      "Manual backups only"
+    ],
+    "answer": [0],
+    "explanation": "Least privilege ensures users have only the access they need, improving security."
+  },
+  {
+    "question": "Which of the following is a benefit of cloud computing for businesses?",
+    "options": [
+      "Higher upfront capital costs",
+      "On-demand resource provisioning",
+      "Longer deployment times",
+      "Manual scaling only"
+    ],
+    "answer": [1],
+    "explanation": "Cloud computing allows businesses to provision resources on demand, reducing upfront costs and deployment times."
+  },
+  {
+    "question": "What is the primary responsibility of the customer in the IaaS model?",
+    "options": [
+      "Managing physical servers",
+      "Managing virtual machines and operating systems",
+      "Managing the cloud network infrastructure",
+      "Managing the underlying hardware"
+    ],
+    "answer": [1],
+    "explanation": "In IaaS, the customer manages VMs, OS, and applications, while the provider manages the infrastructure."
+  },
+  {
+    "question": "Which cloud model is best for rapid application development without managing infrastructure?",
+    "options": [
+      "IaaS",
+      "PaaS",
+      "SaaS",
+      "On-premises"
+    ],
+    "answer": [1],
+    "explanation": "PaaS provides a platform for developers to build and deploy applications without managing infrastructure."
+  },
+  {
+    "question": "Which AWS service is used for scalable, managed relational databases?",
+    "options": [
+      "Amazon S3",
+      "Amazon EC2",
+      "Amazon RDS",
+      "Amazon Lambda"
+    ],
+    "answer": [2],
+    "explanation": "Amazon RDS is a managed relational database service."
+  },
+  {
+    "question": "What is the main advantage of using SaaS?",
+    "options": [
+      "Users manage the application code",
+      "No need to install or maintain software locally",
+      "Requires manual updates",
+      "Limited accessibility"
+    ],
+    "answer": [1],
+    "explanation": "SaaS applications are accessed over the internet and managed by the provider."
+  },
+  {
+    "question": "Which of the following is a common use case for cloud storage?",
+    "options": [
+      "Data backup and disaster recovery",
+      "Running a web server only",
+      "Manual data migration",
+      "On-premises file sharing only"
+    ],
+    "answer": [0],
+    "explanation": "Cloud storage is commonly used for backup, disaster recovery, and scalable file storage."
+  },
+  {
+    "question": "Which cloud provider offers Google Compute Engine?",
+    "options": [
+      "AWS",
+      "Azure",
+      "Google Cloud Platform",
+      "IBM Cloud"
+    ],
+    "answer": [2],
+    "explanation": "Google Compute Engine is part of Google Cloud Platform."
+  },
+  {
+    "question": "What is the purpose of a Virtual Private Cloud (VPC)?",
+    "options": [
+      "To provide isolated network environments in the cloud",
+      "To run serverless functions",
+      "To store objects",
+      "To manage billing"
+    ],
+    "answer": [0],
+    "explanation": "A VPC provides an isolated network environment for resources in the cloud."
+  },
+  {
+    "question": "Which of the following is a key feature of cloud scalability?",
+    "options": [
+      "Manual server upgrades only",
+      "Automatic resource scaling based on demand",
+      "Fixed resource allocation",
+      "No scaling options"
+    ],
+    "answer": [1],
+    "explanation": "Cloud platforms can automatically scale resources up or down based on demand."
+  },
+  {
+    "question": "Which service is used for event-driven, serverless compute in AWS?",
+    "options": [
+      "Amazon EC2",
+      "Amazon Lambda",
+      "Amazon S3",
+      "Amazon VPC"
+    ],
+    "answer": [1],
+    "explanation": "AWS Lambda is a serverless compute service that runs code in response to events."
+  }
+]
