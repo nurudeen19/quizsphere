@@ -16,6 +16,16 @@ A robust, modular, and visually appealing Vue 3 + Vite + Tailwind CSS quiz syste
 - Versioned state for future-proofing
 - SPA routing support for Apache
 
+## Areas Covered
+QuizSphere currently covers the following major topics and sub-areas:
+
+- **Kubernetes**: Pods & Deployments, Services & Networking, ConfigMaps & Secrets, Volumes & Storage, RBAC & Security, Helm & Operators, Cluster Architecture, Troubleshooting
+- **Kubernetes Advanced**: Advanced Scheduling, Security & Hardening, Multi-Cluster Management, Custom Controllers, Performance Tuning, Disaster Recovery, Networking Deep Dive, Real-World Scenarios
+- **GitHub Copilot**: AI Code Suggestions, Editor Integrations, Prompt Engineering, Copilot Labs, Security & Privacy, Supported Languages, Productivity Tips
+- **GitHub Copilot Exam**: Copilot Fundamentals, Prompt Engineering, Copilot in Practice, Security and Privacy, Capabilities and Limitations, IDE Integration, Test Generation, Data Handling, Vulnerability Awareness, Prompt Structure, Prompt Refinement, Team & Collaboration, Licensing & Compliance
+- **Docker**: Docker Fundamentals, Docker CLI & Dockerfile, Docker Compose & Orchestration, Networking, Volumes & Data Persistence, Best Practices, Troubleshooting, Certifications, Interview & Real-World
+- **Cloud Computing**: Cloud Concepts, Service Models (IaaS, PaaS, SaaS), Deployment Models (Public, Private, Hybrid, Multi-Cloud), Cloud Providers, Serverless & Managed Services, Storage & Databases, Networking & Security, Cost Management, Compliance & Governance, Real-World Scenarios
+
 ## Getting Started (Development)
 
 ```sh
@@ -40,6 +50,30 @@ The production-ready files will be in the `dist/` folder.
 3. **Root `index.html` redirects to `/dist/`** to prevent directory listing.
 4. **Access your app:**
    - Visit `http://localhost/quizsphere/` or your configured local domain.
+
+## Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/nurudeen19/quizsphere.git
+   cd quizsphere
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Run the development server:**
+   ```sh
+   npm run dev
+   ```
+4. **Build for production:**
+   ```sh
+   npm run build
+   ```
+
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting issues, feature requests, or pull requests.
 
 ## Folder Structure
 - `src/` — Vue components, styles, and data
