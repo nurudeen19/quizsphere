@@ -38,5 +38,15 @@
     "level": "Intermediate",
     "badge": "AI Coding",
     "questionsCount": 100
+  },
+  {
+    "topic": "docker",
+    "file": "data/docker.json",
+    "title": "Docker & Containerization",
+    "image": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
+    "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
+    "level": "Intermediate",
+    "badge": "Container",
+    "questionsCount": 10
   }
 ]

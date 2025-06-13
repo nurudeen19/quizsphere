@@ -42,6 +42,17 @@ export const topicAreas = {
     'Prompt Refinement',
     'Team & Collaboration',
     'Licensing & Compliance'
+  ],
+  docker: [
+    'Docker Fundamentals',
+    'Docker CLI & Dockerfile',
+    'Docker Compose & Orchestration',
+    'Networking',
+    'Volumes & Data Persistence',
+    'Best Practices',
+    'Troubleshooting',
+    'Certifications',
+    'Interview & Real-World'
   ]
   // Add more topics as needed
 };
