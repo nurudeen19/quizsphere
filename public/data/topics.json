@@ -37,7 +37,7 @@
     "description": "Comprehensive practice for the GitHub Copilot Exam: fundamentals, prompt engineering, security, privacy, and more.",
     "level": "Intermediate",
     "badge": "AI Coding",
-    "questionsCount": 100
+    "questionsCount": 94
   },
   {
     "topic": "docker",
@@ -47,6 +47,6 @@
     "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
     "level": "Intermediate",
     "badge": "Container",
-    "questionsCount": 10
+    "questionsCount": 129
   }
 ]
