@@ -23,14 +23,14 @@
     <div v-if="isQuizActive">
       <div class="question">
         <span class="progress">Question {{ current + 1 }} of {{ questions.length }}</span>
-        <p class="question-text">{{ questions[current].q }}</p>
+        <p class="question-text">{{ questions[current].question || questions[current].q }}</p>
       </div>
       <form class="options" @submit.prevent="submitOptions">
         <fieldset :aria-labelledby="'question-' + current" class="w-full border-0 p-0 m-0">
           <legend :id="'question-' + current" class="sr-only">Question {{ current + 1 }}</legend>
           <div v-for="(opt, idx) in questions[current].options" :key="idx" class="option-row flex items-start text-left">
             <input
-              v-if="questions[current].answers.length === 1"
+              v-if="questions[current].answer.length === 1"
               type="radio"
               :name="'option' + current"
               :id="'option-' + idx"
@@ -265,7 +265,7 @@ function loadQuizState() {
 
 function validateQuestions(data) {
   if (!Array.isArray(data)) return false;
-  return data.every(q => q && typeof q.q === 'string' && Array.isArray(q.options) && Array.isArray(q.answers));
+  return data.every(q => (q && (typeof q.q === 'string' || typeof q.question === 'string') && Array.isArray(q.options) && Array.isArray(q.answer)));
 }
 
 function getSessionKey() {
@@ -302,7 +302,7 @@ watch(() => props.topic, async (newTopic) => {
       }
       if (!supportsPaging) {
         data = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
-        data = data.filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers))
+        data = data.filter(q => (q && (q.q || q.question) && Array.isArray(q.options) && Array.isArray(q.answer)))
         pagedData = getQuizQuestionsPage(data, chapter.value, CHAPTER_SIZE, getSessionKey())
       }
       questionsData.value = data
@@ -337,7 +337,7 @@ watch([chapter, current, score, answered, isCorrect, selectedOptions], saveQuizS
 function submitOptions() {
   answered.value = true
   transitioning.value = false
-  const correctAnswers = questions.value[current.value].answers
+  const correctAnswers = questions.value[current.value].answer
   if (correctAnswers.length === 1) {
     isCorrect.value = Number(selectedOptions.value) === correctAnswers[0]
   } else {
@@ -347,8 +347,20 @@ function submitOptions() {
     isCorrect.value = selected.length === correct.length && selected.every((v, i) => v === correct[i])
   }
   if (isCorrect.value) score.value++
-  // Move focus to feedback for accessibility
+  // Move marking of final chapter as completed after score increment
+  const isLastQuestion = current.value === questions.value.length - 1;
   nextTick(() => {
+    if (isLastQuestion && isFinalChapter()) {
+      let chapters = { ...chapterStates.value };
+      chapters[chapter.value] = {
+        score: score.value,
+        total: questions.value.length,
+        completed: true
+      };
+      chapterStates.value = chapters;
+      saveQuizState();
+    }
+    // Move focus to feedback for accessibility
     const feedback = document.querySelector('.feedback[aria-live]')
     if (feedback) feedback.focus && feedback.focus()
   })
