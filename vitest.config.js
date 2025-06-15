@@ -8,5 +8,9 @@ export default defineConfig({
     globals: true,
     setupFiles: [],
     include: ['tests/unit/**/*.spec.js'],
+    coverage: {
+      reporter: ['text', 'html'],
+      exclude: ['src/main.js', 'src/style.css'],
+    },
   },
 })
