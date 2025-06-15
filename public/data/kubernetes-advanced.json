@@ -1,1333 +1,783 @@
 [
   {
-    "q": "You need to ensure that a set of Pods always run on specific nodes with GPU hardware. Which Kubernetes feature should you use?",
+    "question": "You need to ensure that a set of Pods always run on specific nodes with GPU hardware. Which Kubernetes feature should you use?",
     "options": [
       "Node Affinity",
       "Pod Anti-Affinity",
       "Taints and Tolerations",
       "Resource Quotas"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Node Affinity allows you to constrain which nodes your pod is eligible to be scheduled based on labels, such as those indicating GPU hardware."
   },
   {
-    "q": "A production deployment must ensure zero downtime during rolling updates. Which deployment strategy and configuration should you use?",
+    "question": "A production deployment must ensure zero downtime during rolling updates. Which deployment strategy and configuration should you use?",
     "options": [
       "Recreate strategy",
       "RollingUpdate with maxUnavailable=0",
       "RollingUpdate with maxSurge=0",
       "Blue/Green deployment with manual switch"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "RollingUpdate with maxUnavailable=0 ensures that no pods are taken down before new ones are up, guaranteeing zero downtime."
   },
   {
-    "q": "You want to restrict a namespace so that only a certain number of Pods can be created. Which resource should you use?",
+    "question": "You want to restrict a namespace so that only a certain number of Pods can be created. Which resource should you use?",
     "options": [
       "LimitRange",
       "ResourceQuota",
       "PodDisruptionBudget",
       "NetworkPolicy"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "ResourceQuota can restrict the number of resources, such as Pods, that can be created in a namespace."
   },
   {
-    "q": "Which controller is responsible for ensuring the specified number of pod replicas are running at all times?",
+    "question": "Which controller is responsible for ensuring the specified number of pod replicas are running at all times?",
     "options": [
       "ReplicaSet",
       "DaemonSet",
       "StatefulSet",
       "Job"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "ReplicaSet ensures that a specified number of pod replicas are running at any given time."
   },
   {
-    "q": "You need to run a batch job that must complete successfully only once, even if the node fails. Which Kubernetes resource is best suited?",
+    "question": "You need to run a batch job that must complete successfully only once, even if the node fails. Which Kubernetes resource is best suited?",
     "options": [
       "Job",
       "CronJob",
       "StatefulSet",
       "Deployment"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A Job ensures that a specified number of pods successfully terminate, even if nodes fail."
   },
   {
-    "q": "How can you ensure that a Pod is scheduled only if a specific PersistentVolume is available and bound?",
+    "question": "How can you ensure that a Pod is scheduled only if a specific PersistentVolume is available and bound?",
     "options": [
       "Use a PersistentVolumeClaim in the Pod spec",
       "Use a HostPath volume",
       "Use an EmptyDir volume",
       "Use a ConfigMap volume"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A PersistentVolumeClaim will bind to a PersistentVolume, and the Pod will only be scheduled if the claim is bound."
   },
   {
-    "q": "Which object would you use to ensure a Pod is always running on every node in the cluster?",
+    "question": "Which object would you use to ensure a Pod is always running on every node in the cluster?",
     "options": [
       "ReplicaSet",
       "DaemonSet",
       "StatefulSet",
       "Job"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "DaemonSet ensures that a copy of a pod runs on all (or some) nodes."
   },
   {
-    "q": "You want to expose a service externally using a cloud provider's load balancer. Which Service type should you use?",
+    "question": "You want to expose a service externally using a cloud provider's load balancer. Which Service type should you use?",
     "options": [
       "ClusterIP",
       "NodePort",
       "LoadBalancer",
       "ExternalName"
     ],
-    "answers": [2],
+    "answer": [2],
     "explanation": "LoadBalancer type provisions an external load balancer with most cloud providers."
   },
   {
-    "q": "Which resource allows you to define network access rules between pods?",
+    "question": "Which resource allows you to define network access rules between pods?",
     "options": [
       "NetworkPolicy",
       "ResourceQuota",
       "PodSecurityPolicy",
       "LimitRange"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "NetworkPolicy defines rules for ingress and egress traffic between pods."
   },
   {
-    "q": "You need to run a stateful application that requires stable network identities and persistent storage. Which controller should you use?",
+    "question": "You need to run a stateful application that requires stable network identities and persistent storage. Which controller should you use?",
     "options": [
       "ReplicaSet",
       "StatefulSet",
       "DaemonSet",
       "Job"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "StatefulSet is designed for stateful applications requiring stable identities and storage."
   },
   {
-    "q": "What is the purpose of the Kubernetes Dashboard?",
+    "question": "What is the purpose of the Kubernetes Dashboard?",
     "options": [
       "To provide a CLI for interacting with the cluster",
       "To manage cluster resources via a web-based UI",
       "To monitor cluster performance and health",
       "To deploy applications from a graphical interface"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The Kubernetes Dashboard is a web-based UI that allows you to manage and troubleshoot applications running in the cluster, as well as manage the cluster itself."
   },
   {
-    "q": "Which of the following is a valid reason to use a DaemonSet?",
+    "question": "Which of the following is a valid reason to use a DaemonSet?",
     "options": [
       "To ensure a pod runs on only one node",
       "To run a pod on all nodes or a subset of nodes",
       "To manage the deployment of stateless applications",
       "To automatically scale the number of pod replicas"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "A DaemonSet ensures that all (or some) nodes run a copy of a pod, typically used for background tasks like logging or monitoring."
   },
   {
-    "q": "How would you recover a deleted namespace in Kubernetes?",
+    "question": "How would you recover a deleted namespace in Kubernetes?",
     "options": [
       "Namespaces cannot be recovered once deleted",
       "By restoring from etcd backup",
       "By using kubectl undelete namespace",
       "By recreating the namespace with the same name"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Once a namespace is deleted in Kubernetes, all resources within it are also deleted and cannot be recovered, unless backed up externally."
   },
   {
-    "q": "What is the function of the kube-proxy component in Kubernetes?",
+    "question": "What is the function of the kube-proxy component in Kubernetes?",
     "options": [
       "To maintain network rules on nodes",
       "To schedule pods onto nodes",
       "To manage container runtimes",
       "To provide a web-based UI for the cluster"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kube-proxy manages network rules on nodes, allowing network communication to your pods from network sessions inside or outside of the cluster."
   },
   {
-    "q": "Which type of volume is suitable for storing data that should persist across pod restarts and is not tied to the lifecycle of a specific pod?",
+    "question": "Which type of volume is suitable for storing data that should persist across pod restarts and is not tied to the lifecycle of a specific pod?",
     "options": [
       "EmptyDir",
       "HostPath",
       "PersistentVolume",
       "ConfigMap"
     ],
-    "answers": [2],
+    "answer": [2],
     "explanation": "PersistentVolume is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes."
   },
   {
-    "q": "What does the kubectl apply command do?",
+    "question": "What does the kubectl apply command do?",
     "options": [
       "Deletes resources from the cluster",
       "Updates resources in the cluster to match the provided configuration",
       "Displays the current configuration of resources",
       "Creates a backup of the cluster configuration"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "kubectl apply updates the resources in the cluster with the changes you made in your configuration files."
   },
   {
-    "q": "Which of the following is NOT a valid type of Kubernetes probe?",
+    "question": "Which of the following is NOT a valid type of Kubernetes probe?",
     "options": [
       "Liveness Probe",
       "Readiness Probe",
       "Startup Probe",
       "Health Probe"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "Kubernetes has three main types of probes: Liveness, Readiness, and Startup probes. There is no Health Probe."
   },
   {
-    "q": "What is the default port for the Kubernetes API server?",
+    "question": "What is the default port for the Kubernetes API server?",
     "options": [
       "6443",
       "8080",
       "443",
       "80"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "The default port for the Kubernetes API server is 6443 for secure access (HTTPS)."
   },
   {
-    "q": "Which command would you use to view the logs of a pod named 'my-pod'?",
+    "question": "Which command would you use to view the logs of a pod named 'my-pod'?",
     "options": [
       "kubectl logs my-pod",
       "kubectl get logs my-pod",
       "kubectl describe pod my-pod",
       "kubectl log pod/my-pod"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl logs my-pod fetches the logs of the specified pod."
   },
   {
-    "q": "What is a ConfigMap used for in Kubernetes?",
+    "question": "What is a ConfigMap used for in Kubernetes?",
     "options": [
       "To manage sensitive information like passwords",
       "To store non-confidential data in key-value pairs",
       "To define network policies",
       "To allocate resources to pods"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "ConfigMap is used to store non-confidential data in key-value pairs. Pods can consume these values as environment variables or as command-line arguments."
   },
   {
-    "q": "Which Kubernetes object would you use to manage a set of identical, replicated Pods?",
+    "question": "Which Kubernetes object would you use to manage a set of identical, replicated Pods?",
     "options": [
       "Deployment",
       "ReplicaSet",
       "StatefulSet",
       "DaemonSet"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "ReplicaSet ensures that a specified number of pod replicas are running at any given time, managing the replication of pods."
   },
   {
-    "q": "What is the purpose of the Kubernetes Scheduler?",
+    "question": "What is the purpose of the Kubernetes Scheduler?",
     "options": [
       "To assign nodes to newly created pods",
       "To monitor the health of pods and nodes",
       "To provide network connectivity to pods",
       "To store and manage secrets"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "The Kubernetes Scheduler is responsible for assigning nodes to newly created pods based on resource requirements and other constraints."
   },
   {
-    "q": "Which of the following best describes a Kubernetes Namespace?",
+    "question": "Which of the following best describes a Kubernetes Namespace?",
     "options": [
       "A virtual cluster within a cluster, providing a scope for names",
       "A physical separation of resources in a data center",
       "A way to group nodes with similar labels",
       "A method to encrypt communication between pods"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A Kubernetes Namespace is a way to divide cluster resources between multiple users via resource quota."
   },
   {
-    "q": "How can you secure sensitive data, such as passwords, in a Kubernetes cluster?",
+    "question": "How can you secure sensitive data, such as passwords, in a Kubernetes cluster?",
     "options": [
       "By using ConfigMaps with restricted access",
       "By using Secrets",
       "By encrypting the data at the application level",
       "By using NetworkPolicies"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Kubernetes Secrets are specifically designed to hold sensitive information, such as passwords, OAuth tokens, and ssh keys."
   },
   {
-    "q": "Which Kubernetes resource can be used to automatically scale the number of pod replicas based on CPU utilization?",
+    "question": "Which Kubernetes resource can be used to automatically scale the number of pod replicas based on CPU utilization?",
     "options": [
       "HorizontalPodAutoscaler",
       "ClusterAutoscaler",
       "VerticalPodAutoscaler",
       "ReplicaSet"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "HorizontalPodAutoscaler automatically scales the number of pod replicas based on observed CPU utilization."
   },
   {
-    "q": "What is the role of etcd in a Kubernetes cluster?",
+    "question": "What is the role of etcd in a Kubernetes cluster?",
     "options": [
       "To provide a distributed key-value store for cluster data",
       "To manage the lifecycle of pods and containers",
       "To schedule pods onto nodes",
       "To handle network routing between pods"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "etcd is a distributed key-value store that provides a reliable way to store data across a cluster of machines."
   },
   {
-    "q": "Which of the following commands would you use to create a namespace in Kubernetes?",
+    "question": "Which of the following commands would you use to create a namespace in Kubernetes?",
     "options": [
       "kubectl create namespace my-namespace",
       "kubectl new namespace my-namespace",
       "kubectl namespace create my-namespace",
       "kubectl add namespace my-namespace"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl create namespace my-namespace is the correct command to create a new namespace in Kubernetes."
   },
   {
-    "q": "What is a Helm Chart in Kubernetes?",
+    "question": "What is a Helm Chart in Kubernetes?",
     "options": [
       "A tool for managing Kubernetes resources",
       "A package manager for Kubernetes applications",
       "A way to visualize Kubernetes clusters",
       "A method to secure Kubernetes secrets"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Helm is a package manager for Kubernetes, and a Helm Chart is a package of pre-configured Kubernetes resources."
   },
   {
-    "q": "Which of the following is a valid selector for a Kubernetes Service of type ClusterIP?",
+    "question": "Which of the following is a valid selector for a Kubernetes Service of type ClusterIP?",
     "options": [
       "app=myapp",
       "name=myapp",
       "component=myapp",
       "tier=myapp"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Service selectors are used to determine which pods will receive traffic through the service. The selector matches the labels of the pods."
   },
   {
-    "q": "How do you perform a rolling update for a Deployment in Kubernetes?",
+    "question": "How do you perform a rolling update for a Deployment in Kubernetes?",
     "options": [
       "By updating the Deployment's pod template spec",
       "By changing the number of replicas",
       "By updating the container image only",
       "By deleting the old pods and creating new ones"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A rolling update is performed by updating the Deployment's pod template spec. Kubernetes will then gradually replace the old pods with new ones."
   },
   {
-    "q": "What happens when you delete a Pod in Kubernetes?",
+    "question": "What happens when you delete a Pod in Kubernetes?",
     "options": [
       "The Pod is immediately terminated and removed",
       "The Pod is stopped but can be restarted later",
       "The Pod's data is backed up before deletion",
       "The Pod is marked for deletion and will be removed gracefully"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "When a Pod is deleted, it is marked for deletion and Kubernetes will attempt to terminate it gracefully, allowing for cleanup and data persistence if configured."
   },
   {
-    "q": "Which of the following is NOT a valid Kubernetes Service type?",
+    "question": "Which of the following is NOT a valid Kubernetes Service type?",
     "options": [
       "ClusterIP",
       "NodePort",
       "LoadBalancer",
       "Ingress"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "Ingress is not a Service type. It's a collection of rules that allow inbound connections to reach the cluster services."
   },
   {
-    "q": "What is the purpose of the Kubernetes Ingress resource?",
+    "question": "What is the purpose of the Kubernetes Ingress resource?",
     "options": [
       "To manage external access to services within a cluster",
       "To expose a service on a specific port",
       "To load balance traffic between pods",
       "To provide DNS services for the cluster"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Ingress manages external access to the services in a cluster, typically HTTP/S, providing load balancing, SSL termination and name-based virtual hosting."
   },
   {
-    "q": "How can you restrict a container in a Pod from using more than its allocated CPU and memory resources?",
+    "question": "How can you restrict a container in a Pod from using more than its allocated CPU and memory resources?",
     "options": [
       "By setting resource requests and limits",
       "By using QoS classes",
       "By configuring the scheduler",
       "By applying a NetworkPolicy"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Resource requests and limits are used to control the amount of CPU and memory a container can use. The container is restricted to its limit if set."
   },
   {
-    "q": "Which Kubernetes object would you use to run a job that must be completed successfully only once?",
+    "question": "Which Kubernetes object would you use to run a job that must be completed successfully only once?",
     "options": [
       "Deployment",
       "ReplicaSet",
       "Job",
       "CronJob"
     ],
-    "answers": [2],
+    "answer": [2],
     "explanation": "A Job in Kubernetes is used to create one or more pods and ensures that a specified number of them successfully terminate."
   },
   {
-    "q": "What is the default behavior of a Kubernetes Deployment's strategy type during an update?",
+    "question": "What is the default behavior of a Kubernetes Deployment's strategy type during an update?",
     "options": [
       "Recreate",
       "RollingUpdate",
       "BlueGreen",
       "Canary"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The default strategy type for a Deployment is RollingUpdate, which gradually replaces instances of the previous version of the application with the new version."
   },
   {
-    "q": "Which of the following commands would you use to scale a Deployment named 'my-deployment' to 3 replicas?",
+    "question": "Which of the following commands would you use to scale a Deployment named 'my-deployment' to 3 replicas?",
     "options": [
       "kubectl scale deployment my-deployment --replicas=3",
       "kubectl set replicas my-deployment 3",
       "kubectl update deployment my-deployment --replicas=3",
       "kubectl resize deployment my-deployment --replicas=3"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl scale deployment my-deployment --replicas=3 is the correct command to scale a deployment to the desired number of replicas."
   },
   {
-    "q": "What is the function of the Kubernetes kubelet?",
+    "question": "What is the function of the Kubernetes kubelet?",
     "options": [
       "To manage the network policies of a pod",
       "To ensure that containers are running in a pod",
       "To schedule pods on nodes",
       "To provide DNS resolution for services"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The kubelet is a primary component of the Kubernetes node that ensures containers are running in a pod."
   },
   {
-    "q": "Which of the following is a key benefit of using Kubernetes for container orchestration?",
+    "question": "Which of the following is a key benefit of using Kubernetes for container orchestration?",
     "options": [
       "It provides a single-node deployment for containers",
       "It offers automated load balancing and scaling",
       "It requires manual intervention for scaling",
       "It does not support rolling updates"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Kubernetes provides automated load balancing and scaling, which are key benefits of using it for container orchestration."
   },
   {
-    "q": "How does Kubernetes handle service discovery for pods?",
+    "question": "How does Kubernetes handle service discovery for pods?",
     "options": [
       "By using static IP addresses for each pod",
       "Through the Kubernetes DNS server and environment variables",
       "By manually configuring the /etc/hosts file in each pod",
       "Kubernetes does not provide service discovery"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Kubernetes provides service discovery for pods through the Kubernetes DNS server and environment variables that are automatically injected into pods."
   },
   {
-    "q": "What is the purpose of the Kubernetes ResourceQuota object?",
+    "question": "What is the purpose of the Kubernetes ResourceQuota object?",
     "options": [
       "To limit the number of resources a namespace can consume",
       "To allocate resources to specific pods",
       "To define network policies for a namespace",
       "To manage the lifecycle of resources"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "ResourceQuota is used to limit the number of resources that a namespace can consume, helping to manage resources in a multi-tenant environment."
   },
   {
-    "q": "Which of the following best describes a Kubernetes Volume?",
+    "question": "Which of the following best describes a Kubernetes Volume?",
     "options": [
       "A temporary storage for a pod that is deleted when the pod is deleted",
       "A persistent storage mechanism that is independent of the pod lifecycle",
       "A type of container image",
       "A network policy for controlling traffic to pods"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "A Kubernetes Volume is a persistent storage mechanism that is independent of the pod lifecycle, allowing data to persist even if the pod is restarted or deleted."
   },
   {
-    "q": "How can you ensure that a specific version of an image is used for a container in a pod?",
+    "question": "How can you ensure that a specific version of an image is used for a container in a pod?",
     "options": [
       "By specifying the image tag in the pod specification",
       "By using the latest tag",
       "By not specifying any tag",
       "By using a custom image registry"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Specifying the image tag in the pod specification ensures that the desired version of the image is used for the container."
   },
   {
-    "q": "What is the effect of setting the terminationGracePeriodSeconds field in a pod specification?",
+    "question": "What is the effect of setting the terminationGracePeriodSeconds field in a pod specification?",
     "options": [
       "It defines the time to wait before forcefully terminating a pod",
       "It sets the maximum time a pod can run",
       "It specifies the time to gracefully shutdown a container",
       "It has no effect on pod termination"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "terminationGracePeriodSeconds specifies the time in seconds that Kubernetes will wait for a pod to terminate gracefully before forcefully killing it."
   },
   {
-    "q": "Which of the following is a valid PersistentVolumeClaim status?",
+    "question": "Which of the following is a valid PersistentVolumeClaim status?",
     "options": [
       "Pending",
       "Bound",
       "Lost",
       "Released"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "A PersistentVolumeClaim can have a status of Pending, Bound, or Lost. Bound means the claim is successfully bound to a PersistentVolume."
   },
   {
-    "q": "What is the purpose of the Kubernetes PodDisruptionBudget?",
+    "question": "What is the purpose of the Kubernetes PodDisruptionBudget?",
     "options": [
       "To limit the number of concurrent disruptions to pods",
       "To ensure a certain number of pods are always running",
       "To manage the network policies for pods",
       "To allocate resources to pods"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "PodDisruptionBudget is used to limit the number of concurrent disruptions to pods, helping to maintain application availability during voluntary disruptions."
   },
   {
-    "q": "Which command would you use to view detailed information about a specific pod's configuration?",
+    "question": "Which command would you use to view detailed information about a specific pod's configuration?",
     "options": [
       "kubectl describe pod my-pod",
       "kubectl get pod my-pod -o yaml",
       "kubectl config view pod/my-pod",
       "kubectl show pod my-pod"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl describe pod my-pod provides detailed information about the pod's configuration and status."
   },
   {
-    "q": "What is the function of the Kubernetes API Aggregation Layer?",
+    "question": "What is the function of the Kubernetes API Aggregation Layer?",
     "options": [
       "To aggregate logs from all pods in the cluster",
       "To provide a way to extend the Kubernetes API with custom APIs",
       "To balance the load between different API servers",
       "To encrypt communication between the API server and etcd"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The API Aggregation Layer allows you to extend the Kubernetes API by adding your own API servers, which can be useful for custom resources and controllers."
   },
   {
-    "q": "Which of the following is a common use case for Kubernetes Jobs?",
+    "question": "Which of the following is a common use case for Kubernetes Jobs?",
     "options": [
       "Running a web server",
       "Processing a batch of files",
       "Exposing an application to the internet",
       "Monitoring cluster health"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Kubernetes Jobs are used for running batch processes or jobs that need to be executed to completion, such as processing a batch of files."
   },
   {
-    "q": "How can you ensure that a Kubernetes Deployment always pulls the latest image version?",
+    "question": "How can you ensure that a Kubernetes Deployment always pulls the latest image version?",
     "options": [
       "By setting the image tag to 'latest'",
       "By using an emptyDir volume",
       "By configuring a CronJob",
       "By using a StatefulSet"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "Setting the image tag to 'latest' will ensure that the Deployment always pulls the latest version of the image when creating new pods."
   },
   {
-    "q": "What is the role of the Kubernetes Controller Manager?",
+    "question": "What is the role of the Kubernetes Controller Manager?",
     "options": [
       "To manage the Kubernetes API server",
       "To maintain the desired state of the cluster",
       "To provide network connectivity for pods",
       "To schedule pods on nodes"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The Controller Manager is responsible for maintaining the desired state of the cluster, such as ensuring the correct number of pod replicas are running."
   },
   {
-    "q": "Which of the following best describes a Kubernetes StatefulSet?",
+    "question": "Which of the following best describes a Kubernetes StatefulSet?",
     "options": [
       "A set of pods that are managed as a single entity",
       "A way to run batch jobs in Kubernetes",
       "A deployment strategy for stateless applications",
       "A controller that manages the deployment of applications with persistent storage"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "StatefulSet is a Kubernetes controller that manages the deployment and scaling of a set of pods, and provides guarantees about the ordering and uniqueness of these pods."
   },
   {
-    "q": "How can you restrict network access to a pod in Kubernetes?",
+    "question": "How can you restrict network access to a pod in Kubernetes?",
     "options": [
       "By using NetworkPolicies",
       "By configuring firewalls at the host level",
       "By setting pod security policies",
       "By using service accounts"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "NetworkPolicies are used to restrict network access to pods, controlling the traffic flow at the IP address or port level."
   },
   {
-    "q": "What is the purpose of the Kubernetes ServiceAccount?",
+    "question": "What is the purpose of the Kubernetes ServiceAccount?",
     "options": [
       "To provide an identity for processes that run in a Pod",
       "To manage network policies",
       "To allocate resources to pods",
       "To encrypt communication between pods"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A ServiceAccount provides an identity for processes that run in a Pod, which can be used to authenticate to the Kubernetes API."
   },
   {
-    "q": "Which of the following is a valid reason to use a ReplicaSet?",
+    "question": "Which of the following is a valid reason to use a ReplicaSet?",
     "options": [
       "To ensure a specific number of pod replicas are running",
       "To run a pod on all nodes in the cluster",
       "To manage the deployment of stateful applications",
       "To schedule pods based on resource availability"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at any given time, providing high availability for applications."
   },
   {
-    "q": "What is the effect of setting a Pod's restartPolicy to 'Never'?",
+    "question": "What is the effect of setting a Pod's restartPolicy to 'Never'?",
     "options": [
       "The pod will be restarted automatically if it fails",
       "The pod will not be restarted after it stops",
       "The pod will be deleted immediately if it fails",
       "The pod will be restarted only on the same node"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "Setting a Pod's restartPolicy to 'Never' means that the pod will not be restarted automatically by Kubernetes after it stops or fails."
   },
   {
-    "q": "Which of the following is NOT a valid Kubernetes Volume type?",
+    "question": "Which of the following is NOT a valid Kubernetes Volume type?",
     "options": [
       "emptyDir",
       "hostPath",
       "gcePersistentDisk",
       "cloudStorage"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "cloudStorage is not a valid Kubernetes Volume type. Kubernetes supports various volume types like emptyDir, hostPath, gcePersistentDisk, etc."
   },
   {
-    "q": "What is the purpose of the Kubernetes Admission Controller?",
+    "question": "What is the purpose of the Kubernetes Admission Controller?",
     "options": [
       "To authenticate users to the Kubernetes API",
       "To authorize requests to access Kubernetes resources",
       "To mutate or validate requests to the Kubernetes API server",
       "To log requests to the Kubernetes API server"
     ],
-    "answers": [2],
+    "answer": [2],
     "explanation": "Admission Controllers are plugins that govern and enforce how the cluster is used, they can mutate or validate requests to the Kubernetes API server."
   },
   {
-    "q": "Which command would you use to delete a pod named 'my-pod'?",
+    "question": "Which command would you use to delete a pod named 'my-pod'?",
     "options": [
       "kubectl delete pod my-pod",
       "kubectl remove pod my-pod",
       "kubectl terminate pod my-pod",
       "kubectl destroy pod my-pod"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl delete pod my-pod is the correct command to delete a pod in Kubernetes."
   },
   {
-    "q": "What is the function of the Kubernetes DNS Addon?",
+    "question": "What is the function of the Kubernetes DNS Addon?",
     "options": [
       "To provide DNS resolution for services and pods",
       "To manage network policies",
       "To encrypt communication between pods",
       "To load balance traffic to services"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "The DNS Addon provides a DNS server for the cluster, allowing services and pods to discover each other by name."
   },
   {
-    "q": "Which of the following is a valid PersistentVolumeReclaimPolicy?",
+    "question": "Which of the following is a valid PersistentVolumeReclaimPolicy?",
     "options": [
       "Retain",
       "Recycle",
       "Delete",
       "All of the above"
     ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "A PersistentVolume can have a reclaim policy of Retain, Recycle, or Delete, which determines what happens to the volume when it's released from its claim."
   },
   {
-    "q": "What is the purpose of the Kubernetes NetworkPolicy?",
+    "question": "What is the purpose of the Kubernetes NetworkPolicy?",
     "options": [
       "To control the network traffic to and from pods",
       "To allocate network bandwidth to pods",
       "To encrypt network traffic between pods",
       "To monitor network usage of pods"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "NetworkPolicy is a Kubernetes resource that controls the traffic flow at the IP address or port level to and from pods."
   },
   {
-    "q": "How can you increase the resource limits for a running container in a pod?",
+    "question": "How can you increase the resource limits for a running container in a pod?",
     "options": [
       "By editing the pod's resource limits in the deployment configuration",
       "By using the kubectl set resources command",
       "By directly modifying the container's cgroup settings",
       "By restarting the container with new resource limits"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "You can use the kubectl set resources command to change the resource limits for a container in a pod. For example: kubectl set resources deployment my-deployment --limits=cpu=200m,memory=512Mi."
   },
   {
-    "q": "Which of the following is a valid use case for a Kubernetes CronJob?",
+    "question": "Which of the following is a valid use case for a Kubernetes CronJob?",
     "options": [
       "To run a batch job at a scheduled time",
       "To ensure a pod is always running",
       "To manage the deployment of a stateful application",
       "To expose a service to the internet"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "A CronJob in Kubernetes is used to run jobs on a scheduled basis, similar to cron jobs in Linux."
   },
   {
-    "q": "What is the default value for the replicas field in a Kubernetes Deployment?",
+    "question": "What is the default value for the replicas field in a Kubernetes Deployment?",
     "options": [
       "0",
       "1",
       "3",
       "It depends on the deployment strategy"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The default value for the replicas field in a Deployment is 1, meaning one pod will be created by default."
   },
   {
-    "q": "Which of the following commands would you use to view the events in a namespace?",
+    "question": "Which of the following commands would you use to view the events in a namespace?",
     "options": [
       "kubectl get events -n my-namespace",
       "kubectl describe events -n my-namespace",
       "kubectl events -n my-namespace",
       "kubectl get all -n my-namespace"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "kubectl get events -n my-namespace will list the events in the specified namespace."
   },
   {
-    "q": "What is the purpose of the Kubernetes PodTemplate?",
+    "question": "What is the purpose of the Kubernetes PodTemplate?",
     "options": [
       "To define the desired state for a pod",
       "To provide a blueprint for creating pods",
       "To manage the lifecycle of a pod",
       "To allocate resources to a pod"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "A PodTemplate is used to define the data a pod should have when it's created, including the container image, ports, and other settings."
   },
   {
-    "q": "Which of the following is a valid reason to use a Kubernetes Service of type NodePort?",
+    "question": "Which of the following is a valid reason to use a Kubernetes Service of type NodePort?",
     "options": [
       "To expose a service on a static port on each node",
       "To load balance traffic between pods",
       "To provide a stable IP address for a service",
       "To encrypt traffic to a service"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "NodePort is a way to expose a service on a static port on each node in the cluster, allowing external traffic to access the service."
   },
   {
-    "q": "What is the function of the Kubernetes API Server?",
+    "question": "What is the function of the Kubernetes API Server?",
     "options": [
       "To serve the Kubernetes API and provide a frontend to etcd",
       "To schedule pods onto nodes",
       "To manage the network policies",
       "To provide DNS resolution for services"
     ],
-    "answers": [0],
+    "answer": [0],
     "explanation": "The API Server is a component of the Kubernetes control plane that serves the Kubernetes API, which is used by kubectl and other tools to interact with the cluster."
   },
   {
-    "q": "Which of the following best describes the Kubernetes control plane?",
+    "question": "Which of the following best describes the Kubernetes control plane?",
     "options": [
       "The components that make up the worker nodes in the cluster",
       "The components that control and manage the Kubernetes cluster",
       "The network infrastructure for the Kubernetes cluster",
       "The storage infrastructure for the Kubernetes cluster"
     ],
-    "answers": [1],
+    "answer": [1],
     "explanation": "The control plane is the brain of the Kubernetes cluster, managing the cluster's state and coordinating all activities in the cluster."
   },
   {
-    "q": "How can you access the Kubernetes Dashboard?",
+    "question": "How can you access the Kubernetes Dashboard?",
     "options": [
       "By exposing it as a service of type LoadBalancer",
       "By port-forwarding to the dashboard service",
       "By accessing the cluster's API server",
       "All of the above"
     ],
-    "answers": [3],
-    "explanation": "You can access the Kubernetes Dashboard by exposing it as a service of type LoadBalancer, by port-forwarding to the dashboard service, or by accessing it through the cluster's API server."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes kube-proxy?",
-    "options": [
-      "To maintain network rules on nodes",
-      "To schedule pods onto nodes",
-      "To manage container runtimes",
-      "To provide a web-based UI for the cluster"
-    ],
-    "answers": [0],
-    "explanation": "kube-proxy maintains network rules on nodes, allowing network communication to your pods from network sessions inside or outside of the cluster."
-  },
-  {
-    "q": "Which of the following is a valid reason to use a Kubernetes StatefulSet?",
-    "options": [
-      "To manage the deployment of stateless applications",
-      "To ensure a specific order of pod deployment and scaling",
-      "To run a pod on all nodes in the cluster",
-      "To automatically scale the number of pod replicas"
-    ],
-    "answers": [1],
-    "explanation": "StatefulSet is used for applications that require stable, unique network identifiers, and stable storage. It provides ordered, automated rolling updates and scaling."
-  },
-  {
-    "q": "How can you secure sensitive data, such as passwords, in a Kubernetes cluster?",
-    "options": [
-      "By using ConfigMaps with restricted access",
-      "By using Secrets",
-      "By encrypting the data at the application level",
-      "By using NetworkPolicies"
-    ],
-    "answers": [1],
-    "explanation": "Kubernetes Secrets are specifically designed to hold sensitive information, such as passwords, OAuth tokens, and ssh keys."
-  },
-  {
-    "q": "Which Kubernetes resource can be used to automatically scale the number of pod replicas based on CPU utilization?",
-    "options": [
-      "HorizontalPodAutoscaler",
-      "ClusterAutoscaler",
-      "VerticalPodAutoscaler",
-      "ReplicaSet"
-    ],
-    "answers": [0],
-    "explanation": "HorizontalPodAutoscaler automatically scales the number of pod replicas based on observed CPU utilization."
-  },
-  {
-    "q": "What is the role of etcd in a Kubernetes cluster?",
-    "options": [
-      "To provide a distributed key-value store for cluster data",
-      "To manage the lifecycle of pods and containers",
-      "To schedule pods on nodes",
-      "To handle network routing between pods"
-    ],
-    "answers": [0],
-    "explanation": "etcd is a distributed key-value store that provides a reliable way to store data across a cluster of machines."
-  },
-  {
-    "q": "Which of the following commands would you use to create a namespace in Kubernetes?",
-    "options": [
-      "kubectl create namespace my-namespace",
-      "kubectl new namespace my-namespace",
-      "kubectl namespace create my-namespace",
-      "kubectl add namespace my-namespace"
-    ],
-    "answers": [0],
-    "explanation": "kubectl create namespace my-namespace is the correct command to create a new namespace in Kubernetes."
-  },
-  {
-    "q": "What is a Helm Chart in Kubernetes?",
-    "options": [
-      "A tool for managing Kubernetes resources",
-      "A package manager for Kubernetes applications",
-      "A way to visualize Kubernetes clusters",
-      "A method to secure Kubernetes secrets"
-    ],
-    "answers": [1],
-    "explanation": "Helm is a package manager for Kubernetes, and a Helm Chart is a package of pre-configured Kubernetes resources."
-  },
-  {
-    "q": "Which of the following is a valid selector for a Kubernetes Service of type ClusterIP?",
-    "options": [
-      "app=myapp",
-      "name=myapp",
-      "component=myapp",
-      "tier=myapp"
-    ],
-    "answers": [0],
-    "explanation": "Service selectors are used to determine which pods will receive traffic through the service. The selector matches the labels of the pods."
-  },
-  {
-    "q": "How do you perform a rolling update for a Deployment in Kubernetes?",
-    "options": [
-      "By updating the Deployment's pod template spec",
-      "By changing the number of replicas",
-      "By updating the container image only",
-      "By deleting the old pods and creating new ones"
-    ],
-    "answers": [0],
-    "explanation": "A rolling update is performed by updating the Deployment's pod template spec. Kubernetes will then gradually replace the old pods with new ones."
-  },
-  {
-    "q": "What happens when you delete a Pod in Kubernetes?",
-    "options": [
-      "The Pod is immediately terminated and removed",
-      "The Pod is stopped but can be restarted later",
-      "The Pod's data is backed up before deletion",
-      "The Pod is marked for deletion and will be removed gracefully"
-    ],
-    "answers": [3],
-    "explanation": "When a Pod is deleted, it is marked for deletion and Kubernetes will attempt to terminate it gracefully, allowing for cleanup and data persistence if configured."
-  },
-  {
-    "q": "Which of the following is NOT a valid Kubernetes Service type?",
-    "options": [
-      "ClusterIP",
-      "NodePort",
-      "LoadBalancer",
-      "Ingress"
-    ],
-    "answers": [3],
-    "explanation": "Ingress is not a Service type. It's a collection of rules that allow inbound connections to reach the cluster services."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes Ingress resource?",
-    "options": [
-      "To manage external access to services within a cluster",
-      "To expose a service on a specific port",
-      "To load balance traffic between pods",
-      "To provide DNS services for the cluster"
-    ],
-    "answers": [0],
-    "explanation": "Ingress manages external access to the services in a cluster, typically HTTP/S, providing load balancing, SSL termination and name-based virtual hosting."
-  },
-  {
-    "q": "How can you restrict a container in a Pod from using more than its allocated CPU and memory resources?",
-    "options": [
-      "By setting resource requests and limits",
-      "By using QoS classes",
-      "By configuring the scheduler",
-      "By applying a NetworkPolicy"
-    ],
-    "answers": [0],
-    "explanation": "Resource requests and limits are used to control the amount of CPU and memory a container can use. The container is restricted to its limit if set."
-  },
-  {
-    "q": "Which Kubernetes object would you use to run a job that must be completed successfully only once?",
-    "options": [
-      "Deployment",
-      "ReplicaSet",
-      "Job",
-      "CronJob"
-    ],
-    "answers": [2],
-    "explanation": "A Job in Kubernetes is used to create one or more pods and ensures that a specified number of them successfully terminate."
-  },
-  {
-    "q": "What is the default behavior of a Kubernetes Deployment's strategy type during an update?",
-    "options": [
-      "Recreate",
-      "RollingUpdate",
-      "BlueGreen",
-      "Canary"
-    ],
-    "answers": [1],
-    "explanation": "The default strategy type for a Deployment is RollingUpdate, which gradually replaces instances of the previous version of the application with the new version."
-  },
-  {
-    "q": "Which of the following commands would you use to scale a Deployment named 'my-deployment' to 3 replicas?",
-    "options": [
-      "kubectl scale deployment my-deployment --replicas=3",
-      "kubectl set replicas my-deployment 3",
-      "kubectl update deployment my-deployment --replicas=3",
-      "kubectl resize deployment my-deployment --replicas=3"
-    ],
-    "answers": [0],
-    "explanation": "kubectl scale deployment my-deployment --replicas=3 is the correct command to scale a deployment to the desired number of replicas."
-  },
-  {
-    "q": "What is the function of the Kubernetes kubelet?",
-    "options": [
-      "To manage the network policies of a pod",
-      "To ensure that containers are running in a pod",
-      "To schedule pods on nodes",
-      "To provide DNS resolution for services"
-    ],
-    "answers": [1],
-    "explanation": "The kubelet is a primary component of the Kubernetes node that ensures containers are running in a pod."
-  },
-  {
-    "q": "Which of the following is a key benefit of using Kubernetes for container orchestration?",
-    "options": [
-      "It provides a single-node deployment for containers",
-      "It offers automated load balancing and scaling",
-      "It requires manual intervention for scaling",
-      "It does not support rolling updates"
-    ],
-    "answers": [1],
-    "explanation": "Kubernetes provides automated load balancing and scaling, which are key benefits of using it for container orchestration."
-  },
-  {
-    "q": "How does Kubernetes handle service discovery for pods?",
-    "options": [
-      "By using static IP addresses for each pod",
-      "Through the Kubernetes DNS server and environment variables",
-      "By manually configuring the /etc/hosts file in each pod",
-      "Kubernetes does not provide service discovery"
-    ],
-    "answers": [1],
-    "explanation": "Kubernetes provides service discovery for pods through the Kubernetes DNS server and environment variables that are automatically injected into pods."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes ResourceQuota object?",
-    "options": [
-      "To limit the number of resources a namespace can consume",
-      "To allocate resources to specific pods",
-      "To define network policies for a namespace",
-      "To manage the lifecycle of resources"
-    ],
-    "answers": [0],
-    "explanation": "ResourceQuota is used to limit the number of resources that a namespace can consume, helping to manage resources in a multi-tenant environment."
-  },
-  {
-    "q": "Which of the following best describes a Kubernetes Volume?",
-    "options": [
-      "A temporary storage for a pod that is deleted when the pod is deleted",
-      "A persistent storage mechanism that is independent of the pod lifecycle",
-      "A type of container image",
-      "A network policy for controlling traffic to pods"
-    ],
-    "answers": [1],
-    "explanation": "A Kubernetes Volume is a persistent storage mechanism that is independent of the pod lifecycle, allowing data to persist even if the pod is restarted or deleted."
-  },
-  {
-    "q": "How can you ensure that a specific version of an image is used for a container in a pod?",
-    "options": [
-      "By specifying the image tag in the pod specification",
-      "By using the latest tag",
-      "By not specifying any tag",
-      "By using a custom image registry"
-    ],
-    "answers": [0],
-    "explanation": "Specifying the image tag in the pod specification ensures that the desired version of the image is used for the container."
-  },
-  {
-    "q": "What is the effect of setting the terminationGracePeriodSeconds field in a pod specification?",
-    "options": [
-      "It defines the time to wait before forcefully terminating a pod",
-      "It sets the maximum time a pod can run",
-      "It specifies the time to gracefully shutdown a container",
-      "It has no effect on pod termination"
-    ],
-    "answers": [0],
-    "explanation": "terminationGracePeriodSeconds specifies the time in seconds that Kubernetes will wait for a pod to terminate gracefully before forcefully killing it."
-  },
-  {
-    "q": "Which of the following is a valid PersistentVolumeClaim status?",
-    "options": [
-      "Pending",
-      "Bound",
-      "Lost",
-      "Released"
-    ],
-    "answers": [1],
-    "explanation": "A PersistentVolumeClaim can have a status of Pending, Bound, or Lost. Bound means the claim is successfully bound to a PersistentVolume."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes PodDisruptionBudget?",
-    "options": [
-      "To limit the number of concurrent disruptions to pods",
-      "To ensure a certain number of pods are always running",
-      "To manage the network policies for pods",
-      "To allocate resources to pods"
-    ],
-    "answers": [0],
-    "explanation": "PodDisruptionBudget is used to limit the number of concurrent disruptions to pods, helping to maintain application availability during voluntary disruptions."
-  },
-  {
-    "q": "Which command would you use to view detailed information about a specific pod's configuration?",
-    "options": [
-      "kubectl describe pod my-pod",
-      "kubectl get pod my-pod -o yaml",
-      "kubectl config view pod/my-pod",
-      "kubectl show pod my-pod"
-    ],
-    "answers": [0],
-    "explanation": "kubectl describe pod my-pod provides detailed information about the pod's configuration and status."
-  },
-  {
-    "q": "What is the function of the Kubernetes API Aggregation Layer?",
-    "options": [
-      "To aggregate logs from all pods in the cluster",
-      "To provide a way to extend the Kubernetes API with custom APIs",
-      "To balance the load between different API servers",
-      "To encrypt communication between the API server and etcd"
-    ],
-    "answers": [1],
-    "explanation": "The API Aggregation Layer allows you to extend the Kubernetes API by adding your own API servers, which can be useful for custom resources and controllers."
-  },
-  {
-    "q": "Which of the following is a common use case for Kubernetes Jobs?",
-    "options": [
-      "Running a web server",
-      "Processing a batch of files",
-      "Exposing an application to the internet",
-      "Monitoring cluster health"
-    ],
-    "answers": [1],
-    "explanation": "Kubernetes Jobs are used for running batch processes or jobs that need to be executed to completion, such as processing a batch of files."
-  },
-  {
-    "q": "How can you ensure that a Kubernetes Deployment always pulls the latest image version?",
-    "options": [
-      "By setting the image tag to 'latest'",
-      "By using an emptyDir volume",
-      "By configuring a CronJob",
-      "By using a StatefulSet"
-    ],
-    "answers": [0],
-    "explanation": "Setting the image tag to 'latest' will ensure that the Deployment always pulls the latest version of the image when creating new pods."
-  },
-  {
-    "q": "What is the role of the Kubernetes Controller Manager?",
-    "options": [
-      "To manage the Kubernetes API server",
-      "To maintain the desired state of the cluster",
-      "To provide network connectivity for pods",
-      "To schedule pods on nodes"
-    ],
-    "answers": [1],
-    "explanation": "The Controller Manager is responsible for maintaining the desired state of the cluster, such as ensuring the correct number of pod replicas are running."
-  },
-  {
-    "q": "Which of the following best describes a Kubernetes StatefulSet?",
-    "options": [
-      "A set of pods that are managed as a single entity",
-      "A way to run batch jobs in Kubernetes",
-      "A deployment strategy for stateless applications",
-      "A controller that manages the deployment of applications with persistent storage"
-    ],
-    "answers": [3],
-    "explanation": "StatefulSet is a Kubernetes controller that manages the deployment and scaling of a set of pods, and provides guarantees about the ordering and uniqueness of these pods."
-  },
-  {
-    "q": "How can you restrict network access to a pod in Kubernetes?",
-    "options": [
-      "By using NetworkPolicies",
-      "By configuring firewalls at the host level",
-      "By setting pod security policies",
-      "By using service accounts"
-    ],
-    "answers": [0],
-    "explanation": "NetworkPolicies are used to restrict network access to pods, controlling the traffic flow at the IP address or port level."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes ServiceAccount?",
-    "options": [
-      "To provide an identity for processes that run in a Pod",
-      "To manage network policies",
-      "To allocate resources to pods",
-      "To encrypt communication between pods"
-    ],
-    "answers": [0],
-    "explanation": "A ServiceAccount provides an identity for processes that run in a Pod, which can be used to authenticate to the Kubernetes API."
-  },
-  {
-    "q": "Which of the following is a valid reason to use a ReplicaSet?",
-    "options": [
-      "To ensure a specific number of pod replicas are running",
-      "To run a pod on all nodes in the cluster",
-      "To manage the deployment of stateful applications",
-      "To schedule pods based on resource availability"
-    ],
-    "answers": [0],
-    "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at any given time, providing high availability for applications."
-  },
-  {
-    "q": "What is the effect of setting a Pod's restartPolicy to 'Never'?",
-    "options": [
-      "The pod will be restarted automatically if it fails",
-      "The pod will not be restarted after it stops",
-      "The pod will be deleted immediately if it fails",
-      "The pod will be restarted only on the same node"
-    ],
-    "answers": [1],
-    "explanation": "Setting a Pod's restartPolicy to 'Never' means that the pod will not be restarted automatically by Kubernetes after it stops or fails."
-  },
-  {
-    "q": "Which of the following is NOT a valid Kubernetes Volume type?",
-    "options": [
-      "emptyDir",
-      "hostPath",
-      "gcePersistentDisk",
-      "cloudStorage"
-    ],
-    "answers": [3],
-    "explanation": "cloudStorage is not a valid Kubernetes Volume type. Kubernetes supports various volume types like emptyDir, hostPath, gcePersistentDisk, etc."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes Admission Controller?",
-    "options": [
-      "To authenticate users to the Kubernetes API",
-      "To authorize requests to access Kubernetes resources",
-      "To mutate or validate requests to the Kubernetes API server",
-      "To log requests to the Kubernetes API server"
-    ],
-    "answers": [2],
-    "explanation": "Admission Controllers are plugins that govern and enforce how the cluster is used, they can mutate or validate requests to the Kubernetes API server."
-  },
-  {
-    "q": "Which command would you use to delete a pod named 'my-pod'?",
-    "options": [
-      "kubectl delete pod my-pod",
-      "kubectl remove pod my-pod",
-      "kubectl terminate pod my-pod",
-      "kubectl destroy pod my-pod"
-    ],
-    "answers": [0],
-    "explanation": "kubectl delete pod my-pod is the correct command to delete a pod in Kubernetes."
-  },
-  {
-    "q": "What is the function of the Kubernetes DNS Addon?",
-    "options": [
-      "To provide DNS resolution for services and pods",
-      "To manage network policies",
-      "To encrypt communication between pods",
-      "To load balance traffic to services"
-    ],
-    "answers": [0],
-    "explanation": "The DNS Addon provides a DNS server for the cluster, allowing services and pods to discover each other by name."
-  },
-  {
-    "q": "Which of the following is a valid PersistentVolumeReclaimPolicy?",
-    "options": [
-      "Retain",
-      "Recycle",
-      "Delete",
-      "All of the above"
-    ],
-    "answers": [3],
-    "explanation": "A PersistentVolume can have a reclaim policy of Retain, Recycle, or Delete, which determines what happens to the volume when it's released from its claim."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes NetworkPolicy?",
-    "options": [
-      "To control the network traffic to and from pods",
-      "To allocate network bandwidth to pods",
-      "To encrypt network traffic between pods",
-      "To monitor network usage of pods"
-    ],
-    "answers": [0],
-    "explanation": "NetworkPolicy is a Kubernetes resource that controls the traffic flow at the IP address or port level to and from pods."
-  },
-  {
-    "q": "How can you increase the resource limits for a running container in a pod?",
-    "options": [
-      "By editing the pod's resource limits in the deployment configuration",
-      "By using the kubectl set resources command",
-      "By directly modifying the container's cgroup settings",
-      "By restarting the container with new resource limits"
-    ],
-    "answers": [1],
-    "explanation": "You can use the kubectl set resources command to change the resource limits for a container in a pod. For example: kubectl set resources deployment my-deployment --limits=cpu=200m,memory=512Mi."
-  },
-  {
-    "q": "Which of the following is a valid use case for a Kubernetes CronJob?",
-    "options": [
-      "To run a batch job at a scheduled time",
-      "To ensure a pod is always running",
-      "To manage the deployment of a stateful application",
-      "To expose a service to the internet"
-    ],
-    "answers": [0],
-    "explanation": "A CronJob in Kubernetes is used to run jobs on a scheduled basis, similar to cron jobs in Linux."
-  },
-  {
-    "q": "What is the default value for the replicas field in a Kubernetes Deployment?",
-    "options": [
-      "0",
-      "1",
-      "3",
-      "It depends on the deployment strategy"
-    ],
-    "answers": [1],
-    "explanation": "The default value for the replicas field in a Deployment is 1, meaning one pod will be created by default."
-  },
-  {
-    "q": "Which of the following commands would you use to view the events in a namespace?",
-    "options": [
-      "kubectl get events -n my-namespace",
-      "kubectl describe events -n my-namespace",
-      "kubectl events -n my-namespace",
-      "kubectl get all -n my-namespace"
-    ],
-    "answers": [0],
-    "explanation": "kubectl get events -n my-namespace will list the events in the specified namespace."
-  },
-  {
-    "q": "What is the purpose of the Kubernetes PodTemplate?",
-    "options": [
-      "To define the desired state for a pod",
-      "To provide a blueprint for creating pods",
-      "To manage the lifecycle of a pod",
-      "To allocate resources to a pod"
-    ],
-    "answers": [1],
-    "explanation": "A PodTemplate is used to define the data a pod should have when it's created, including the container image, ports, and other settings."
-  },
-  {
-    "q": "Which of the following is a valid reason to use a Kubernetes Service of type NodePort?",
-    "options": [
-      "To expose a service on a static port on each node",
-      "To load balance traffic between pods",
-      "To provide a stable IP address for a service",
-      "To encrypt traffic to a service"
-    ],
-    "answers": [0],
-    "explanation": "NodePort is a way to expose a service on a static port on each node in the cluster, allowing external traffic to access the service."
-  },
-  {
-    "q": "What is the function of the Kubernetes API Server?",
-    "options": [
-      "To serve the Kubernetes API and provide a frontend to etcd",
-      "To schedule pods onto nodes",
-      "To manage the network policies",
-      "To provide DNS resolution for services"
-    ],
-    "answers": [0],
-    "explanation": "The API Server is a component of the Kubernetes control plane that serves the Kubernetes API, which is used by kubectl and other tools to interact with the cluster."
-  },
-  {
-    "q": "Which of the following best describes the Kubernetes control plane?",
-    "options": [
-      "The components that make up the worker nodes in the cluster",
-      "The components that control and manage the Kubernetes cluster",
-      "The network infrastructure for the Kubernetes cluster",
-      "The storage infrastructure for the Kubernetes cluster"
-    ],
-    "answers": [1],
-    "explanation": "The control plane is the brain of the Kubernetes cluster, managing the cluster's state and coordinating all activities in the cluster."
-  },
-  {
-    "q": "How can you access the Kubernetes Dashboard?",
-    "options": [
-      "By exposing it as a service of type LoadBalancer",
-      "By port-forwarding to the dashboard service",
-      "By accessing the cluster's API server",
-      "All of the above"
-    ],
-    "answers": [3],
+    "answer": [3],
     "explanation": "You can access the Kubernetes Dashboard by exposing it as a service of type LoadBalancer, by port-forwarding to the dashboard service, or by accessing it through the cluster's API server."
   }
 ]

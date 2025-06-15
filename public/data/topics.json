@@ -7,7 +7,7 @@
     "description": "Master Kubernetes concepts, architecture, and operations.",
     "level": "Intermediate",
     "badge": "Cloud Native",
-    "questionsCount": 218
+    "questionsCount": 113
   },
   {
     "topic": "github-copilot",
@@ -27,7 +27,7 @@
     "description": "Tackle advanced Kubernetes topics, real-world scenarios, and troubleshooting.",
     "level": "Advanced",
     "badge": "Cloud Native",
-    "questionsCount": 121
+    "questionsCount": 71
   },
   {
     "topic": "github-copilot-exam",
