@@ -24,9 +24,15 @@ function shuffleOptionsAndRemapAnswers(questions) {
         optionPairs.forEach((pair, newIdx) => {
             oldToNew[pair.idx] = newIdx;
         });
+        // Support both 'answer' and 'answers' fields
+        if (Array.isArray(q.answer)) {
+            q.answer = q.answer.map(oldIdx => oldToNew[oldIdx]);
+        } else if (typeof q.answer === 'number') {
+            q.answer = [oldToNew[q.answer]];
+        }
         if (Array.isArray(q.answers)) {
             q.answers = q.answers.map(oldIdx => oldToNew[oldIdx]);
-        } else {
+        } else if (typeof q.answers === 'number') {
             q.answers = [oldToNew[q.answers]];
         }
     }
