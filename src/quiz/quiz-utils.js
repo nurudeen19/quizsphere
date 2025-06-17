@@ -30,11 +30,6 @@ function shuffleOptionsAndRemapAnswers(questions) {
         } else if (typeof q.answer === 'number') {
             q.answer = [oldToNew[q.answer]];
         }
-        if (Array.isArray(q.answers)) {
-            q.answers = q.answers.map(oldIdx => oldToNew[oldIdx]);
-        } else if (typeof q.answers === 'number') {
-            q.answers = [oldToNew[q.answers]];
-        }
     }
 }
 
@@ -62,7 +57,7 @@ function applyOrder(arr, order) {
 
 function getQuizQuestionsPage(questionsData, page = 0, pageSize = PAGE_SIZE, sessionKey = null) {
     // Defensive: filter out malformed questions before paginating
-    const validQuestions = (questionsData || []).filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answers));
+    const validQuestions = (questionsData || []).filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answer));
     let orderedQuestions = validQuestions;
     if (sessionKey) {
         const order = getSessionShuffledOrder(sessionKey, validQuestions.length);
@@ -92,13 +87,7 @@ export async function fetchQuestions(file, opts = {}) {
   } else {
     filePath = '/quizsphere/data/' + filePath.replace(/^\/+/,'').replace(/^data\//,'');
   }
-  // Add pagination query if requested
-  if (typeof opts.page === 'number' && typeof opts.size === 'number') {
-    const sep = filePath.includes('?') ? '&' : '?';
-    filePath += `${sep}page=${opts.page}&size=${opts.size}`;
-  }
-  // Debug log
-  console.log('Fetching questions from:', filePath);
+  // Always fetch the full file
   const res = await fetch(filePath);
   if (!res.ok) {
     const text = await res.text();
@@ -120,6 +109,12 @@ export async function fetchQuestions(file, opts = {}) {
     shuffleArray(data);
   }
   shuffleOptionsAndRemapAnswers(data);
+  // Paginate after fetch
+  if (typeof opts.page === 'number' && typeof opts.size === 'number') {
+    const start = opts.page * opts.size;
+    const end = start + opts.size;
+    return data.slice(start, end);
+  }
   return data;
 }
 

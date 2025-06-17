@@ -276,42 +276,28 @@ function getSessionKey() {
 watch(() => props.topic, async (newTopic) => {
   if (newTopic && newTopic.topic) {
     topicTitle.value = newTopic.title
-    let data = []
+    let filePath = ''
+    if (newTopic.file) {
+      filePath = newTopic.file
+    } else if (newTopic.topic) {
+      filePath = `${newTopic.topic}.json`
+    }
+    filePath = filePath.replace(/^\/?.*data\//, '');
+    filePath = '/data/' + filePath.replace(/^\/+/, '');
     try {
-      let filePath = ''
-      if (newTopic.file) {
-        filePath = newTopic.file
-      } else if (newTopic.topic) {
-        filePath = `${newTopic.topic}.json`
-      }
-      filePath = filePath.replace(/^\/?.*data\//, '');
-      filePath = '/data/' + filePath.replace(/^\/+/, '');
-      console.log(`Loading questions from: ${filePath}`)
-      let pagedData = []
-      let supportsPaging = false
-      try {
-        const pageParam = `?page=${chapter.value}&size=${CHAPTER_SIZE}`
-        // Pass sessionKey for stable shuffling
-        const pagedRes = await fetchQuestions(filePath + pageParam, { sessionKey: getSessionKey() })
-        if (Array.isArray(pagedRes)) {
-          pagedData = pagedRes
-          supportsPaging = true
-        }
-      } catch (e) {
-        // If paging not supported, fallback to full fetch
-      }
-      if (!supportsPaging) {
-        data = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
-        data = data.filter(q => (q && (q.q || q.question) && Array.isArray(q.options) && Array.isArray(q.answer)))
-        pagedData = getQuizQuestionsPage(data, chapter.value, CHAPTER_SIZE, getSessionKey())
-      }
-      questionsData.value = data
+      // Fetch only the current chapter's questions using pagination
+      const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
       questions.value = pagedData
+      // Optionally, fetch all questions for stats or total count
+      const allData = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
+      questionsData.value = allData
     } catch (e) {
-      data = []
+      questions.value = []
+      questionsData.value = []
       topicTitle.value = 'Failed to load question data.'
     }
     if (!validateQuestions(questions.value)) {
+      questions.value = []
       questionsData.value = []
       topicTitle.value = 'Invalid or corrupt question data.'
       return
@@ -326,7 +312,7 @@ watch(() => props.topic, async (newTopic) => {
       chapterStates.value = chapters
     } else {
       if (!questions.value.length) {
-        questions.value = getChapterQuestions(chapter.value)
+        questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
       }
     }
   }
@@ -423,12 +409,25 @@ function goToNextChapter() {
   chapterStates.value = chapters
   saveQuizState()
   chapter.value++
-  questions.value = getChapterQuestions(chapter.value)
+  // Fetch next chapter's questions
+  fetchNextChapterQuestions()
   current.value = 0
   answered.value = false
   selectedOptions.value = []
   isCorrect.value = false
   score.value = 0
+}
+
+async function fetchNextChapterQuestions() {
+  let filePath = ''
+  if (props.topic.file) {
+    filePath = props.topic.file
+  } else if (props.topic.topic) {
+    filePath = `${props.topic.topic}.json`
+  }
+  filePath = filePath.replace(/^\/?.*data\//, '');
+  filePath = '/data/' + filePath.replace(/^\/+/, '');
+  questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
 }
 
 function handleNext() {
