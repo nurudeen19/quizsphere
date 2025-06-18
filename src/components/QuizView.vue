@@ -147,17 +147,17 @@
         </table>
       </div>
       <div class="w-full flex flex-row justify-center items-center mt-4 gap-2">
-        <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); color: #fff; min-width: 120px; min-height: 32px;">
+        <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); color: #fff; min-width: 120px; min-height: 32px;">
           <i class="fas fa-undo text-base pr-1"></i>
-          <span>Restart Chapter</span>
+          <span class="whitespace-nowrap">Restart Chapter</span>
         </button>
         <button
           v-if="questions.length === CHAPTER_SIZE && !isFinalChapter()"
           @click="goToNextChapter"
-          class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
+          class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
           style="font-size:unset;background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: #fff; min-width: 120px; min-height: 32px;">
           <i class="fas fa-arrow-right text-base pr-1"></i>
-          <span>Continue to Next Chapter</span>
+          <span class="whitespace-nowrap">Continue to Next Chapter</span>
         </button>
         <button
           v-if="questions.length === CHAPTER_SIZE && isFinalChapter()"
@@ -470,23 +470,7 @@ function loadQuizState() {
 watch([
   answered, current, questions, isAllChaptersComplete, isFinalChapter
 ], ([answeredVal, currentVal, questionsVal, allComplete, finalChapter]) => {
-  // End of chapter: when last question is answered
-  if (answeredVal && currentVal === questionsVal.length - 1) {
-    nextTick(() => {
-      for (let i = 0; i < 2; i++) {
-        setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            spread: 60 + Math.random() * 30,
-            origin: { y: 0.7 },
-            angle: 60 + Math.random() * 60,
-            scalar: 0.7 + Math.random() * 0.5,
-          })
-        }, i * 250)
-      }
-    })
-  }
-  // End of quiz (all chapters complete)
+  // Only fire confetti at the end of the quiz (all chapters complete and on final chapter)
   if (allComplete && finalChapter) {
     nextTick(() => {
       for (let i = 0; i < 3; i++) {

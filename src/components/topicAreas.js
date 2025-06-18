@@ -1,13 +1,15 @@
 export const topicAreas = {
   kubernetes: [
-    'Pods & Deployments',
+    'Cluster Architecture & Components',
+    'Pods, Deployments & Controllers',
     'Services & Networking',
     'ConfigMaps & Secrets',
     'Volumes & Storage',
+    'Namespaces & Resource Quotas',
     'RBAC & Security',
-    'Helm & Operators',
-    'Cluster Architecture',
-    'Troubleshooting'
+    'Labels, Selectors & Annotations',
+    'API & Resource Operations',
+    'Troubleshooting & Status'
   ],
   'kubernetes-advanced': [
     'Advanced Scheduling',

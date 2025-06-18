@@ -1,5 +1,411 @@
 [
     {
+        "question": "What is the primary purpose of a readiness probe in Kubernetes?",
+        "options": [
+            "To restart containers that fail health checks",
+            "To determine when a container is ready to accept traffic",
+            "To collect metrics about container performance",
+            "To scale pods based on HTTP traffic"
+        ],
+        "answer": [1],
+        "explanation": "Readiness probes determine when a container is ready to start accepting traffic. This prevents sending requests to pods that are still initializing."
+    },
+    {
+        "question": "Which kubectl command is used to forward a local port to a port in a pod?",
+        "options": [
+            "kubectl proxy",
+            "kubectl attach",
+            "kubectl port-forward",
+            "kubectl tunnel"
+        ],
+        "answer": [2],
+        "explanation": "The 'kubectl port-forward' command forwards one or more local ports to a pod for temporary access and debugging."
+    },
+    {
+        "question": "What does the 'ImagePullBackOff' status indicate for a pod?",
+        "options": [
+            "The container image is too large",
+            "Kubernetes cannot download the container image",
+            "The image has passed security scanning",
+            "The container is ready for traffic"
+        ],
+        "answer": [1],
+        "explanation": "ImagePullBackOff indicates Kubernetes is failing to pull the container image, often due to incorrect name, registry auth, or network issues."
+    },
+    {
+        "question": "Which CNCF project provides distributed tracing capabilities?",
+        "options": [
+            "Fluentd",
+            "Jaeger",
+            "Prometheus",
+            "CoreDNS"
+        ],
+        "answer": [1],
+        "explanation": "Jaeger is a CNCF-graduated project providing end-to-end distributed tracing for microservices architectures."
+    },
+    {
+        "question": "What is the main purpose of a Pod Security Admission in Kubernetes?",
+        "options": [
+            "Manage network traffic between pods",
+            "Enforce security standards at pod creation",
+            "Encrypt secrets at rest",
+            "Authenticate API requests"
+        ],
+        "answer": [1],
+        "explanation": "Pod Security Admission enforces security policies during pod creation by validating against predefined security levels (privileged/baseline/restricted)."
+    },
+    {
+        "question": "Which command shows events related to a specific pod?",
+        "options": [
+            "kubectl events pod/<name>",
+            "kubectl get events --field-selector involvedObject.name=<pod>",
+            "kubectl logs pod/<name> --events",
+            "kubectl describe events pod/<name>"
+        ],
+        "answer": [1],
+        "explanation": "Filtering events by involvedObject.name shows cluster events related to a specific resource like a pod."
+    },
+    {
+        "question": "What is the primary advantage of using a sidecar container pattern?",
+        "options": [
+            "Reduces total container count",
+            "Allows shared lifecycle with main container",
+            "Provides auxiliary services without modifying main app",
+            "Increases pod security isolation"
+        ],
+        "answer": [2],
+        "explanation": "Sidecars extend functionality (logging, monitoring, proxying) without modifying the main application container."
+    },
+    {
+        "question": "Which Kubernetes resource would you use to limit CPU usage per container in a namespace?",
+        "options": [
+            "ResourceQuota",
+            "LimitRange",
+            "PodDisruptionBudget",
+            "NetworkPolicy"
+        ],
+        "answer": [1],
+        "explanation": "LimitRange sets default and max resource constraints per container/pod in a namespace."
+    },
+    {
+        "question": "What problem does GitOps solve in Kubernetes deployments?",
+        "options": [
+            "Automatic scaling of nodes",
+            "Drift between desired and actual state",
+            "Network policy enforcement",
+            "Secret encryption"
+        ],
+        "answer": [1],
+        "explanation": "GitOps maintains cluster state in Git repositories, automatically reconciling drift using agents like Argo CD."
+    },
+    {
+        "question": "Which tool is commonly used with Prometheus for visualization?",
+        "options": [
+            "Jaeger",
+            "Grafana",
+            "Fluentd",
+            "OpenTelemetry"
+        ],
+        "answer": [1],
+        "explanation": "Grafana is the visualization layer typically used with Prometheus for dashboards and metrics analysis."
+    },
+    {
+        "question": "What does 'kubectl api-resources' display?",
+        "options": [
+            "Current resource utilization",
+            "Available API endpoints",
+            "Supported resource types and their API groups",
+            "Cluster authentication settings"
+        ],
+        "answer": [2],
+        "explanation": "This command lists all available resource types and their associated API groups/versions."
+    },
+    {
+        "question": "Which security context setting prevents privilege escalation?",
+        "options": [
+            "allowPrivilegeEscalation=false",
+            "readOnlyRootFilesystem=true",
+            "runAsNonRoot=true",
+            "privileged=false"
+        ],
+        "answer": [0],
+        "explanation": "Setting allowPrivilegeEscalation=false blocks child processes from gaining more privileges than their parent."
+    },
+    {
+        "question": "What is the purpose of OpenTelemetry in cloud-native environments?",
+        "options": [
+            "Container runtime management",
+            "Unified observability data collection",
+            "Cluster autoscaling",
+            "Network policy enforcement"
+        ],
+        "answer": [1],
+        "explanation": "OpenTelemetry provides vendor-neutral APIs/instrumentation for collecting metrics, logs, and traces."
+    },
+    {
+        "question": "Which command creates a temporary interactive pod?",
+        "options": [
+            "kubectl run --rm -it --image=busybox temp-pod -- sh",
+            "kubectl create pod --interactive",
+            "kubectl attach --pod temp-pod",
+            "kubectl debug --interactive"
+        ],
+        "answer": [0],
+        "explanation": "This command creates an ephemeral pod that deletes itself after exit, useful for troubleshooting."
+    },
+    {
+        "question": "What is the primary function of CoreDNS in Kubernetes?",
+        "options": [
+            "Container runtime",
+            "Cluster storage",
+            "Service discovery and name resolution",
+            "Network encryption"
+        ],
+        "answer": [2],
+        "explanation": "CoreDNS provides DNS-based service discovery, resolving service names to cluster IPs."
+    },
+    {
+        "question": "Which resource would you check first when a pod stays in 'Pending' status?",
+        "options": [
+            "Events (kubectl get events)",
+            "Node metrics (kubectl top nodes)",
+            "Deployment history (kubectl rollout history)",
+            "Network policies (kubectl get networkpolicy)"
+        ],
+        "answer": [0],
+        "explanation": "Events provide immediate diagnostic information about scheduling failures or resource constraints."
+    },
+    {
+        "question": "What is the main advantage of using Init Containers over startup scripts?",
+        "options": [
+            "Better performance",
+            "Stronger security boundaries",
+            "Access to Kubernetes API",
+            "Simpler debugging"
+        ],
+        "answer": [1],
+        "explanation": "Init containers run with separate security contexts and images, isolating setup tasks from the main application."
+    },
+    {
+        "question": "Which CNCF project provides serverless capabilities on Kubernetes?",
+        "options": [
+            "Knative",
+            "Linkerd",
+            "Falco",
+            "SPIFFE"
+        ],
+        "answer": [0],
+        "explanation": "Knative extends Kubernetes to provide serverless workload capabilities like auto-scaling to zero."
+    },
+    {
+        "question": "What information does the Downward API provide to containers?",
+        "options": [
+            "Cluster security policies",
+            "Pod metadata (name, IP, labels)",
+            "Node hardware specifications",
+            "Kubernetes version information"
+        ],
+        "answer": [1],
+        "explanation": "The Downward API exposes pod/container metadata as environment variables or files."
+    },
+    {
+        "question": "Which command safely restarts all pods in a deployment?",
+        "options": [
+            "kubectl delete pods --all",
+            "kubectl rollout restart deployment/<name>",
+            "kubectl scale deployment/<name> --replicas=0 && kubectl scale --replicas=2",
+            "kubectl restart deployment/<name>"
+        ],
+        "answer": [1],
+        "explanation": "This performs a rolling restart respecting update strategies and readiness checks."
+    },
+    {
+        "question": "What is the primary purpose of a ServiceAccount?",
+        "options": [
+            "User authentication",
+            "Pod identity for API access",
+            "Network encryption",
+            "Storage access control"
+        ],
+        "answer": [1],
+        "explanation": "ServiceAccounts provide identity for pods to authenticate to the Kubernetes API server."
+    },
+    {
+        "question": "Which RBAC resource grants permissions within a specific namespace?",
+        "options": [
+            "ClusterRole",
+            "ClusterRoleBinding",
+            "Role",
+            "RoleBinding"
+        ],
+        "answer": [2],
+        "explanation": "Roles define permissions within a single namespace, while ClusterRoles apply cluster-wide."
+    },
+    {
+        "question": "What problem does a headless service solve?",
+        "options": [
+            "Load balancing stateful pods",
+            "Direct pod-to-pod connections",
+            "External access to services",
+            "Network policy enforcement"
+        ],
+        "answer": [1],
+        "explanation": "Headless services (clusterIP: None) return individual pod IPs for direct connections in stateful applications."
+    },
+    {
+        "question": "Which tool scans Kubernetes manifests for security issues?",
+        "options": [
+            "kube-bench",
+            "kube-hunter",
+            "Trivy",
+            "Falco"
+        ],
+        "answer": [2],
+        "explanation": "Trivy scans configuration files for security vulnerabilities and misconfigurations."
+    },
+    {
+        "question": "What is the primary benefit of immutable container tags?",
+        "options": [
+            "Smaller image sizes",
+            "Predictable deployments",
+            "Faster container startup",
+            "Automatic rollbacks"
+        ],
+        "answer": [1],
+        "explanation": "Immutable tags (e.g., hashes) ensure consistent deployments by preventing image changes after tagging."
+    },
+    {
+        "question": "Which CNCF project provides runtime security monitoring?",
+        "options": [
+            "Prometheus",
+            "Falco",
+            "Argo CD",
+            "etcd"
+        ],
+        "answer": [1],
+        "explanation": "Falco detects anomalous activity at runtime using kernel system calls."
+    },
+    {
+        "question": "What information would you check first when a service can't reach its pods?",
+        "options": [
+            "Pod logs",
+            "Endpoint objects",
+            "Node resource usage",
+            "NetworkPolicy rules"
+        ],
+        "answer": [1],
+        "explanation": "Endpoint objects show which pods are backing a service - if empty, selectors may be misconfigured."
+    },
+    {
+        "question": "Which command shows resource requests/limits for all pods?",
+        "options": [
+            "kubectl top pods",
+            "kubectl describe pods",
+            "kubectl get pods -o custom-columns=NAME:.metadata.name,CPU:.spec.containers[*].resources.requests.cpu",
+            "kubectl inspect resources"
+        ],
+        "answer": [2],
+        "explanation": "Custom columns provide a concise view of resource configurations across pods."
+    },
+    {
+        "question": "What is the purpose of the KEP (Kubernetes Enhancement Proposal) process?",
+        "options": [
+            "Security vulnerability reporting",
+            "Governance for major changes to Kubernetes",
+            "Certification of Kubernetes distributions",
+            "Performance benchmarking"
+        ],
+        "answer": [1],
+        "explanation": "KEPs document and coordinate significant enhancements to the Kubernetes project."
+    },
+    {
+        "question": "Which metric type is most important for SLO-based autoscaling?",
+        "options": [
+            "Node CPU utilization",
+            "Application latency (p99)",
+            "Network throughput",
+            "Disk I/O operations"
+        ],
+        "answer": [1],
+        "explanation": "Latency metrics directly measure user experience, making them ideal for SLO-driven scaling."
+    },
+    {
+        "question": "What is the primary purpose of a Horizontal Pod Autoscaler?",
+        "options": [
+            "Scale pods based on CPU/memory usage",
+            "Manage network policies",
+            "Expose services to external traffic",
+            "Store persistent data"
+        ],
+        "answer": [0],
+        "explanation": "The Horizontal Pod Autoscaler automatically adjusts the number of pod replicas based on observed CPU utilization or other select metrics."
+    },
+    {
+        "question": "Which of the following are valid Kubernetes resource types?",
+        "options": [
+            "Pod",
+            "Service",
+            "Deployment",
+            "ConfigMap"
+        ],
+        "answer": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "explanation": "All listed options are valid Kubernetes resource types. They represent different objects that can be managed within a Kubernetes cluster."
+    },
+    {
+        "question": "What is the purpose of a ReplicaSet in Kubernetes?",
+        "options": [
+            "To manage network policies",
+            "To ensure a specified number of pod replicas are running",
+            "To expose services",
+            "To store configuration data"
+        ],
+        "answer": [1],
+        "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at any given time, providing high availability."
+    },
+    {
+        "question": "Which of the following are valid Kubernetes controllers?",
+        "options": [
+            "Job controller",
+            "ReplicaSet controller",
+            "Deployment controller",
+            "StatefulSet controller"
+        ],
+        "answer": [
+            0,
+            1,
+            2,
+            3
+        ],
+        "explanation": "All listed options are valid Kubernetes controllers, each managing different aspects of application deployment and scaling."
+    },
+    {
+        "question": "What is the purpose of a Namespace in Kubernetes?",
+        "options": [
+            "To isolate resources within a cluster",
+            "To manage network policies",
+            "To expose services",
+            "To store configuration data"
+        ],
+        "answer": [0],
+        "explanation": "Namespaces provide a way to divide cluster resources between multiple users or teams, allowing for resource isolation and management."
+    },
+    {
+        "question": "What is the purpose of a PersistentVolumeClaim in Kubernetes?",
+        "options": [
+            "To request storage resources",
+            "To manage network policies",
+            "To expose services",
+            "To schedule pods"
+        ],
+        "answer": [0],
+        "explanation": "A PersistentVolumeClaim is used by a pod to request storage resources from a PersistentVolume."
+    },
+    {
         "question": "What is Kubernetes?",
         "options": [
             "A programming language",
