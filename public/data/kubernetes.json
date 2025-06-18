@@ -7,7 +7,9 @@
             "To collect metrics about container performance",
             "To scale pods based on HTTP traffic"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Readiness probes determine when a container is ready to start accepting traffic. This prevents sending requests to pods that are still initializing."
     },
     {
@@ -18,7 +20,9 @@
             "kubectl port-forward",
             "kubectl tunnel"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "The 'kubectl port-forward' command forwards one or more local ports to a pod for temporary access and debugging."
     },
     {
@@ -29,7 +33,9 @@
             "The image has passed security scanning",
             "The container is ready for traffic"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "ImagePullBackOff indicates Kubernetes is failing to pull the container image, often due to incorrect name, registry auth, or network issues."
     },
     {
@@ -40,7 +46,9 @@
             "Prometheus",
             "CoreDNS"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Jaeger is a CNCF-graduated project providing end-to-end distributed tracing for microservices architectures."
     },
     {
@@ -51,7 +59,9 @@
             "Encrypt secrets at rest",
             "Authenticate API requests"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Pod Security Admission enforces security policies during pod creation by validating against predefined security levels (privileged/baseline/restricted)."
     },
     {
@@ -62,7 +72,9 @@
             "kubectl logs pod/<name> --events",
             "kubectl describe events pod/<name>"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Filtering events by involvedObject.name shows cluster events related to a specific resource like a pod."
     },
     {
@@ -73,7 +85,9 @@
             "Provides auxiliary services without modifying main app",
             "Increases pod security isolation"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "Sidecars extend functionality (logging, monitoring, proxying) without modifying the main application container."
     },
     {
@@ -84,7 +98,9 @@
             "PodDisruptionBudget",
             "NetworkPolicy"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "LimitRange sets default and max resource constraints per container/pod in a namespace."
     },
     {
@@ -95,7 +111,9 @@
             "Network policy enforcement",
             "Secret encryption"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "GitOps maintains cluster state in Git repositories, automatically reconciling drift using agents like Argo CD."
     },
     {
@@ -106,7 +124,9 @@
             "Fluentd",
             "OpenTelemetry"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Grafana is the visualization layer typically used with Prometheus for dashboards and metrics analysis."
     },
     {
@@ -117,7 +137,9 @@
             "Supported resource types and their API groups",
             "Cluster authentication settings"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "This command lists all available resource types and their associated API groups/versions."
     },
     {
@@ -128,7 +150,9 @@
             "runAsNonRoot=true",
             "privileged=false"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "Setting allowPrivilegeEscalation=false blocks child processes from gaining more privileges than their parent."
     },
     {
@@ -139,7 +163,9 @@
             "Cluster autoscaling",
             "Network policy enforcement"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "OpenTelemetry provides vendor-neutral APIs/instrumentation for collecting metrics, logs, and traces."
     },
     {
@@ -150,7 +176,9 @@
             "kubectl attach --pod temp-pod",
             "kubectl debug --interactive"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "This command creates an ephemeral pod that deletes itself after exit, useful for troubleshooting."
     },
     {
@@ -161,7 +189,9 @@
             "Service discovery and name resolution",
             "Network encryption"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "CoreDNS provides DNS-based service discovery, resolving service names to cluster IPs."
     },
     {
@@ -172,7 +202,9 @@
             "Deployment history (kubectl rollout history)",
             "Network policies (kubectl get networkpolicy)"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "Events provide immediate diagnostic information about scheduling failures or resource constraints."
     },
     {
@@ -183,7 +215,9 @@
             "Access to Kubernetes API",
             "Simpler debugging"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Init containers run with separate security contexts and images, isolating setup tasks from the main application."
     },
     {
@@ -194,7 +228,9 @@
             "Falco",
             "SPIFFE"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "Knative extends Kubernetes to provide serverless workload capabilities like auto-scaling to zero."
     },
     {
@@ -205,7 +241,9 @@
             "Node hardware specifications",
             "Kubernetes version information"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "The Downward API exposes pod/container metadata as environment variables or files."
     },
     {
@@ -216,7 +254,9 @@
             "kubectl scale deployment/<name> --replicas=0 && kubectl scale --replicas=2",
             "kubectl restart deployment/<name>"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "This performs a rolling restart respecting update strategies and readiness checks."
     },
     {
@@ -227,7 +267,9 @@
             "Network encryption",
             "Storage access control"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "ServiceAccounts provide identity for pods to authenticate to the Kubernetes API server."
     },
     {
@@ -238,7 +280,9 @@
             "Role",
             "RoleBinding"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "Roles define permissions within a single namespace, while ClusterRoles apply cluster-wide."
     },
     {
@@ -249,7 +293,9 @@
             "External access to services",
             "Network policy enforcement"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Headless services (clusterIP: None) return individual pod IPs for direct connections in stateful applications."
     },
     {
@@ -260,7 +306,9 @@
             "Trivy",
             "Falco"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "Trivy scans configuration files for security vulnerabilities and misconfigurations."
     },
     {
@@ -271,7 +319,9 @@
             "Faster container startup",
             "Automatic rollbacks"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Immutable tags (e.g., hashes) ensure consistent deployments by preventing image changes after tagging."
     },
     {
@@ -282,7 +332,9 @@
             "Argo CD",
             "etcd"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Falco detects anomalous activity at runtime using kernel system calls."
     },
     {
@@ -293,7 +345,9 @@
             "Node resource usage",
             "NetworkPolicy rules"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Endpoint objects show which pods are backing a service - if empty, selectors may be misconfigured."
     },
     {
@@ -304,7 +358,9 @@
             "kubectl get pods -o custom-columns=NAME:.metadata.name,CPU:.spec.containers[*].resources.requests.cpu",
             "kubectl inspect resources"
         ],
-        "answer": [2],
+        "answer": [
+            2
+        ],
         "explanation": "Custom columns provide a concise view of resource configurations across pods."
     },
     {
@@ -315,7 +371,9 @@
             "Certification of Kubernetes distributions",
             "Performance benchmarking"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "KEPs document and coordinate significant enhancements to the Kubernetes project."
     },
     {
@@ -326,7 +384,9 @@
             "Network throughput",
             "Disk I/O operations"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "Latency metrics directly measure user experience, making them ideal for SLO-driven scaling."
     },
     {
@@ -337,7 +397,9 @@
             "Expose services to external traffic",
             "Store persistent data"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "The Horizontal Pod Autoscaler automatically adjusts the number of pod replicas based on observed CPU utilization or other select metrics."
     },
     {
@@ -364,7 +426,9 @@
             "To expose services",
             "To store configuration data"
         ],
-        "answer": [1],
+        "answer": [
+            1
+        ],
         "explanation": "A ReplicaSet ensures that a specified number of pod replicas are running at any given time, providing high availability."
     },
     {
@@ -391,7 +455,9 @@
             "To expose services",
             "To store configuration data"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "Namespaces provide a way to divide cluster resources between multiple users or teams, allowing for resource isolation and management."
     },
     {
@@ -402,7 +468,9 @@
             "To expose services",
             "To schedule pods"
         ],
-        "answer": [0],
+        "answer": [
+            0
+        ],
         "explanation": "A PersistentVolumeClaim is used by a pod to request storage resources from a PersistentVolume."
     },
     {
@@ -571,22 +639,6 @@
         "explanation": "A ConfigMap is used to store non-confidential data in key-value pairs. Pods can consume these values as environment variables or as command-line arguments."
     },
     {
-        "question": "Which of the following are valid Kubernetes resource types?",
-        "options": [
-            "ConfigMap",
-            "Service",
-            "Deployment",
-            "Pod"
-        ],
-        "answer": [
-            0,
-            1,
-            2,
-            3
-        ],
-        "explanation": "All listed options are valid Kubernetes resource types. They represent different objects that can be managed within a Kubernetes cluster."
-    },
-    {
         "question": "What is the purpose of a PersistentVolume in Kubernetes?",
         "options": [
             "Provide persistent storage",
@@ -598,22 +650,6 @@
             0
         ],
         "explanation": "A PersistentVolume provides a way for administrators to pre-provision storage that can be used by pods in the cluster."
-    },
-    {
-        "question": "Which of the following are valid Kubernetes controllers?",
-        "options": [
-            "Job controller",
-            "ReplicaSet controller",
-            "Deployment controller",
-            "StatefulSet controller"
-        ],
-        "answer": [
-            2,
-            1,
-            0,
-            3
-        ],
-        "explanation": "All listed options are valid Kubernetes controllers, each managing different aspects of application deployment and scaling."
     },
     {
         "question": "What is the purpose of a DaemonSet in Kubernetes?",
