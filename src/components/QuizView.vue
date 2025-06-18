@@ -1,5 +1,13 @@
 <template>
-  <div v-if="questions.length" class="quiz">
+  <div v-if="loading" class="quiz-loading flex flex-col items-center justify-center py-12">
+    <div class="loader mb-4"></div>
+    <div class="text-blue-700 text-lg font-semibold">Loading questions...</div>
+  </div>
+  <div v-else-if="errorMessage" class="quiz-error text-center py-12 text-lg text-red-600">
+    <i class="fas fa-exclamation-triangle text-3xl mb-4"></i>
+    <div>{{ errorMessage }}</div>
+  </div>
+  <div v-else-if="questions.length" class="quiz">
     <h2><i class="fas fa-brain"></i> {{ topicTitle }}</h2>
     <div class="text-sm text-blue-900 mb-2 font-bold tracking-wide">
       <div class="chapter-info">
@@ -170,20 +178,11 @@
 
 <script setup>
 import { ref, watch, nextTick, computed, onMounted } from 'vue'
-import { getQuizQuestionsPage, PAGE_SIZE, fetchQuestions } from '../quiz/quiz-utils.js'
+import { PAGE_SIZE, fetchQuestions } from '../quiz/quiz-utils.js'
 import confetti from 'canvas-confetti'
 
 const props = defineProps({
   topic: Object
-})
-
-const isQuizActive = computed(() => {
-  // If the current chapter is completed but the next chapter hasn't started, show chapter complete page
-  const chapters = chapterStates.value;
-  const currentCompleted = chapters[chapter.value]?.completed;
-  const nextStarted = chapters[chapter.value + 1]?.score > 0 || chapters[chapter.value + 1]?.completed;
-  // Quiz is active if not completed, or if next chapter has started
-  return (current.value < questions.value.length && !currentCompleted) || nextStarted;
 })
 
 const questions = ref([])
@@ -199,78 +198,20 @@ const showNextBtn = ref(true)
 const chapterStates = ref({})
 const questionsData = ref([])
 const transitioning = ref(false)
+const loading = ref(false)
+const errorMessage = ref('')
 
 const getQuizStateKey = (topicKey) => `quizsphere-quiz-state-${topicKey}`
 const getChaptersKey = (topicKey) => `quizsphere-chapter-states-${topicKey}`
 
-function getChapterQuestions(chapterNum) {
-  if (!questionsData.value.length) return []
-  // Use sessionKey for stable shuffling per session
-  return getQuizQuestionsPage(questionsData.value, chapterNum, CHAPTER_SIZE, getSessionKey())
-}
-
-let saveTimeout = null
-function saveQuizState() {
-  if (saveTimeout) clearTimeout(saveTimeout)
-  saveTimeout = setTimeout(() => {
-    const topicKey = props.topic?.topic
-    // Prevent saving state if there are no valid questions
-    if (!questions.value.length) return;
-    const state = {
-      version: 1,
-      topic: topicKey,
-      chapter: chapter.value,
-      current: current.value,
-      score: score.value,
-      answered: answered.value,
-      isCorrect: isCorrect.value,
-      selectedOptions: selectedOptions.value,
-      questions: questions.value
-    }
-    localStorage.setItem(getQuizStateKey(topicKey), JSON.stringify(state))
-    // Save per-chapter state
-    let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}')
-    chapters[chapter.value] = {
-      version: 1,
-      score: questions.value.length ? score.value : 0,
-      total: questions.value.length,
-      completed: questions.value.length ? (current.value >= questions.value.length) : false
-    }
-    localStorage.setItem(getChaptersKey(topicKey), JSON.stringify(chapters))
-    chapterStates.value = chapters
-  }, 200) // Debounce 200ms
-}
-
-function loadQuizState() {
-  const topicKey = props.topic?.topic
-  const stateStr = localStorage.getItem(getQuizStateKey(topicKey))
-  let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}')
-  chapterStates.value = chapters
-  if (!stateStr) return false
-  try {
-    const state = JSON.parse(stateStr)
-    if (state.topic === topicKey) {
-      chapter.value = state.chapter || 0
-      current.value = state.current
-      score.value = state.score
-      answered.value = state.answered
-      isCorrect.value = state.isCorrect
-      selectedOptions.value = state.selectedOptions
-      questions.value = state.questions
-      return true
-    }
-  } catch {}
-  return false
-}
-
-function validateQuestions(data) {
-  if (!Array.isArray(data)) return false;
-  return data.every(q => (q && (typeof q.q === 'string' || typeof q.question === 'string') && Array.isArray(q.options) && Array.isArray(q.answer)));
-}
-
-function getSessionKey() {
-  // Use topic key as sessionKey for shuffling
-  return props.topic?.topic ? `quizsphere-shuffle-${props.topic.topic}` : 'quizsphere-shuffle-default';
+function resetStateForChapter() {
+  current.value = 0
+  score.value = 0
+  answered.value = false
+  selectedOptions.value = []
+  isCorrect.value = false
+  showNextBtn.value = true
+  transitioning.value = false
 }
 
 watch(() => props.topic, async (newTopic) => {
@@ -284,6 +225,8 @@ watch(() => props.topic, async (newTopic) => {
     }
     filePath = filePath.replace(/^\/?.*data\//, '');
     filePath = '/data/' + filePath.replace(/^\/+/, '');
+    loading.value = true
+    errorMessage.value = ''
     try {
       // Fetch only the current chapter's questions using pagination
       const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
@@ -291,23 +234,23 @@ watch(() => props.topic, async (newTopic) => {
       // Optionally, fetch all questions for stats or total count
       const allData = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
       questionsData.value = allData
+      resetStateForChapter()
     } catch (e) {
       questions.value = []
       questionsData.value = []
-      topicTitle.value = 'Failed to load question data.'
+      errorMessage.value = 'Failed to load question data.'
+    } finally {
+      loading.value = false
     }
     if (!validateQuestions(questions.value)) {
       questions.value = []
       questionsData.value = []
-      topicTitle.value = 'Invalid or corrupt question data.'
+      errorMessage.value = 'Invalid or corrupt question data.'
       return
     }
     if (!loadQuizState()) {
       chapter.value = 0
-      current.value = 0
-      score.value = 0
-      answered.value = false
-      selectedOptions.value = []
+      resetStateForChapter()
       let chapters = JSON.parse(localStorage.getItem(getChaptersKey(newTopic.topic)) || '{}')
       chapterStates.value = chapters
     } else {
@@ -319,6 +262,28 @@ watch(() => props.topic, async (newTopic) => {
 }, { immediate: true })
 
 watch([chapter, current, score, answered, isCorrect, selectedOptions], saveQuizState)
+
+function handleNext() {
+  showNextBtn.value = false
+  setTimeout(() => {
+    next()
+    nextTick(() => {
+      showNextBtn.value = true
+    })
+  }, 250)
+}
+
+function next() {
+  current.value++
+  answered.value = false
+  selectedOptions.value = []
+  transitioning.value = false
+  // Move focus to first option for accessibility
+  nextTick(() => {
+    const firstOption = document.querySelector('.option-row input:not(:disabled)')
+    if (firstOption) firstOption.focus()
+  })
+}
 
 function submitOptions() {
   answered.value = true
@@ -351,52 +316,6 @@ function submitOptions() {
     if (feedback) feedback.focus && feedback.focus()
   })
 }
-function next() {
-  transitioning.value = true
-  setTimeout(() => {
-    current.value++
-    answered.value = false
-    selectedOptions.value = []
-    transitioning.value = false
-  }, 250) // matches fade transition duration
-}
-
-function getOverallScore() {
-  let chapters = chapterStates.value
-  let total = 0, scoreSum = 0
-  for (const ch in chapters) {
-    total += chapters[ch].total || 0
-    scoreSum += chapters[ch].score || 0
-  }
-  // Add current chapter if not completed
-  if (!chapters[chapter.value]) {
-    total += questions.value.length
-    scoreSum += score.value
-  }
-  return { score: scoreSum, total }
-}
-
-function getLastCompletedChapter() {
-  let chapters = chapterStates.value
-  let last = -1
-  for (const ch in chapters) {
-    if (chapters[ch].completed && Number(ch) > last) last = Number(ch)
-  }
-  return last
-}
-
-function showChapterComplete() {
-  // Show chapter complete if current is past end, or if last completed chapter is not the current, or if chapter is completed but next not started
-  const chapters = chapterStates.value;
-  const lastCompleted = getLastCompletedChapter();
-  const currentCompleted = chapters[chapter.value]?.completed;
-  const nextStarted = chapters[chapter.value + 1]?.score > 0 || chapters[chapter.value + 1]?.completed;
-  return (
-    current.value >= questions.value.length ||
-    (lastCompleted >= 0 && lastCompleted === chapter.value) ||
-    (currentCompleted && !nextStarted)
-  );
-}
 
 function goToNextChapter() {
   // Save current chapter score as completed
@@ -409,13 +328,8 @@ function goToNextChapter() {
   chapterStates.value = chapters
   saveQuizState()
   chapter.value++
-  // Fetch next chapter's questions
   fetchNextChapterQuestions()
-  current.value = 0
-  answered.value = false
-  selectedOptions.value = []
-  isCorrect.value = false
-  score.value = 0
+  resetStateForChapter()
 }
 
 async function fetchNextChapterQuestions() {
@@ -427,27 +341,21 @@ async function fetchNextChapterQuestions() {
   }
   filePath = filePath.replace(/^\/?.*data\//, '');
   filePath = '/data/' + filePath.replace(/^\/+/, '');
-  questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
-}
-
-function handleNext() {
-  showNextBtn.value = false
-  setTimeout(() => {
-    next()
-    nextTick(() => {
-      showNextBtn.value = true
-    })
-  }, 250) // matches fade transition duration
+  loading.value = true
+  errorMessage.value = ''
+  try {
+    questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
+  } catch (e) {
+    questions.value = []
+    errorMessage.value = 'Failed to load next chapter.'
+  } finally {
+    loading.value = false
+  }
 }
 
 function restartChapter() {
-  questions.value = getChapterQuestions(chapter.value)
-  current.value = 0
-  score.value = 0 // Reset score for this chapter
-  answered.value = false
-  selectedOptions.value = []
-  isCorrect.value = false
-  showNextBtn.value = true
+  fetchNextChapterQuestions()
+  resetStateForChapter()
   // Remove chapter score from chapterStates
   let chapters = { ...chapterStates.value }
   if (chapters[chapter.value]) {
@@ -502,6 +410,33 @@ function startFresh() {
   // Optionally, scroll to top or focus first question
 }
 
+function saveQuizState() {
+  const topicKey = props.topic?.topic;
+  if (!questions.value.length) return;
+  const state = {
+    version: 1,
+    topic: topicKey,
+    chapter: chapter.value,
+    current: current.value,
+    score: score.value,
+    answered: answered.value,
+    isCorrect: isCorrect.value,
+    selectedOptions: selectedOptions.value,
+    questions: questions.value
+  };
+  localStorage.setItem(getQuizStateKey(topicKey), JSON.stringify(state));
+  // Save per-chapter state
+  let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}');
+  chapters[chapter.value] = {
+    version: 1,
+    score: questions.value.length ? score.value : 0,
+    total: questions.value.length,
+    completed: questions.value.length ? (current.value >= questions.value.length) : false
+  };
+  localStorage.setItem(getChaptersKey(topicKey), JSON.stringify(chapters));
+  chapterStates.value = chapters;
+}
+
 // Fire confetti when all chapters are complete and on the final chapter, or at the end of any chapter
 watch([
   answered, current, questions, isAllChaptersComplete, isFinalChapter
@@ -541,6 +476,11 @@ watch([
 })
 // TODO: For a more dynamic confetti effect, consider using a JS confetti library or randomizing confetti properties for extra delight.
 // TODO: For internationalization, extract all user-facing strings to a localization file or use a library like vue-i18n.
+
+function validateQuestions(data) {
+  if (!Array.isArray(data)) return false;
+  return data.every(q => (q && (typeof q.q === 'string' || typeof q.question === 'string') && Array.isArray(q.options) && Array.isArray(q.answer)));
+}
 </script>
 
 <style>
@@ -552,5 +492,18 @@ watch([
 }
 .fade-slow-enter-to, .fade-slow-leave-from {
   opacity: 1;
+}
+.loader {
+  border: 4px solid #e0e7ef;
+  border-top: 4px solid #06b6d4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

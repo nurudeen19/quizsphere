@@ -57,13 +57,13 @@
     {
         "question": "Which of the following are core components of the Kubernetes control plane?",
         "options": ["kube-scheduler", "kube-apiserver", "etcd", "kubelet"],
-        "answer": [0, 1, 2],
+        "answer": [0,1,2],
         "explanation": "The core components of the Kubernetes control plane include the kube-apiserver, etcd, kube-scheduler, and kube-controller-manager."
     },
     {
         "question": "Which objects in Kubernetes are used to manage replicated applications?",
         "options": ["StatefulSet", "ReplicaSet", "Deployment", "ConfigMap"],
-        "answer": [2, 1, 0],
+        "answer": [2,1,0],
         "explanation": "Replicated applications in Kubernetes are managed using Deployments, ReplicaSets, and StatefulSets."
     },
     {
@@ -75,7 +75,7 @@
     {
         "question": "Which of the following are valid Kubernetes namespaces?",
         "options": ["prod", "kube-public", "default", "kube-system"],
-        "answer": [2, 3, 0, 1],
+        "answer": [2,3,0,1],
         "explanation": "Valid Kubernetes namespaces include default, kube-system, kube-public, and any user-defined namespaces like 'prod'."
     },
     {
@@ -87,7 +87,7 @@
     {
         "question": "Which of the following are valid Kubernetes volume types?",
         "options": ["nfs", "emptyDir", "hostPath", "persistentVolume"],
-        "answer": [1, 2, 0],
+        "answer": [1,2,0],
         "explanation": "Valid Kubernetes volume types include emptyDir, hostPath, and persistentVolume. NFS is not a volume type but a network file system protocol."
     },
     {
@@ -99,7 +99,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource types?",
         "options": ["ConfigMap", "Service", "Deployment", "Pod"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes resource types. They represent different objects that can be managed within a Kubernetes cluster."
     },
     {
@@ -111,7 +111,7 @@
     {
         "question": "Which of the following are valid Kubernetes controllers?",
         "options": ["Job controller", "ReplicaSet controller", "Deployment controller", "StatefulSet controller"],
-        "answer": [2, 1, 0, 3],
+        "answer": [2,1,0,3],
         "explanation": "All listed options are valid Kubernetes controllers, each managing different aspects of application deployment and scaling."
     },
     {
@@ -123,7 +123,7 @@
     {
         "question": "Which of the following are valid Kubernetes labels?",
         "options": ["tier=frontend", "app=nginx", "version=v1", "env=prod"],
-        "answer": [1, 0, 3, 2],
+        "answer": [1,0,3,2],
         "explanation": "All listed options are valid Kubernetes labels. Labels are key/value pairs that are attached to objects, such as pods, to help organize and select them."
     },
     {
@@ -135,7 +135,7 @@
     {
         "question": "Which of the following are valid Kubernetes annotations?",
         "options": ["version=v1.0", "description=nginx app", "created_at=2023-10-01", "maintainer=team"],
-        "answer": [1, 0, 3, 2],
+        "answer": [1,0,3,2],
         "explanation": "All listed options are valid Kubernetes annotations. Annotations are key/value pairs that are used to attach arbitrary non-identifying metadata to objects."
     },
     {
@@ -147,7 +147,7 @@
     {
         "question": "Which of the following are valid Kubernetes API operations?",
         "options": ["delete", "create", "update", "get"],
-        "answer": [3, 1, 2, 0],
+        "answer": [3,1,2,0],
         "explanation": "Valid Kubernetes API operations include get, create, update, and delete. These operations are used to manage resources in the cluster."
     },
     {
@@ -159,7 +159,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource limits?",
         "options": ["storage", "cpu", "memory", "network"],
-        "answer": [1, 2, 0],
+        "answer": [1,2,0],
         "explanation": "Valid Kubernetes resource limits include CPU and memory. Storage is not a resource limit but a resource type."
     },
     {
@@ -171,7 +171,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource requests?",
         "options": ["storage", "cpu", "memory", "network"],
-        "answer": [1, 2, 0],
+        "answer": [1,2,0],
         "explanation": "Valid Kubernetes resource requests include CPU and memory. Storage is not a resource request but a resource type."
     },
     {
@@ -183,7 +183,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource quotas?",
         "options": ["pods", "cpu", "services", "memory"],
-        "answer": [0, 1, 3, 2],
+        "answer": [0,1,3,2],
         "explanation": "Valid Kubernetes resource quotas include limits on the number of pods, CPU, memory, and services."
     },
     {
@@ -195,7 +195,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource selectors?",
         "options": ["app=nginx", "tier=frontend", "env=prod", "version=v1"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes resource selectors. They are used to select resources based on label criteria."
     },
     {
@@ -207,7 +207,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource kinds?",
         "options": ["Pod", "Service", "VolumeMount", "Deployment"],
-        "answer": [0, 1, 3],
+        "answer": [0,1,3],
         "explanation": "Valid Kubernetes resource kinds include Pod, Service, and Deployment. VolumeMount is not a resource kind but a property of a Pod spec."
     },
     {
@@ -219,7 +219,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource fields?",
         "options": ["metadata.name", "status.conditions", "spec.replicas", "status.podIP"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes resource fields. They represent different attributes of a Kubernetes resource."
     },
     {
@@ -231,7 +231,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource statuses?",
         "options": ["Pending", "Running", "Succeeded", "Failed"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "Valid Kubernetes resource statuses include Pending, Running, Succeeded, and Failed. They represent the different states a resource can be in."
     },
     {
@@ -243,7 +243,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource configurations?",
         "options": ["spec.template.spec.containers", "metadata.annotations", "spec.selector.matchLabels", "status.podIP"],
-        "answer": [0, 1, 2],
+        "answer": [0,1,2],
         "explanation": "Valid Kubernetes resource configurations include spec.template.spec.containers, metadata.annotations, and spec.selector.matchLabels."
     },
     {
@@ -357,7 +357,7 @@
     {
         "question": "Which of the following is a valid update strategy for StatefulSets?",
         "options": ["RollingUpdate", "OnDelete", "Recreate", "BlueGreen"],
-        "answer": [0, 1],
+        "answer": [0,1],
         "explanation": "Valid update strategies for StatefulSets include RollingUpdate and OnDelete."
     },
     {
@@ -466,6 +466,365 @@
         "explanation": "The Cloud Controller Manager is responsible for managing cloud-specific control logic. If the external-ip is pending, it may indicate an issue with the cloud provider's load balancer integration."
     },
     {
+        "question": "Which of the following is a built-in Kubernetes resource for scheduling pods on nodes?",
+        "options": [
+            "Deployment",
+            "Ingress",
+            "Service",
+            "DaemonSet"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What Kubernetes resource is used to expose an application running on a set of pods as a network service?",
+        "options": [
+            "ReplicaSet",
+            "Job",
+            "Service",
+            "CronJob"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What is the primary component of a Kubernetes control plane that manages API requests?",
+        "options": [
+            "Kube-scheduler",
+            "Kube-controller-manager",
+            "Etcd",
+            "Kube-apiserver"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which component of a Kubernetes node is responsible for managing network rules and IP addresses?",
+        "options": [
+            "Kubelet",
+            "Kubectl",
+            "Kube-proxy",
+            "Container runtime"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which component of the Kubernetes control plane exposes the RESTful API that serves as the primary entry point for managing the cluster?",
+        "options": [
+            "kube-scheduler",
+            "kube-controller-manager",
+            "kube-apiserver",
+            "etcd"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "How does the Kubernetes API ensure that different clients can interact with the cluster autonomously and in a consistent manner?",
+        "options": [
+            "By using YAML configuration files exclusively",
+            "Through a single and uniform endpoint known as the kube-apiserver",
+            "By integrating with third-party authentication services only",
+            "By implementing a versioned set of API objects and operations"
+        ],
+        "answer": [
+            1,
+            3
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What is the primary advantage of using containers in application deployment?",
+        "options": [
+            "They allow the hardware to operate at a higher efficiency.",
+            "They isolate applications and their dependencies.",
+            "They increase the size of the application bundle.",
+            "They convert applications into virtual machines."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following statements about containers is true?",
+        "options": [
+            "Containers always require a specific operating system to run.",
+            "Containers can run consistently across different computing environments.",
+            "Containers are the same as virtual machines.",
+            "Containers only support monolithic applications."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following is responsible for determining which nodes can run a pod in Kubernetes?",
+        "options": [
+            "Kubelet",
+            "Kube-scheduler",
+            "Pod controller",
+            "Node selector"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What role does a node\u2019s taint play in Kubernetes scheduling?",
+        "options": [
+            "It causes pods with matching tolerations to be allocated to the node.",
+            "It prevents any pods from being scheduled on the node.",
+            "It enhances the node\u2019s performance for specific applications.",
+            "It limits the amount of resources available to a pod."
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What is the primary function of a container orchestration platform like Kubernetes?",
+        "options": [
+            "It monitors network traffic and protects against attacks.",
+            "It manages the lifecycle of containers, including their deployment, scaling, and operation.",
+            "It provides a runtime environment for compiling code.",
+            "It offers a platform for cloud storage solutions."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which component in Kubernetes is responsible for maintaining the desired state of applications?",
+        "options": [
+            "Controller Manager",
+            "Kubelet",
+            "Etcd",
+            "Docker Daemon"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What is the primary role of a container runtime in a Kubernetes environment?",
+        "options": [
+            "To build container images from scratch.",
+            "To run containers on a node.",
+            "To schedule pods across the cluster.",
+            "To monitor the health of nodes."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following container runtime options is supported by Kubernetes natively?",
+        "options": [
+            "Docker Engine",
+            "Kubernetes CRI (Container Runtime Interface) implementations",
+            "Hyper-V",
+            "VMware vSphere"
+        ],
+        "answer": [
+            0,
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following are best practices for securing a Kubernetes cluster?",
+        "options": [
+            "Use Role-Based Access Control (RBAC).",
+            "Grant admin privileges to all users.",
+            "Disable network policies.",
+            "Regularly audit the cluster."
+        ],
+        "answer": [
+            0,
+            3
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "What is the purpose of Pod Security Policies in Kubernetes?",
+        "options": [
+            "To manage network traffic between pods.",
+            "To enforce rules on how pods are allowed to execute.",
+            "To scale pods automatically.",
+            "To manage storage resources for pods."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which networking model does Kubernetes primarily use to enable communication between Pods?",
+        "options": [
+            "Network Address Translation (NAT)",
+            "Virtual Private Network (VPN)",
+            "Flat networking model",
+            "Peer-to-peer network"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "In Kubernetes networking, which of the following is responsible for exposing services to external traffic?",
+        "options": [
+            "DaemonSet",
+            "ConfigMap",
+            "Ingress",
+            "PersistentVolume"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following are key features provided by a service mesh?",
+        "options": [
+            "Load balancing and service discovery.",
+            "Communication security (e.g., mTLS).",
+            "Container image storage.",
+            "CI/CD pipeline automation."
+        ],
+        "answer": [0, 1],
+        "explanation": ""
+    },
+    {
+        "question": "How do service meshes benefit microservices architectures?",
+        "options": [
+            "They provide network-level abstractions for service-to-service communication.",
+            "They manage centralized logging collection for applications.",
+            "They eliminate the need for Docker containers.",
+            "They provide automatic scaling of server resources."
+        ],
+        "answer": [0],
+        "explanation": ""
+    },
+        {
+        "question": "What is the primary function of a container orchestration platform like Kubernetes?",
+        "options": [
+            "It monitors network traffic and protects against attacks.",
+            "It manages the lifecycle of containers, including their deployment, scaling, and operation.",
+            "It provides a runtime environment for compiling code.",
+            "It offers a platform for cloud storage solutions."
+        ],
+        "answer": [1],
+        "explanation": ""
+    },
+    {
+        "question": "Which component in Kubernetes is responsible for maintaining the desired state of applications?",
+        "options": ["Controller Manager", "Kubelet", "Etcd", "Docker Daemon"],
+        "answer": [0],
+        "explanation": ""
+    },
+    {
+        "question": "What is the primary role of a container runtime in a Kubernetes environment?",
+        "options": [
+            "To build container images from scratch.",
+            "To run containers on a node.",
+            "To schedule pods across the cluster.",
+            "To monitor the health of nodes."
+        ],
+        "answer": [1],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following container runtime options is supported by Kubernetes natively?",
+        "options": [
+            "Docker Engine",
+            "Kubernetes CRI (Container Runtime Interface) implementations",
+            "Hyper-V",
+            "VMware vSphere"
+        ],
+        "answer": [0, 1],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following are best practices for securing a Kubernetes cluster?",
+        "options": [
+            "Use Role-Based Access Control (RBAC).",
+            "Grant admin privileges to all users.",
+            "Disable network policies.",
+            "Regularly audit the cluster."
+        ],
+        "answer": [0, 3],
+        "explanation": ""
+    },
+    {
+        "question": "What is the purpose of Pod Security Policies in Kubernetes?",
+        "options": [
+            "To manage network traffic between pods.",
+            "To enforce rules on how pods are allowed to execute.",
+            "To scale pods automatically.",
+            "To manage storage resources for pods."
+        ],
+        "answer": [1],
+        "explanation": ""
+    },
+    {
+        "question": "Which networking model does Kubernetes primarily use to enable communication between Pods?",
+        "options": [
+            "Network Address Translation (NAT)",
+            "Virtual Private Network (VPN)",
+            "Flat networking model",
+            "Peer-to-peer network"
+        ],
+        "answer": [2],
+        "explanation": ""
+    },
+    {
+        "question": "In Kubernetes networking, which of the following is responsible for exposing services to external traffic?",
+        "options": ["DaemonSet", "ConfigMap", "Ingress", "PersistentVolume"],
+        "answer": [2],
+        "explanation": ""
+    },
+    {
+        "question": "Which of the following are key features provided by a service mesh?",
+        "options": [
+            "Load balancing and service discovery.",
+            "Communication security (e.g., mTLS).",
+            "Container image storage.",
+            "CI/CD pipeline automation."
+        ],
+        "answer": [0, 1],
+        "explanation": ""
+    },
+    {
+        "question": "How do service meshes benefit microservices architectures?",
+        "options": [
+            "They provide network-level abstractions for service-to-service communication.",
+            "They manage centralized logging collection for applications.",
+            "They eliminate the need for Docker containers.",
+            "They provide automatic scaling of server resources."
+        ],
+        "answer": [0],
+        "explanation": ""
+    },
+    {
         "question": "Which tool is commonly used to collect and visualize metrics in Kubernetes?",
         "options": [
         "Helm",
@@ -558,7 +917,7 @@
     {
         "question": "Which of the following are valid Kubernetes scheduling policies?",
         "options": ["Node Affinity", "Taints and Tolerations", "Pod Affinity", "Resource Requests"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes scheduling policies. They are used to control how pods are scheduled onto nodes."
     },
     {
@@ -582,7 +941,7 @@
     {
         "question": "Which of the following are valid Kubernetes admission controllers?",
         "options": ["NodeRestriction", "NamespaceLifecycle", "LimitRanger", "ServiceAccount"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes admission controllers. They are used to enforce policies on resources as they are created or updated."
     },
     {
@@ -606,7 +965,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource types?",
         "options": ["ConfigMap", "Service", "Deployment", "Pod"],
-        "answer": [0, 1, 2, 3],
+        "answer": [0,1,2,3],
         "explanation": "All listed options are valid Kubernetes resource types. They represent different objects that can be managed within a Kubernetes cluster."
     },
     {
@@ -630,7 +989,7 @@
     {
         "question": "Which of the following are valid Kubernetes resource versions?",
         "options": ["v1", "v2beta1", "v2", "v1alpha1"],
-        "answer": [0, 1, 3],
+        "answer": [0,1,3],
         "explanation": "Valid Kubernetes resource versions include v1, v2beta1, and v1alpha1. They represent different stages in the evolution of a resource's API."
     },
     {
@@ -708,7 +1067,7 @@
     {
         "question": "Which of the following is a valid probe type in Kubernetes?",
         "options": ["Liveness", "Readiness", "Shutdown", "Startup"],
-        "answer": [0, 1, 3],
+        "answer": [0,1,3],
         "explanation": "Liveness and Readiness probes are used to check the health of a container. Startup probes are used to determine if an application within a container has started."
     },
     {
@@ -725,7 +1084,7 @@
             "Expose services",
             "Schedule pods"
         ],
-        "answer": [0, 2],
+        "answer": [0,2],
         "explanation": "A Service in Kubernetes is used to expose services and can also be used to manage communication between microservices."
     },
     {
