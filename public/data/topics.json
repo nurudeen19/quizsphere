@@ -7,7 +7,7 @@
     "description": "Master Kubernetes concepts, architecture, and operations.",
     "level": "Intermediate",
     "badge": "Cloud Native",
-    "questionsCount": 113
+    "questionsCount": 244
   },
   {
     "topic": "github-copilot",
@@ -17,7 +17,7 @@
     "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
     "level": "Beginner",
     "badge": "AI Coding",
-    "questionsCount": 111
+    "questionsCount": 107
   },
   {
     "topic": "kubernetes-advanced",
@@ -37,7 +37,7 @@
     "description": "Comprehensive practice for the GitHub Copilot Exam: fundamentals, prompt engineering, security, privacy, and more.",
     "level": "Intermediate",
     "badge": "AI Coding",
-    "questionsCount": 94
+    "questionsCount": 52
   },
   {
     "topic": "docker",
@@ -47,7 +47,7 @@
     "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
     "level": "Intermediate",
     "badge": "Container",
-    "questionsCount": 129
+    "questionsCount": 123
   },
   {
     "topic": "cloud-computing",
