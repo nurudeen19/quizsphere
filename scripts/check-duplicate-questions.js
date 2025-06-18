@@ -1,6 +1,7 @@
 // Script to check for duplicate questions in all JSON files in the data folder
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const dataDir = path.join(__dirname, '../public/data');
 const files = fs.readdirSync(dataDir).filter(f => f.endsWith('.json'));
@@ -43,4 +44,13 @@ files.forEach(file => {
 });
 if (!foundDuplicates) {
   console.log('No duplicate questions found in any file.');
+}
+
+// Run update-question-counts.js after removing duplicates
+try {
+  console.log('\nRunning update-question-counts.js...');
+  execSync('node scripts/update-question-counts.js', { stdio: 'inherit', cwd: path.join(__dirname, '..') });
+  console.log('update-question-counts.js completed.');
+} catch (e) {
+  console.error('Failed to run update-question-counts.js:', e.message);
 }

@@ -12,7 +12,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
-    "prebuild": "node scripts/update-question-counts.js && npm run pretest",
+    "prebuild": "node scripts/check-duplicate-questions.js && npm run pretest",
     "pretest": "echo Running prebuild steps before tests...",
     "test": "vitest run"
   },
