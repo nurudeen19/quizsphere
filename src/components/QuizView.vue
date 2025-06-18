@@ -239,6 +239,8 @@ watch(() => props.topic, async (newTopic) => {
       questions.value = []
       questionsData.value = []
       errorMessage.value = 'Failed to load question data.'
+      // Log the error for debugging
+      console.error('Error loading question data:', e)
     } finally {
       loading.value = false
     }
@@ -379,6 +381,10 @@ const totalQuestions = computed(() => {
   return props.topic?.questionsCount || questionsData.value.length || 0;
 })
 
+const isQuizActive = computed(() => {
+  return questions.value.length > 0 && current.value < questions.value.length;
+})
+
 function isAllChaptersComplete() {
   const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
   let chapters = chapterStates.value;
@@ -437,6 +443,29 @@ function saveQuizState() {
   chapterStates.value = chapters;
 }
 
+function loadQuizState() {
+  const topicKey = props.topic?.topic;
+  if (!topicKey) return false;
+  const stateStr = localStorage.getItem(getQuizStateKey(topicKey));
+  if (!stateStr) return false;
+  try {
+    const state = JSON.parse(stateStr);
+    if (state && state.topic === topicKey && state.version === 1) {
+      chapter.value = state.chapter || 0;
+      current.value = state.current || 0;
+      score.value = state.score || 0;
+      answered.value = state.answered || false;
+      isCorrect.value = state.isCorrect || false;
+      selectedOptions.value = state.selectedOptions || [];
+      // Optionally restore questions if needed
+      return true;
+    }
+  } catch (e) {
+    // Ignore parse errors
+  }
+  return false;
+}
+
 // Fire confetti when all chapters are complete and on the final chapter, or at the end of any chapter
 watch([
   answered, current, questions, isAllChaptersComplete, isFinalChapter
@@ -480,6 +509,35 @@ watch([
 function validateQuestions(data) {
   if (!Array.isArray(data)) return false;
   return data.every(q => (q && (typeof q.q === 'string' || typeof q.question === 'string') && Array.isArray(q.options) && Array.isArray(q.answer)));
+}
+
+function getSessionKey() {
+  // Use a unique session key per topic and per user session
+  const topicKey = props.topic?.topic || 'default';
+  let sessionKey = sessionStorage.getItem('quizsphere-session-key-' + topicKey);
+  if (!sessionKey) {
+    sessionKey = Math.random().toString(36).substr(2, 10) + Date.now();
+    sessionStorage.setItem('quizsphere-session-key-' + topicKey, sessionKey);
+  }
+  return sessionKey;
+}
+
+function getOverallScore() {
+  // Sum up scores and totals from all completed chapters and the current chapter
+  let totalScore = 0;
+  let totalQuestionsCount = 0;
+  const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
+  for (let i = 0; i < totalChapters; i++) {
+    if (i === chapter.value) {
+      // Current chapter (may be in progress)
+      totalScore += score.value;
+      totalQuestionsCount += questions.value.length;
+    } else if (chapterStates.value[i]) {
+      totalScore += chapterStates.value[i].score || 0;
+      totalQuestionsCount += chapterStates.value[i].total || 0;
+    }
+  }
+  return { score: totalScore, total: totalQuestionsCount };
 }
 </script>
 
