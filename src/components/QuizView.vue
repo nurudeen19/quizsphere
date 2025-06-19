@@ -212,6 +212,7 @@ const lastCompletedScore = ref(0);
 const lastCompletedTotal = ref(0);
 const currentChapterScore = ref(0);
 const showSelectionWarning = ref(false);
+const overallStatsVersion = ref(0)
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -308,7 +309,7 @@ function submitOptions() {
     return;
   }
   // Log the submitted option for debugging
-  console.log('Submitted option(s):', submittedOption);
+  //console.log('Submitted option(s):', submittedOption);
   if (answered.value) return; // Prevent double submission
   answered.value = true
   transitioning.value = false
@@ -375,6 +376,7 @@ function restartChapter() {
     overall.totalCorrect = totalCorrect;
     // Save the updated overall state
     localStorage.setItem(OVERALL_STATE_KEY(topicKey), JSON.stringify(overall));
+    overallStatsVersion.value++ // trigger reactivity
   }
 
   fetchNextChapterQuestions(); // Reload current chapter's questions and reset state
@@ -427,6 +429,7 @@ const completedChapters = computed(() => {
 
 // Computed for stats page: get saved overall stats
 const savedOverallStats = computed(() => {
+  overallStatsVersion.value // dependency for reactivity
   const overall = loadOverallState();
   if (!overall) return {
     chapters: {},
@@ -560,6 +563,7 @@ function saveOverallState({ initializing = false } = {}) {
     overall.completed = false;
   }
   localStorage.setItem(OVERALL_STATE_KEY(topicKey), JSON.stringify(overall));
+  overallStatsVersion.value++ // trigger reactivity
 }
 
 function loadOverallState() {
