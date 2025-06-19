@@ -120,36 +120,31 @@
           </div>
         </div>
       </template>
-      <template v-else>
-        <h3>
-          <i class="fas fa-trophy"></i>
-          Chapter Complete!
-        </h3>
-      </template>
       <!-- Stats UI from saved overall stats -->
       <div class="chapter-stats mb-4 w-full flex justify-center">
-        <table class="w-auto min-w-[320px] text-base border-collapse bg-white rounded-lg shadow-md">
-          <tbody>
-            <tr v-for="chap in savedCompletedChapters" :key="chap.chapter" class="bg-blue-50 rounded-lg">
-              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left bg-blue-100 rounded-l-lg">
-                Chapter {{ chap.chapter }} Score
-              </th>
-              <td class="py-2 px-4 text-cyan-500 font-bold text-left bg-white rounded-r-lg">
-                {{ chap.score }} / {{ chap.total }}
-              </td>
-            </tr>
-            <tr>
-              <td colspan="4" class="py-1"><hr class="border-t-2 border-gray-200 my-1"></td>
-            </tr>
-            <tr>
-              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left">Overall</th>
-              <td class="py-2 px-4 text-blue-600 font-bold text-left" colspan="3">
-                {{ savedOverallStats.totalCorrect }} / {{ savedOverallStats.totalQuestions }}
-                <span class="text-xs text-gray-500 ml-2">({{ savedCompletedChapters.length }} of {{ savedOverallStats.totalChapters }} chapters completed)</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="stats-card bg-gradient-to-br from-blue-50 via-cyan-50 to-white rounded-3xl shadow-2xl border-2 border-blue-100 p-6 w-full max-w-xl animate-fade-in">
+          <h4 class="text-2xl font-extrabold text-blue-800 mb-4 flex items-center gap-2">
+            <i class="fas fa-chart-bar text-cyan-500"></i> Chapter & Overall Stats
+          </h4>
+          <ul class="divide-y divide-blue-100">
+            <li v-for="chap in savedCompletedChapters" :key="chap.chapter" class="flex items-center justify-between py-3 px-2 bg-gradient-to-r from-cyan-100/60 to-blue-50/60 rounded-xl mb-2 shadow-sm hover:scale-[1.02] transition-transform">
+              <span class="font-semibold text-blue-700 flex items-center gap-2">
+                <i class="fas fa-book-open text-cyan-400"></i> Chapter {{ chap.chapter }}
+              </span>
+              <span class="font-bold text-cyan-700 text-lg">{{ chap.score }} <span class="text-gray-400">/</span> {{ chap.total }}</span>
+            </li>
+          </ul>
+          <div class="my-4 border-t-2 border-cyan-200"></div>
+          <div class="flex items-center justify-between px-2 py-2 rounded-xl bg-gradient-to-r from-blue-200/60 to-cyan-100/60 shadow-inner">
+            <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
+              <i class="fas fa-star text-yellow-400"></i> Overall
+            </span>
+            <span class="font-extrabold text-blue-700 text-xl">{{ savedOverallStats.totalCorrect }} <span class="text-gray-400">/</span> {{ savedOverallStats.totalQuestions }}</span>
+          </div>
+          <div class="text-xs text-gray-500 mt-2 text-right">
+            ({{ savedCompletedChapters.length }} of {{ savedOverallStats.totalChapters }} chapters completed)
+          </div>
+        </div>
       </div>
       <div class="w-full flex flex-row justify-center items-center mt-4 gap-2">
         <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); color: #fff; min-width: 120px; min-height: 32px;">
@@ -213,6 +208,7 @@ const lastCompletedTotal = ref(0);
 const currentChapterScore = ref(0);
 const showSelectionWarning = ref(false);
 const overallStatsVersion = ref(0)
+const skipConfetti = ref(false)
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -466,15 +462,45 @@ function isFinalChapter() {
 }
 
 function startFresh() {
+  skipConfetti.value = true;
   clearStates();
+  // Reset all local state for a true fresh start
   chapter.value = 0;
-  questions.value = getChapterQuestions(0);
+  questions.value = [];
+  questionsData.value = [];
   current.value = 0;
   answered.value = false;
   isCorrect.value = false;
   selectedOptions.value = [];
   currentChapterScore.value = 0;
-  // Optionally, scroll to top or focus first question
+  lastCompletedChapter.value = null;
+  lastCompletedScore.value = 0;
+  lastCompletedTotal.value = 0;
+  resetStateForChapter();
+  // Re-fetch all questions for the topic as if starting new
+  let filePath = '';
+  if (props.topic.file) {
+    filePath = props.topic.file;
+  } else if (props.topic.topic) {
+    filePath = `${props.topic.topic}.json`;
+  }
+  loading.value = true;
+  errorMessage.value = '';
+  fetchQuestions(filePath, { page: 0, size: CHAPTER_SIZE, all: true })
+    .then(allData => {
+      questionsData.value = allData;
+      questions.value = allData.slice(0, CHAPTER_SIZE);
+      resetStateForChapter();
+    })
+    .catch(() => {
+      questionsData.value = [];
+      questions.value = [];
+      errorMessage.value = 'Failed to load questions.';
+    })
+    .finally(() => {
+      loading.value = false;
+      setTimeout(() => { skipConfetti.value = false }, 1000); // allow confetti again after reload
+    });
 }
 
 // Utility to get total chapters for the current topic
@@ -599,10 +625,11 @@ const overallStats = computed(() => {
 
 // Fire confetti when all chapters are complete and on the final chapter, or at the end of any chapter
 watch([
-  answered, current, questions, isAllChaptersComplete, isFinalChapter
-], ([answeredVal, currentVal, questionsVal, allComplete, finalChapter]) => {
+  answered, current, questions, isAllChaptersComplete, isFinalChapter, savedOverallStats
+], ([answeredVal, currentVal, questionsVal, allComplete, finalChapter, overallStatsVal]) => {
+  if (skipConfetti.value) return;
   // Only fire confetti at the end of the quiz (all chapters complete and on final chapter)
-  if (allComplete && finalChapter) {
+  if ((allComplete && finalChapter) || (overallStatsVal.completed)) {
     nextTick(() => {
       for (let i = 0; i < 3; i++) {
         setTimeout(() => {
@@ -671,5 +698,16 @@ function handleBack() {
   transition: opacity 0.4s ease;
   opacity: 0.9;
   z-index: 1000;
+}
+.stats-card {
+  box-shadow: 0 8px 32px 0 rgba(56,189,248,0.12), 0 1.5px 6px 0 rgba(59,130,246,0.08);
+  border-radius: 1.5rem;
+  border: 2px solid #bae6fd;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 60%, #fff 100%);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.stats-card:hover {
+  box-shadow: 0 12px 36px 0 rgba(56,189,248,0.18), 0 2px 8px 0 rgba(59,130,246,0.12);
+  transform: scale(1.01);
 }
 </style>
