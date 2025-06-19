@@ -120,28 +120,27 @@
           Chapter Complete!
         </h3>
       </template>
+      <!-- Stats UI from saved overall stats -->
       <div class="chapter-stats mb-4 w-full flex justify-center">
         <table class="w-auto min-w-[320px] text-base border-collapse bg-white rounded-lg shadow-md">
           <tbody>
-            <tr v-for="n in chapter + 1" :key="n" class="bg-blue-50 rounded-lg">
-                <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left bg-blue-100 rounded-l-lg">
-                  Chapter {{ n }} Score
-                </th>
-                <td class="py-2 px-4 text-cyan-500 font-bold text-left bg-white rounded-r-lg">
-                  {{ (n - 1) === chapter ? score : (chapterStates[n-1]?.score ?? 0) }} / {{ (n - 1) === chapter ? questions.length : (chapterStates[n-1]?.total ?? questions.length) }}
-                </td>
-              </tr>
+            <tr v-for="chap in savedCompletedChapters" :key="chap.chapter" class="bg-blue-50 rounded-lg">
+              <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left bg-blue-100 rounded-l-lg">
+                Chapter {{ chap.chapter }} Score
+              </th>
+              <td class="py-2 px-4 text-cyan-500 font-bold text-left bg-white rounded-r-lg">
+                {{ chap.score }} / {{ chap.total }}
+              </td>
+            </tr>
             <tr>
               <td colspan="4" class="py-1"><hr class="border-t-2 border-gray-200 my-1"></td>
             </tr>
             <tr>
               <th class="py-2 px-4 font-semibold text-blue-700 whitespace-nowrap text-left">Overall</th>
               <td class="py-2 px-4 text-blue-600 font-bold text-left" colspan="3">
-                <span v-if="!isAllChaptersComplete()">{{ getOverallScore().score }}</span>
-                <span v-else>{{ getOverallScore().score }} / {{ getOverallScore().total }}</span>
+                {{ savedOverallStats.totalCorrect }} / {{ savedOverallStats.totalQuestions }}
+                <span class="text-xs text-gray-500 ml-2">({{ savedCompletedChapters.length }} of {{ savedOverallStats.totalChapters }} chapters completed)</span>
               </td>
-            </tr>
-            <tr>
             </tr>
           </tbody>
         </table>
@@ -187,7 +186,6 @@ const props = defineProps({
 
 const questions = ref([])
 const current = ref(0)
-const score = ref(0)
 const answered = ref(false)
 const isCorrect = ref(false)
 const topicTitle = ref('')
@@ -200,13 +198,17 @@ const questionsData = ref([])
 const transitioning = ref(false)
 const loading = ref(false)
 const errorMessage = ref('')
+const lastCompletedChapter = ref(null);
+const lastCompletedScore = ref(0);
+const lastCompletedTotal = ref(0);
+const currentChapterScore = ref(0);
 
-const getQuizStateKey = (topicKey) => `quizsphere-quiz-state-${topicKey}`
-const getChaptersKey = (topicKey) => `quizsphere-chapter-states-${topicKey}`
+const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
+const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
 
 function resetStateForChapter() {
   current.value = 0
-  score.value = 0
+  currentChapterScore.value = 0
   answered.value = false
   selectedOptions.value = []
   isCorrect.value = false
@@ -223,16 +225,14 @@ watch(() => props.topic, async (newTopic) => {
     } else if (newTopic.topic) {
       filePath = `${newTopic.topic}.json`
     }
-    filePath = filePath.replace(/^\/?.*data\//, '');
-    filePath = '/data/' + filePath.replace(/^\/+/, '');
     loading.value = true
     errorMessage.value = ''
     try {
       // Fetch only the current chapter's questions using pagination
-      const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
+      const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE })
       questions.value = pagedData
       // Optionally, fetch all questions for stats or total count
-      const allData = await fetchQuestions(filePath, { sessionKey: getSessionKey() })
+      const allData = await fetchQuestions(filePath)
       questionsData.value = allData
       resetStateForChapter()
     } catch (e) {
@@ -250,20 +250,12 @@ watch(() => props.topic, async (newTopic) => {
       errorMessage.value = 'Invalid or corrupt question data.'
       return
     }
-    if (!loadQuizState()) {
+    if (!loadChapterState()) {
       chapter.value = 0
       resetStateForChapter()
-      let chapters = JSON.parse(localStorage.getItem(getChaptersKey(newTopic.topic)) || '{}')
-      chapterStates.value = chapters
-    } else {
-      if (!questions.value.length) {
-        questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
-      }
     }
   }
 }, { immediate: true })
-
-watch([chapter, current, score, answered, isCorrect, selectedOptions], saveQuizState)
 
 function handleNext() {
   showNextBtn.value = false
@@ -276,6 +268,10 @@ function handleNext() {
 }
 
 function next() {
+  // If this is the last question in the chapter, update global stats
+  if (current.value === questions.value.length - 1) {
+    saveOverallState();
+  }
   current.value++
   answered.value = false
   selectedOptions.value = []
@@ -288,6 +284,7 @@ function next() {
 }
 
 function submitOptions() {
+  if (answered.value) return; // Prevent double submission
   answered.value = true
   transitioning.value = false
   const correctAnswers = questions.value[current.value].answer
@@ -299,39 +296,63 @@ function submitOptions() {
     const correct = Array.from(correctAnswers).map(Number).sort()
     isCorrect.value = selected.length === correct.length && selected.every((v, i) => v === correct[i])
   }
-  if (isCorrect.value) score.value++
-  // Move marking of final chapter as completed after score increment
-  const isLastQuestion = current.value === questions.value.length - 1;
+  if (isCorrect.value) currentChapterScore.value++
+  // Create localStorage state on first answer for this topic
+  const topicKey = props.topic?.topic;
+  const chapterStateKey = CHAPTER_STATE_KEY(topicKey);
+  const overallStateKey = OVERALL_STATE_KEY(topicKey);
+  if (!localStorage.getItem(chapterStateKey)) {
+    saveChapterState();
+  }
+  if (!localStorage.getItem(overallStateKey)) {
+    saveOverallState({ initializing: true });
+  }
+  // Always update chapter state on each answer
+  saveChapterState();
+  // Move focus to feedback for accessibility
   nextTick(() => {
-    if (isLastQuestion && isFinalChapter()) {
-      let chapters = { ...chapterStates.value };
-      chapters[chapter.value] = {
-        score: score.value,
-        total: questions.value.length,
-        completed: true
-      };
-      chapterStates.value = chapters;
-      saveQuizState();
-    }
-    // Move focus to feedback for accessibility
     const feedback = document.querySelector('.feedback[aria-live]')
     if (feedback) feedback.focus && feedback.focus()
   })
 }
 
 function goToNextChapter() {
-  // Save current chapter score as completed
-  let chapters = { ...chapterStates.value }
+  saveChapterState();
+  saveOverallState(); // Now this will update chapters and stats
+  chapter.value++;
+  fetchNextChapterQuestions();
+}
+
+function restartChapter() {
+  // Reset only the current chapter's state and score
+  let chapters = { ...chapterStates.value };
   chapters[chapter.value] = {
-    score: score.value,
+    score: 0,
     total: questions.value.length,
-    completed: true
+    completed: false
+  };
+  chapterStates.value = chapters;
+  saveChapterState();
+
+  // Remove the chapter from the overall state and update total score
+  const topicKey = props.topic?.topic;
+  let overall = loadOverallState();
+  if (overall && overall.chapters) {
+    // Remove the current chapter from the overall chapters
+    delete overall.chapters[chapter.value];
+    // Recompute totalCorrect
+    let totalCorrect = 0;
+    Object.values(overall.chapters).forEach(chap => {
+      if (chap.completed) {
+        totalCorrect += chap.score;
+      }
+    });
+    overall.totalCorrect = totalCorrect;
+    // Save the updated overall state
+    localStorage.setItem(OVERALL_STATE_KEY(topicKey), JSON.stringify(overall));
   }
-  chapterStates.value = chapters
-  saveQuizState()
-  chapter.value++
-  fetchNextChapterQuestions()
-  resetStateForChapter()
+
+  fetchNextChapterQuestions(); // Reload current chapter's questions and reset state
 }
 
 async function fetchNextChapterQuestions() {
@@ -341,39 +362,17 @@ async function fetchNextChapterQuestions() {
   } else if (props.topic.topic) {
     filePath = `${props.topic.topic}.json`
   }
-  filePath = filePath.replace(/^\/?.*data\//, '');
-  filePath = '/data/' + filePath.replace(/^\/+/, '');
   loading.value = true
   errorMessage.value = ''
   try {
-    questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE, sessionKey: getSessionKey() })
+    questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE })
+    resetStateForChapter() // Always reset state after loading new questions
   } catch (e) {
     questions.value = []
     errorMessage.value = 'Failed to load next chapter.'
   } finally {
     loading.value = false
   }
-}
-
-function restartChapter() {
-  fetchNextChapterQuestions()
-  resetStateForChapter()
-  // Remove chapter score from chapterStates
-  let chapters = { ...chapterStates.value }
-  if (chapters[chapter.value]) {
-    chapters[chapter.value].score = 0
-    chapters[chapter.value].completed = false
-    chapters[chapter.value].total = questions.value.length
-  } else {
-    chapters[chapter.value] = {
-      version: 1,
-      score: 0,
-      total: questions.value.length,
-      completed: false
-    }
-  }
-  chapterStates.value = chapters
-  saveQuizState()
 }
 
 const totalQuestions = computed(() => {
@@ -384,6 +383,44 @@ const totalQuestions = computed(() => {
 const isQuizActive = computed(() => {
   return questions.value.length > 0 && current.value < questions.value.length;
 })
+
+const completedChapters = computed(() => {
+  // Only include chapters that are actually completed
+  const chapters = [];
+  const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
+  for (let i = 0; i < totalChapters; i++) {
+    if (chapterStates.value[i]?.completed) {
+      chapters.push(i + 1);
+    }
+  }
+  // If the quiz is not active, also show the just-completed chapter
+  if (!isQuizActive.value && lastCompletedChapter.value && !chapters.includes(lastCompletedChapter.value)) {
+    chapters.push(lastCompletedChapter.value);
+  }
+  return chapters;
+});
+
+// Computed for stats page: get saved overall stats
+const savedOverallStats = computed(() => {
+  const overall = loadOverallState();
+  if (!overall) return {
+    chapters: {},
+    totalCorrect: 0,
+    totalQuestions: 0,
+    totalChapters: 0,
+    completed: false,
+  };
+  return overall;
+});
+
+// Computed for stats page: get completed chapters and their scores from saved overall stats
+const savedCompletedChapters = computed(() => {
+  const overall = savedOverallStats.value;
+  if (!overall.chapters) return [];
+  return Object.entries(overall.chapters)
+    .filter(([_, chap]) => chap.completed)
+    .map(([idx, chap]) => ({ chapter: Number(idx) + 1, score: chap.score, total: chap.total }));
+});
 
 function isAllChaptersComplete() {
   const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
@@ -401,70 +438,135 @@ function isFinalChapter() {
 }
 
 function startFresh() {
-  // Clear all quiz and chapter state for this topic
-  const topicKey = props.topic?.topic;
-  localStorage.removeItem(getQuizStateKey(topicKey));
-  localStorage.removeItem(getChaptersKey(topicKey));
+  clearStates();
   chapter.value = 0;
   questions.value = getChapterQuestions(0);
   current.value = 0;
-  score.value = 0;
   answered.value = false;
   isCorrect.value = false;
   selectedOptions.value = [];
-  chapterStates.value = {};
+  currentChapterScore.value = 0;
   // Optionally, scroll to top or focus first question
 }
 
-function saveQuizState() {
+// Utility to get total chapters for the current topic
+function getTotalChapters() {
+  return Math.ceil((questionsData.value.length || 0) / CHAPTER_SIZE) || 1;
+}
+
+function saveChapterState() {
   const topicKey = props.topic?.topic;
-  if (!questions.value.length) return;
+  if (!topicKey) return;
+  // Determine if chapter is completed
+  const isCompleted = (current.value >= questions.value.length - 1 && answered.value);
   const state = {
-    version: 1,
-    topic: topicKey,
     chapter: chapter.value,
     current: current.value,
-    score: score.value,
     answered: answered.value,
     isCorrect: isCorrect.value,
     selectedOptions: selectedOptions.value,
-    questions: questions.value
-  };
-  localStorage.setItem(getQuizStateKey(topicKey), JSON.stringify(state));
-  // Save per-chapter state
-  let chapters = JSON.parse(localStorage.getItem(getChaptersKey(topicKey)) || '{}');
-  chapters[chapter.value] = {
-    version: 1,
-    score: questions.value.length ? score.value : 0,
+    score: currentChapterScore.value,
     total: questions.value.length,
-    completed: questions.value.length ? (current.value >= questions.value.length) : false
+    questions: questions.value,
+    completed: isCompleted,
   };
-  localStorage.setItem(getChaptersKey(topicKey), JSON.stringify(chapters));
-  chapterStates.value = chapters;
+  localStorage.setItem(CHAPTER_STATE_KEY(topicKey), JSON.stringify(state));
 }
 
-function loadQuizState() {
+function loadChapterState() {
   const topicKey = props.topic?.topic;
   if (!topicKey) return false;
-  const stateStr = localStorage.getItem(getQuizStateKey(topicKey));
+  const stateStr = localStorage.getItem(CHAPTER_STATE_KEY(topicKey));
   if (!stateStr) return false;
   try {
     const state = JSON.parse(stateStr);
-    if (state && state.topic === topicKey && state.version === 1) {
-      chapter.value = state.chapter || 0;
-      current.value = state.current || 0;
-      score.value = state.score || 0;
-      answered.value = state.answered || false;
-      isCorrect.value = state.isCorrect || false;
-      selectedOptions.value = state.selectedOptions || [];
-      // Optionally restore questions if needed
+    if (state && state.chapter !== undefined) {
+      chapter.value = state.chapter;
+      current.value = state.current;
+      answered.value = state.answered;
+      isCorrect.value = state.isCorrect;
+      selectedOptions.value = state.selectedOptions;
+      currentChapterScore.value = state.score;
+      // If chapter is completed, show stats page (i.e., set isQuizActive to false)
+      if (state.completed) {
+        current.value = questions.value.length; // This will make isQuizActive false
+      }
       return true;
     }
-  } catch (e) {
-    // Ignore parse errors
-  }
+  } catch (e) {}
   return false;
 }
+
+function saveOverallState({ initializing = false } = {}) {
+  const topicKey = props.topic?.topic;
+  if (!topicKey) return;
+  let overall = loadOverallState() || {
+    chapters: {},
+    totalCorrect: 0,
+    totalQuestions: questionsData.value.length || 0,
+    totalChapters: getTotalChapters(),
+    completed: false,
+  };
+  if (!initializing) {
+    // Only update chapters when moving to a new chapter (not on first answer)
+    overall.chapters[chapter.value] = {
+      score: currentChapterScore.value,
+      total: questions.value.length,
+      completed: true,
+    };
+    // Recompute totals
+    let totalCorrect = 0;
+    Object.values(overall.chapters).forEach(chap => {
+      if (chap.completed) {
+        totalCorrect += chap.score;
+      }
+    });
+    overall.totalCorrect = totalCorrect;
+    // Do NOT update overall.totalQuestions here; it is the total set size
+    // Only set completed=true if the current completed chapter is the last chapter
+    overall.totalChapters = getTotalChapters();
+    overall.completed = (Number(chapter.value) === overall.totalChapters - 1);
+  } else {
+    // On initialization, do not add chapters, set completed false, totalQuestions = all questions, score = 0
+    overall.chapters = {};
+    overall.totalCorrect = 0;
+    overall.totalQuestions = questionsData.value.length || 0;
+    overall.totalChapters = getTotalChapters();
+    overall.completed = false;
+  }
+  localStorage.setItem(OVERALL_STATE_KEY(topicKey), JSON.stringify(overall));
+}
+
+function loadOverallState() {
+  const topicKey = props.topic?.topic;
+  if (!topicKey) return null;
+  const stateStr = localStorage.getItem(OVERALL_STATE_KEY(topicKey));
+  if (!stateStr) return null;
+  try {
+    return JSON.parse(stateStr);
+  } catch (e) { return null; }
+}
+
+function clearStates() {
+  const topicKey = props.topic?.topic;
+  localStorage.removeItem(CHAPTER_STATE_KEY(topicKey));
+  localStorage.removeItem(OVERALL_STATE_KEY(topicKey));
+}
+
+// On mount/load, try to load both states
+onMounted(() => {
+  if (!loadChapterState()) {
+    resetStateForChapter();
+  }
+  // Optionally, load overall state for stats display
+});
+
+// For stats display
+const overallStats = computed(() => {
+  const overall = loadOverallState();
+  if (!overall) return { totalCorrect: 0, totalQuestions: 0, completed: false, chapters: {} };
+  return overall;
+});
 
 // Fire confetti when all chapters are complete and on the final chapter, or at the end of any chapter
 watch([
@@ -495,32 +597,16 @@ function validateQuestions(data) {
   return data.every(q => (q && (typeof q.q === 'string' || typeof q.question === 'string') && Array.isArray(q.options) && Array.isArray(q.answer)));
 }
 
-function getSessionKey() {
-  // Use a unique session key per topic and per user session
-  const topicKey = props.topic?.topic || 'default';
-  let sessionKey = sessionStorage.getItem('quizsphere-session-key-' + topicKey);
-  if (!sessionKey) {
-    sessionKey = Math.random().toString(36).substr(2, 10) + Date.now();
-    sessionStorage.setItem('quizsphere-session-key-' + topicKey, sessionKey);
-  }
-  return sessionKey;
-}
-
 function getOverallScore() {
-  // Sum up scores and totals from all completed chapters and the current chapter
+  // Sum up scores and totals from all completed chapters
   let totalScore = 0;
   let totalQuestionsCount = 0;
-  const totalChapters = Math.ceil(totalQuestions.value / CHAPTER_SIZE) || 1;
-  for (let i = 0; i < totalChapters; i++) {
-    if (i === chapter.value) {
-      // Current chapter (may be in progress)
-      totalScore += score.value;
-      totalQuestionsCount += questions.value.length;
-    } else if (chapterStates.value[i]) {
-      totalScore += chapterStates.value[i].score || 0;
-      totalQuestionsCount += chapterStates.value[i].total || 0;
+  Object.values(chapterStates.value).forEach(chap => {
+    if (chap.completed) {
+      totalScore += chap.score || 0;
+      totalQuestionsCount += chap.total || 0;
     }
-  }
+  });
   return { score: totalScore, total: totalQuestionsCount };
 }
 </script>

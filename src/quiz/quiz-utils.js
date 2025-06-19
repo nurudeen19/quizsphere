@@ -2,7 +2,7 @@
 // This file will export quiz logic for use in Vue components
 // Suggest renaming this file to quiz-utils.js or quiz-logic.js
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 5;
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -58,14 +58,10 @@ function applyOrder(arr, order) {
 function getQuizQuestionsPage(questionsData, page = 0, pageSize = PAGE_SIZE, sessionKey = null) {
     // Defensive: filter out malformed questions before paginating
     const validQuestions = (questionsData || []).filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answer));
-    let orderedQuestions = validQuestions;
-    if (sessionKey) {
-        const order = getSessionShuffledOrder(sessionKey, validQuestions.length);
-        orderedQuestions = applyOrder(validQuestions, order);
-    }
+    // No shuffling, just paginate in original order
     const start = page * pageSize;
     const end = start + pageSize;
-    const pageQuestions = orderedQuestions.slice(start, end);
+    const pageQuestions = validQuestions.slice(start, end);
     shuffleOptionsAndRemapAnswers(pageQuestions);
     return pageQuestions;
 }
@@ -80,13 +76,17 @@ function getQuizQuestionsPage(questionsData, page = 0, pageSize = PAGE_SIZE, ses
  */
 export async function fetchQuestions(file, opts = {}) {
   let filePath = file;
+  //console.log('passed filePath:', filePath);
+  // Always ensure filePath is /quizsphere/data/<filename>
   if (filePath.startsWith('/quizsphere/data/')) {
     // already correct
   } else if (filePath.startsWith('/data/')) {
-    filePath = '/quizsphere' + filePath;
+    filePath = '/quizsphere/data/' + filePath.replace(/^\/data\//, '');
   } else {
     filePath = '/quizsphere/data/' + filePath.replace(/^\/+/,'').replace(/^data\//,'');
   }
+  // Log the final filePath for debugging
+  //console.log('[fetchQuestions] Fetching:', filePath);
   // Always fetch the full file
   const res = await fetch(filePath);
   if (!res.ok) {
@@ -96,18 +96,19 @@ export async function fetchQuestions(file, opts = {}) {
   }
   let data;
   try {
+    // Check content-type before parsing
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await res.text();
+      console.error('Expected JSON, got:', contentType, text);
+      throw new Error('Expected JSON but got: ' + contentType + ' at ' + filePath);
+    }
     data = await res.json();
   } catch (e) {
     console.error('Failed to parse JSON:', e);
     throw new Error('Invalid JSON in questions file: ' + filePath);
   }
-  // Only shuffle once per session for this topic
-  if (opts.sessionKey) {
-    const order = getSessionShuffledOrder(opts.sessionKey, data.length);
-    data = applyOrder(data, order);
-  } else {
-    shuffleArray(data);
-  }
+  // No shuffling, just use original order
   shuffleOptionsAndRemapAnswers(data);
   // Paginate after fetch
   if (typeof opts.page === 'number' && typeof opts.size === 'number') {

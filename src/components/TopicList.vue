@@ -66,16 +66,21 @@ function onImageError(event, title) {
 }
 
 function getQuizState(topicKey) {
-  const stateStr = localStorage.getItem(`quizsphere-quiz-state-${topicKey}`)
-  if (!stateStr) return false
+  // Use the same keys as QuizView.vue
+  const chapterStateStr = localStorage.getItem(`quizsphere-chapter-state-${topicKey}`)
+  const overallStateStr = localStorage.getItem(`quizsphere-overall-state-${topicKey}`)
+  if (!chapterStateStr && !overallStateStr) return false
+  // If either state exists, consider quiz as started
   try {
-    const state = JSON.parse(stateStr)
-    // Check if the quiz is for this topic
-    if (state.topic !== topicKey) return false
-    // If there are no questions, don't show continue
-    if (!state.questions || !state.questions.length) return false
-    // If the user has ever started the quiz, show continue (even if completed)
-    return true
+    if (chapterStateStr) {
+      const state = JSON.parse(chapterStateStr)
+      if (state && state.questions && state.questions.length) return true
+    }
+    if (overallStateStr) {
+      const state = JSON.parse(overallStateStr)
+      if (state && state.chapters && Object.keys(state.chapters).length) return true
+    }
+    return false
   } catch {
     return false
   }

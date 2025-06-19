@@ -4,7 +4,7 @@
     "file": "data/kubernetes.json",
     "title": "Kubernetes",
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
-    "description": "Master Kubernetes concepts, architecture, and operations.",
+    "description": "For cloud engineers, DevOps practitioners, and developers seeking to validate their understanding of Kubernetes fundamentals, operations, and troubleshooting. Ideal for those preparing for Kubernetes certifications or working with modern cloud-native infrastructure.",
     "level": "Intermediate",
     "badge": "Cloud Native",
     "questionsCount": 278
@@ -18,6 +18,27 @@
     "level": "Beginner",
     "badge": "AI Coding",
     "questionsCount": 107
+  },
+  
+  {
+    "topic": "docker",
+    "file": "data/docker.json",
+    "title": "Docker & Containerization",
+    "image": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
+    "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
+    "level": "Intermediate",
+    "badge": "Container",
+    "questionsCount": 123
+  },
+  {
+    "topic": "cloud-computing",
+    "file": "data/cloud-computing.json",
+    "title": "Cloud Computing",
+    "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
+    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
+    "level": "Intermediate",
+    "badge": "Cloud",
+    "questionsCount": 10
   },
   {
     "topic": "kubernetes-advanced",
@@ -40,23 +61,13 @@
     "questionsCount": 52
   },
   {
-    "topic": "docker",
-    "file": "data/docker.json",
-    "title": "Docker & Containerization",
+    "topic": "docker-advanced",
+    "file": "data/docker-advanced.json",
+    "title": "Docker Advanced",
     "image": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
-    "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
-    "level": "Intermediate",
+    "description": "Dive into advanced Docker topics, real-world scenarios, and troubleshooting.",
+    "level": "Advanced",
     "badge": "Container",
-    "questionsCount": 123
-  },
-  {
-    "topic": "cloud-computing",
-    "file": "data/cloud-computing.json",
-    "title": "Cloud Computing",
-    "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
-    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
-    "level": "Intermediate",
-    "badge": "Cloud",
-    "questionsCount": 53
+    "questionsCount": 0
   }
 ]
