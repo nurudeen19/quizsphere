@@ -65,6 +65,12 @@
             </label>
           </div>
         </fieldset>
+        <transition name="fade-slow">
+          <div v-if="showSelectionWarning" class="selection-warning bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 px-4 py-2 rounded shadow my-2 text-base font-semibold flex items-center gap-2">
+            <i class="fas fa-exclamation-triangle"></i>
+            Please select at least one option before submitting your answer.
+          </div>
+        </transition>
         <section class="quiz-action-area min-h-[140px] flex flex-col items-center justify-center relative">
           <div style="width:100%">
             <transition name="fade-slow" mode="out-in">
@@ -173,16 +179,19 @@
     <i class="fas fa-exclamation-circle text-3xl text-yellow-400 mb-4"></i>
     <div>No valid questions available for this topic. Please check back later.</div>
   </div>
+  <!-- User-friendly message box for selection warning -->
 </template>
 
 <script setup>
-import { ref, watch, nextTick, computed, onMounted } from 'vue'
+import { ref, watch, nextTick, computed, onMounted, defineEmits } from 'vue'
 import { PAGE_SIZE, fetchQuestions } from '../quiz/quiz-utils.js'
 import confetti from 'canvas-confetti'
 
 const props = defineProps({
   topic: Object
 })
+
+const emit = defineEmits(['back'])
 
 const questions = ref([])
 const current = ref(0)
@@ -202,6 +211,7 @@ const lastCompletedChapter = ref(null);
 const lastCompletedScore = ref(0);
 const lastCompletedTotal = ref(0);
 const currentChapterScore = ref(0);
+const showSelectionWarning = ref(false);
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -276,23 +286,38 @@ function next() {
   answered.value = false
   selectedOptions.value = []
   transitioning.value = false
-  // Move focus to first option for accessibility
-  nextTick(() => {
-    const firstOption = document.querySelector('.option-row input:not(:disabled)')
-    if (firstOption) firstOption.focus()
-  })
+  // Remove auto focus on options to prevent default answer selection
+  // nextTick(() => {
+  //   const firstOption = document.querySelector('.option-row input:not(:disabled)')
+  //   if (firstOption) firstOption.focus()
+  // })
 }
 
 function submitOptions() {
+  // Prevent submission if no option is selected
+  let submittedOption = selectedOptions.value;
+  let noSelection = false;
+  if (Array.isArray(submittedOption)) {
+    noSelection = submittedOption.length === 0;
+  } else {
+    noSelection = (submittedOption === undefined || submittedOption === null || submittedOption === '' || isNaN(Number(submittedOption)));
+  }
+  if (noSelection) {
+    showSelectionWarning.value = true;
+    setTimeout(() => { showSelectionWarning.value = false; }, 2000);
+    return;
+  }
+  // Log the submitted option for debugging
+  console.log('Submitted option(s):', submittedOption);
   if (answered.value) return; // Prevent double submission
   answered.value = true
   transitioning.value = false
   const correctAnswers = questions.value[current.value].answer
   if (correctAnswers.length === 1) {
-    isCorrect.value = Number(selectedOptions.value) === correctAnswers[0]
+    isCorrect.value = Number(submittedOption) === correctAnswers[0]
   } else {
     // compare arrays (order-insensitive)
-    const selected = selectedOptions.value.map(Number).sort()
+    const selected = submittedOption.map(Number).sort()
     const correct = Array.from(correctAnswers).map(Number).sort()
     isCorrect.value = selected.length === correct.length && selected.every((v, i) => v === correct[i])
   }
@@ -609,6 +634,10 @@ function getOverallScore() {
   });
   return { score: totalScore, total: totalQuestionsCount };
 }
+
+function handleBack() {
+  emit('back')
+}
 </script>
 
 <style>
@@ -633,5 +662,10 @@ function getOverallScore() {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.selection-warning-message {
+  transition: opacity 0.4s ease;
+  opacity: 0.9;
+  z-index: 1000;
 }
 </style>
