@@ -31,19 +31,14 @@ export const topicAreas = {
     'Productivity Tips'
   ],
   'github-copilot-exam': [
-    'Copilot Fundamentals',
-    'Prompt Engineering',
-    'Copilot in Practice',
-    'Security and Privacy',
-    'Capabilities and Limitations',
-    'IDE Integration',
-    'Test Generation',
-    'Data Handling',
-    'Vulnerability Awareness',
-    'Prompt Structure',
-    'Prompt Refinement',
-    'Team & Collaboration',
-    'Licensing & Compliance'
+    'Responsible AI',
+    'Copilot Plans & Features',
+    'How Copilot Works & Data Handling',
+    'Prompt Crafting & Engineering',
+    'Developer AI Use Cases',
+    'Testing with Copilot',
+    'Privacy Fundamentals & Exclusions',
+    'Real-World Scenarios'
   ],
   docker: [
     'Docker Fundamentals',

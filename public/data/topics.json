@@ -10,6 +10,16 @@
     "questionsCount": 278
   },
   {
+    "topic": "github-copilot-exam",
+    "file": "data/github-copilot-exam.json",
+    "title": "GitHub Copilot Certification Prep",
+    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "description": "For developers and AI practitioners preparing for the GitHub Copilot Certification. Practice questions cover Responsible AI, Copilot features, data handling, prompt engineering, use cases, testing, and privacy.",
+    "level": "Intermediate",
+    "badge": "AI Coding",
+    "questionsCount": 130
+  },
+  {
     "topic": "github-copilot",
     "file": "data/github-copilot.json",
     "title": "GitHub Copilot",
@@ -48,15 +58,5 @@
     "level": "Advanced",
     "badge": "Cloud Native",
     "questionsCount": 71
-  },
-  {
-    "topic": "github-copilot-exam",
-    "file": "data/github-copilot-exam.json",
-    "title": "GitHub Copilot Exam Preparation",
-    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    "description": "Comprehensive practice for the GitHub Copilot Exam: fundamentals, prompt engineering, security, privacy, and more.",
-    "level": "Intermediate",
-    "badge": "AI Coding",
-    "questionsCount": 52
   }
 ]

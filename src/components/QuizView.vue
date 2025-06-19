@@ -234,6 +234,12 @@ watch(() => props.topic, async (newTopic) => {
     }
     loading.value = true
     errorMessage.value = ''
+    // FIX: Load chapter state BEFORE fetching questions so chapter.value is correct
+    let loaded = loadChapterState();
+    if (!loaded) {
+      chapter.value = 0
+      resetStateForChapter()
+    }
     try {
       // Fetch only the current chapter's questions using pagination
       const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE })
@@ -256,10 +262,6 @@ watch(() => props.topic, async (newTopic) => {
       questionsData.value = []
       errorMessage.value = 'Invalid or corrupt question data.'
       return
-    }
-    if (!loadChapterState()) {
-      chapter.value = 0
-      resetStateForChapter()
     }
   }
 }, { immediate: true })
