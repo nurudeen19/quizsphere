@@ -19,7 +19,6 @@
     "badge": "AI Coding",
     "questionsCount": 107
   },
-  
   {
     "topic": "docker",
     "file": "data/docker.json",
@@ -38,7 +37,7 @@
     "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
     "level": "Intermediate",
     "badge": "Cloud",
-    "questionsCount": 10
+    "questionsCount": 53
   },
   {
     "topic": "kubernetes-advanced",
@@ -59,15 +58,5 @@
     "level": "Intermediate",
     "badge": "AI Coding",
     "questionsCount": 52
-  },
-  {
-    "topic": "docker-advanced",
-    "file": "data/docker-advanced.json",
-    "title": "Docker Advanced",
-    "image": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
-    "description": "Dive into advanced Docker topics, real-world scenarios, and troubleshooting.",
-    "level": "Advanced",
-    "badge": "Container",
-    "questionsCount": 0
   }
 ]

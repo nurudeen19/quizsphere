@@ -2,7 +2,7 @@
 // This file will export quiz logic for use in Vue components
 // Suggest renaming this file to quiz-utils.js or quiz-logic.js
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 25;
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

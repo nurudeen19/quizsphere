@@ -672,42 +672,5 @@ function handleBack() {
 </script>
 
 <style>
-.fade-slow-enter-active, .fade-slow-leave-active {
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.fade-slow-enter-from, .fade-slow-leave-to {
-  opacity: 0;
-}
-.fade-slow-enter-to, .fade-slow-leave-from {
-  opacity: 1;
-}
-.loader {
-  border: 4px solid #e0e7ef;
-  border-top: 4px solid #06b6d4;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.selection-warning-message {
-  transition: opacity 0.4s ease;
-  opacity: 0.9;
-  z-index: 1000;
-}
-.stats-card {
-  box-shadow: 0 8px 32px 0 rgba(56,189,248,0.12), 0 1.5px 6px 0 rgba(59,130,246,0.08);
-  border-radius: 1.5rem;
-  border: 2px solid #bae6fd;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 60%, #fff 100%);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.stats-card:hover {
-  box-shadow: 0 12px 36px 0 rgba(56,189,248,0.18), 0 2px 8px 0 rgba(59,130,246,0.12);
-  transform: scale(1.01);
-}
+/* All styles moved to style.css */
 </style>

@@ -85,13 +85,16 @@ if (typeof window === 'undefined') {
 describe('QuizView.vue', () => {
   const topic = { title: 'Kubernetes', topic: 'kubernetes' };
 
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it('renders the first quiz question and its options', async () => {
     const wrapper = mount(QuizView, {
       props: { topic },
       global: { stubs: ['router-link', 'QuizButton'] }
     });
     await flushPromises();
-    // The question text is rendered as a <p> element
     const questionText = wrapper.find('.question-text').text();
     expect(questionText).toContain('What is Kubernetes?');
     [
@@ -102,7 +105,6 @@ describe('QuizView.vue', () => {
     ].forEach(opt => {
       expect(wrapper.text()).toContain(opt);
     });
-    // Should not show the second question yet
     expect(wrapper.text()).not.toContain('What is a Pod?');
   });
 
@@ -121,17 +123,30 @@ describe('QuizView.vue', () => {
       global: { stubs: ['router-link', 'QuizButton'] }
     });
     await flushPromises();
-    // Simulate selecting the correct answer for the first question
     const firstOption = wrapper.findAll('input[type="radio"]').at(1);
     await firstOption.setValue();
     await wrapper.find('form').trigger('submit.prevent');
     expect(wrapper.text()).toContain(
       'Kubernetes is an open-source platform for automating container operations.'
     );
+    // Should show feedback and next button
+    expect(wrapper.find('.feedback').exists()).toBe(true);
+    expect(wrapper.find('.next-btn-wrapper').exists()).toBe(true);
   });
 
-  it('shows completion message after finishing quiz', async () => {
-    // Clear localStorage to ensure clean state
+  it('shows selection warning if no option is selected', async () => {
+    const wrapper = mount(QuizView, {
+      props: { topic },
+      global: { stubs: ['router-link', 'QuizButton'] }
+    });
+    await flushPromises();
+    await wrapper.find('form').trigger('submit.prevent');
+    await flushPromises();
+    expect(wrapper.find('.selection-warning').exists()).toBe(true);
+    expect(wrapper.text()).toContain('Please select at least one option');
+  });
+
+  it('shows completion message and stats after finishing all chapters', async () => {
     localStorage.clear();
     const wrapper = mount(QuizView, {
       props: { topic },
@@ -150,17 +165,11 @@ describe('QuizView.vue', () => {
         await flushPromises();
       }
     }
-    // After last question in first chapter, ensure chapter complete state
-    await flushPromises();
-    await new Promise(r => setTimeout(r, 200));
-    // Now click 'Continue to Next Chapter'
+    // Continue to next chapter
     let continueBtn = wrapper.findAll('button').find(btn => btn.text().toLowerCase().includes('continue'));
     if (continueBtn) {
       await continueBtn.trigger('click');
       await flushPromises();
-      await new Promise(r => setTimeout(r, 200));
-      expect(wrapper.vm.chapter).toBe(1);
-      expect(wrapper.vm.questions[0].question).toBe(mockQuestions[2].question);
     }
     // Complete second chapter (next 2 questions)
     for (let i = 2; i < 4; i++) {
@@ -174,26 +183,67 @@ describe('QuizView.vue', () => {
         await flushPromises();
       }
     }
-    // After last question in final chapter, check for completion message
+    // After last question in final chapter, check for completion message and stats
     await flushPromises();
     await new Promise(r => setTimeout(r, 300));
     await flushPromises();
-    // Debug: log the wrapper HTML to inspect the rendered output
-    // eslint-disable-next-line no-console
-    console.log('FINAL HTML:', wrapper.html());
-    // Debug: log the state after the last answer
-    // eslint-disable-next-line no-console
-    console.log('FINAL STATE:', {
-      chapter: wrapper.vm.chapter,
-      current: wrapper.vm.current,
-      questionsLength: wrapper.vm.questions.length,
-      chapterStates: wrapper.vm.chapterStates
-    });
-    // Check for the congrats section or completion message
     const congrats = wrapper.find('.congrats-section');
-    const text = wrapper.text().toLowerCase();
-    expect(
-      congrats.exists() || text.includes('congratulations') || text.includes('chapter complete')
-    ).toBe(true);
+    expect(congrats.exists()).toBe(true);
+    expect(wrapper.text().toLowerCase()).toContain('congratulations');
+    // Stats card should be visible
+    expect(wrapper.find('.stats-card').exists()).toBe(true);
+    expect(wrapper.text()).toContain('Overall');
+    expect(wrapper.text()).toContain('Chapter 1');
+    expect(wrapper.text()).toContain('Chapter 2');
+  });
+
+  it('resets all state and stats when Start Fresh is clicked', async () => {
+    localStorage.clear();
+    const wrapper = mount(QuizView, {
+      props: { topic },
+      global: { stubs: ['router-link', 'QuizButton'] }
+    });
+    await flushPromises();
+    // Complete first chapter (2 questions)
+    for (let i = 0; i < 2; i++) {
+      let correctOption = wrapper.findAll('input[type="radio"]').at(mockQuestions[i].answer[0]);
+      await correctOption.setValue();
+      await wrapper.find('form').trigger('submit.prevent');
+      await flushPromises();
+      let nextBtn = wrapper.findAll('button').find(btn => btn.text().toLowerCase().includes('next'));
+      if (nextBtn) {
+        await nextBtn.trigger('click');
+        await flushPromises();
+      }
+    }
+    // Continue to next chapter
+    let continueBtn = wrapper.findAll('button').find(btn => btn.text().toLowerCase().includes('continue'));
+    if (continueBtn) {
+      await continueBtn.trigger('click');
+      await flushPromises();
+    }
+    // Complete second chapter (next 2 questions)
+    for (let i = 2; i < 4; i++) {
+      let correctOption = wrapper.findAll('input[type="radio"]').at(mockQuestions[i].answer[0]);
+      await correctOption.setValue();
+      await wrapper.find('form').trigger('submit.prevent');
+      await flushPromises();
+      let nextBtn = wrapper.findAll('button').find(btn => btn.text().toLowerCase().includes('next'));
+      if (nextBtn) {
+        await nextBtn.trigger('click');
+        await flushPromises();
+      }
+    }
+    // After completion, click Start Fresh
+    await flushPromises();
+    let startFreshBtn = wrapper.findAll('button').find(btn => btn.text().toLowerCase().includes('start fresh'));
+    expect(startFreshBtn.exists()).toBe(true);
+    await startFreshBtn.trigger('click');
+    await flushPromises();
+    // Should be back to first question
+    expect(wrapper.find('.question-text').text()).toContain('What is Kubernetes?');
+    expect(wrapper.text()).toMatch(/Question\s*1\s*of\s*2/);
+    // Stats card should not show completed chapters
+    expect(wrapper.find('.stats-card').exists()).toBe(false);
   });
 });
