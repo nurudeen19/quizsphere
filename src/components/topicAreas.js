@@ -22,13 +22,13 @@ export const topicAreas = {
     'Real-World Scenarios'
   ],
   'github-copilot': [
-    'AI Code Suggestions',
-    'Editor Integrations',
-    'Prompt Engineering',
-    'Copilot Labs',
-    'Security & Privacy',
+    'Copilot Basics',
     'Supported Languages',
-    'Productivity Tips'
+    'Editor Integration',
+    'Code Suggestions',
+    'Security & Review',
+    'Best Practices',
+    'Getting Started'
   ],
   'github-copilot-exam': [
     'Responsible AI',

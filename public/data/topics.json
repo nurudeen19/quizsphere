@@ -22,12 +22,12 @@
   {
     "topic": "github-copilot",
     "file": "data/github-copilot.json",
-    "title": "GitHub Copilot",
+    "title": "GitHub Copilot for Beginners",
     "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
+    "description": "For new developers and students exploring AI-powered coding. Covers Copilot basics, supported languages, editor integration, code suggestions, security, and best practices for getting started.",
     "level": "Beginner",
     "badge": "AI Coding",
-    "questionsCount": 107
+    "questionsCount": 44
   },
   {
     "topic": "docker",
