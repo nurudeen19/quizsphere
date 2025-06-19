@@ -4,10 +4,10 @@
     "file": "data/kubernetes.json",
     "title": "Kubernetes",
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
-    "description": "Master Kubernetes concepts, architecture, and operations.",
+    "description": "For cloud engineers, DevOps practitioners, and developers seeking to validate their understanding of Kubernetes fundamentals, operations, and troubleshooting. Ideal for those preparing for Kubernetes certifications or working with modern cloud-native infrastructure.",
     "level": "Intermediate",
     "badge": "Cloud Native",
-    "questionsCount": 218
+    "questionsCount": 278
   },
   {
     "topic": "github-copilot",
@@ -17,7 +17,28 @@
     "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
     "level": "Beginner",
     "badge": "AI Coding",
-    "questionsCount": 111
+    "questionsCount": 107
+  },
+  
+  {
+    "topic": "docker",
+    "file": "data/docker.json",
+    "title": "Docker & Containerization",
+    "image": "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png",
+    "description": "Master Docker fundamentals, real-world scenarios, troubleshooting, certifications, and interview prep.",
+    "level": "Intermediate",
+    "badge": "Container",
+    "questionsCount": 123
+  },
+  {
+    "topic": "cloud-computing",
+    "file": "data/cloud-computing.json",
+    "title": "Cloud Computing",
+    "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
+    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
+    "level": "Intermediate",
+    "badge": "Cloud",
+    "questionsCount": 10
   },
   {
     "topic": "kubernetes-advanced",
@@ -26,7 +47,17 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg",
     "description": "Tackle advanced Kubernetes topics, real-world scenarios, and troubleshooting.",
     "level": "Advanced",
-    "badge": "Expert",
-    "questionsCount": 121
+    "badge": "Cloud Native",
+    "questionsCount": 71
+  },
+  {
+    "topic": "github-copilot-exam",
+    "file": "data/github-copilot-exam.json",
+    "title": "GitHub Copilot Exam Preparation",
+    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "description": "Comprehensive practice for the GitHub Copilot Exam: fundamentals, prompt engineering, security, privacy, and more.",
+    "level": "Intermediate",
+    "badge": "AI Coding",
+    "questionsCount": 52
   }
 ]

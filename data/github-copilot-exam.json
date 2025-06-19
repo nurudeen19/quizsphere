@@ -1,0 +1,678 @@
+[
+    {
+        "question": "Which of the following is NOT a primary domain of the GitHub Copilot Exam?",
+        "options": [
+            "Copilot Fundamentals",
+            "Prompt Engineering",
+            "Security and Privacy",
+            "Cloud Deployment"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Cloud Deployment is not a listed domain in the official Copilot exam guide."
+    },
+    {
+        "question": "What is the main benefit of using Copilot's code suggestions?",
+        "options": [
+            "It guarantees bug-free code",
+            "It increases developer productivity by suggesting code completions",
+            "It replaces the need for human developers",
+            "It automatically deploys code to production"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot is designed to assist developers by suggesting code, increasing productivity."
+    },
+    {
+        "question": "Which of the following is a best practice when using Copilot for code generation?",
+        "options": [
+            "Blindly accept all suggestions",
+            "Review and test Copilot's suggestions before using them",
+            "Never use Copilot for documentation",
+            "Disable Copilot in all projects"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Always review and test Copilot's suggestions for correctness and security."
+    },
+    {
+        "question": "In the context of Copilot, what is prompt engineering?",
+        "options": [
+            "Writing code without comments",
+            "Crafting effective input to guide Copilot's output",
+            "Disabling Copilot's suggestions",
+            "Engineering software prompts for user interfaces"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Prompt engineering is about crafting effective prompts to get the best results from Copilot."
+    },
+    {
+        "question": "Which Copilot feature helps you generate code for an entire function based on a comment?",
+        "options": [
+            "Inline Suggestions",
+            "Code Completion",
+            "Function Synthesis",
+            "Documentation Generation"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Function Synthesis allows Copilot to generate an entire function from a descriptive comment."
+    },
+    {
+        "question": "What should you do if Copilot suggests code that includes a known security vulnerability?",
+        "options": [
+            "Accept the suggestion and fix it later",
+            "Ignore the vulnerability",
+            "Reject the suggestion and write secure code manually",
+            "Report the issue to GitHub support only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You should reject insecure suggestions and ensure your code is secure."
+    },
+    {
+        "question": "Which of the following is a privacy consideration when using Copilot?",
+        "options": [
+            "Copilot stores all your code in the cloud by default",
+            "Copilot may use code context to generate suggestions, but does not store your code",
+            "Copilot publishes your code to public repositories",
+            "Copilot encrypts all code suggestions with user-specific keys"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot uses code context for suggestions but does not store or publish your code."
+    },
+    {
+        "question": "Which domain covers the ability to use Copilot in different IDEs and environments?",
+        "options": [
+            "Copilot Fundamentals",
+            "Copilot in Practice",
+            "Prompt Engineering",
+            "Security and Privacy"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "'Copilot in Practice' covers using Copilot in various environments."
+    },
+    {
+        "question": "What is a recommended way to improve Copilot's code suggestions?",
+        "options": [
+            "Provide clear and descriptive comments",
+            "Use ambiguous variable names",
+            "Avoid writing tests",
+            "Disable Copilot's context awareness"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear comments help Copilot understand your intent and improve suggestions."
+    },
+    {
+        "question": "Which of the following is a sub-section of the 'Security and Privacy' domain?",
+        "options": [
+            "Data Handling",
+            "Prompt Engineering",
+            "IDE Integration",
+            "Code Review"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Data Handling is a sub-section of Security and Privacy."
+    },
+    {
+        "question": "Which of the following is a key feature of Copilot Fundamentals?",
+        "options": [
+            "Code completion",
+            "Cloud deployment",
+            "Database migration",
+            "Container orchestration"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot Fundamentals includes code completion as a core feature."
+    },
+    {
+        "question": "What is the primary goal of prompt engineering in Copilot?",
+        "options": [
+            "To write ambiguous prompts",
+            "To guide Copilot to generate desired code",
+            "To disable Copilot suggestions",
+            "To test code coverage"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Prompt engineering is about crafting prompts that guide Copilot to generate the code you want."
+    },
+    {
+        "question": "Which of the following is NOT a recommended prompt engineering technique?",
+        "options": [
+            "Use clear comments",
+            "Be specific about intent",
+            "Use vague variable names",
+            "Describe expected output"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Vague variable names reduce prompt effectiveness."
+    },
+    {
+        "question": "In Copilot in Practice, which IDE is NOT officially supported?",
+        "options": [
+            "Visual Studio Code",
+            "Neovim",
+            "IntelliJ IDEA",
+            "Eclipse"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Eclipse is not officially supported by Copilot as of the study guide publication."
+    },
+    {
+        "question": "How can you use Copilot to generate documentation?",
+        "options": [
+            "By writing a comment and accepting Copilot's suggestion",
+            "By running a build script",
+            "By disabling Copilot",
+            "By using only keyboard shortcuts"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can generate documentation from comments."
+    },
+    {
+        "question": "Which of the following is a best practice for Copilot in Practice?",
+        "options": [
+            "Accept all suggestions without review",
+            "Review and test Copilot's code",
+            "Never use Copilot for tests",
+            "Disable Copilot in production"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Always review and test Copilot's code before using it."
+    },
+    {
+        "question": "What is a key consideration in the Security and Privacy domain?",
+        "options": [
+            "Copilot suggestions are always secure",
+            "You must review suggestions for vulnerabilities",
+            "Copilot encrypts all code",
+            "Copilot never uses context"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "You must review Copilot's suggestions for security vulnerabilities."
+    },
+    {
+        "question": "Which of the following is a sub-section of Security and Privacy?",
+        "options": [
+            "Data Handling",
+            "Prompt Engineering",
+            "IDE Integration",
+            "Testing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Data Handling is a sub-section of Security and Privacy."
+    },
+    {
+        "question": "What is the recommended way to handle sensitive data in Copilot suggestions?",
+        "options": [
+            "Accept suggestions with secrets",
+            "Never accept suggestions containing sensitive data",
+            "Share suggestions publicly",
+            "Ignore data handling"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Never accept suggestions that contain sensitive data or secrets."
+    },
+    {
+        "question": "Which of the following is a sub-section of Copilot Fundamentals?",
+        "options": [
+            "Capabilities and Limitations",
+            "Data Handling",
+            "Prompt Engineering",
+            "Security Review"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Capabilities and Limitations is a sub-section of Copilot Fundamentals."
+    },
+    {
+        "question": "What is a limitation of Copilot?",
+        "options": [
+            "It cannot generate code in any language",
+            "It may generate insecure or incorrect code",
+            "It always writes perfect code",
+            "It replaces all developers"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot may generate insecure or incorrect code and should be reviewed."
+    },
+    {
+        "question": "Which domain covers the use of Copilot for test generation?",
+        "options": [
+            "Copilot in Practice",
+            "Prompt Engineering",
+            "Security and Privacy",
+            "Copilot Fundamentals"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot in Practice covers using Copilot for test generation."
+    },
+    {
+        "question": "What is a best practice for using Copilot with open source code?",
+        "options": [
+            "Accept all code",
+            "Check for license compatibility and attribution",
+            "Ignore licenses",
+            "Publish all suggestions"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Always check for license compatibility and attribution when using Copilot with open source code."
+    },
+    {
+        "question": "Which of the following is a sub-section of Prompt Engineering?",
+        "options": [
+            "Prompt Structure",
+            "Data Handling",
+            "IDE Integration",
+            "Security Review"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Prompt Structure is a sub-section of Prompt Engineering."
+    },
+    {
+        "question": "What is the effect of providing more context in your prompt?",
+        "options": [
+            "Worse suggestions",
+            "No effect",
+            "Better and more relevant suggestions",
+            "Slower performance"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "More context leads to better and more relevant suggestions from Copilot."
+    },
+    {
+        "question": "Which of the following is a sub-section of Copilot in Practice?",
+        "options": [
+            "IDE Integration",
+            "Prompt Structure",
+            "Capabilities and Limitations",
+            "Data Handling"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "IDE Integration is a sub-section of Copilot in Practice."
+    },
+    {
+        "question": "Which IDEs are officially supported by Copilot?",
+        "options": [
+            "VS Code, Neovim, JetBrains IDEs",
+            "Eclipse, Atom, Sublime Text",
+            "Notepad, Emacs, BlueJ",
+            "All IDEs"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot officially supports VS Code, Neovim, and JetBrains IDEs."
+    },
+    {
+        "question": "What is a privacy risk when using Copilot in a corporate environment?",
+        "options": [
+            "Copilot may suggest code from private repositories",
+            "Copilot never uses private code",
+            "Copilot disables itself automatically",
+            "No privacy risks exist"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot may suggest code similar to private repositories if not configured properly."
+    },
+    {
+        "question": "What is the best way to ensure Copilot's suggestions are secure?",
+        "options": [
+            "Trust all suggestions",
+            "Review and test all suggestions",
+            "Ignore security",
+            "Disable Copilot"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Always review and test Copilot's suggestions for security."
+    },
+    {
+        "question": "What is prompt refinement?",
+        "options": [
+            "Making prompts less clear",
+            "Iteratively improving prompts for better results",
+            "Disabling Copilot",
+            "Ignoring prompt structure"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Prompt refinement is the process of iteratively improving prompts to get better results from Copilot."
+    },
+    {
+        "question": "What is a key limitation of Copilot's code suggestions?",
+        "options": [
+            "They may not always be correct or secure",
+            "They are always perfect",
+            "They never need review",
+            "They are always unique"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot's suggestions may not always be correct or secure and should be reviewed."
+    },
+    {
+        "question": "How can Copilot assist with test generation?",
+        "options": [
+            "By generating test code from comments or examples",
+            "By disabling tests",
+            "By removing test files",
+            "By ignoring test coverage"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can generate test code from comments or examples provided by the user."
+    },
+    {
+        "question": "What should you do if Copilot suggests code with a known vulnerability?",
+        "options": [
+            "Accept it",
+            "Reject it and write secure code",
+            "Ignore it",
+            "Publish it"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Reject suggestions with known vulnerabilities and write secure code."
+    },
+    {
+        "question": "What is the benefit of using prompt structure in Copilot?",
+        "options": [
+            "It helps guide Copilot to generate more accurate code",
+            "It makes prompts less clear",
+            "It disables Copilot",
+            "It increases ambiguity"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Prompt structure helps guide Copilot to generate more accurate code."
+    },
+    {
+        "question": "What is a best practice for using Copilot in a team environment?",
+        "options": [
+            "Share all suggestions without review",
+            "Review suggestions as a team and follow code review processes",
+            "Ignore team feedback",
+            "Disable Copilot for all"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Review Copilot's suggestions as a team and follow code review processes."
+    },
+    {
+        "question": "What is the main privacy concern when using Copilot?",
+        "options": [
+            "Copilot may suggest code similar to private code",
+            "Copilot never uses private code",
+            "Copilot disables itself automatically",
+            "No privacy concerns exist"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot may suggest code similar to private code if not configured properly."
+    },
+    {
+        "question": "What is the purpose of prompt refinement?",
+        "options": [
+            "To iteratively improve prompts for better results",
+            "To make prompts less clear",
+            "To disable Copilot",
+            "To ignore prompt structure"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Prompt refinement is the process of iteratively improving prompts to get better results from Copilot."
+    },
+    {
+        "question": "Which Copilot feature provides suggestions as you type?",
+        "options": [
+            "Inline Suggestions",
+            "Batch Suggestions",
+            "Manual Suggestions",
+            "No Suggestions"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Inline Suggestions are provided as you type in the editor."
+    },
+    {
+        "question": "What is the effect of ambiguous comments on Copilot's output?",
+        "options": [
+            "Improves accuracy",
+            "Reduces accuracy",
+            "No effect",
+            "Always generates tests"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Ambiguous comments reduce the accuracy of Copilot's suggestions."
+    },
+    {
+        "question": "Which of the following is a limitation of Copilot's context awareness?",
+        "options": [
+            "It cannot see code outside the current file",
+            "It can access all files in the repo",
+            "It always knows project structure",
+            "It reads private keys"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot's context is limited to the current file and some open tabs."
+    },
+    {
+        "question": "How can you use Copilot to generate code in a new language?",
+        "options": [
+            "Write a comment in that language",
+            "Change the IDE theme",
+            "Disable Copilot",
+            "Use only default settings"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Writing a comment in the target language helps Copilot generate code in that language."
+    },
+    {
+        "question": "What is a best practice for using Copilot with proprietary code?",
+        "options": [
+            "Review for sensitive data leaks",
+            "Accept all suggestions",
+            "Share code publicly",
+            "Ignore company policy"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Always review Copilot's suggestions for sensitive data leaks in proprietary code."
+    },
+    {
+        "question": "Which of the following is a scenario where Copilot may generate insecure code?",
+        "options": [
+            "When prompted with insecure patterns",
+            "When using strong typing",
+            "When writing documentation",
+            "When using test-driven development"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot may generate insecure code if prompted with insecure patterns."
+    },
+    {
+        "question": "What is the recommended way to use Copilot for learning new APIs?",
+        "options": [
+            "Write a comment describing the API usage",
+            "Guess the syntax",
+            "Disable Copilot",
+            "Use only code snippets"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Describing the API usage in a comment helps Copilot generate relevant code."
+    },
+    {
+        "question": "Which of the following is a Copilot limitation regarding code style?",
+        "options": [
+            "May not follow project-specific style guides",
+            "Always enforces style",
+            "Never generates comments",
+            "Only writes in JavaScript"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot may not always follow your project's style guide."
+    },
+    {
+        "question": "How can you refine Copilot's suggestions for a specific framework?",
+        "options": [
+            "Provide framework-specific context in comments",
+            "Use generic comments",
+            "Disable Copilot",
+            "Ignore framework documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Providing framework-specific context helps Copilot generate better suggestions."
+    },
+    {
+        "question": "What is a key privacy feature of Copilot?",
+        "options": [
+            "Does not store your code",
+            "Publishes all code",
+            "Shares code with third parties",
+            "Encrypts code with user keys"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot does not store your code or share it with third parties."
+    },
+    {
+        "question": "Which of the following is a scenario where prompt refinement is useful?",
+        "options": [
+            "When initial suggestions are not accurate",
+            "When suggestions are perfect",
+            "When Copilot is disabled",
+            "When writing documentation only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Prompt refinement is useful when you want to improve the accuracy of Copilot's suggestions."
+    },
+    {
+        "question": "What is the impact of using Copilot in a regulated industry?",
+        "options": [
+            "Requires careful review for compliance",
+            "No impact",
+            "Automatically ensures compliance",
+            "Disables Copilot"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "In regulated industries, Copilot's suggestions must be reviewed for compliance."
+    },
+    {
+        "question": "Which of the following is a Copilot best practice for accessibility?",
+        "options": [
+            "Use descriptive variable names and comments",
+            "Use only abbreviations",
+            "Ignore accessibility",
+            "Disable Copilot"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Descriptive names and comments improve accessibility and Copilot's output."
+    },
+    {
+        "question": "How does Copilot handle code licensing?",
+        "options": [
+            "May generate code similar to open source",
+            "Always generates original code",
+            "Never uses open source",
+            "Publishes code automatically"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot may generate code similar to open source and users should check licenses."
+    },
+    {
+        "question": "What is the effect of using Copilot in a collaborative project?",
+        "options": [
+            "Requires team review of suggestions",
+            "No effect",
+            "Disables Copilot",
+            "Always generates tests"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Team review ensures Copilot's suggestions meet project standards."
+    }
+]

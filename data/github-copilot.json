@@ -1,1223 +1,1393 @@
 [
-  {
-    "q": "What is Responsible AI?",
-    "options": [
-      "AI that is designed to maximize profit regardless of consequences",
-      "AI that is developed and used in a way that is ethical, transparent, and accountable",
-      "AI that is only used for entertainment purposes",
-      "AI that is not regulated by any standards"
-    ],
-    "answers": [1],
-    "explanation": "Responsible AI refers to the practice of designing, developing, and deploying AI systems in a way that is ethical, transparent, and accountable."
-  },
-  {
-    "q": "Which of the following is NOT a principle of Responsible AI?",
-    "options": [
-      "Fairness",
-      "Transparency",
-      "Profit Maximization",
-      "Accountability"
-    ],
-    "answers": [2],
-    "explanation": "Profit maximization is not a principle of Responsible AI. Responsible AI focuses on fairness, transparency, and accountability."
-  },
-  {
-    "q": "Why is transparency important in AI systems?",
-    "options": [
-      "It allows users to understand how decisions are made",
-      "It makes AI systems more expensive",
-      "It reduces the need for documentation",
-      "It ensures AI systems are always correct"
-    ],
-    "answers": [0],
-    "explanation": "Transparency helps users and stakeholders understand how AI systems make decisions, which is crucial for trust and accountability."
-  },
-  {
-    "q": "What is algorithmic bias?",
-    "options": [
-      "A preference for using algorithms over manual processes",
-      "A systematic and repeatable error in a computer system that creates unfair outcomes",
-      "A type of computer virus",
-      "A method for improving AI accuracy"
-    ],
-    "answers": [1],
-    "explanation": "Algorithmic bias refers to systematic errors in AI systems that result in unfair outcomes, often due to biased data or design."
-  },
-  {
-    "q": "Which regulation is most closely associated with data privacy in AI in the European Union?",
-    "options": [
-      "GDPR",
-      "HIPAA",
-      "CCPA",
-      "FERPA"
-    ],
-    "answers": [0],
-    "explanation": "The General Data Protection Regulation (GDPR) is the primary regulation for data privacy in the EU."
-  },
-  {
-    "q": "What is the purpose of an AI impact assessment?",
-    "options": [
-      "To measure the speed of an AI system",
-      "To evaluate the potential effects and risks of an AI system before deployment",
-      "To increase the cost of AI projects",
-      "To replace human decision-making entirely"
-    ],
-    "answers": [1],
-    "explanation": "An AI impact assessment evaluates the potential effects, risks, and benefits of an AI system before it is deployed."
-  },
-  {
-    "q": "Which of the following is a key risk of using unexplainable AI models in high-stakes domains?",
-    "options": [
-      "Increased entertainment value",
-      "Reduced trust and accountability",
-      "Faster computation",
-      "Lower costs"
-    ],
-    "answers": [1],
-    "explanation": "Unexplainable AI models can reduce trust and accountability, especially in high-stakes domains like healthcare or finance."
-  },
-  {
-    "q": "What is the main goal of fairness in AI?",
-    "options": [
-      "To ensure AI systems are profitable",
-      "To ensure AI systems do not discriminate against individuals or groups",
-      "To make AI systems faster",
-      "To reduce the need for human oversight"
-    ],
-    "answers": [1],
-    "explanation": "Fairness in AI aims to prevent discrimination and ensure equitable treatment for all individuals and groups."
-  },
-  {
-    "q": "Which of the following best describes accountability in AI?",
-    "options": [
-      "The ability to blame users for AI errors",
-      "The ability to trace and explain decisions made by AI systems and hold relevant parties responsible",
-      "The ability to automate all decisions",
-      "The ability to avoid regulation"
-    ],
-    "answers": [1],
-    "explanation": "Accountability in AI means being able to trace, explain, and take responsibility for decisions made by AI systems."
-  },
-  {
-    "q": "What is the role of human oversight in Responsible AI?",
-    "options": [
-      "To eliminate the need for AI",
-      "To ensure AI systems are monitored and can be overridden if necessary",
-      "To slow down AI development",
-      "To increase costs"
-    ],
-    "answers": [1],
-    "explanation": "Human oversight ensures that AI systems are monitored and that humans can intervene or override decisions when necessary."
-  },
-  {
-    "q": "Which organization published the AI Ethics Guidelines for Trustworthy AI in 2019?",
-    "options": [
-      "IEEE",
-      "European Commission",
-      "OpenAI",
-      "Google"
-    ],
-    "answers": [1],
-    "explanation": "The European Commission published the Ethics Guidelines for Trustworthy AI in 2019."
-  },
-  {
-    "q": "What is the main purpose of an AI Code of Conduct?",
-    "options": [
-      "To provide technical documentation",
-      "To outline ethical standards and best practices for AI development and use",
-      "To increase AI adoption",
-      "To reduce costs"
-    ],
-    "answers": [1],
-    "explanation": "An AI Code of Conduct outlines ethical standards and best practices for responsible AI development and use."
-  },
-  {
-    "q": "Which of the following is a risk of using biased training data in AI?",
-    "options": [
-      "Improved accuracy",
-      "Unfair or discriminatory outcomes",
-      "Faster computation",
-      "Lower costs"
-    ],
-    "answers": [1],
-    "explanation": "Biased training data can lead to unfair or discriminatory outcomes in AI systems."
-  },
-  {
-    "q": "What is model explainability?",
-    "options": [
-      "The ability to make AI models run faster",
-      "The ability to understand and interpret how an AI model makes decisions",
-      "The ability to automate all tasks",
-      "The ability to avoid regulation"
-    ],
-    "answers": [1],
-    "explanation": "Model explainability refers to the ability to understand and interpret how an AI model makes decisions."
-  },
-  {
-    "q": "Which of the following is a method to mitigate bias in AI?",
-    "options": [
-      "Ignoring outliers",
-      "Using diverse and representative training data",
-      "Reducing transparency",
-      "Automating all decisions"
-    ],
-    "answers": [1],
-    "explanation": "Using diverse and representative training data helps mitigate bias in AI systems."
-  },
-  {
-    "q": "What is the purpose of AI auditing?",
-    "options": [
-      "To increase costs",
-      "To independently assess AI systems for compliance with ethical and legal standards",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [1],
-    "explanation": "AI auditing independently assesses AI systems for compliance with ethical and legal standards."
-  },
-  {
-    "q": "Which of the following is a key element of data minimization in AI?",
-    "options": [
-      "Collecting as much data as possible",
-      "Only collecting data that is necessary for the intended purpose",
-      "Sharing all data with third parties",
-      "Storing data indefinitely"
-    ],
-    "answers": [1],
-    "explanation": "Data minimization means only collecting data that is necessary for the intended purpose."
-  },
-  {
-    "q": "What is the main goal of privacy by design in AI?",
-    "options": [
-      "To add privacy features after deployment",
-      "To integrate privacy protections into the design and development of AI systems from the start",
-      "To avoid regulation",
-      "To maximize data collection"
-    ],
-    "answers": [1],
-    "explanation": "Privacy by design means integrating privacy protections into AI systems from the start."
-  },
-  {
-    "q": "Which of the following is an example of a high-risk AI application?",
-    "options": [
-      "Spam filtering",
-      "Medical diagnosis",
-      "Weather prediction",
-      "Music recommendation"
-    ],
-    "answers": [1],
-    "explanation": "Medical diagnosis is considered a high-risk AI application due to its impact on human health."
-  },
-  {
-    "q": "What is the purpose of a model card in AI?",
-    "options": [
-      "To provide a summary of an AI model's intended use, performance, and limitations",
-      "To increase model complexity",
-      "To hide model details",
-      "To automate documentation"
-    ],
-    "answers": [0],
-    "explanation": "A model card provides a summary of an AI model's intended use, performance, and limitations."
-  },
-  {
-    "q": "Which of the following is a benefit of open-sourcing AI models?",
-    "options": [
-      "Reduced transparency",
-      "Increased collaboration and scrutiny",
-      "Increased secrecy",
-      "Higher costs"
-    ],
-    "answers": [1],
-    "explanation": "Open-sourcing AI models increases collaboration and allows for greater scrutiny by the community."
-  },
-  {
-    "q": "What is the main risk of using black-box AI models in critical applications?",
-    "options": [
-      "Improved explainability",
-      "Lack of transparency and accountability",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [1],
-    "explanation": "Black-box AI models lack transparency and accountability, which is risky in critical applications."
-  },
-  {
-    "q": "Which of the following is a recommended practice for responsible data collection in AI?",
-    "options": [
-      "Collecting data without consent",
-      "Obtaining informed consent from data subjects",
-      "Sharing all data publicly",
-      "Ignoring data privacy laws"
-    ],
-    "answers": [1],
-    "explanation": "Obtaining informed consent from data subjects is a recommended practice for responsible data collection."
-  },
-  {
-    "q": "What is the purpose of differential privacy in AI?",
-    "options": [
-      "To make data public",
-      "To protect individual privacy while allowing data analysis",
-      "To increase data sharing",
-      "To reduce model accuracy"
-    ],
-    "answers": [1],
-    "explanation": "Differential privacy protects individual privacy while allowing useful data analysis."
-  },
-  {
-    "q": "Which of the following is a sign of algorithmic discrimination?",
-    "options": [
-      "Equal outcomes for all groups",
-      "Consistent underperformance for a specific demographic group",
-      "High model accuracy",
-      "Fast computation"
-    ],
-    "answers": [1],
-    "explanation": "Consistent underperformance for a specific demographic group is a sign of algorithmic discrimination."
-  },
-  {
-    "q": "What is the main goal of robustness in AI systems?",
-    "options": [
-      "To make AI systems more fragile",
-      "To ensure AI systems perform reliably under a variety of conditions",
-      "To reduce costs",
-      "To increase bias"
-    ],
-    "answers": [1],
-    "explanation": "Robustness ensures AI systems perform reliably under a variety of conditions."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system deployment?",
-    "options": [
-      "Ignoring user feedback",
-      "Monitoring system performance and impact",
-      "Avoiding documentation",
-      "Maximizing data collection"
-    ],
-    "answers": [1],
-    "explanation": "Monitoring system performance and impact is a key consideration for AI deployment."
-  },
-  {
-    "q": "What is the main purpose of red-teaming in AI?",
-    "options": [
-      "To test AI systems for vulnerabilities and weaknesses",
-      "To increase model complexity",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "Red-teaming tests AI systems for vulnerabilities and weaknesses."
-  },
-  {
-    "q": "Which of the following is a requirement under the EU AI Act for high-risk AI systems?",
-    "options": [
-      "No documentation required",
-      "Comprehensive risk management and documentation",
-      "Unlimited data collection",
-      "No human oversight"
-    ],
-    "answers": [1],
-    "explanation": "The EU AI Act requires comprehensive risk management and documentation for high-risk AI systems."
-  },
-  {
-    "q": "What is the main benefit of using interpretable models in AI?",
-    "options": [
-      "Easier to understand and trust",
-      "Increased secrecy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Interpretable models are easier to understand and trust."
-  },
-  {
-    "q": "Which of the following is a best practice for AI model validation?",
-    "options": [
-      "Testing only on training data",
-      "Using diverse and representative test data",
-      "Ignoring edge cases",
-      "Avoiding documentation"
-    ],
-    "answers": [1],
-    "explanation": "Using diverse and representative test data is a best practice for AI model validation."
-  },
-  {
-    "q": "What is the main risk of data poisoning attacks in AI?",
-    "options": [
-      "Improved accuracy",
-      "Compromised model integrity and performance",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [1],
-    "explanation": "Data poisoning attacks can compromise the integrity and performance of AI models."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system accountability?",
-    "options": [
-      "Clear assignment of responsibility for outcomes",
-      "Avoiding responsibility",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Clear assignment of responsibility for outcomes is a key aspect of AI accountability."
-  },
-  {
-    "q": "What is the purpose of a data protection impact assessment (DPIA) in AI?",
-    "options": [
-      "To increase data collection",
-      "To identify and mitigate data privacy risks",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [1],
-    "explanation": "A DPIA identifies and mitigates data privacy risks in AI systems."
-  },
-  {
-    "q": "Which of the following is a recommended approach to mitigate model drift?",
-    "options": [
-      "Ignoring changes in data",
-      "Regularly monitoring and updating models",
-      "Avoiding retraining",
-      "Maximizing automation"
-    ],
-    "answers": [1],
-    "explanation": "Regularly monitoring and updating models helps mitigate model drift."
-  },
-  {
-    "q": "What is the main goal of AI system documentation?",
-    "options": [
-      "To provide transparency and facilitate accountability",
-      "To increase secrecy",
-      "To reduce costs",
-      "To automate all processes"
-    ],
-    "answers": [0],
-    "explanation": "Documentation provides transparency and facilitates accountability in AI systems."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system decommissioning?",
-    "options": [
-      "Ensuring data is securely deleted or anonymized",
-      "Maximizing data retention",
-      "Avoiding documentation",
-      "Increasing automation"
-    ],
-    "answers": [0],
-    "explanation": "Secure deletion or anonymization of data is a key consideration when decommissioning AI systems."
-  },
-  {
-    "q": "What is the main purpose of fairness metrics in AI?",
-    "options": [
-      "To measure and ensure equitable outcomes across groups",
-      "To increase model complexity",
-      "To automate all decisions",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "Fairness metrics measure and ensure equitable outcomes across different groups."
-  },
-  {
-    "q": "Which of the following is a risk of overfitting in AI models?",
-    "options": [
-      "Poor generalization to new data",
-      "Improved accuracy on all data",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Overfitting leads to poor generalization to new, unseen data."
-  },
-  {
-    "q": "What is the main benefit of using synthetic data in AI?",
-    "options": [
-      "Protecting privacy while enabling model training",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "Synthetic data can protect privacy while enabling effective model training."
-  },
-  {
-    "q": "Which of the following is a key principle of the OECD AI Principles?",
-    "options": [
-      "Inclusive growth, sustainable development, and well-being",
-      "Profit maximization",
-      "Secrecy",
-      "Automation"
-    ],
-    "answers": [0],
-    "explanation": "Inclusive growth, sustainable development, and well-being are key principles of the OECD AI Principles."
-  },
-  {
-    "q": "What is the main risk of using proprietary datasets in AI?",
-    "options": [
-      "Reduced transparency and reproducibility",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Proprietary datasets can reduce transparency and reproducibility in AI research and applications."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system monitoring?",
-    "options": [
-      "Continuous monitoring for performance and ethical compliance",
-      "Ignoring system performance",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Continuous monitoring for performance and ethical compliance is recommended for AI systems."
-  },
-  {
-    "q": "What is the main purpose of adversarial testing in AI?",
-    "options": [
-      "To identify vulnerabilities to adversarial attacks",
-      "To increase model complexity",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "Adversarial testing identifies vulnerabilities to adversarial attacks in AI systems."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system scalability?",
-    "options": [
-      "Ability to handle increased data and user load",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Scalability refers to the ability of an AI system to handle increased data and user load."
-  },
-  {
-    "q": "What is the main benefit of using federated learning in AI?",
-    "options": [
-      "Enabling collaborative model training without sharing raw data",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "Federated learning enables collaborative model training without sharing raw data, protecting privacy."
-  },
-  {
-    "q": "Which of the following is a risk of using outdated training data in AI?",
-    "options": [
-      "Model drift and reduced accuracy",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Outdated training data can cause model drift and reduce accuracy."
-  },
-  {
-    "q": "What is the main purpose of a data governance framework in AI?",
-    "options": [
-      "To ensure responsible data management and use",
-      "To maximize data collection",
-      "To reduce transparency",
-      "To automate all processes"
-    ],
-    "answers": [0],
-    "explanation": "A data governance framework ensures responsible data management and use in AI systems."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system resilience?",
-    "options": [
-      "Ability to recover from failures and attacks",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Resilience refers to the ability of an AI system to recover from failures and attacks."
-  },
-  {
-    "q": "What is the main risk of using non-representative test data in AI?",
-    "options": [
-      "Biased or inaccurate model evaluation",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Non-representative test data can lead to biased or inaccurate model evaluation."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system transparency?",
-    "options": [
-      "Providing clear documentation and explanations for system behavior",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Providing clear documentation and explanations is recommended for AI system transparency."
-  },
-  {
-    "q": "What is the main benefit of using open datasets in AI?",
-    "options": [
-      "Increased transparency and reproducibility",
-      "Increased secrecy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Open datasets increase transparency and reproducibility in AI research and applications."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system upgradability?",
-    "options": [
-      "Ability to update and improve the system over time",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Upgradability refers to the ability to update and improve an AI system over time."
-  },
-  {
-    "q": "What is the main risk of using black-box AI models in regulated industries?",
-    "options": [
-      "Non-compliance with regulatory requirements",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Black-box AI models may not comply with regulatory requirements in regulated industries."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system validation?",
-    "options": [
-      "Independent third-party validation",
-      "Ignoring validation",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Independent third-party validation is recommended for AI system validation."
-  },
-  {
-    "q": "What is the main purpose of a risk register in AI projects?",
-    "options": [
-      "To document and manage potential risks",
-      "To increase model complexity",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "A risk register documents and manages potential risks in AI projects."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system maintainability?",
-    "options": [
-      "Ease of updating and fixing the system",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Maintainability refers to the ease of updating and fixing an AI system."
-  },
-  {
-    "q": "What is the main benefit of using explainable AI (XAI) techniques?",
-    "options": [
-      "Improved trust and understanding of AI decisions",
-      "Increased secrecy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Explainable AI techniques improve trust and understanding of AI decisions."
-  },
-  {
-    "q": "Which of the following is a risk of using AI for automated decision-making?",
-    "options": [
-      "Lack of human oversight and potential for unfair outcomes",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Automated decision-making without human oversight can lead to unfair outcomes."
-  },
-  {
-    "q": "What is the main purpose of a model audit trail in AI?",
-    "options": [
-      "To track changes and decisions made by the model",
-      "To increase model complexity",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "A model audit trail tracks changes and decisions made by the model for accountability."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system accessibility?",
-    "options": [
-      "Ensuring the system is usable by people with disabilities",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Accessibility ensures AI systems are usable by people with disabilities."
-  },
-  {
-    "q": "What is the main risk of using AI-generated content without human review?",
-    "options": [
-      "Spread of misinformation or harmful content",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI-generated content without human review can spread misinformation or harmful content."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system security?",
-    "options": [
-      "Implementing robust security measures and regular testing",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Robust security measures and regular testing are recommended for AI system security."
-  },
-  {
-    "q": "What is the main benefit of using human-in-the-loop (HITL) approaches in AI?",
-    "options": [
-      "Improved oversight and error correction",
-      "Increased secrecy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "Human-in-the-loop approaches improve oversight and error correction in AI systems."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system scalability?",
-    "options": [
-      "Ability to handle increased data and user load",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Scalability refers to the ability of an AI system to handle increased data and user load."
-  },
-  {
-    "q": "What is the main risk of using AI in hiring and recruitment?",
-    "options": [
-      "Potential for bias and discrimination",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in hiring and recruitment can introduce bias and discrimination if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system decommissioning?",
-    "options": [
-      "Securely deleting or anonymizing data",
-      "Maximizing data retention",
-      "Avoiding documentation",
-      "Increasing automation"
-    ],
-    "answers": [0],
-    "explanation": "Secure deletion or anonymization of data is recommended when decommissioning AI systems."
-  },
-  {
-    "q": "What is the main benefit of using privacy-enhancing technologies (PETs) in AI?",
-    "options": [
-      "Protecting data privacy while enabling useful analysis",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "Privacy-enhancing technologies protect data privacy while enabling useful analysis."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system interoperability?",
-    "options": [
-      "Ability to work with other systems and standards",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Interoperability refers to the ability of an AI system to work with other systems and standards."
-  },
-  {
-    "q": "What is the main risk of using AI for surveillance?",
-    "options": [
-      "Invasion of privacy and potential for abuse",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI for surveillance can invade privacy and be abused if not properly regulated."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system explainability?",
-    "options": [
-      "Providing clear explanations for decisions and outcomes",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Clear explanations for decisions and outcomes are recommended for AI system explainability."
-  },
-  {
-    "q": "What is the main benefit of using AI for accessibility?",
-    "options": [
-      "Enabling new capabilities for people with disabilities",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can enable new capabilities and improve accessibility for people with disabilities."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system transparency?",
-    "options": [
-      "Providing information about how the system works and makes decisions",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Transparency means providing information about how the system works and makes decisions."
-  },
-  {
-    "q": "What is the main risk of using AI in financial services?",
-    "options": [
-      "Potential for unfair or discriminatory outcomes",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in financial services can lead to unfair or discriminatory outcomes if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system validation?",
-    "options": [
-      "Independent third-party validation",
-      "Ignoring validation",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Independent third-party validation is recommended for AI system validation."
-  },
-  {
-    "q": "What is the main purpose of a data protection officer (DPO) in AI projects?",
-    "options": [
-      "To ensure compliance with data protection laws and best practices",
-      "To increase model complexity",
-      "To automate all processes",
-      "To reduce transparency"
-    ],
-    "answers": [0],
-    "explanation": "A DPO ensures compliance with data protection laws and best practices in AI projects."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system usability?",
-    "options": [
-      "Ensuring the system is easy to use and understand",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Usability means ensuring the system is easy to use and understand."
-  },
-  {
-    "q": "What is the main risk of using AI in law enforcement?",
-    "options": [
-      "Potential for bias and unfair treatment",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in law enforcement can introduce bias and unfair treatment if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system documentation?",
-    "options": [
-      "Providing clear and comprehensive documentation",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Clear and comprehensive documentation is recommended for AI systems."
-  },
-  {
-    "q": "What is the main benefit of using AI for environmental monitoring?",
-    "options": [
-      "Improved data collection and analysis for sustainability",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can improve data collection and analysis for environmental sustainability."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system reliability?",
-    "options": [
-      "Consistent and dependable performance",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Reliability means consistent and dependable performance of AI systems."
-  },
-  {
-    "q": "What is the main risk of using AI in healthcare?",
-    "options": [
-      "Potential for incorrect or harmful decisions",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in healthcare can lead to incorrect or harmful decisions if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system improvement?",
-    "options": [
-      "Continuous monitoring and feedback",
-      "Ignoring feedback",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Continuous monitoring and feedback are recommended for AI system improvement."
-  },
-  {
-    "q": "What is the main benefit of using AI for education?",
-    "options": [
-      "Personalized learning and improved outcomes",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can enable personalized learning and improve educational outcomes."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system ethics?",
-    "options": [
-      "Ensuring the system aligns with ethical principles and values",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Ethics means ensuring the system aligns with ethical principles and values."
-  },
-  {
-    "q": "What is the main risk of using AI in autonomous vehicles?",
-    "options": [
-      "Potential for accidents and safety issues",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in autonomous vehicles can lead to accidents and safety issues if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system fairness?",
-    "options": [
-      "Regularly testing for and mitigating bias",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Regularly testing for and mitigating bias is recommended for AI system fairness."
-  },
-  {
-    "q": "What is the main benefit of using AI for public safety?",
-    "options": [
-      "Improved emergency response and crime prevention",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can improve emergency response and crime prevention for public safety."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system security?",
-    "options": [
-      "Protecting the system from unauthorized access and attacks",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Security means protecting the system from unauthorized access and attacks."
-  },
-  {
-    "q": "What is the main risk of using AI in social media?",
-    "options": [
-      "Spread of misinformation and harmful content",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in social media can spread misinformation and harmful content if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system transparency?",
-    "options": [
-      "Providing clear explanations and documentation",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Clear explanations and documentation are recommended for AI system transparency."
-  },
-  {
-    "q": "What is the main benefit of using AI for disaster response?",
-    "options": [
-      "Faster and more effective emergency response",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can enable faster and more effective emergency response in disasters."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system trustworthiness?",
-    "options": [
-      "Ensuring the system is reliable, transparent, and accountable",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Trustworthiness means the system is reliable, transparent, and accountable."
-  },
-  {
-    "q": "What is the main risk of using AI in government decision-making?",
-    "options": [
-      "Potential for bias and lack of accountability",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in government decision-making can introduce bias and reduce accountability if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system accountability?",
-    "options": [
-      "Clear assignment of responsibility and regular audits",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Clear responsibility and regular audits are recommended for AI system accountability."
-  },
-  {
-    "q": "What is the main benefit of using AI for scientific research?",
-    "options": [
-      "Accelerated discovery and improved analysis",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can accelerate discovery and improve analysis in scientific research."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system compliance?",
-    "options": [
-      "Adhering to relevant laws, regulations, and standards",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Compliance means adhering to relevant laws, regulations, and standards."
-  },
-  {
-    "q": "What is the main risk of using AI in critical infrastructure?",
-    "options": [
-      "Potential for system failures and security breaches",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in critical infrastructure can lead to system failures and security breaches if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system improvement?",
-    "options": [
-      "Continuous monitoring and feedback",
-      "Ignoring feedback",
-      "Maximizing automation",
-      "Reducing transparency"
-    ],
-    "answers": [0],
-    "explanation": "Continuous monitoring and feedback are recommended for AI system improvement."
-  },
-  {
-    "q": "What is the main benefit of using AI for transportation?",
-    "options": [
-      "Improved efficiency and safety",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can improve efficiency and safety in transportation."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system sustainability?",
-    "options": [
-      "Minimizing environmental impact and resource use",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Sustainability means minimizing environmental impact and resource use."
-  },
-  {
-    "q": "What is the main risk of using AI in education?",
-    "options": [
-      "Potential for bias and unequal access",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in education can introduce bias and unequal access if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system reliability?",
-    "options": [
-      "Regular testing and maintenance",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Regular testing and maintenance are recommended for AI system reliability."
-  },
-  {
-    "q": "What is the main benefit of using AI for customer service?",
-    "options": [
-      "Faster and more efficient support",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can provide faster and more efficient customer support."
-  },
-  {
-    "q": "Which of the following is a key aspect of AI system usability?",
-    "options": [
-      "Ensuring the system is easy to use and understand",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Usability means ensuring the system is easy to use and understand."
-  },
-  {
-    "q": "What is the main risk of using AI in journalism?",
-    "options": [
-      "Potential for spreading misinformation and bias",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in journalism can spread misinformation and bias if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended approach for AI system security?",
-    "options": [
-      "Implementing robust security measures and regular testing",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Robust security measures and regular testing are recommended for AI system security."
-  },
-  {
-    "q": "What is the main benefit of using AI for supply chain management?",
-    "options": [
-      "Improved efficiency and optimization",
-      "Increasing data bias",
-      "Reducing model accuracy",
-      "Maximizing data collection"
-    ],
-    "answers": [0],
-    "explanation": "AI can improve efficiency and optimization in supply chain management."
-  },
-  {
-    "q": "Which of the following is a key consideration for AI system ethics?",
-    "options": [
-      "Ensuring the system aligns with ethical principles and values",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Ethics means ensuring the system aligns with ethical principles and values."
-  },
-  {
-    "q": "What is the main risk of using AI in marketing?",
-    "options": [
-      "Potential for manipulation and privacy invasion",
-      "Improved accuracy",
-      "Lower costs",
-      "Faster computation"
-    ],
-    "answers": [0],
-    "explanation": "AI in marketing can lead to manipulation and privacy invasion if not properly managed."
-  },
-  {
-    "q": "Which of the following is a recommended practice for AI system transparency?",
-    "options": [
-      "Providing clear explanations and documentation",
-      "Reducing transparency",
-      "Maximizing automation",
-      "Avoiding documentation"
-    ],
-    "answers": [0],
-    "explanation": "Clear explanations and documentation are recommended for AI system transparency."
-  }
+    {
+        "question": "What is Responsible AI?",
+        "options": [
+            "AI that is designed to maximize profit regardless of consequences",
+            "AI that is developed and used in a way that is ethical, transparent, and accountable",
+            "AI that is only used for entertainment purposes",
+            "AI that is not regulated by any standards"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Responsible AI refers to the practice of designing, developing, and deploying AI systems in a way that is ethical, transparent, and accountable."
+    },
+    {
+        "question": "Which of the following is NOT a principle of Responsible AI?",
+        "options": [
+            "Fairness",
+            "Transparency",
+            "Profit Maximization",
+            "Accountability"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Profit maximization is not a principle of Responsible AI. Responsible AI focuses on fairness, transparency, and accountability."
+    },
+    {
+        "question": "Why is transparency important in AI systems?",
+        "options": [
+            "It allows users to understand how decisions are made",
+            "It makes AI systems more expensive",
+            "It reduces the need for documentation",
+            "It ensures AI systems are always correct"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Transparency helps users and stakeholders understand how AI systems make decisions, which is crucial for trust and accountability."
+    },
+    {
+        "question": "What is algorithmic bias?",
+        "options": [
+            "A preference for using algorithms over manual processes",
+            "A systematic and repeatable error in a computer system that creates unfair outcomes",
+            "A type of computer virus",
+            "A method for improving AI accuracy"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Algorithmic bias refers to systematic errors in AI systems that result in unfair outcomes, often due to biased data or design."
+    },
+    {
+        "question": "Which regulation is most closely associated with data privacy in AI in the European Union?",
+        "options": [
+            "GDPR",
+            "HIPAA",
+            "CCPA",
+            "FERPA"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "The General Data Protection Regulation (GDPR) is the primary regulation for data privacy in the EU."
+    },
+    {
+        "question": "What is the purpose of an AI impact assessment?",
+        "options": [
+            "To measure the speed of an AI system",
+            "To evaluate the potential effects and risks of an AI system before deployment",
+            "To increase the cost of AI projects",
+            "To replace human decision-making entirely"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "An AI impact assessment evaluates the potential effects, risks, and benefits of an AI system before it is deployed."
+    },
+    {
+        "question": "Which of the following is a key risk of using unexplainable AI models in high-stakes domains?",
+        "options": [
+            "Increased entertainment value",
+            "Reduced trust and accountability",
+            "Faster computation",
+            "Lower costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Unexplainable AI models can reduce trust and accountability, especially in high-stakes domains like healthcare or finance."
+    },
+    {
+        "question": "What is the main goal of fairness in AI?",
+        "options": [
+            "To ensure AI systems are profitable",
+            "To ensure AI systems do not discriminate against individuals or groups",
+            "To make AI systems faster",
+            "To reduce the need for human oversight"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Fairness in AI aims to prevent discrimination and ensure equitable treatment for all individuals and groups."
+    },
+    {
+        "question": "Which of the following best describes accountability in AI?",
+        "options": [
+            "The ability to blame users for AI errors",
+            "The ability to trace and explain decisions made by AI systems and hold relevant parties responsible",
+            "The ability to automate all decisions",
+            "The ability to avoid regulation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Accountability in AI means being able to trace, explain, and take responsibility for decisions made by AI systems."
+    },
+    {
+        "question": "What is the role of human oversight in Responsible AI?",
+        "options": [
+            "To eliminate the need for AI",
+            "To ensure AI systems are monitored and can be overridden if necessary",
+            "To slow down AI development",
+            "To increase costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Human oversight ensures that AI systems are monitored and that humans can intervene or override decisions when necessary."
+    },
+    {
+        "question": "Which organization published the AI Ethics Guidelines for Trustworthy AI in 2019?",
+        "options": [
+            "IEEE",
+            "European Commission",
+            "OpenAI",
+            "Google"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "The European Commission published the Ethics Guidelines for Trustworthy AI in 2019."
+    },
+    {
+        "question": "What is the main purpose of an AI Code of Conduct?",
+        "options": [
+            "To provide technical documentation",
+            "To outline ethical standards and best practices for AI development and use",
+            "To increase AI adoption",
+            "To reduce costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "An AI Code of Conduct outlines ethical standards and best practices for responsible AI development and use."
+    },
+    {
+        "question": "Which of the following is a risk of using biased training data in AI?",
+        "options": [
+            "Improved accuracy",
+            "Unfair or discriminatory outcomes",
+            "Faster computation",
+            "Lower costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Biased training data can lead to unfair or discriminatory outcomes in AI systems."
+    },
+    {
+        "question": "What is model explainability?",
+        "options": [
+            "The ability to make AI models run faster",
+            "The ability to understand and interpret how an AI model makes decisions",
+            "The ability to automate all tasks",
+            "The ability to avoid regulation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Model explainability refers to the ability to understand and interpret how an AI model makes decisions."
+    },
+    {
+        "question": "Which of the following is a method to mitigate bias in AI?",
+        "options": [
+            "Ignoring outliers",
+            "Using diverse and representative training data",
+            "Reducing transparency",
+            "Automating all decisions"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Using diverse and representative training data helps mitigate bias in AI systems."
+    },
+    {
+        "question": "What is the purpose of AI auditing?",
+        "options": [
+            "To increase costs",
+            "To independently assess AI systems for compliance with ethical and legal standards",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AI auditing independently assesses AI systems for compliance with ethical and legal standards."
+    },
+    {
+        "question": "Which of the following is a key element of data minimization in AI?",
+        "options": [
+            "Collecting as much data as possible",
+            "Only collecting data that is necessary for the intended purpose",
+            "Sharing all data with third parties",
+            "Storing data indefinitely"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Data minimization means only collecting data that is necessary for the intended purpose."
+    },
+    {
+        "question": "What is the main goal of privacy by design in AI?",
+        "options": [
+            "To add privacy features after deployment",
+            "To integrate privacy protections into the design and development of AI systems from the start",
+            "To avoid regulation",
+            "To maximize data collection"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Privacy by design means integrating privacy protections into AI systems from the start."
+    },
+    {
+        "question": "Which of the following is an example of a high-risk AI application?",
+        "options": [
+            "Spam filtering",
+            "Medical diagnosis",
+            "Weather prediction",
+            "Music recommendation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Medical diagnosis is considered a high-risk AI application due to its impact on human health."
+    },
+    {
+        "question": "What is the purpose of a model card in AI?",
+        "options": [
+            "To provide a summary of an AI model's intended use, performance, and limitations",
+            "To increase model complexity",
+            "To hide model details",
+            "To automate documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A model card provides a summary of an AI model's intended use, performance, and limitations."
+    },
+    {
+        "question": "Which of the following is a benefit of open-sourcing AI models?",
+        "options": [
+            "Reduced transparency",
+            "Increased collaboration and scrutiny",
+            "Increased secrecy",
+            "Higher costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Open-sourcing AI models increases collaboration and allows for greater scrutiny by the community."
+    },
+    {
+        "question": "What is the main risk of using black-box AI models in critical applications?",
+        "options": [
+            "Improved explainability",
+            "Lack of transparency and accountability",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Black-box AI models lack transparency and accountability, which is risky in critical applications."
+    },
+    {
+        "question": "Which of the following is a recommended practice for responsible data collection in AI?",
+        "options": [
+            "Collecting data without consent",
+            "Obtaining informed consent from data subjects",
+            "Sharing all data publicly",
+            "Ignoring data privacy laws"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Obtaining informed consent from data subjects is a recommended practice for responsible data collection."
+    },
+    {
+        "question": "What is the purpose of differential privacy in AI?",
+        "options": [
+            "To make data public",
+            "To protect individual privacy while allowing data analysis",
+            "To increase data sharing",
+            "To reduce model accuracy"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Differential privacy protects individual privacy while allowing useful data analysis."
+    },
+    {
+        "question": "Which of the following is a sign of algorithmic discrimination?",
+        "options": [
+            "Equal outcomes for all groups",
+            "Consistent underperformance for a specific demographic group",
+            "High model accuracy",
+            "Fast computation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Consistent underperformance for a specific demographic group is a sign of algorithmic discrimination."
+    },
+    {
+        "question": "What is the main goal of robustness in AI systems?",
+        "options": [
+            "To make AI systems more fragile",
+            "To ensure AI systems perform reliably under a variety of conditions",
+            "To reduce costs",
+            "To increase bias"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Robustness ensures AI systems perform reliably under a variety of conditions."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system deployment?",
+        "options": [
+            "Ignoring user feedback",
+            "Monitoring system performance and impact",
+            "Avoiding documentation",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Monitoring system performance and impact is a key consideration for AI deployment."
+    },
+    {
+        "question": "What is the main purpose of red-teaming in AI?",
+        "options": [
+            "To test AI systems for vulnerabilities and weaknesses",
+            "To increase model complexity",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Red-teaming tests AI systems for vulnerabilities and weaknesses."
+    },
+    {
+        "question": "Which of the following is a requirement under the EU AI Act for high-risk AI systems?",
+        "options": [
+            "No documentation required",
+            "Comprehensive risk management and documentation",
+            "Unlimited data collection",
+            "No human oversight"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "The EU AI Act requires comprehensive risk management and documentation for high-risk AI systems."
+    },
+    {
+        "question": "What is the main benefit of using interpretable models in AI?",
+        "options": [
+            "Easier to understand and trust",
+            "Increased secrecy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Interpretable models are easier to understand and trust."
+    },
+    {
+        "question": "Which of the following is a best practice for AI model validation?",
+        "options": [
+            "Testing only on training data",
+            "Using diverse and representative test data",
+            "Ignoring edge cases",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Using diverse and representative test data is a best practice for AI model validation."
+    },
+    {
+        "question": "What is the main risk of data poisoning attacks in AI?",
+        "options": [
+            "Improved accuracy",
+            "Compromised model integrity and performance",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Data poisoning attacks can compromise the integrity and performance of AI models."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system accountability?",
+        "options": [
+            "Clear assignment of responsibility for outcomes",
+            "Avoiding responsibility",
+            "Maximizing automation",
+            "Reducing transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear assignment of responsibility for outcomes is a key aspect of AI accountability."
+    },
+    {
+        "question": "What is the purpose of a data protection impact assessment (DPIA) in AI?",
+        "options": [
+            "To increase data collection",
+            "To identify and mitigate data privacy risks",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "A DPIA identifies and mitigates data privacy risks in AI systems."
+    },
+    {
+        "question": "Which of the following is a recommended approach to mitigate model drift?",
+        "options": [
+            "Ignoring changes in data",
+            "Regularly monitoring and updating models",
+            "Avoiding retraining",
+            "Maximizing automation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Regularly monitoring and updating models helps mitigate model drift."
+    },
+    {
+        "question": "What is the main goal of AI system documentation?",
+        "options": [
+            "To provide transparency and facilitate accountability",
+            "To increase secrecy",
+            "To reduce costs",
+            "To automate all processes"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Documentation provides transparency and facilitates accountability in AI systems."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system decommissioning?",
+        "options": [
+            "Ensuring data is securely deleted or anonymized",
+            "Maximizing data retention",
+            "Avoiding documentation",
+            "Increasing automation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Secure deletion or anonymization of data is a key consideration when decommissioning AI systems."
+    },
+    {
+        "question": "What is the main purpose of fairness metrics in AI?",
+        "options": [
+            "To measure and ensure equitable outcomes across groups",
+            "To increase model complexity",
+            "To automate all decisions",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Fairness metrics measure and ensure equitable outcomes across different groups."
+    },
+    {
+        "question": "Which of the following is a risk of overfitting in AI models?",
+        "options": [
+            "Poor generalization to new data",
+            "Improved accuracy on all data",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Overfitting leads to poor generalization to new, unseen data."
+    },
+    {
+        "question": "What is the main benefit of using synthetic data in AI?",
+        "options": [
+            "Protecting privacy while enabling model training",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Synthetic data can protect privacy while enabling effective model training."
+    },
+    {
+        "question": "Which of the following is a key principle of the OECD AI Principles?",
+        "options": [
+            "Inclusive growth, sustainable development, and well-being",
+            "Profit maximization",
+            "Secrecy",
+            "Automation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Inclusive growth, sustainable development, and well-being are key principles of the OECD AI Principles."
+    },
+    {
+        "question": "What is the main risk of using proprietary datasets in AI?",
+        "options": [
+            "Reduced transparency and reproducibility",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Proprietary datasets can reduce transparency and reproducibility in AI research and applications."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system monitoring?",
+        "options": [
+            "Continuous monitoring for performance and ethical compliance",
+            "Ignoring system performance",
+            "Maximizing automation",
+            "Reducing transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Continuous monitoring for performance and ethical compliance is recommended for AI systems."
+    },
+    {
+        "question": "What is the main purpose of adversarial testing in AI?",
+        "options": [
+            "To identify vulnerabilities to adversarial attacks",
+            "To increase model complexity",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Adversarial testing identifies vulnerabilities to adversarial attacks in AI systems."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system scalability?",
+        "options": [
+            "Ability to handle increased data and user load",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Scalability refers to the ability of an AI system to handle increased data and user load."
+    },
+    {
+        "question": "What is the main benefit of using federated learning in AI?",
+        "options": [
+            "Enabling collaborative model training without sharing raw data",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Federated learning enables collaborative model training without sharing raw data, protecting privacy."
+    },
+    {
+        "question": "Which of the following is a risk of using outdated training data in AI?",
+        "options": [
+            "Model drift and reduced accuracy",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Outdated training data can cause model drift and reduce accuracy."
+    },
+    {
+        "question": "What is the main purpose of a data governance framework in AI?",
+        "options": [
+            "To ensure responsible data management and use",
+            "To maximize data collection",
+            "To reduce transparency",
+            "To automate all processes"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A data governance framework ensures responsible data management and use in AI systems."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system resilience?",
+        "options": [
+            "Ability to recover from failures and attacks",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Resilience refers to the ability of an AI system to recover from failures and attacks."
+    },
+    {
+        "question": "What is the main risk of using non-representative test data in AI?",
+        "options": [
+            "Biased or inaccurate model evaluation",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Non-representative test data can lead to biased or inaccurate model evaluation."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system transparency?",
+        "options": [
+            "Providing clear documentation and explanations for system behavior",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Providing clear documentation and explanations is recommended for AI system transparency."
+    },
+    {
+        "question": "What is the main benefit of using open datasets in AI?",
+        "options": [
+            "Increased transparency and reproducibility",
+            "Increased secrecy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Open datasets increase transparency and reproducibility in AI research and applications."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system upgradability?",
+        "options": [
+            "Ability to update and improve the system over time",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Upgradability refers to the ability to update and improve an AI system over time."
+    },
+    {
+        "question": "What is the main risk of using black-box AI models in regulated industries?",
+        "options": [
+            "Non-compliance with regulatory requirements",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Black-box AI models may not comply with regulatory requirements in regulated industries."
+    },
+    {
+        "question": "Which of the following is a recommended approach for AI system validation?",
+        "options": [
+            "Independent third-party validation",
+            "Ignoring validation",
+            "Maximizing automation",
+            "Reducing transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Independent third-party validation is recommended for AI system validation."
+    },
+    {
+        "question": "What is the main purpose of a risk register in AI projects?",
+        "options": [
+            "To document and manage potential risks",
+            "To increase model complexity",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A risk register documents and manages potential risks in AI projects."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system maintainability?",
+        "options": [
+            "Ease of updating and fixing the system",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Maintainability refers to the ease of updating and fixing an AI system."
+    },
+    {
+        "question": "What is the main benefit of using explainable AI (XAI) techniques?",
+        "options": [
+            "Improved trust and understanding of AI decisions",
+            "Increased secrecy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Explainable AI techniques improve trust and understanding of AI decisions."
+    },
+    {
+        "question": "Which of the following is a risk of using AI for automated decision-making?",
+        "options": [
+            "Lack of human oversight and potential for unfair outcomes",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Automated decision-making without human oversight can lead to unfair outcomes."
+    },
+    {
+        "question": "What is the main purpose of a model audit trail in AI?",
+        "options": [
+            "To track changes and decisions made by the model",
+            "To increase model complexity",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A model audit trail tracks changes and decisions made by the model for accountability."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system accessibility?",
+        "options": [
+            "Ensuring the system is usable by people with disabilities",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Accessibility ensures AI systems are usable by people with disabilities."
+    },
+    {
+        "question": "What is the main risk of using AI-generated content without human review?",
+        "options": [
+            "Spread of misinformation or harmful content",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI-generated content without human review can spread misinformation or harmful content."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system security?",
+        "options": [
+            "Implementing robust security measures and regular testing",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Robust security measures and regular testing are recommended for AI system security."
+    },
+    {
+        "question": "What is the main benefit of using human-in-the-loop (HITL) approaches in AI?",
+        "options": [
+            "Improved oversight and error correction",
+            "Increased secrecy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Human-in-the-loop approaches improve oversight and error correction in AI systems."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system scalability?",
+        "options": [
+            "Ability to handle increased data and user load",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Scalability refers to the ability of an AI system to handle increased data and user load."
+    },
+    {
+        "question": "What is the main risk of using AI in hiring and recruitment?",
+        "options": [
+            "Potential for bias and discrimination",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in hiring and recruitment can introduce bias and discrimination if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended approach for AI system decommissioning?",
+        "options": [
+            "Securely deleting or anonymizing data",
+            "Maximizing data retention",
+            "Avoiding documentation",
+            "Increasing automation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Secure deletion or anonymization of data is recommended when decommissioning AI systems."
+    },
+    {
+        "question": "What is the main benefit of using privacy-enhancing technologies (PETs) in AI?",
+        "options": [
+            "Protecting data privacy while enabling useful analysis",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Privacy-enhancing technologies protect data privacy while enabling useful analysis."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system interoperability?",
+        "options": [
+            "Ability to work with other systems and standards",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Interoperability refers to the ability of an AI system to work with other systems and standards."
+    },
+    {
+        "question": "What is the main risk of using AI for surveillance?",
+        "options": [
+            "Invasion of privacy and potential for abuse",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI for surveillance can invade privacy and be abused if not properly regulated."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system explainability?",
+        "options": [
+            "Providing clear explanations for decisions and outcomes",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear explanations for decisions and outcomes are recommended for AI system explainability."
+    },
+    {
+        "question": "What is the main benefit of using AI for accessibility?",
+        "options": [
+            "Enabling new capabilities for people with disabilities",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can enable new capabilities and improve accessibility for people with disabilities."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system transparency?",
+        "options": [
+            "Providing information about how the system works and makes decisions",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Transparency means providing information about how the system works and makes decisions."
+    },
+    {
+        "question": "What is the main risk of using AI in financial services?",
+        "options": [
+            "Potential for unfair or discriminatory outcomes",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in financial services can lead to unfair or discriminatory outcomes if not properly managed."
+    },
+    {
+        "question": "What is the main purpose of a data protection officer (DPO) in AI projects?",
+        "options": [
+            "To ensure compliance with data protection laws and best practices",
+            "To increase model complexity",
+            "To automate all processes",
+            "To reduce transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A DPO ensures compliance with data protection laws and best practices in AI projects."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system usability?",
+        "options": [
+            "Ensuring the system is easy to use and understand",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Usability means ensuring the system is easy to use and understand."
+    },
+    {
+        "question": "What is the main risk of using AI in law enforcement?",
+        "options": [
+            "Potential for bias and unfair treatment",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in law enforcement can introduce bias and unfair treatment if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system documentation?",
+        "options": [
+            "Providing clear and comprehensive documentation",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear and comprehensive documentation is recommended for AI systems."
+    },
+    {
+        "question": "What is the main benefit of using AI for environmental monitoring?",
+        "options": [
+            "Improved data collection and analysis for sustainability",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can improve data collection and analysis for environmental sustainability."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system reliability?",
+        "options": [
+            "Consistent and dependable performance",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Reliability means consistent and dependable performance of AI systems."
+    },
+    {
+        "question": "What is the main risk of using AI in healthcare?",
+        "options": [
+            "Potential for incorrect or harmful decisions",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in healthcare can lead to incorrect or harmful decisions if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended approach for AI system improvement?",
+        "options": [
+            "Continuous monitoring and feedback",
+            "Ignoring feedback",
+            "Maximizing automation",
+            "Reducing transparency"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Continuous monitoring and feedback are recommended for AI system improvement."
+    },
+    {
+        "question": "What is the main benefit of using AI for education?",
+        "options": [
+            "Personalized learning and improved outcomes",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can enable personalized learning and improve educational outcomes."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system ethics?",
+        "options": [
+            "Ensuring the system aligns with ethical principles and values",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Ethics means ensuring the system aligns with ethical principles and values."
+    },
+    {
+        "question": "What is the main risk of using AI in autonomous vehicles?",
+        "options": [
+            "Potential for accidents and safety issues",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in autonomous vehicles can lead to accidents and safety issues if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system fairness?",
+        "options": [
+            "Regularly testing for and mitigating bias",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Regularly testing for and mitigating bias is recommended for AI system fairness."
+    },
+    {
+        "question": "What is the main benefit of using AI for public safety?",
+        "options": [
+            "Improved emergency response and crime prevention",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can improve emergency response and crime prevention for public safety."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system security?",
+        "options": [
+            "Protecting the system from unauthorized access and attacks",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Security means protecting the system from unauthorized access and attacks."
+    },
+    {
+        "question": "What is the main risk of using AI in social media?",
+        "options": [
+            "Spread of misinformation and harmful content",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in social media can spread misinformation and harmful content if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended approach for AI system transparency?",
+        "options": [
+            "Providing clear explanations and documentation",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear explanations and documentation are recommended for AI system transparency."
+    },
+    {
+        "question": "What is the main benefit of using AI for disaster response?",
+        "options": [
+            "Faster and more effective emergency response",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can enable faster and more effective emergency response in disasters."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system trustworthiness?",
+        "options": [
+            "Ensuring the system is reliable, transparent, and accountable",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Trustworthiness means the system is reliable, transparent, and accountable."
+    },
+    {
+        "question": "What is the main risk of using AI in government decision-making?",
+        "options": [
+            "Potential for bias and lack of accountability",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in government decision-making can introduce bias and reduce accountability if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system accountability?",
+        "options": [
+            "Clear assignment of responsibility and regular audits",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Clear responsibility and regular audits are recommended for AI system accountability."
+    },
+    {
+        "question": "What is the main benefit of using AI for scientific research?",
+        "options": [
+            "Accelerated discovery and improved analysis",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can accelerate discovery and improve analysis in scientific research."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system compliance?",
+        "options": [
+            "Adhering to relevant laws, regulations, and standards",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Compliance means adhering to relevant laws, regulations, and standards."
+    },
+    {
+        "question": "What is the main risk of using AI in critical infrastructure?",
+        "options": [
+            "Potential for system failures and security breaches",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in critical infrastructure can lead to system failures and security breaches if not properly managed."
+    },
+    {
+        "question": "What is the main benefit of using AI for transportation?",
+        "options": [
+            "Improved efficiency and safety",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can improve efficiency and safety in transportation."
+    },
+    {
+        "question": "Which of the following is a key consideration for AI system sustainability?",
+        "options": [
+            "Minimizing environmental impact and resource use",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Sustainability means minimizing environmental impact and resource use."
+    },
+    {
+        "question": "What is the main risk of using AI in education?",
+        "options": [
+            "Potential for bias and unequal access",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in education can introduce bias and unequal access if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended practice for AI system reliability?",
+        "options": [
+            "Regular testing and maintenance",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Regular testing and maintenance are recommended for AI system reliability."
+    },
+    {
+        "question": "What is the main benefit of using AI for customer service?",
+        "options": [
+            "Faster and more efficient support",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can provide faster and more efficient customer support."
+    },
+    {
+        "question": "Which of the following is a key aspect of AI system usability?",
+        "options": [
+            "Ensuring the system is easy to use and understand",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Usability means ensuring the system is easy to use and understand."
+    },
+    {
+        "question": "What is the main risk of using AI in journalism?",
+        "options": [
+            "Potential for spreading misinformation and bias",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in journalism can spread misinformation and bias if not properly managed."
+    },
+    {
+        "question": "Which of the following is a recommended approach for AI system security?",
+        "options": [
+            "Implementing robust security measures and regular testing",
+            "Reducing transparency",
+            "Maximizing automation",
+            "Avoiding documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Robust security measures and regular testing are recommended for AI system security."
+    },
+    {
+        "question": "What is the main benefit of using AI for supply chain management?",
+        "options": [
+            "Improved efficiency and optimization",
+            "Increasing data bias",
+            "Reducing model accuracy",
+            "Maximizing data collection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI can improve efficiency and optimization in supply chain management."
+    },
+    {
+        "question": "What is the main risk of using AI in marketing?",
+        "options": [
+            "Potential for manipulation and privacy invasion",
+            "Improved accuracy",
+            "Lower costs",
+            "Faster computation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AI in marketing can lead to manipulation and privacy invasion if not properly managed."
+    }
 ]
