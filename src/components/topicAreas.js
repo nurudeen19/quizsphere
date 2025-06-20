@@ -81,6 +81,18 @@ export const topicAreas = {
     "Data Modeling",
     "CRUD Operations",
     "Database Security"
+  ],
+  'databases-sql': [
+    'SQL Syntax',
+    'Joins & Relationships',
+    'Indexing Strategies',
+    'ACID Transactions',
+    'Query Optimization',
+    'Normalization',
+    'Window Functions',
+    'Stored Procedures',
+    'SQL Security',
+    'CTEs & Recursive Queries'
   ]
   // Add more topics as needed
 };

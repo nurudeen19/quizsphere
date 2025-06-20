@@ -68,5 +68,15 @@
     "level": "Beginner",
     "badge": "Data",
     "questionsCount": 52
+  },
+  {
+    "topic": "databases-sql",
+    "file": "data/databases-sql.json",
+    "title": "SQL Databases & Querying",
+    "image": "https://cdn-icons-png.flaticon.com/512/4248/4248443.png",
+    "description": "SQL database concepts with practical query writing, optimization, and transaction management.",
+    "level": "Intermediate",
+    "badge": "SQL",
+    "questionsCount": 100
   }
 ]
