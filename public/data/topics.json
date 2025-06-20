@@ -74,7 +74,7 @@
     "file": "data/databases-sql.json",
     "title": "SQL Databases & Querying",
     "image": "https://cdn-icons-png.flaticon.com/512/4248/4248443.png",
-    "description": "SQL database concepts with practical query writing, optimization, and transaction management.",
+    "description": "SQL database concepts with practical query writing, optimization, and transaction management. For students, developers, and data professionals learning SQL. Covers query writing, optimization, transactions, and practical database management.",
     "level": "Intermediate",
     "badge": "SQL",
     "questionsCount": 100
