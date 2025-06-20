@@ -44,10 +44,10 @@
     "file": "data/cloud-computing.json",
     "title": "Cloud Computing",
     "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
-    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
+    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios. Suitable for certification prep (AWS/Azure/GCP), technical interviews, and cloud engineers.",
     "level": "Intermediate",
     "badge": "Cloud",
-    "questionsCount": 53
+    "questionsCount": 188
   },
   {
     "topic": "kubernetes-advanced",

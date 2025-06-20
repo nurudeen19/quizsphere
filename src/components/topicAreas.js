@@ -52,16 +52,23 @@ export const topicAreas = {
     'Interview & Real-World'
   ],
   'cloud-computing': [
-    'Cloud Concepts',
-    'Service Models (IaaS, PaaS, SaaS)',
-    'Deployment Models (Public, Private, Hybrid, Multi-Cloud)',
-    'Cloud Providers',
-    'Serverless & Managed Services',
-    'Storage & Databases',
-    'Networking & Security',
-    'Cost Management',
-    'Compliance & Governance',
-    'Real-World Scenarios'
+    "Cloud Concepts & Economics",
+    "Service Models (IaaS/PaaS/SaaS)",
+    "Deployment Models (Public/Private/Hybrid/Multi-Cloud)",
+    "Core Services (Compute/Storage/Networking)",
+    "Cloud Security & Compliance",
+    "Scalability & High Availability",
+    "Disaster Recovery Strategies",
+    "Serverless & Containerization",
+    "Cost Optimization & Management",
+    "Cloud Migration Techniques",
+    "DevOps & Infrastructure as Code",
+    "Monitoring & Logging",
+    "Identity & Access Management",
+    "Cloud Storage Solutions",
+    "Networking & Content Delivery",
+    "Database Services",
+    "Governance & Policies"
   ]
   // Add more topics as needed
 };
