@@ -15,7 +15,7 @@
       </nav>
     </header>
     <transition name="modal-fade-scale">
-      <SettingsPanel v-if="showSettings" :key="settingsPanelKey" @settings-changed="handleSettingsChanged" @close="showSettings = false" />
+      <SettingsPanel v-if="showSettings" :key="settingsPanelKey" @settings-changed="handleSettingsChanged" @close="showSettings = false" :disabled="!!selectedTopic" />
     </transition>
     <main>
       <section class="welcome-section">

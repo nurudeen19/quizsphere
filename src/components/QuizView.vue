@@ -179,7 +179,7 @@
 
 <script setup>
 import { ref, watch, nextTick, computed, onMounted, defineEmits } from 'vue'
-import { PAGE_SIZE, fetchQuestions } from '../quiz/quiz-utils.js'
+import { fetchQuestions, getPageSize } from '../quiz/quiz-utils.js'
 import confetti from 'canvas-confetti'
 
 const props = defineProps({
@@ -194,7 +194,7 @@ const answered = ref(false)
 const isCorrect = ref(false)
 const topicTitle = ref('')
 const selectedOptions = ref([])
-const CHAPTER_SIZE = PAGE_SIZE
+const CHAPTER_SIZE = getPageSize()
 const chapter = ref(0)
 const showNextBtn = ref(true)
 const chapterStates = ref({})

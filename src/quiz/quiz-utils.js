@@ -3,6 +3,7 @@
 // Suggest renaming this file to quiz-utils.js or quiz-logic.js
 
 const PAGE_SIZE = 25;
+const SETTINGS_KEY = 'quizsphere-user-settings';
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -33,34 +34,35 @@ function shuffleOptionsAndRemapAnswers(questions) {
     }
 }
 
-// Utility to get a stable shuffled order for a session
-function getSessionShuffledOrder(key, arrLength) {
-    let order = sessionStorage.getItem(key);
-    if (order) {
-        try {
-            order = JSON.parse(order);
-            if (Array.isArray(order) && order.length === arrLength) {
-                return order;
-            }
-        } catch (e) {}
+
+function getUserSettings() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return {};
+}
+
+function getPageSize() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (raw) {
+      const settings = JSON.parse(raw);
+      if (settings.questionsPerChapter && Number(settings.questionsPerChapter) > 0) {
+        return Number(settings.questionsPerChapter);
+      }
     }
-    // Generate new shuffled order
-    order = Array.from({ length: arrLength }, (_, i) => i);
-    shuffleArray(order);
-    sessionStorage.setItem(key, JSON.stringify(order));
-    return order;
+  } catch {}
+  return PAGE_SIZE;
 }
 
-function applyOrder(arr, order) {
-    return order.map(i => arr[i]);
-}
-
-function getQuizQuestionsPage(questionsData, page = 0, pageSize = PAGE_SIZE, sessionKey = null) {
+function getQuizQuestionsPage(questionsData, page = 0, pageSize) {
     // Defensive: filter out malformed questions before paginating
     const validQuestions = (questionsData || []).filter(q => q && q.q && Array.isArray(q.options) && Array.isArray(q.answer));
-    // No shuffling, just paginate in original order
-    const start = page * pageSize;
-    const end = start + pageSize;
+    // Prefer user setting for page size if not provided
+    const effectivePageSize = pageSize || getPageSize();
+    const start = page * effectivePageSize;
+    const end = start + effectivePageSize;
     const pageQuestions = validQuestions.slice(start, end);
     shuffleOptionsAndRemapAnswers(pageQuestions);
     return pageQuestions;
@@ -119,4 +121,4 @@ export async function fetchQuestions(file, opts = {}) {
   return data;
 }
 
-export { getQuizQuestionsPage, shuffleArray, shuffleOptionsAndRemapAnswers, PAGE_SIZE };
+export { getQuizQuestionsPage, shuffleArray, shuffleOptionsAndRemapAnswers, getPageSize, getUserSettings, PAGE_SIZE };
