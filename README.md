@@ -2,6 +2,8 @@
 
 A robust, modular, and visually appealing Vue 3 + Vite + Tailwind CSS quiz system with topic/chapter support, state persistence, modern UI, and production readiness.
 
+> ⭐ **If you find QuizSphere helpful, please [star the repo on GitHub](https://github.com/nurudeen19/quizsphere)! It helps others discover this free resource.**
+
 ## Features
 - Vue 3 with `<script setup>` SFCs
 - Tailwind CSS for modern, responsive design
