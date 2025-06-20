@@ -14,6 +14,17 @@
         Chapter {{ chapter + 1 }} of {{ Math.ceil(totalQuestions / CHAPTER_SIZE) || 1 }}
       </div>
     </div>
+    <!-- Timer Component -->
+    <div v-if="timerEnabled" class="mb-4 flex justify-center">
+      <Timer
+        :key="timerKey"
+        :duration="timerMinutes"
+        :auto-terminate="timerAutoTerminate"
+        :allow-negative="timerAllowNegative"
+        :running="timerRunning"
+        @timeout="handleTimerTimeout"
+      />
+    </div>
     <!-- Animated Progress Bar -->
     <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner">
       <div
@@ -179,7 +190,8 @@
 
 <script setup>
 import { ref, watch, nextTick, computed, onMounted, defineEmits } from 'vue'
-import { fetchQuestions, getPageSize } from '../quiz/quiz-utils.js'
+import { PAGE_SIZE, fetchQuestions, getPageSize, getUserSettings } from '../quiz/quiz-utils.js'
+import Timer from './Timer.vue'
 import confetti from 'canvas-confetti'
 
 const props = defineProps({
@@ -503,6 +515,26 @@ function startFresh() {
       loading.value = false;
       setTimeout(() => { skipConfetti.value = false }, 1000); // allow confetti again after reload
     });
+}
+
+// Timer settings
+const userSettings = getUserSettings()
+const timerEnabled = ref(!!userSettings.enableTimer)
+const timerMinutes = ref(userSettings.timerMinutes || 0)
+const timerAutoTerminate = ref(!!userSettings.autoTerminate)
+const timerAllowNegative = ref(!!userSettings.allowNegative)
+const timerRunning = ref(true)
+const timerKey = ref(0) // for resetting timer
+
+function handleTimerTimeout() {
+  if (timerAutoTerminate.value) {
+    // Auto-submit or end chapter
+    // If not answered, mark as complete and move to stats
+    current.value = questions.value.length // End quiz
+    answered.value = true
+    transitioning.value = false
+    // Optionally, show a message or feedback
+  }
 }
 
 // Utility to get total chapters for the current topic
