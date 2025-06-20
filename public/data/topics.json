@@ -58,5 +58,15 @@
     "level": "Advanced",
     "badge": "Cloud Native",
     "questionsCount": 71
+  },
+  {
+    "topic": "database",
+    "file": "data/database.json",
+    "title": "Database Fundamentals",
+    "image": "https://cdn-icons-png.flaticon.com/512/2721/2721278.png",
+    "description": "Fundamental database concepts covering relational and non-relational systems, ACID properties, CAP theorem, and basic design principles.",
+    "level": "Beginner",
+    "badge": "Data",
+    "questionsCount": 52
   }
 ]

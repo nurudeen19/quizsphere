@@ -69,6 +69,18 @@ export const topicAreas = {
     "Networking & Content Delivery",
     "Database Services",
     "Governance & Policies"
+  ],
+  database: [
+    "Database Types",
+    "ACID Properties",
+    "CAP Theorem",
+    "Normalization",
+    "Indexing Basics",
+    "Transactions",
+    "SQL vs NoSQL",
+    "Data Modeling",
+    "CRUD Operations",
+    "Database Security"
   ]
   // Add more topics as needed
 };
