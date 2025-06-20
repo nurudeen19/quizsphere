@@ -701,3 +701,16 @@ main {
   box-shadow: 0 12px 36px 0 rgba(56,189,248,0.18), 0 2px 8px 0 rgba(59,130,246,0.12);
   transform: scale(1.01);
 }
+
+/* Modal fade/scale transition for settings modal */
+.modal-fade-scale-enter-active, .modal-fade-scale-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.modal-fade-scale-enter-from, .modal-fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.92) translateY(32px);
+}
+.modal-fade-scale-enter-to, .modal-fade-scale-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}

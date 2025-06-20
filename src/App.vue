@@ -9,8 +9,14 @@
       <nav>
         <a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a>
         <a href="https://github.com/nurudeen19/quizsphere" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub</a>
+        <button @click="showSettings = !showSettings" class="ml-4 nav-link settings-btn" title="Quiz Settings">
+          <i class="fas fa-cog"></i>
+        </button>
       </nav>
     </header>
+    <transition name="modal-fade-scale">
+      <SettingsPanel v-if="showSettings" :key="settingsPanelKey" @settings-changed="handleSettingsChanged" @close="showSettings = false" />
+    </transition>
     <main>
       <section class="welcome-section">
         <h1>Welcome to <span class="brand">QuizSphere</span>!</h1>
@@ -23,7 +29,7 @@
         >
           <i class="fas fa-arrow-left text-sm"></i> Back to Topics
         </button>
-        <QuizView :topic="selectedTopic" @back="selectedTopic = null" />
+        <QuizView :topic="selectedTopic" />
       </section>
       <transition name="fade-slide" mode="out-in">
         <section v-if="!selectedTopic" class="w-full min-w-0 min-h-0 animate-fade-in">
@@ -41,10 +47,21 @@
 import { ref } from 'vue'
 import TopicList from './components/TopicList.vue'
 import QuizView from './components/QuizView.vue'
+import SettingsPanel from './components/SettingsPanel.vue'
 
 const selectedTopic = ref(null)
 function selectTopic(topic) {
   selectedTopic.value = topic
+}
+
+const showSettings = ref(false)
+const userSettings = ref({})
+const settingsPanelKey = ref(0) // for resetting panel if needed
+
+function handleSettingsChanged(newSettings) {
+  userSettings.value = { ...newSettings }
+  // Optionally close panel on save
+  // showSettings.value = false
 }
 </script>
 
