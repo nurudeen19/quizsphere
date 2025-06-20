@@ -53,22 +53,15 @@ export const topicAreas = {
   ],
   'cloud-computing': [
     "Cloud Concepts & Economics",
-    "Service Models (IaaS/PaaS/SaaS)",
-    "Deployment Models (Public/Private/Hybrid/Multi-Cloud)",
+    "Service & Deployment Models (IaaS/PaaS/SaaS, Public/Private/Hybrid)",
     "Core Services (Compute/Storage/Networking)",
     "Cloud Security & Compliance",
     "Scalability & High Availability",
-    "Disaster Recovery Strategies",
+    "Disaster Recovery & Backup",
     "Serverless & Containerization",
     "Cost Optimization & Management",
-    "Cloud Migration Techniques",
     "DevOps & Infrastructure as Code",
-    "Monitoring & Logging",
-    "Identity & Access Management",
-    "Cloud Storage Solutions",
-    "Networking & Content Delivery",
-    "Database Services",
-    "Governance & Policies"
+    "Identity & Access Management"
   ],
   database: [
     "Database Types",

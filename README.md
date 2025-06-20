@@ -5,7 +5,7 @@ A robust, modular, and visually appealing Vue 3 + Vite + Tailwind CSS quiz syste
 ## Features
 - Vue 3 with `<script setup>` SFCs
 - Tailwind CSS for modern, responsive design
-- Topic and chapter-based quizzes
+- Topic and chapter-based quizzes (add unlimited topics via `topics.json`)
 - State persistence (per topic/chapter) using localStorage
 - Animated progress bar, chapter navigation, and stats
 - Unified chapter stats table
@@ -15,16 +15,36 @@ A robust, modular, and visually appealing Vue 3 + Vite + Tailwind CSS quiz syste
 - Confetti/congratulatory animation at quiz completion
 - Versioned state for future-proofing
 - SPA routing support for Apache
+- Easily extensible: add new topics, question sets, and areas
 
-## Areas Covered
-QuizSphere currently covers the following major topics and sub-areas:
+## Topics & Areas Covered
+QuizSphere currently covers:
 
-- **Kubernetes**: Pods & Deployments, Services & Networking, ConfigMaps & Secrets, Volumes & Storage, RBAC & Security, Helm & Operators, Cluster Architecture, Troubleshooting
-- **Kubernetes Advanced**: Advanced Scheduling, Security & Hardening, Multi-Cluster Management, Custom Controllers, Performance Tuning, Disaster Recovery, Networking Deep Dive, Real-World Scenarios
-- **GitHub Copilot**: AI Code Suggestions, Editor Integrations, Prompt Engineering, Copilot Labs, Security & Privacy, Supported Languages, Productivity Tips
-- **GitHub Copilot Exam**: Copilot Fundamentals, Prompt Engineering, Copilot in Practice, Security and Privacy, Capabilities and Limitations, IDE Integration, Test Generation, Data Handling, Vulnerability Awareness, Prompt Structure, Prompt Refinement, Team & Collaboration, Licensing & Compliance
-- **Docker**: Docker Fundamentals, Docker CLI & Dockerfile, Docker Compose & Orchestration, Networking, Volumes & Data Persistence, Best Practices, Troubleshooting, Certifications, Interview & Real-World
-- **Cloud Computing**: Cloud Concepts, Service Models (IaaS, PaaS, SaaS), Deployment Models (Public, Private, Hybrid, Multi-Cloud), Cloud Providers, Serverless & Managed Services, Storage & Databases, Networking & Security, Cost Management, Compliance & Governance, Real-World Scenarios
+- **Kubernetes**: Fundamentals, operations, troubleshooting, RBAC, storage, networking, and certification prep
+- **Kubernetes Advanced**: Advanced scheduling, security, multi-cluster, controllers, performance, disaster recovery
+- **GitHub Copilot for Beginners**: Copilot basics, supported languages, editor integration, code suggestions, security, best practices
+- **GitHub Copilot Certification Prep**: Responsible AI, Copilot features, data handling, prompt engineering, use cases, testing, privacy
+- **Docker & Containerization**: Docker CLI, Compose, orchestration, networking, volumes, troubleshooting, certifications
+- **Cloud Computing**: Concepts, service/deployment models, core services, security, scalability, serverless, cost, DevOps, IAM
+- **Database Fundamentals**: Relational & non-relational, ACID, CAP theorem, normalization, indexing, security
+- **SQL Databases & Querying**: SQL syntax, joins, indexing, transactions, optimization, window functions, security
+
+> **Add your own topics!**
+> - Add a new entry to `public/data/topics.json` (see examples)
+> - Add a question set in `public/data/` (JSON format)
+> - Add topic areas in `src/components/topicAreas.js`
+
+## Validating Question Counts
+To ensure the `questionsCount` in `topics.json` matches the actual number of questions in each topic's data file, use the scripts in the `scripts/` folder:
+
+- `scripts/count-duplicates.js`: Checks for duplicate questions in a data file.
+- `scripts/update-question-counts.js`: Automatically counts questions in each topic's JSON file and updates the `questionsCount` field in `topics.json`.
+
+Run these scripts with Node.js to keep your topic metadata accurate:
+
+```sh
+node scripts/update-question-counts.js
+```
 
 ## Getting Started (Development)
 
@@ -77,6 +97,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ## Folder Structure
 - `src/` — Vue components, styles, and data
+- `public/data/` — Topic/question JSON files
+- `scripts/` — Utility scripts for validation and maintenance
 - `dist/` — Production build output
 - `.htaccess` — Apache rewrite rules for SPA routing
 
@@ -84,6 +106,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 - Add new topics in `public/data/topics.json` (with image URLs)
 - Add/modify questions in `public/data/`
 - Update styles in `src/style.css` or via Tailwind
+- Add topic areas in `src/components/topicAreas.js`
 
 ## Accessibility & i18n
 - Accessible by keyboard and screen readers
