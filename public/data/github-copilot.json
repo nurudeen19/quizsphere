@@ -13,33 +13,72 @@
         "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
     },
     {
-        "question": "Likely mission forward key coach but management social person science.?",
+        "question": "What is the primary purpose of GitHub Copilot?",
         "options": [
-            "Yes",
-            "No",
-            "Only in Python",
-            "Only in Java"
+            "To manage Git repositories",
+            "To suggest code in real-time as you type",
+            "To deploy applications to the cloud",
+            "To run automated tests"
         ],
         "answer": [
-            0
+            1
         ],
-        "explanation": "Copilot can suggest comments based on natural language input."
+        "explanation": "GitHub Copilot is an AI pair programmer that suggests code in real time as you type."
     },
     {
-        "question": "Two cover participant establish listen bad wish scientist car.?",
+        "question": "Can GitHub Copilot be used in Visual Studio Code?",
         "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
+            "Yes, only in VS Code",
+            "No, it can only be used in JetBrains IDEs",
+            "Yes, in multiple IDEs including VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "No, it can only be used in online editors"
         ],
         "answer": [
             2
         ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
+        "explanation": "Copilot supports major IDEs like VS Code, Visual Studio, JetBrains, and Neovim."
     },
     {
-        "question": "Blue because what country our eat remember pick rich real myself.?",
+        "question": "What is Copilot Chat used for?",
+        "options": [
+            "Starting Zoom meetings",
+            "Asking natural language questions about your code",
+            "Managing git branches",
+            "Debugging external APIs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot Chat allows developers to ask questions in plain English to get help on their code."
+    },
+    {
+        "question": "How does GitHub Copilot handle security risks?",
+        "options": [
+            "It guarantees secure code",
+            "It scans all files in your repo",
+            "Users must validate and review all suggestions",
+            "It blocks insecure code"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Developers must review all code suggestions for correctness and security."
+    },
+    {
+        "question": "What is the default key to accept a Copilot suggestion in VS Code?",
+        "options": [
+            "Click the green check icon",
+            "Press the Tab key",
+            "Use the Enter key",
+            "Type 'accept suggestion'"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "The default key to accept a Copilot suggestion in VS Code is Tab."
+    },
+    {
+        "question": "Can GitHub Copilot suggest comments based on natural language input?",
         "options": [
             "Yes",
             "No",
@@ -50,6 +89,45 @@
             0
         ],
         "explanation": "Copilot can suggest comments based on natural language input."
+    },
+    {
+        "question": "Is GitHub Copilot free for verified students?",
+        "options": [
+            "Yes",
+            "No",
+            "Only for the first 30 days",
+            "Only in the US"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot is free for verified students and maintainers of popular open-source projects."
+    },
+    {
+        "question": "What should a developer do if a Copilot suggestion includes sensitive data?",
+        "options": [
+            "Ignore it and continue",
+            "Report it to GitHub",
+            "Copy and use it",
+            "Check if it's working"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub recommends reporting any suggestion that includes sensitive or personal data."
+    },
+    {
+        "question": "How does GitHub Copilot generate code suggestions?",
+        "options": [
+            "By searching Stack Overflow in real time",
+            "By using AI to predict code based on context",
+            "By executing your code and analyzing output",
+            "By copying code from GitHub repositories"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot uses AI to understand your current code context and predict what you might want next."
     },
     {
         "question": "Can Copilot suggest code comments?",
@@ -169,19 +247,6 @@
         "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
     },
     {
-        "question": "Is GitHub Copilot free for verified students?",
-        "options": [
-            "Yes",
-            "No",
-            "Only for the first 30 days",
-            "Only in the US"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot is free for verified students and maintainers of popular open-source projects."
-    },
-    {
         "question": "Southern end possible development this family air dream discussion sing.?",
         "options": [
             "Python",
@@ -193,19 +258,6 @@
             3
         ],
         "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "What should a developer do if a Copilot suggestion includes sensitive data?",
-        "options": [
-            "Ignore it and continue",
-            "Report it to GitHub",
-            "Copy and use it",
-            "Check if it's working"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "GitHub recommends reporting any suggestion that includes sensitive or personal data."
     },
     {
         "question": "Left officer population level opportunity show newspaper.?",
@@ -401,19 +453,6 @@
             2
         ],
         "explanation": "Copilot is trained only on publicly available source code and other public content."
-    },
-    {
-        "question": "What is Copilot Chat used for?",
-        "options": [
-            "Starting Zoom meetings",
-            "Asking natural language questions about your code",
-            "Managing git branches",
-            "Debugging external APIs"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Copilot Chat allows developers to ask questions in plain English to get help on their code."
     },
     {
         "question": "Late which miss hospital blue.?",

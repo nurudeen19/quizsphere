@@ -30,7 +30,7 @@
           <i class="fas fa-arrow-left text-sm"></i> Back to Topics
         </button>
         <div class="flex flex-col items-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
-          <QuizView :topic="selectedTopic" />
+          <QuizView :topic="selectedTopic" :user-settings="userSettings" />
         </div>
       </section>
       <transition name="fade-slide" mode="out-in">

@@ -46,13 +46,19 @@
                   </div>
                   <div class="text-xs text-gray-500 mt-1">Set the time limit for each chapter.</div>
                 </div>
-                <div class="flex items-center gap-2 mb-2">
-                  <input type="checkbox" id="autoTerminate" v-model="settings.autoTerminate" />
-                  <label for="autoTerminate" class="text-base">Auto-terminate and score when timer ends</label>
-                </div>
-                <div class="flex items-center gap-2 mb-2">
-                  <input type="checkbox" id="allowNegative" v-model="settings.allowNegative" />
-                  <label for="allowNegative" class="text-base">Allow timer to run negative (show overtime)</label>
+                <div class="mb-2">
+                  <label class="block text-sm font-semibold text-blue-700 mb-1">Post-timeout Action</label>
+                  <div class="flex flex-col gap-1">
+                    <label class="flex items-center gap-2">
+                      <input type="radio" name="timeoutAction" value="autoTerminate" v-model="timeoutAction" />
+                      Auto-terminate and score when timer ends
+                    </label>
+                    <label class="flex items-center gap-2">
+                      <input type="radio" name="timeoutAction" value="allowNegative" v-model="timeoutAction" />
+                      Allow timer to run negative (show overtime)
+                    </label>
+                  </div>
+                  <div class="text-xs text-gray-500 mt-1">Choose what happens when the timer runs out.</div>
                 </div>
               </div>
             </div>
@@ -151,6 +157,7 @@ const timerOptions = [
 ]
 const timerSelect = ref('')
 const customTimer = ref('')
+const timeoutAction = ref('autoTerminate')
 
 watch(
   () => settings.value.enableTimer,
@@ -166,6 +173,10 @@ watch(
         timerSelect.value = 15
         customTimer.value = ''
       }
+      // Set timeoutAction from settings
+      if (settings.value.autoTerminate) timeoutAction.value = 'autoTerminate'
+      else if (settings.value.allowNegative) timeoutAction.value = 'allowNegative'
+      else timeoutAction.value = 'autoTerminate'
     } else {
       timerSelect.value = ''
       customTimer.value = ''
@@ -173,6 +184,16 @@ watch(
   },
   { immediate: true }
 )
+
+watch(timeoutAction, (val) => {
+  if (val === 'autoTerminate') {
+    settings.value.autoTerminate = true
+    settings.value.allowNegative = false
+  } else if (val === 'allowNegative') {
+    settings.value.autoTerminate = false
+    settings.value.allowNegative = true
+  }
+})
 
 watch([timerSelect, customTimer], ([sel, custom]) => {
   if (sel === 'custom' && custom > 0) {
@@ -186,6 +207,13 @@ watch(settings, (val) => {
   // Optionally auto-save on change
   // saveSettings()
 }, { deep: true })
+
+watch([() => settings.value.autoTerminate, () => settings.value.allowNegative, () => settings.value.enableTimer], ([autoTerminate, allowNegative, enableTimer]) => {
+  if (enableTimer && !autoTerminate && !allowNegative) {
+    // Force autoTerminate to true if both are unchecked
+    settings.value.autoTerminate = true
+  }
+})
 </script>
 
 <style scoped>

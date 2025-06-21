@@ -30,6 +30,8 @@ const props = defineProps({
   autoTerminate: { type: Boolean, default: false },
   allowNegative: { type: Boolean, default: false },
   running: { type: Boolean, default: true },
+  resumeSeconds: { type: Number, default: null },
+  displaySeconds: { type: Number, default: null }, // for initial display only
 })
 const emit = defineEmits(['timeout', 'tick'])
 
@@ -38,6 +40,7 @@ const elapsed = ref(0)
 const timer = ref(null)
 const isNegative = ref(false)
 
+// Remove displayTime computed, use live countdown for display
 const minutes = computed(() => Math.floor(Math.abs(totalSeconds.value - elapsed.value) / 60))
 const seconds = computed(() => Math.abs(totalSeconds.value - elapsed.value) % 60)
 
@@ -106,9 +109,32 @@ function getTimeLeft() {
     : Math.max(0, totalSeconds.value - elapsed.value)
 }
 
+function setElapsedFromResume() {
+  // Use displaySeconds for initial value if present, else resumeSeconds
+  let resume = props.displaySeconds != null ? props.displaySeconds : props.resumeSeconds
+  if (resume !== null && typeof resume === 'number') {
+    elapsed.value = totalSeconds.value - resume
+    isNegative.value = elapsed.value > totalSeconds.value
+  } else {
+    elapsed.value = 0
+    isNegative.value = false
+  }
+}
+
+onMounted(() => {
+  setElapsedFromResume()
+  if (props.running) start()
+})
+onUnmounted(stop)
+
+watch(() => props.resumeSeconds, (val) => {
+  setElapsedFromResume()
+})
+
 watch(() => props.duration, (newVal) => {
   totalSeconds.value = newVal * 60
   reset()
+  setElapsedFromResume()
   if (props.running) start()
 })
 
@@ -117,10 +143,21 @@ watch(() => props.running, (val) => {
   else stop()
 })
 
-onMounted(() => {
-  if (props.running) start()
+watch(() => props.autoTerminate, (val) => {
+  // If autoTerminate changes, reset timer logic if needed
+  if (props.running) {
+    reset()
+    start()
+  }
 })
-onUnmounted(stop)
+
+watch(() => props.allowNegative, (val) => {
+  // If allowNegative changes, reset timer logic if needed
+  if (props.running) {
+    reset()
+    start()
+  }
+})
 </script>
 
 <style scoped>

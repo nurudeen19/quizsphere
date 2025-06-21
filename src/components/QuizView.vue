@@ -14,6 +14,11 @@
         Chapter {{ chapter + 1 }} of {{ Math.ceil(totalQuestions / CHAPTER_SIZE) || 1 }}
       </div>
     </div>
+    <!-- Timer Resume Info -->
+    <div v-if="timerResumeInfo" class="timer-resume-info bg-blue-100 border-l-4 border-blue-500 text-blue-900 px-4 py-2 rounded shadow mb-4 text-base font-semibold flex items-center gap-2">
+      <i class="fas fa-info-circle"></i>
+      {{ timerResumeInfo }}
+    </div>
     <!-- Timer Component -->
     <div v-if="timerEnabled" class="mb-4 flex justify-center">
       <Timer
@@ -22,7 +27,10 @@
         :auto-terminate="timerAutoTerminate"
         :allow-negative="timerAllowNegative"
         :running="timerRunning"
+        :resume-seconds="timerResumeSeconds"
+        :display-seconds="timerDisplaySeconds"
         @timeout="handleTimerTimeout"
+        @tick="handleTimerTick"
         aria-label="Quiz timer"
       />
     </div>
@@ -81,7 +89,7 @@
             Please select at least one option before submitting your answer.
           </div>
         </transition>
-        <section class="quiz-action-area min-h-[140px] flex flex-col items-center justify-center relative">
+        <section class="quiz-action-area min-h-[200px] w-full max-w-2xl px-6 transition-[min-width,min-height] duration-500 flex flex-col items-center justify-center relative text-center mx-auto">
           <div style="width:100%">
             <transition name="fade-slow" mode="out-in">
               <div v-if="!answered && !transitioning" key="submit" class="quiz-action-sub">
@@ -195,7 +203,11 @@ import confetti from 'canvas-confetti'
 import { renderMarkdown } from '../quiz/markdown.js'
 
 const props = defineProps({
-  topic: Object
+  topic: Object,
+  userSettings: {
+    type: Object,
+    default: () => ({})
+  }
 })
 
 const emit = defineEmits(['back'])
@@ -221,6 +233,8 @@ const currentChapterScore = ref(0);
 const showSelectionWarning = ref(false);
 const overallStatsVersion = ref(0)
 const skipConfetti = ref(false)
+const timerResumeSeconds = ref(null)
+const TIMER_STATE_KEY = (topicKey, chapter) => `quizsphere-timer-state-${topicKey}-ch${chapter}`;
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -262,6 +276,19 @@ watch(() => props.topic, async (newTopic) => {
       // Only reset state if not loaded from localStorage
       if (!loaded) {
         resetStateForChapter()
+      }
+      // TIMER: Check for saved timer state
+      const timerKeyStr = TIMER_STATE_KEY(newTopic.topic, chapter.value)
+      const timerStateStr = localStorage.getItem(timerKeyStr)
+      if (timerStateStr) {
+        const timerState = JSON.parse(timerStateStr)
+        if (timerState && timerState.remaining > 0) {
+          timerResumeSeconds.value = timerState.remaining
+          timerEnabled.value = true // Ensure timer is enabled on resume
+          timerKey.value++ // force Timer component to re-mount
+        }
+      } else {
+        timerResumeSeconds.value = null
       }
     } catch (e) {
       questions.value = []
@@ -524,13 +551,50 @@ function startFresh() {
 }
 
 // Timer settings
-const userSettings = getUserSettings()
-const timerEnabled = ref(!!userSettings.enableTimer)
-const timerMinutes = ref(userSettings.timerMinutes || 0)
-const timerAutoTerminate = ref(!!userSettings.autoTerminate)
-const timerAllowNegative = ref(!!userSettings.allowNegative)
+const timerEnabled = ref(!!props.userSettings.enableTimer)
+const timerMinutes = ref(props.userSettings.timerMinutes || 0)
+const timerAutoTerminate = ref(!!props.userSettings.autoTerminate)
+const timerAllowNegative = ref(!!props.userSettings.allowNegative)
 const timerRunning = ref(true)
 const timerKey = ref(0) // for resetting timer
+let timerTickCounter = 0 // For throttling timer persistence
+
+// Computed: display value for timer (seconds)
+const timerDisplaySeconds = computed(() => {
+  return timerResumeSeconds.value != null ? timerResumeSeconds.value : timerMinutes.value * 60;
+})
+
+// Computed: timer resume info message, updates as timerResumeSeconds changes
+const timerResumeInfo = computed(() => {
+  if (!timerEnabled.value || timerResumeSeconds.value == null || !isQuizActive.value) return ''
+  const min = Math.floor(timerResumeSeconds.value / 60)
+  const sec = timerResumeSeconds.value % 60
+  return `You are continuing a timed session. Remaining time: ${min} min ${sec} sec.`
+})
+
+// --- TIMER PERSISTENCE ---
+function saveTimerState(remaining) {
+  if (!timerEnabled.value) return
+  const topicKey = props.topic?.topic
+  if (!topicKey) return
+  const key = TIMER_STATE_KEY(topicKey, chapter.value)
+  localStorage.setItem(key, JSON.stringify({ remaining }))
+}
+function clearTimerState() {
+  const topicKey = props.topic?.topic
+  if (!topicKey) return
+  const key = TIMER_STATE_KEY(topicKey, chapter.value)
+  localStorage.removeItem(key)
+}
+
+// --- Timer event handling ---
+function handleTimerTick(remaining) {
+  timerTickCounter++
+  timerResumeSeconds.value = remaining // keep resume info in sync
+  if (timerTickCounter % 5 === 0 || remaining === 0) { // Save every 5 seconds or on zero
+    saveTimerState(remaining)
+  }
+}
 
 function handleTimerTimeout() {
   if (timerAutoTerminate.value) {
@@ -539,6 +603,7 @@ function handleTimerTimeout() {
     current.value = questions.value.length // End quiz
     answered.value = true
     transitioning.value = false
+    clearTimerState()
     // Optionally, show a message or feedback
   }
 }
@@ -679,12 +744,13 @@ watch([
             origin: { y: 0.6 },
             angle: 60 + Math.random() * 60,
             scalar: 0.8 + Math.random() * 0.4,
-          })
-        }, i * 350)
+          });
+        }, i * 350);
       }
-    })
+    });
   }
-})
+});
+
 // TODO: For a more dynamic confetti effect, consider using a JS confetti library or randomizing confetti properties for extra delight.
 // TODO: For internationalization, extract all user-facing strings to a localization file or use a library like vue-i18n.
 
@@ -714,6 +780,19 @@ const renderedQuestion = computed(() => {
   const q = questions.value[current.value]?.question || questions.value[current.value]?.q || '';
   return renderMarkdown(q);
 })
+
+// Watch for changes in userSettings prop and update timer settings
+watch(() => props.userSettings, (newSettings, oldSettings) => {
+  const prevEnabled = timerEnabled.value
+  timerEnabled.value = !!newSettings.enableTimer
+  timerMinutes.value = newSettings.timerMinutes || 0
+  timerAutoTerminate.value = !!newSettings.autoTerminate
+  timerAllowNegative.value = !!newSettings.allowNegative
+  // If timerEnabled changes, force Timer re-mount
+  if (timerEnabled.value !== prevEnabled) {
+    timerKey.value++
+  }
+}, { deep: true })
 </script>
 
 <style>
