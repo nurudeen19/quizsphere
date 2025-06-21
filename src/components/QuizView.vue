@@ -23,19 +23,16 @@
         :allow-negative="timerAllowNegative"
         :running="timerRunning"
         @timeout="handleTimerTimeout"
+        aria-label="Quiz timer"
       />
     </div>
     <!-- Animated Progress Bar -->
-    <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner">
+    <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner" role="progressbar" :aria-valuenow="((current + 0) / questions.length * 100)" aria-valuemin="0" :aria-valuemax="questions.length" tabindex="0">
       <div
         class="progress-bar transition-all duration-500"
         :style="{ width: ((current + 0) / questions.length * 100) + '%' }"
-        aria-valuenow="((current + 0) / questions.length * 100)"
-        aria-valuemin="0"
-        :aria-valuemax="questions.length"
-        role="progressbar"
       >
-        <span class="sr-only">Progress</span>
+        <span class="sr-only">Progress: {{ current + 1 }} of {{ questions.length }}</span>
       </div>
     </div>
     <!-- End Progress Bar -->
@@ -59,6 +56,7 @@
               class="mr-3 accent-cyan-500 w-5 h-5 focus:ring-2 focus:ring-cyan-400"
               :aria-checked="selectedOptions == idx"
               :tabindex="answered ? -1 : 0"
+              :aria-label="'Option ' + (idx + 1) + ': ' + opt"
             />
             <input
               v-else
@@ -70,6 +68,7 @@
               class="mr-3 accent-cyan-500 w-5 h-5 focus:ring-2 focus:ring-cyan-400"
               :aria-checked="selectedOptions.includes(idx)"
               :tabindex="answered ? -1 : 0"
+              :aria-label="'Option ' + (idx + 1) + ': ' + opt"
             />
             <label :for="'option-' + idx" class="flex-1 cursor-pointer text-base font-medium flex items-center gap-2 text-left">
               {{ opt }}

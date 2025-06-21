@@ -22,14 +22,16 @@
         <h1>Welcome to <span class="brand">QuizSphere</span>!</h1>
         <p class="subtitle">Explore various topics and test your knowledge!</p>
       </section>
-      <section v-if="selectedTopic" class="quiz-section animate-fade-in">
+      <section v-if="selectedTopic" class="quiz-section animate-fade-in px-2 py-6 md:px-8 md:py-10 bg-gradient-to-br from-blue-50 via-cyan-50 to-white rounded-3xl shadow-2xl border-2 border-blue-100 max-w-5xl mx-auto mt-6 mb-8 relative flex flex-col items-center min-h-[600px]">
         <button
           @click="selectedTopic = null"
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-200 text-blue-800 font-semibold shadow hover:from-cyan-200 hover:to-blue-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 transition-all mb-4 text-base tracking-wide drop-shadow border border-blue-200 cursor-pointer"
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-200 text-blue-800 font-semibold shadow hover:from-cyan-200 hover:to-blue-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 transition-all mb-4 text-base tracking-wide drop-shadow border border-blue-200 cursor-pointer absolute left-4 top-4 z-10"
         >
           <i class="fas fa-arrow-left text-sm"></i> Back to Topics
         </button>
-        <QuizView :topic="selectedTopic" />
+        <div class="flex flex-col items-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto">
+          <QuizView :topic="selectedTopic" />
+        </div>
       </section>
       <transition name="fade-slide" mode="out-in">
         <section v-if="!selectedTopic" class="w-full min-w-0 min-h-0 animate-fade-in">

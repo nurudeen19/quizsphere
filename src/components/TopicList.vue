@@ -16,9 +16,18 @@
         </div>
       </div>
       <div class="flex-1 flex flex-col justify-between p-6 pt-3 card-content-padding bg-white/80 h-full">
-        <p class="topic-description text-cyan-700 text-[15px] italic font-semibold mb-2 text-left min-h-[40px] tracking-wide drop-shadow-sm flex items-center">
+        <p
+          class="topic-description text-cyan-700 text-[15px] italic font-semibold mb-2 text-left tracking-wide drop-shadow-sm flex items-center"
+          :class="{ 'expanded': expandedDescriptions[topic.topic] || hoveredDescription === topic.topic }"
+          ref="el => setDescriptionRef(topic.topic, el)"
+          @mouseenter="hoveredDescription = topic.topic"
+          @mouseleave="hoveredDescription = null"
+        >
           {{ topic.description || 'This quiz covers the following key areas:' }}
+          <span v-if="showReadMore[topic.topic] && !(expandedDescriptions[topic.topic] || hoveredDescription === topic.topic)" class="truncate-indicator">&nbsp;…</span>
         </p>
+        <button v-if="showReadMore[topic.topic] && !expandedDescriptions[topic.topic]" class="read-more-btn text-xs text-blue-700 underline font-semibold mb-2 ml-1" @click="expandDescription(topic.topic)">Read more</button>
+        <button v-if="expandedDescriptions[topic.topic]" class="read-more-btn text-xs text-blue-700 underline font-semibold mb-2 ml-1" @click="collapseDescription(topic.topic)">Show less</button>
         <ul v-if="topic.areas && topic.areas.length" class="topic-areas-animated list-none text-xs text-blue-800 mb-3 pl-0 min-h-[48px] flex flex-wrap items-start">
           <li v-for="(area, idx) in topic.areas" :key="area" :style="{ animationDelay: (0.05 * idx) + 's' }" class="topic-area-bullet animate-fadein-left flex items-center w-full sm:w-1/2 md:w-full lg:w-1/2 xl:w-full">
             <span class="custom-bullet mr-2"></span>{{ area }}
@@ -54,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick, watch } from 'vue'
 import QuizButton from './QuizButton.vue'
 import { topicAreas } from './topicAreas.js'
 import { fetchQuestions } from '../quiz/quiz-utils.js'
@@ -88,6 +97,32 @@ function getQuizState(topicKey) {
 
 const topics = ref([])
 const loadError = ref("")
+
+// --- Description expand/collapse logic ---
+const expandedDescriptions = ref({})
+const showReadMore = ref({})
+const descriptionRefs = ref({})
+const hoveredDescription = ref(null)
+
+function setDescriptionRef(topicKey, el) {
+  if (el) descriptionRefs.value[topicKey] = el
+}
+function expandDescription(topicKey) {
+  expandedDescriptions.value[topicKey] = true
+}
+function collapseDescription(topicKey) {
+  expandedDescriptions.value[topicKey] = false
+}
+function checkOverflow() {
+  nextTick(() => {
+    for (const topic of topics.value) {
+      const el = descriptionRefs.value[topic.topic]
+      if (el) {
+        showReadMore.value[topic.topic] = el.scrollHeight > el.clientHeight + 2
+      }
+    }
+  })
+}
 
 onMounted(async () => {
   try {
@@ -143,7 +178,10 @@ onMounted(async () => {
   } catch (e) {
     loadError.value = 'Failed to load topics. Please try again later.'
   }
+  await nextTick()
+  checkOverflow()
 })
+watch(topics, checkOverflow)
 
 </script>
 
