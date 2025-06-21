@@ -246,7 +246,7 @@ watch(() => props.topic, async (newTopic) => {
     }
     loading.value = true
     errorMessage.value = ''
-    // FIX: Load chapter state BEFORE fetching questions so chapter.value is correct
+    // Load chapter state BEFORE fetching questions so chapter.value is correct
     let loaded = loadChapterState();
     if (!loaded) {
       chapter.value = 0
@@ -259,7 +259,10 @@ watch(() => props.topic, async (newTopic) => {
       // Optionally, fetch all questions for stats or total count
       const allData = await fetchQuestions(filePath)
       questionsData.value = allData
-      resetStateForChapter()
+      // Only reset state if not loaded from localStorage
+      if (!loaded) {
+        resetStateForChapter()
+      }
     } catch (e) {
       questions.value = []
       questionsData.value = []
@@ -297,6 +300,9 @@ function next() {
   answered.value = false
   selectedOptions.value = []
   transitioning.value = false
+  isCorrect.value = false // Reset isCorrect when moving to a new question
+  // Save state after moving to next question so resume works correctly
+  saveChapterState();
   // Remove auto focus on options to prevent default answer selection
   // nextTick(() => {
   //   const firstOption = document.querySelector('.option-row input:not(:disabled)')
