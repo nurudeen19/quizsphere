@@ -14,26 +14,37 @@
         Chapter {{ chapter + 1 }} of {{ Math.ceil(totalQuestions / CHAPTER_SIZE) || 1 }}
       </div>
     </div>
-    <!-- Timer Resume Info -->
-    <div v-if="timerResumeInfo" class="timer-resume-info bg-blue-100 border-l-4 border-blue-500 text-blue-900 px-4 py-2 rounded shadow mb-4 text-base font-semibold flex items-center gap-2">
-      <i class="fas fa-info-circle"></i>
-      {{ timerResumeInfo }}
+    <!-- Timer & Resume Message Area (width-stable) -->
+    <div class="timer-area w-full flex flex-col items-center justify-center mb-4" style="min-width:340px; max-width:420px; margin:0 auto; position:relative;">
+      <!-- Ghost message to reserve width -->
+      <div aria-hidden="true" class="timer-resume-info ghost-message opacity-0 pointer-events-none absolute top-0 left-0 w-full" style="visibility:hidden;">
+        <i class="fas fa-info-circle"></i>
+        You are continuing a timed session. Remaining time: 99 min 59 sec.
+      </div>
+      <!-- Actual resume message -->
+      <transition name="fade-slow">
+        <div v-if="timerResumeInfo" class="timer-resume-info bg-blue-100 border-l-4 border-blue-500 text-blue-900 px-4 py-2 rounded shadow mb-2 text-base font-semibold flex items-center gap-2 w-full justify-center">
+          <i class="fas fa-info-circle"></i>
+          {{ timerResumeInfo }}
+        </div>
+      </transition>
+      <!-- Timer Component -->
+      <div v-if="timerEnabled" class="flex justify-center w-full">
+        <Timer
+          :key="timerKey"
+          :duration="timerMinutes"
+          :auto-terminate="timerAutoTerminate"
+          :allow-negative="timerAllowNegative"
+          :running="timerRunning"
+          :resume-seconds="timerResumeSeconds"
+          :display-seconds="timerDisplaySeconds"
+          @timeout="handleTimerTimeout"
+          @tick="handleTimerTick"
+          aria-label="Quiz timer"
+        />
+      </div>
     </div>
-    <!-- Timer Component -->
-    <div v-if="timerEnabled" class="mb-4 flex justify-center">
-      <Timer
-        :key="timerKey"
-        :duration="timerMinutes"
-        :auto-terminate="timerAutoTerminate"
-        :allow-negative="timerAllowNegative"
-        :running="timerRunning"
-        :resume-seconds="timerResumeSeconds"
-        :display-seconds="timerDisplaySeconds"
-        @timeout="handleTimerTimeout"
-        @tick="handleTimerTick"
-        aria-label="Quiz timer"
-      />
-    </div>
+    <!-- End Timer & Resume Message Area -->
     <!-- Animated Progress Bar -->
     <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner" role="progressbar" :aria-valuenow="((current + 0) / questions.length * 100)" aria-valuemin="0" :aria-valuemax="questions.length" tabindex="0">
       <div
@@ -564,8 +575,22 @@ const timerDisplaySeconds = computed(() => {
   return timerResumeSeconds.value != null ? timerResumeSeconds.value : timerMinutes.value * 60;
 })
 
-// Computed: timer resume info message, updates as timerResumeSeconds changes
+const timerResumeMessageVisible = ref(false)
+let hasShownResumeMessage = false
+
+// Show the resume message for 5 seconds only once per resume
+watch(timerResumeSeconds, (val, oldVal) => {
+  if (val != null && val !== oldVal && !hasShownResumeMessage) {
+    timerResumeMessageVisible.value = true
+    hasShownResumeMessage = true
+    setTimeout(() => { timerResumeMessageVisible.value = false }, 5000)
+  }
+})
+// When topic changes, reset the flag
+watch(() => props.topic, () => { hasShownResumeMessage = false }, { immediate: true })
+
 const timerResumeInfo = computed(() => {
+  if (!timerResumeMessageVisible.value) return ''
   if (!timerEnabled.value || timerResumeSeconds.value == null || !isQuizActive.value) return ''
   const min = Math.floor(timerResumeSeconds.value / 60)
   const sec = timerResumeSeconds.value % 60
@@ -797,4 +822,24 @@ watch(() => props.userSettings, (newSettings, oldSettings) => {
 
 <style>
 /* All styles moved to style.css */
+.timer-area {
+  min-width: 420px; /* match or exceed timer width */
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  min-height: 56px; /* enough for message + timer */
+}
+.timer-resume-info.ghost-message {
+  visibility: hidden;
+  position: static;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.timer-resume-info {
+  min-width: 380px;
+  max-width: 100%;
+  text-align: center;
+  /* other existing styles */
+}
 </style>

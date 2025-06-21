@@ -1,16 +1,17 @@
 <template>
-  <div class="timer-bar-container flex flex-col items-center w-full select-none">
-    <div class="timer-bar-label mb-1 text-base font-semibold" :class="isNegative ? 'text-red-600' : progressColorClass">
-      {{ isNegative ? '-' : '' }}{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}
-      <span class="timer-desc text-xs text-gray-500 ml-2">Time left</span>
+  <div class="timer-bar-container glassy flex flex-col items-center w-full select-none shadow-xl">
+    <div class="timer-bar-label mb-1 text-2xl font-extrabold tracking-widest flex items-center justify-center gap-2" :class="isNegative ? 'text-red-600' : progressColorClass">
+      <svg class="inline-block w-6 h-6 text-blue-400 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="timer-digits">{{ isNegative ? '-' : '' }}{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
+      <span class="timer-desc text-xs text-gray-500 ml-2 font-semibold">Time left</span>
     </div>
-    <div class="timer-bar-bg w-full h-5 rounded-full bg-gray-200 shadow-inner overflow-hidden">
+    <div class="timer-bar-bg w-full h-6 rounded-full bg-gray-200 shadow-inner overflow-hidden relative">
       <div
-        class="timer-bar-progress h-5 rounded-full transition-all duration-500"
+        class="timer-bar-progress h-6 rounded-full transition-all duration-500 animated-gradient"
         :style="{
           width: (progress * 100) + '%',
           background: progressBarGradient,
-          boxShadow: (progress <= 0.1 || isNegative) ? '0 0 8px 2px #dc2626aa' : 'none',
+          boxShadow: (progress <= 0.1 || isNegative) ? '0 0 16px 4px #dc2626cc, 0 0 32px 8px #f87171aa' : '0 2px 8px 0 #2563eb33',
         }"
         :class="{ 'timer-bar-pulse': progress <= 0.1 || isNegative }"
         role="progressbar"
@@ -18,6 +19,7 @@
         aria-valuemin="0"
         aria-valuemax="100"
       ></div>
+      <div class="timer-bar-glass absolute inset-0 pointer-events-none"></div>
     </div>
   </div>
 </template>
@@ -165,11 +167,26 @@ watch(() => props.allowNegative, (val) => {
   width: 100%;
   min-width: 180px;
   max-width: 420px;
+  border-radius: 1.5rem;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px) saturate(1.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+  border: 1.5px solid rgba(30,64,175,0.10);
+  padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .timer-bar-label {
   text-align: center;
   font-variant-numeric: tabular-nums;
   text-shadow: 0 1px 6px rgba(0,0,0,0.10);
+  letter-spacing: 0.08em;
+}
+.timer-digits {
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  transition: color 0.3s, text-shadow 0.3s;
+  text-shadow: 0 2px 12px rgba(80,120,200,0.10);
 }
 .timer-bar-bg {
   width: 100%;
@@ -177,17 +194,31 @@ watch(() => props.allowNegative, (val) => {
   border-radius: 9999px;
   box-shadow: 0 2px 8px 0 rgba(80, 120, 200, 0.08);
   overflow: hidden;
+  position: relative;
 }
 .timer-bar-progress {
   height: 100%;
   border-radius: 9999px;
   transition: width 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+  background-size: 200% 200%;
+}
+.animated-gradient {
+  animation: gradient-move 2.5s linear infinite;
+}
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 .timer-bar-pulse {
   animation: timer-bar-pulse 1s infinite alternate;
 }
 @keyframes timer-bar-pulse {
-  0% { box-shadow: 0 0 0 0 #dc2626aa; }
-  100% { box-shadow: 0 0 12px 4px #dc2626aa; }
+  0% { box-shadow: 0 0 0 0 #dc2626cc, 0 0 0 0 #f87171aa; }
+  100% { box-shadow: 0 0 16px 4px #dc2626cc, 0 0 32px 8px #f87171aa; }
+}
+.timer-bar-glass {
+  background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+  border-radius: 9999px;
+  opacity: 0.7;
 }
 </style>
