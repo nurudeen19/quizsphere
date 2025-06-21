@@ -3,12 +3,10 @@
 @tailwind utilities;
 
 body {
-  background: #fff;
-  color: #222;
+  font-family: 'Inter', 'Nunito', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+  color: #1e293b;
 }
 
 /* TopicList styles moved from component */
@@ -320,139 +318,204 @@ body {
   background: #fff;
 }
 .main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2.5vw;
-  background: #fff;
-  box-shadow: 0 2px 8px #0002;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 24px 0 rgba(80, 120, 200, 0.10);
+  border-bottom: 1.5px solid #e0e7ef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2.5vw;
+  min-height: 64px;
+  transition: background 0.3s;
 }
 .logo {
   display: flex;
   align-items: center;
+  gap: 0.7rem;
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #00c6ff;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 6px rgba(80,120,200,0.08);
 }
 .logo img {
-  width: 36px;
-  margin-right: 0.7rem;
-  filter: drop-shadow(0 0 4px #00c6ff88);
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 2px 8px #bae6fd88);
 }
 nav {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1.2rem;
 }
 .nav-link {
-  color: #222;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.2s;
+  color: #2563eb;
+  font-weight: 600;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  background: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
 }
-.nav-link.active, .nav-link:hover {
-  color: #00c6ff;
+.nav-link.active, .nav-link:focus, .nav-link:hover {
+  background: linear-gradient(90deg, #e0e7ff 0%, #bae6fd 100%);
+  color: #0ea5e9;
+  box-shadow: 0 2px 8px 0 #bae6fd44;
+  text-decoration: underline wavy #38bdf8 1.5px;
+  transform: translateY(-2px) scale(1.04);
 }
+.settings-btn {
+  transition: transform 0.2s;
+}
+.settings-btn:hover i {
+  animation: spin 0.7s linear;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 2rem 0 3rem 0;
+  padding: 2.5vw 0 0 0;
+  min-height: 70vh;
 }
 .welcome-section {
+  background: rgba(255,255,255,0.85);
+  border-radius: 2rem;
+  box-shadow: 0 4px 32px 0 rgba(80, 120, 200, 0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: 2.5vw auto 2vw auto;
+  max-width: 600px;
   text-align: center;
-  margin-bottom: 2.5rem;
+  animation: fadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
 }
 .brand {
-  color: #00c6ff;
-  font-weight: bold;
-  text-shadow: 0 2px 8px #00c6ff33;
+  background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  letter-spacing: 0.01em;
 }
 .subtitle {
-  color: #555;
+  color: #64748b;
   font-size: 1.2rem;
   margin-top: 0.5rem;
+  font-weight: 500;
 }
 .quiz-section {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 2rem;
+  box-shadow: 0 4px 32px 0 rgba(80, 120, 200, 0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin: 2vw auto 2vw auto;
+  max-width: 700px;
+  min-width: 0;
+  min-height: 0;
+  animation: fadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
 }
+
+button, .next-btn {
+  background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px 0 #bae6fd44;
+  padding: 0.6rem 1.6rem;
+  font-size: 1.1rem;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  outline: none;
+}
+button:hover, .next-btn:hover, button:focus, .next-btn:focus {
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+  box-shadow: 0 4px 16px 0 #bae6fd88;
+  transform: scale(1.04);
+}
+
 .main-footer {
-  background: #fff;
+  background: rgba(255,255,255,0.85);
+  border-top: 1.5px solid #e0e7ef;
+  box-shadow: 0 -2px 12px 0 rgba(80, 120, 200, 0.06);
+  padding: 1.2rem 0 1.2rem 0;
   text-align: center;
-  padding: 1rem 0;
+  color: #64748b;
   font-size: 1rem;
-  color: #888;
-  box-shadow: 0 -2px 8px #0002;
+  font-weight: 500;
+  margin-top: 2vw;
+  letter-spacing: 0.01em;
 }
 .main-footer i.fa-heart {
-  color: #00c6ff;
+  color: #f43f5e;
+  margin: 0 2px;
+  font-size: 1.1em;
+  vertical-align: middle;
 }
-@media (max-width: 600px) {
-  .main-header, .main-footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .quiz-section {
-    padding: 0 1rem;
-  }
+
+/* --- Moved from QuizView.vue --- */
+.next-btn, .next-btn-wrapper {
+  font-size: 1rem !important;
+  min-width: 110px !important;
+  min-height: 36px !important;
+  padding: 0.5rem 1.2rem !important;
+  border-radius: 9999px !important;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: none; }
+.next-btn i, .next-btn-wrapper i {
+  font-size: 1.1rem !important;
+  padding-right: 0.5rem;
 }
-.progress-bar {
-  display: block;
-  height: 1.2rem !important;
-  min-width: 1px;
-  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 2px 8px 0 rgba(6,182,212,0.15), 0 1.5px 4px 0 rgba(37,99,235,0.10);
-  background-color: #06b6d4;
-  background-image: linear-gradient(90deg, #06b6d4 0%, #22d3ee 40%, #22c55e 100%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  border-radius: 9999px;
-  border: none;
-  z-index: 1;
+/* --- End QuizView button styles --- */
+.loader {
+  border: 4px solid #e0e7ef;
+  border-top: 4px solid #06b6d4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
-.chapter-info {
-  color: #334155; /* slate-800, less vibrant and softer than black */
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-.next-btn {
-  background: linear-gradient(90deg, #00c6ff 0%, #00e0ff 100%);
-  color: #fff;
-  border: none;
-  border-radius: 9999px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 0.9rem 2.2rem;
-  margin: 1.2rem auto 0 auto;
-  box-shadow: 0 2px 12px #00c6ff33;
-  letter-spacing: 0.5px;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  width: auto;
-  min-width: 160px;
-  justify-content: center;
+.selection-warning-message {
+  transition: opacity 0.4s ease;
+  opacity: 0.9;
+  z-index: 1000;
 }
-.next-btn:hover,
-.next-btn:focus {
-  background: linear-gradient(90deg, #00e0ff 0%, #00c6ff 100%);
-  box-shadow: 0 4px 20px #00c6ff44;
-  transform: translateY(-2px) scale(1.04);
-  outline: none;
+.stats-card {
+  box-shadow: 0 8px 32px 0 rgba(56,189,248,0.12), 0 1.5px 6px 0 rgba(59,130,246,0.08);
+  border-radius: 1.5rem;
+  border: 2px solid #bae6fd;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 60%, #fff 100%);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.stats-card:hover {
+  box-shadow: 0 12px 36px 0 rgba(56,189,248,0.18), 0 2px 8px 0 rgba(59,130,246,0.12);
+  transform: scale(1.01);
+}
+
+/* Modal fade/scale transition for settings modal */
+.modal-fade-scale-enter-active, .modal-fade-scale-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.modal-fade-scale-enter-from, .modal-fade-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.92) translateY(32px);
+}
+.modal-fade-scale-enter-to, .modal-fade-scale-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
 /* Congrats Section Styles */

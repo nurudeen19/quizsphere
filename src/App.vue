@@ -67,26 +67,4 @@ function handleSettingsChanged(newSettings) {
 
 <style>
 /* ...existing styles... */
-
-.animate-fade-in {
-  animation: fadeIn 0.5s cubic-bezier(0.4,0,0.2,1);
-}
-
-.fade-slide-enter-active, .fade-slide-leave-active {
-  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.4,0,0.2,1);
-}
-.fade-slide-enter-from, .fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(32px);
-}
-.fade-slide-enter-to, .fade-slide-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(32px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ...existing styles... */
 </style>
