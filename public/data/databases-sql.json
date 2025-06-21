@@ -11,7 +11,7 @@
       "explanation": "HAVING applies conditions to aggregated results."
     },
     {
-      "question": "What does this query return? SELECT * FROM employees WHERE department = 'Sales' ORDER BY hire_date DESC LIMIT 5;",
+      "question": "What does this query return?\n\n```sql\nSELECT * FROM employees WHERE department = 'Sales' ORDER BY hire_date DESC LIMIT 5;\n```",
       "options": [
         "First 5 sales employees hired",
         "Last 5 sales employees hired",

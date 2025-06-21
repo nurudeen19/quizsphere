@@ -39,7 +39,7 @@
     <div v-if="isQuizActive">
       <div class="question">
         <span class="progress">Question {{ current + 1 }} of {{ questions.length }}</span>
-        <p class="question-text">{{ questions[current].question || questions[current].q }}</p>
+        <div class="question-text" v-html="renderedQuestion"></div>
       </div>
       <form class="options" @submit.prevent="submitOptions">
         <fieldset :aria-labelledby="'question-' + current" class="w-full border-0 p-0 m-0">
@@ -192,6 +192,7 @@ import { ref, watch, nextTick, computed, onMounted, defineEmits } from 'vue'
 import { PAGE_SIZE, fetchQuestions, getPageSize, getUserSettings } from '../quiz/quiz-utils.js'
 import Timer from './Timer.vue'
 import confetti from 'canvas-confetti'
+import { renderMarkdown } from '../quiz/markdown.js'
 
 const props = defineProps({
   topic: Object
@@ -702,6 +703,11 @@ function getOverallScore() {
 function handleBack() {
   emit('back')
 }
+
+const renderedQuestion = computed(() => {
+  const q = questions.value[current.value]?.question || questions.value[current.value]?.q || '';
+  return renderMarkdown(q);
+})
 </script>
 
 <style>
