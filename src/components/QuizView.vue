@@ -117,7 +117,7 @@
                       <i class="fas fa-info-circle text-blue-400 mr-2"></i>
                       {{ questions[current].explanation }}
                     </p>
-                    <button v-if="answered" class="next-btn-wrapper next-btn rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all text-2xl tracking-wide drop-shadow-md border-0 cursor-pointer mt-4" style="background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%); color: #fff; min-width: 180px; min-height: 52px;" @click="handleNext">
+                    <button v-if="answered" class="next-btn-wrapper next-btn rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all text-2xl tracking-wide drop-shadow-md border-0 cursor-pointer mt-4 btn-next" @click="handleNext">
                       <i class="fas fa-arrow-right text-2xl pr-4"></i>
                       <span>Next</span>
                     </button>
@@ -164,6 +164,13 @@
             </li>
           </ul>
           <div class="my-4 border-t-2 border-cyan-200"></div>
+          <!-- Show time used for the just-completed chapter -->
+          <div v-if="!isQuizActive && typeof timerUsedSeconds.value === 'number' && timerUsedSeconds.value > 0" class="flex items-center justify-center px-2 py-2 rounded-xl bg-gradient-to-r from-blue-100/60 to-cyan-50/60 shadow-inner mb-2">
+            <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
+              <i class="fas fa-clock text-cyan-400"></i> Time used for this chapter:
+            </span>
+            <span class="font-extrabold text-blue-700 text-xl ml-2">{{ Math.floor(timerUsedSeconds.value / 60) }}m {{ timerUsedSeconds.value % 60 }}s</span>
+          </div>
           <div class="flex items-center justify-between px-2 py-2 rounded-xl bg-gradient-to-r from-blue-200/60 to-cyan-100/60 shadow-inner">
             <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
               <i class="fas fa-star text-yellow-400"></i> Overall
@@ -176,23 +183,23 @@
         </div>
       </div>
       <div class="w-full flex flex-row justify-center items-center mt-4 gap-2">
-        <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer" style="font-size:unset;background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); color: #fff; min-width: 120px; min-height: 32px;">
+        <button @click="restartChapter" class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-red-400 to-pink-500 text-white font-semibold shadow-lg hover:from-pink-500 hover:to-red-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer btn-restart">
           <i class="fas fa-undo text-base pr-1"></i>
           <span class="whitespace-nowrap">Restart Chapter</span>
         </button>
         <button
           v-if="questions.length === CHAPTER_SIZE && !isFinalChapter()"
           @click="goToNextChapter"
-          class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
-          style="font-size:unset;background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); color: #fff; min-width: 120px; min-height: 32px;">
+          class="next-btn flex items-center justify-center h-[40px] px-2 py-1 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold shadow-lg hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer btn-continue"
+        >
           <i class="fas fa-arrow-right text-base pr-1"></i>
           <span class="whitespace-nowrap">Continue to Next Chapter</span>
         </button>
         <button
           v-if="questions.length === CHAPTER_SIZE && isFinalChapter()"
           @click="startFresh"
-          class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer"
-          style="font-size:unset;background: linear-gradient(90deg, #06b6d4 0%, #1e40af 100%); color: #fff; min-width: 120px; min-height: 32px;">
+          class="next-btn flex items-center justify-center h-[40px] px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all tracking-wide drop-shadow-md border-0 cursor-pointer btn-fresh"
+        >
           <i class="fas fa-redo text-base pr-1"></i>
           <span>Start Fresh</span>
         </button>
@@ -245,7 +252,7 @@ const showSelectionWarning = ref(false);
 const overallStatsVersion = ref(0)
 const skipConfetti = ref(false)
 const timerResumeSeconds = ref(null)
-const TIMER_STATE_KEY = (topicKey, chapter) => `quizsphere-timer-state-${topicKey}-ch${chapter}`;
+const timerUsedSeconds = ref(0)
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -287,19 +294,6 @@ watch(() => props.topic, async (newTopic) => {
       // Only reset state if not loaded from localStorage
       if (!loaded) {
         resetStateForChapter()
-      }
-      // TIMER: Check for saved timer state
-      const timerKeyStr = TIMER_STATE_KEY(newTopic.topic, chapter.value)
-      const timerStateStr = localStorage.getItem(timerKeyStr)
-      if (timerStateStr) {
-        const timerState = JSON.parse(timerStateStr)
-        if (timerState && timerState.remaining > 0) {
-          timerResumeSeconds.value = timerState.remaining
-          timerEnabled.value = true // Ensure timer is enabled on resume
-          timerKey.value++ // force Timer component to re-mount
-        }
-      } else {
-        timerResumeSeconds.value = null
       }
     } catch (e) {
       questions.value = []
@@ -578,9 +572,15 @@ const timerDisplaySeconds = computed(() => {
 const timerResumeMessageVisible = ref(false)
 let hasShownResumeMessage = false
 
+// Helper: determine if this is a true resume (not first start)
+const isTrueResume = computed(() => {
+  // Show resume only if timerUsedSeconds > 0 and timerResumeSeconds is less than full duration
+  return timerEnabled.value && timerResumeSeconds.value != null && timerUsedSeconds.value > 0 && timerResumeSeconds.value < timerMinutes.value * 60;
+})
+
 // Show the resume message for 5 seconds only once per resume
 watch(timerResumeSeconds, (val, oldVal) => {
-  if (val != null && val !== oldVal && !hasShownResumeMessage) {
+  if (isTrueResume.value && val != null && val !== oldVal && !hasShownResumeMessage) {
     timerResumeMessageVisible.value = true
     hasShownResumeMessage = true
     setTimeout(() => { timerResumeMessageVisible.value = false }, 5000)
@@ -591,33 +591,30 @@ watch(() => props.topic, () => { hasShownResumeMessage = false }, { immediate: t
 
 const timerResumeInfo = computed(() => {
   if (!timerResumeMessageVisible.value) return ''
-  if (!timerEnabled.value || timerResumeSeconds.value == null || !isQuizActive.value) return ''
+  if (!isTrueResume.value || !isQuizActive.value) return ''
   const min = Math.floor(timerResumeSeconds.value / 60)
   const sec = timerResumeSeconds.value % 60
   return `You are continuing a timed session. Remaining time: ${min} min ${sec} sec.`
 })
 
 // --- TIMER PERSISTENCE ---
-function saveTimerState(remaining) {
-  if (!timerEnabled.value) return
-  const topicKey = props.topic?.topic
-  if (!topicKey) return
-  const key = TIMER_STATE_KEY(topicKey, chapter.value)
-  localStorage.setItem(key, JSON.stringify({ remaining }))
-}
-function clearTimerState() {
-  const topicKey = props.topic?.topic
-  if (!topicKey) return
-  const key = TIMER_STATE_KEY(topicKey, chapter.value)
-  localStorage.removeItem(key)
-}
+// Remove saveTimerState and clearTimerState, and instead store timer in chapter state
 
 // --- Timer event handling ---
 function handleTimerTick(remaining) {
   timerTickCounter++
   timerResumeSeconds.value = remaining // keep resume info in sync
-  if (timerTickCounter % 5 === 0 || remaining === 0) { // Save every 5 seconds or on zero
-    saveTimerState(remaining)
+  // Track time used (only if quiz is active)
+  if (timerEnabled.value && isQuizActive.value) {
+    timerUsedSeconds.value++
+  }
+  // Reduce the frequency of localStorage writes (every 10 seconds instead of 5)
+  if (timerTickCounter % 10 === 0 || remaining === 0) { 
+    // Use requestAnimationFrame to move the save operation off the critical path
+    // This will allow the UI to update before we perform the potentially expensive localStorage operation
+    window.requestAnimationFrame(() => {
+      saveChapterState(remaining);
+    });
   }
 }
 
@@ -628,21 +625,20 @@ function handleTimerTimeout() {
     current.value = questions.value.length // End quiz
     answered.value = true
     transitioning.value = false
-    clearTimerState()
-    // Optionally, show a message or feedback
+    // Timer state is now part of chapter state, so just save
+    saveChapterState(0)
   }
 }
 
-// Utility to get total chapters for the current topic
-function getTotalChapters() {
-  return Math.ceil((questionsData.value.length || 0) / CHAPTER_SIZE) || 1;
-}
-
-function saveChapterState() {
+function saveChapterState(timerRemainingOverride) {
   const topicKey = props.topic?.topic;
   if (!topicKey) return;
   // Determine if chapter is completed
   const isCompleted = (current.value >= questions.value.length - 1 && answered.value);
+  // Use override if provided, else use timerResumeSeconds
+  const timerRemaining = typeof timerRemainingOverride === 'number' ? timerRemainingOverride : timerResumeSeconds.value;
+  
+  // Create a minimal state object without the full questions content
   const state = {
     chapter: chapter.value,
     current: current.value,
@@ -651,10 +647,24 @@ function saveChapterState() {
     selectedOptions: selectedOptions.value,
     score: currentChapterScore.value,
     total: questions.value.length,
-    questions: questions.value,
     completed: isCompleted,
+    timerRemaining: timerRemaining,
+    timerUsed: timerUsedSeconds.value,
   };
-  localStorage.setItem(CHAPTER_STATE_KEY(topicKey), JSON.stringify(state));
+  
+  try {
+    const stateString = JSON.stringify(state);
+    // Check if the string is too large for localStorage (typical limit ~5MB)
+    if (stateString.length > 4 * 1024 * 1024) {
+      console.error('State too large for localStorage');
+      return false;
+    }
+    localStorage.setItem(CHAPTER_STATE_KEY(topicKey), stateString);
+    return true;
+  } catch (e) {
+    console.error('Failed to save state to localStorage:', e);
+    return false;
+  }
 }
 
 function loadChapterState() {
@@ -671,6 +681,16 @@ function loadChapterState() {
       isCorrect.value = state.isCorrect;
       selectedOptions.value = state.selectedOptions;
       currentChapterScore.value = state.score;
+      // Restore timer remaining if present
+      if (typeof state.timerRemaining === 'number' && state.timerRemaining > 0) {
+        timerResumeSeconds.value = state.timerRemaining
+        timerEnabled.value = true // Ensure timer is enabled on resume
+        timerKey.value++ // force Timer component to re-mount
+      } else {
+        timerResumeSeconds.value = null
+      }
+      // Restore timer used if present
+      timerUsedSeconds.value = typeof state.timerUsed === 'number' ? state.timerUsed : 0
       // If chapter is completed, show stats page (i.e., set isQuizActive to false)
       if (state.completed) {
         current.value = questions.value.length; // This will make isQuizActive false
@@ -806,6 +826,11 @@ const renderedQuestion = computed(() => {
   return renderMarkdown(q);
 })
 
+// Utility to get total chapters for the current topic
+function getTotalChapters() {
+  return Math.ceil((questionsData.value.length || 0) / CHAPTER_SIZE) || 1;
+}
+
 // Watch for changes in userSettings prop and update timer settings
 watch(() => props.userSettings, (newSettings, oldSettings) => {
   const prevEnabled = timerEnabled.value
@@ -818,6 +843,13 @@ watch(() => props.userSettings, (newSettings, oldSettings) => {
     timerKey.value++
   }
 }, { deep: true })
+
+// Watch for quiz completion to stop timer
+watch(isQuizActive, (active) => {
+  if (!active) {
+    timerRunning.value = false
+  }
+})
 </script>
 
 <style>

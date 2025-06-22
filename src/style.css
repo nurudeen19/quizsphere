@@ -681,8 +681,8 @@ button:hover, .next-btn:hover, button:focus, .next-btn:focus {
 .topic-description {
   min-height: 88px;
   max-height: 88px;
-  display: -webkit-box;
-  display: box;
+  display: -webkit-box; /* legacy for line clamp */
+  display: flex;        /* modern browsers */
   -webkit-box-orient: vertical;
   box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -779,4 +779,33 @@ button:hover, .next-btn:hover, button:focus, .next-btn:focus {
 .question-text {
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+/* New optimized button styles */
+.btn-next {
+  background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%); 
+  color: #fff; 
+  min-width: 180px; 
+  min-height: 52px;
+}
+
+.btn-restart {
+  background: linear-gradient(90deg, #f43f5e 0%, #ec4899 100%); 
+  color: #fff; 
+  min-width: 120px; 
+  min-height: 32px;
+}
+
+.btn-continue {
+  background: linear-gradient(90deg, #22c55e 0%, #2563eb 100%); 
+  color: #fff; 
+  min-width: 120px; 
+  min-height: 32px;
+}
+
+.btn-fresh {
+  background: linear-gradient(90deg, #06b6d4 0%, #1e40af 100%); 
+  color: #fff; 
+  min-width: 120px; 
+  min-height: 32px;
 }

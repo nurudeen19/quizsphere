@@ -33,7 +33,6 @@ const props = defineProps({
   allowNegative: { type: Boolean, default: false },
   running: { type: Boolean, default: true },
   resumeSeconds: { type: Number, default: null },
-  displaySeconds: { type: Number, default: null }, // for initial display only
 })
 const emit = defineEmits(['timeout', 'tick'])
 
@@ -74,7 +73,8 @@ const progressBarGradient = computed(() => {
 })
 
 function start() {
-  if (timer.value) return
+  // First stop any existing timer to prevent duplicates
+  stop()
   timer.value = setInterval(() => {
     if (!props.running) return
     elapsed.value++
@@ -112,8 +112,8 @@ function getTimeLeft() {
 }
 
 function setElapsedFromResume() {
-  // Use displaySeconds for initial value if present, else resumeSeconds
-  let resume = props.displaySeconds != null ? props.displaySeconds : props.resumeSeconds
+  // Only use resumeSeconds for resume logic
+  let resume = props.resumeSeconds
   if (resume !== null && typeof resume === 'number') {
     elapsed.value = totalSeconds.value - resume
     isNegative.value = elapsed.value > totalSeconds.value
@@ -123,11 +123,39 @@ function setElapsedFromResume() {
   }
 }
 
+// Make sure timer is properly cleaned up
 onMounted(() => {
   setElapsedFromResume()
   if (props.running) start()
 })
-onUnmounted(stop)
+
+onUnmounted(() => {
+  stop() // Ensure timer is stopped on unmount
+})
+
+// New property to watch for component visibility changes
+// This helps prevent timers running in background tabs
+const documentVisibilityHandler = () => {
+  if (document.hidden) {
+    // Page is not visible, pause the timer
+    if (timer.value) clearInterval(timer.value)
+  } else if (props.running) {
+    // Page is visible again, restart the timer if it should be running
+    start()
+  }
+}
+
+onMounted(() => {
+  // Listen for visibility changes to pause/resume timer
+  document.addEventListener('visibilitychange', documentVisibilityHandler)
+  // Note: don't call setElapsedFromResume() here since we already called it in the previous onMounted
+  if (props.running) start()
+})
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', documentVisibilityHandler)
+  stop()
+})
 
 watch(() => props.resumeSeconds, (val) => {
   setElapsedFromResume()

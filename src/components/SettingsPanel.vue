@@ -196,10 +196,20 @@ watch(timeoutAction, (val) => {
 })
 
 watch([timerSelect, customTimer], ([sel, custom]) => {
-  if (sel === 'custom' && custom > 0) {
-    settings.value.timerMinutes = custom
+  if (sel === 'custom') {
+    // Validate custom timer input - ensure it's a positive number within reasonable limits
+    const validatedValue = Number(custom);
+    if (isNaN(validatedValue) || validatedValue <= 0) {
+      customTimer.value = 10; // Default to 10 minutes if invalid
+      settings.value.timerMinutes = 10;
+    } else if (validatedValue > 180) {
+      customTimer.value = 180; // Cap at 3 hours (180 minutes)
+      settings.value.timerMinutes = 180;
+    } else {
+      settings.value.timerMinutes = validatedValue;
+    }
   } else if (sel !== 'custom') {
-    settings.value.timerMinutes = Number(sel)
+    settings.value.timerMinutes = Number(sel);
   }
 })
 

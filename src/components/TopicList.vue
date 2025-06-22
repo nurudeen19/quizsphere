@@ -148,7 +148,7 @@ onMounted(async () => {
       // Use questionsCount from metadata if available
       if (typeof t.questionsCount === 'number') {
         questionsCount = t.questionsCount
-      } else {
+      } else if (t.file || t.topic) {
         try {
           let filePath = ''
           if (t.file) {
@@ -160,8 +160,19 @@ onMounted(async () => {
             filePath = 'data/' + filePath.replace(/^\/+/, '')
           }
           filePath = filePath.replace(/^\/+/, '')
-          const qData = await fetchQuestions('/' + filePath)
-          questionsCount = Array.isArray(qData) ? qData.length : 0
+          
+          // Use a HEAD request instead of fetching the full content
+          // This gets content-length header without downloading the entire file
+          const response = await fetch('/' + filePath, { method: 'HEAD' });
+          if (response.ok) {
+            // Estimate question count based on file size (rough approximation)
+            const contentLength = response.headers.get('content-length');
+            if (contentLength) {
+              const sizeKB = parseInt(contentLength) / 1024;
+              // Rough estimate: ~1KB per question on average
+              questionsCount = Math.max(Math.round(sizeKB / 1), 1);
+            }
+          }
         } catch (e) {
           // ignore error, leave questionsCount as 0
         }

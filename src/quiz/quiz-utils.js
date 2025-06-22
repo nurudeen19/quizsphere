@@ -4,6 +4,8 @@
 
 const PAGE_SIZE = 25;
 const SETTINGS_KEY = 'quizsphere-user-settings';
+// Add question cache to reduce network requests
+const questionCache = new Map(); // Cache with path as key
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -78,7 +80,6 @@ function getQuizQuestionsPage(questionsData, page = 0, pageSize) {
  */
 export async function fetchQuestions(file, opts = {}) {
   let filePath = file;
-  //console.log('passed filePath:', filePath);
   // Always ensure filePath is /quizsphere/data/<filename>
   if (filePath.startsWith('/quizsphere/data/')) {
     // already correct
@@ -87,15 +88,27 @@ export async function fetchQuestions(file, opts = {}) {
   } else {
     filePath = '/quizsphere/data/' + filePath.replace(/^\/+/,'').replace(/^data\//,'');
   }
-  // Log the final filePath for debugging
-  //console.log('[fetchQuestions] Fetching:', filePath);
-  // Always fetch the full file
+  
+  // Check if we have this in cache first
+  if (questionCache.has(filePath) && !opts.bypassCache) {
+    const cached = questionCache.get(filePath);
+    // Return either the full data or a paginated slice
+    if (typeof opts.page === 'number' && typeof opts.size === 'number') {
+      const start = opts.page * opts.size;
+      const end = start + opts.size;
+      return cached.slice(start, end);
+    }
+    return cached;
+  }
+  
+  // Not in cache, need to fetch
   const res = await fetch(filePath);
   if (!res.ok) {
     const text = await res.text();
     console.error('Fetch failed, response:', text);
     throw new Error('Failed to load questions: ' + filePath);
   }
+  
   let data;
   try {
     // Check content-type before parsing
@@ -110,8 +123,18 @@ export async function fetchQuestions(file, opts = {}) {
     console.error('Failed to parse JSON:', e);
     throw new Error('Invalid JSON in questions file: ' + filePath);
   }
+  
   // No shuffling, just use original order
   shuffleOptionsAndRemapAnswers(data);
+  
+  // Add to cache, but manage cache size (max 5 topics)
+  if (questionCache.size >= 5) {
+    // Remove oldest entry when cache gets too big
+    const oldestKey = questionCache.keys().next().value;
+    questionCache.delete(oldestKey);
+  }
+  questionCache.set(filePath, data);
+  
   // Paginate after fetch
   if (typeof opts.page === 'number' && typeof opts.size === 'number') {
     const start = opts.page * opts.size;
