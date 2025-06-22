@@ -1,5 +1,5 @@
 <template>
-  <div class="timer-bar-container glassy flex flex-col items-center w-full select-none shadow-xl">
+  <div v-if="!props.hide" class="timer-bar-container glassy flex flex-col items-center w-full select-none shadow-xl">
     <div class="timer-bar-label mb-1 text-2xl font-extrabold tracking-widest flex items-center justify-center gap-2" :class="isNegative ? 'text-red-600' : progressColorClass">
       <svg class="inline-block w-6 h-6 text-blue-400 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span class="timer-digits">{{ isNegative ? '-' : '' }}{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</span>
@@ -33,6 +33,7 @@ const props = defineProps({
   allowNegative: { type: Boolean, default: false },
   running: { type: Boolean, default: true },
   resumeSeconds: { type: Number, default: null },
+  hide: { type: Boolean, default: false }, // New prop to handle hiding the timer
 })
 const emit = defineEmits(['timeout', 'tick'])
 
@@ -123,16 +124,6 @@ function setElapsedFromResume() {
   }
 }
 
-// Make sure timer is properly cleaned up
-onMounted(() => {
-  setElapsedFromResume()
-  if (props.running) start()
-})
-
-onUnmounted(() => {
-  stop() // Ensure timer is stopped on unmount
-})
-
 // New property to watch for component visibility changes
 // This helps prevent timers running in background tabs
 const documentVisibilityHandler = () => {
@@ -145,16 +136,22 @@ const documentVisibilityHandler = () => {
   }
 }
 
+// Single onMounted and onUnmounted hooks to handle all lifecycle logic
 onMounted(() => {
+  // Initialize timer with resume state
+  setElapsedFromResume()
+  
   // Listen for visibility changes to pause/resume timer
   document.addEventListener('visibilitychange', documentVisibilityHandler)
-  // Note: don't call setElapsedFromResume() here since we already called it in the previous onMounted
+  
+  // Start the timer if it should be running
   if (props.running) start()
 })
 
 onUnmounted(() => {
+  // Clean up all resources and event listeners
   document.removeEventListener('visibilitychange', documentVisibilityHandler)
-  stop()
+  stop() // Ensure timer is stopped on unmount
 })
 
 watch(() => props.resumeSeconds, (val) => {

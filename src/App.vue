@@ -50,6 +50,8 @@ import { ref } from 'vue'
 import TopicList from './components/TopicList.vue'
 import QuizView from './components/QuizView.vue'
 import SettingsPanel from './components/SettingsPanel.vue'
+import { onMounted } from 'vue'
+import { getUserSettings } from './quiz/quiz-utils.js'
 
 const selectedTopic = ref(null)
 function selectTopic(topic) {
@@ -59,6 +61,11 @@ function selectTopic(topic) {
 const showSettings = ref(false)
 const userSettings = ref({})
 const settingsPanelKey = ref(0) // for resetting panel if needed
+
+// Initialize settings from localStorage on mount
+onMounted(() => {
+  userSettings.value = getUserSettings() || {}
+})
 
 function handleSettingsChanged(newSettings) {
   userSettings.value = { ...newSettings }

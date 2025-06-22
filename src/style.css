@@ -108,7 +108,7 @@ body {
 
 /* QuizView styles moved from component */
 .quiz {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2rem auto;
   background: rgba(255,255,255,0.96);
   border-radius: 2rem;
@@ -116,6 +116,7 @@ body {
   padding: 2.5rem 2rem 2rem 2rem;
   text-align: center;
   animation: fadeIn 0.7s;
+  width: 100%;
 }
 .quiz h2 {
   color: #0072ff;
@@ -126,6 +127,12 @@ body {
   justify-content: center;
   gap: 0.5rem;
   text-shadow: 0 2px 8px #00c6ff33;
+  text-align: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.quiz .chapter-info {
+  text-align: center;
 }
 .progress {
   color: #b0b8c1;
@@ -137,8 +144,8 @@ body {
   background: linear-gradient(90deg, #e0f2fe 0%, #f0f9ff 100%);
   border-radius: 1.25rem;
   box-shadow: 0 2px 12px #bae6fd33;
-  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
-  margin-bottom: 1.5rem;
+  padding: 1rem 1rem 0.8rem 1rem;
+  margin-bottom: 1rem;
   border-left: 6px solid #06b6d4;
   position: relative;
 }
@@ -160,6 +167,7 @@ body {
   overflow-x: auto;
   margin-bottom: 0.5rem;
   padding-left: 0.2rem;
+  width: 100%;
 }
 @media (max-width: 600px) {
   .question-text {
@@ -167,24 +175,30 @@ body {
   }
 }
 .options {
-  margin-bottom: 1.2rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0.25rem 0;
 }
 .option-row {
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
   border-radius: 12px;
   transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-  max-width: 540px;
+  max-width: 700px;
   background: #f8fafc;
   box-shadow: 0 1px 4px #bae6fd22;
   border: 1.5px solid #e0e7ef;
   cursor: pointer;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: background-color 0.2s;
 }
 .option-row:hover {
-  background: #e0f2fe;
-  box-shadow: 0 4px 16px #bae6fd33;
-  transform: scale(1.02);
+  background-color: rgba(235, 245, 255, 0.8);
 }
 .option-row input[type="radio"],
 .option-row input[type="checkbox"] {
@@ -253,6 +267,9 @@ body {
   color: #1a2233;
   cursor: pointer;
   padding: 0.2rem 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 .progress-bar {
   background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%);
@@ -779,6 +796,9 @@ button:hover, .next-btn:hover, button:focus, .next-btn:focus {
 .question-text {
   word-break: break-word;
   overflow-wrap: anywhere;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /* New optimized button styles */
@@ -808,4 +828,100 @@ button:hover, .next-btn:hover, button:focus, .next-btn:focus {
   color: #fff; 
   min-width: 120px; 
   min-height: 32px;
+}
+
+/* Quiz container width fix */
+.quiz {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-complete {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Question container fixed width */
+.question-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  min-height: 90px;
+  padding: 0;
+}
+
+/* Layout stability enhancements */
+.quiz h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.quiz .chapter-info {
+  text-align: center;
+}
+
+/* Enhanced quiz actions area */
+.quiz-action-area {
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+}
+
+.quiz-action-sub {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+.feedback-content {
+  width: 100%;
+  max-width: 650px;
+}
+
+/* Progress and question number styling */
+.progress {
+  font-size: 0.9rem;
+  color: #3b82f6;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* Ensuring explanation text maintains consistent width */
+.explanation-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Making sure content doesn't cause layout shifts */
+.quiz,
+.quiz-complete,
+.question,
+.question-container,
+.options,
+.feedback {
+  box-sizing: border-box;
+}
+
+/* Add consistent min-height to ensure stability */
+.question-text {
+  min-height: 50px;
 }

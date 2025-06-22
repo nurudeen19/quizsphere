@@ -38,6 +38,7 @@
           :running="timerRunning"
           :resume-seconds="timerResumeSeconds"
           :display-seconds="timerDisplaySeconds"
+          :hide="!isQuizActive"
           @timeout="handleTimerTimeout"
           @tick="handleTimerTick"
           aria-label="Quiz timer"
@@ -45,22 +46,20 @@
       </div>
     </div>
     <!-- End Timer & Resume Message Area -->
-    <!-- Animated Progress Bar -->
-    <div class="w-full bg-gray-200 rounded-full h-5 mb-6 overflow-hidden shadow-inner" role="progressbar" :aria-valuenow="((current + 0) / questions.length * 100)" aria-valuemin="0" :aria-valuemax="questions.length" tabindex="0">
+    <!-- Animated Progress Bar -->    <div class="w-full max-w-[700px] mx-auto bg-gray-200 rounded-full h-5 mb-4 overflow-hidden shadow-inner" role="progressbar" :aria-valuenow="((current + 0) / questions.length * 100)" aria-valuemin="0" :aria-valuemax="questions.length" tabindex="0">
       <div
         class="progress-bar transition-all duration-500"
         :style="{ width: ((current + 0) / questions.length * 100) + '%' }"
       >
         <span class="sr-only">Progress: {{ current + 1 }} of {{ questions.length }}</span>
       </div>
-    </div>
-    <!-- End Progress Bar -->
-    <div v-if="isQuizActive">
+    </div>    <!-- End Progress Bar -->    <div v-if="isQuizActive" class="w-full">
       <div class="question">
         <span class="progress">Question {{ current + 1 }} of {{ questions.length }}</span>
-        <div class="question-text" v-html="renderedQuestion"></div>
-      </div>
-      <form class="options" @submit.prevent="submitOptions">
+        <div class="question-container">
+          <div class="question-text" v-html="renderedQuestion"></div>
+        </div>
+      </div>      <form class="options w-full mx-auto" @submit.prevent="submitOptions">
         <fieldset :aria-labelledby="'question-' + current" class="w-full border-0 p-0 m-0">
           <legend :id="'question-' + current" class="sr-only">Question {{ current + 1 }}</legend>
           <div v-for="(opt, idx) in questions[current].options" :key="idx" class="option-row flex items-start text-left">
@@ -100,7 +99,7 @@
             Please select at least one option before submitting your answer.
           </div>
         </transition>
-        <section class="quiz-action-area min-h-[200px] w-full max-w-2xl px-6 transition-[min-width,min-height] duration-500 flex flex-col items-center justify-center relative text-center mx-auto">
+        <section class="quiz-action-area min-h-[160px] w-full max-w-2xl px-2 transition-[min-width,min-height] duration-500 flex flex-col items-center justify-center relative text-center mx-auto">
           <div style="width:100%">
             <transition name="fade-slow" mode="out-in">
               <div v-if="!answered && !transitioning" key="submit" class="quiz-action-sub">
@@ -112,11 +111,12 @@
                     <p :class="{ correct: isCorrect, wrong: !isCorrect }">
                       <i :class="isCorrect ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
                       {{ isCorrect ? 'Correct!' : 'Wrong!' }}
-                    </p>
-                    <p v-if="questions[current] && questions[current].explanation" class="explanation mt-3 text-base text-gray-700 bg-blue-50 border-l-4 border-blue-400 px-4 py-2 rounded shadow-sm w-full">
-                      <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-                      {{ questions[current].explanation }}
-                    </p>
+                    </p>                    <div class="explanation-container w-full max-w-[650px] mx-auto">
+                      <p v-if="questions[current] && questions[current].explanation" class="explanation mt-3 text-base text-gray-700 bg-blue-50 border-l-4 border-blue-400 px-4 py-2 rounded shadow-sm w-full">
+                        <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                        {{ questions[current].explanation }}
+                      </p>
+                    </div>
                     <button v-if="answered" class="next-btn-wrapper next-btn rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 transition-all text-2xl tracking-wide drop-shadow-md border-0 cursor-pointer mt-4 btn-next" @click="handleNext">
                       <i class="fas fa-arrow-right text-2xl pr-4"></i>
                       <span>Next</span>
@@ -149,27 +149,37 @@
           </div>
         </div>
       </template>
-      <!-- Stats UI from saved overall stats -->
-      <div class="chapter-stats mb-4 w-full flex justify-center">
-        <div class="stats-card bg-gradient-to-br from-blue-50 via-cyan-50 to-white rounded-3xl shadow-2xl border-2 border-blue-100 p-6 w-full max-w-xl animate-fade-in">
+      <!-- Stats UI from saved overall stats -->      <div class="chapter-stats mb-4 w-full flex justify-center">
+        <div class="stats-card bg-gradient-to-br from-blue-50 via-cyan-50 to-white rounded-3xl shadow-2xl border-2 border-blue-100 p-6 w-full max-w-xl animate-fade-in" style="min-width: 340px;">
           <h4 class="text-2xl font-extrabold text-blue-800 mb-4 flex items-center gap-2">
             <i class="fas fa-chart-bar text-cyan-500"></i> Chapter & Overall Stats
           </h4>
-          <ul class="divide-y divide-blue-100">
-            <li v-for="chap in savedCompletedChapters" :key="chap.chapter" class="flex items-center justify-between py-3 px-2 bg-gradient-to-r from-cyan-100/60 to-blue-50/60 rounded-xl mb-2 shadow-sm hover:scale-[1.02] transition-transform">
-              <span class="font-semibold text-blue-700 flex items-center gap-2">
-                <i class="fas fa-book-open text-cyan-400"></i> Chapter {{ chap.chapter }}
-              </span>
-              <span class="font-bold text-cyan-700 text-lg">{{ chap.score }} <span class="text-gray-400">/</span> {{ chap.total }}</span>
+          <ul class="divide-y divide-blue-100">            <li v-for="chap in savedCompletedChapters" :key="chap.chapter" class="flex flex-col gap-1 py-3 px-2 bg-gradient-to-r from-cyan-100/60 to-blue-50/60 rounded-xl mb-2 shadow-sm hover:scale-[1.02] transition-transform">
+              <div class="flex items-center justify-between w-full">
+                <span class="font-semibold text-blue-700 flex items-center gap-2">
+                  <i class="fas fa-book-open text-cyan-400"></i> Chapter {{ chap.chapter }}
+                </span>
+                <span class="font-bold text-cyan-700 text-lg">{{ chap.score }} <span class="text-gray-400">/</span> {{ chap.total }}</span>
+              </div>              <!-- Show time used for each completed chapter if available -->
+              <div v-if="chap.timeUsed > 0" class="w-full flex justify-end text-sm text-gray-600">
+                <span class="flex items-center gap-1">
+                  <i class="fas fa-clock text-cyan-400"></i>
+                  {{ Math.floor(chap.timeUsed / 60) }}m {{ chap.timeUsed % 60 }}s
+                </span>
+              </div>
             </li>
-          </ul>
-          <div class="my-4 border-t-2 border-cyan-200"></div>
-          <!-- Show time used for the just-completed chapter -->
-          <div v-if="!isQuizActive && typeof timerUsedSeconds.value === 'number' && timerUsedSeconds.value > 0" class="flex items-center justify-center px-2 py-2 rounded-xl bg-gradient-to-r from-blue-100/60 to-cyan-50/60 shadow-inner mb-2">
+          </ul>          <div class="my-4 border-t-2 border-cyan-200"></div>          <!-- Show time used for the just-completed chapter -->          <div v-if="!isQuizActive && timerUsedSeconds > 0" class="flex items-center justify-center px-2 py-2 rounded-xl bg-gradient-to-r from-blue-100/60 to-cyan-50/60 shadow-inner mb-2">
             <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
               <i class="fas fa-clock text-cyan-400"></i> Time used for this chapter:
             </span>
-            <span class="font-extrabold text-blue-700 text-xl ml-2">{{ Math.floor(timerUsedSeconds.value / 60) }}m {{ timerUsedSeconds.value % 60 }}s</span>
+            <span class="font-extrabold text-blue-700 text-xl ml-2">{{ Math.floor(timerUsedSeconds / 60) }}m {{ timerUsedSeconds % 60 }}s</span>
+          </div>
+          
+          <!-- Display time used for the current chapter when timer is enabled but not active (chapter complete) -->          <div v-else-if="timerEnabled && !isQuizActive && currentChapterTimeUsed > 0" class="flex items-center justify-center px-2 py-2 rounded-xl bg-gradient-to-r from-blue-100/60 to-cyan-50/60 shadow-inner mb-2">
+            <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
+              <i class="fas fa-clock text-cyan-400"></i> Time used for this chapter:
+            </span>
+            <span class="font-extrabold text-blue-700 text-xl ml-2">{{ Math.floor(currentChapterTimeUsed / 60) }}m {{ currentChapterTimeUsed % 60 }}s</span>
           </div>
           <div class="flex items-center justify-between px-2 py-2 rounded-xl bg-gradient-to-r from-blue-200/60 to-cyan-100/60 shadow-inner">
             <span class="font-bold text-blue-900 text-lg flex items-center gap-2">
@@ -251,8 +261,24 @@ const currentChapterScore = ref(0);
 const showSelectionWarning = ref(false);
 const overallStatsVersion = ref(0)
 const skipConfetti = ref(false)
+
+// Get stored settings for proper initialization
+const storedSettings = getUserSettings();
+
+// Timer related refs
 const timerResumeSeconds = ref(null)
 const timerUsedSeconds = ref(0)
+const timerEnabled = ref(!!(props.userSettings.enableTimer || storedSettings.enableTimer))
+const timerMinutes = ref(props.userSettings.timerMinutes || storedSettings.timerMinutes || 0)
+const timerAutoTerminate = ref(!!(props.userSettings.autoTerminate || storedSettings.autoTerminate))
+const timerAllowNegative = ref(!!(props.userSettings.allowNegative || storedSettings.allowNegative))
+const timerRunning = ref(true)
+const timerKey = ref(0) // for resetting timer
+let timerTickCounter = 0 // For throttling timer persistence
+const timerResumeMessageVisible = ref(false)
+let hasShownResumeMessage = false
+
+const quizStarted = ref(false) // Flag to track if user has started the quiz
 
 const CHAPTER_STATE_KEY = (topicKey) => `quizsphere-chapter-state-${topicKey}`;
 const OVERALL_STATE_KEY = (topicKey) => `quizsphere-overall-state-${topicKey}`;
@@ -265,6 +291,13 @@ function resetStateForChapter() {
   isCorrect.value = false
   showNextBtn.value = true
   transitioning.value = false
+  quizStarted.value = false // Reset quiz started flag when resetting state
+  
+  // Reset timer state but keep user preferences
+  timerResumeSeconds.value = null
+  timerUsedSeconds.value = 0
+  timerRunning.value = true
+  // Note: We don't reset timerEnabled here as it should follow user settings
 }
 
 watch(() => props.topic, async (newTopic) => {
@@ -283,17 +316,30 @@ watch(() => props.topic, async (newTopic) => {
     if (!loaded) {
       chapter.value = 0
       resetStateForChapter()
-    }
-    try {
+    }    try {
       // Fetch only the current chapter's questions using pagination
       const pagedData = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE })
       questions.value = pagedData
       // Optionally, fetch all questions for stats or total count
       const allData = await fetchQuestions(filePath)
       questionsData.value = allData
-      // Only reset state if not loaded from localStorage
+      
       if (!loaded) {
+        // Only reset state if not loaded from localStorage
         resetStateForChapter()
+        // Ensure timer settings are correctly initialized for fresh starts
+        initializeTimerSettings()
+      } else {
+        // If state was loaded, check if this chapter is completed in the overall state
+        const overall = loadOverallState();
+        const isChapterCompletedInOverall = overall?.chapters?.[chapter.value]?.completed === true;
+        
+        // If chapter is completed, make sure we're showing the stats page
+        if (isChapterCompletedInOverall) {
+          console.log(`Topic changed: Chapter ${chapter.value} is completed - showing stats page`);
+          current.value = questions.value.length; // Set to end to show stats
+          timerRunning.value = false; // Ensure timer isn't running
+        }
       }
     } catch (e) {
       questions.value = []
@@ -369,8 +415,10 @@ function submitOptions() {
     const selected = submittedOption.map(Number).sort()
     const correct = Array.from(correctAnswers).map(Number).sort()
     isCorrect.value = selected.length === correct.length && selected.every((v, i) => v === correct[i])
-  }
-  if (isCorrect.value) currentChapterScore.value++
+  }  if (isCorrect.value) currentChapterScore.value++
+  // Mark that the quiz has been started/interacted with
+  quizStarted.value = true
+  
   // Create localStorage state on first answer for this topic
   const topicKey = props.topic?.topic;
   const chapterStateKey = CHAPTER_STATE_KEY(topicKey);
@@ -394,54 +442,143 @@ function goToNextChapter() {
   saveChapterState();
   saveOverallState(); // Now this will update chapters and stats
   chapter.value++;
-  fetchNextChapterQuestions();
+  fetchNextChapterQuestions({ skipCompletionCheck: false });
 }
 
 function restartChapter() {
-  // Reset only the current chapter's state and score
+  // Fully reset the current chapter state
+  resetStateForChapter();
+  
+  // Update chapter states reference object
   let chapters = { ...chapterStates.value };
   chapters[chapter.value] = {
     score: 0,
     total: questions.value.length,
-    completed: false
+    completed: false,
+    timeUsed: 0
   };
   chapterStates.value = chapters;
-  saveChapterState();
-
-  // Remove the chapter from the overall state and update total score
+  
+  // Update the local chapter state in localStorage
   const topicKey = props.topic?.topic;
+  if (!topicKey) return;
+  
+  // Build a fresh state object with all values reset
+  const state = {
+    chapter: chapter.value,
+    current: 0,
+    answered: false,
+    isCorrect: false,
+    selectedOptions: [],
+    score: 0,
+    completed: false,
+    timerRemaining: timerEnabled.value ? (timerMinutes.value * 60) : null,
+    timerUsed: 0
+  };
+  
+  try {
+    // Save the reset chapter state to localStorage
+    const stateString = JSON.stringify(state);
+    localStorage.setItem(CHAPTER_STATE_KEY(topicKey), stateString);
+  } catch (e) {
+    console.error("Error saving reset chapter state", e);
+  }
+
+  // Update the overall state by removing this chapter
   let overall = loadOverallState();
   if (overall && overall.chapters) {
     // Remove the current chapter from the overall chapters
     delete overall.chapters[chapter.value];
-    // Recompute totalCorrect
+    
+    // Recompute totalCorrect without the current chapter
     let totalCorrect = 0;
     Object.values(overall.chapters).forEach(chap => {
       if (chap.completed) {
         totalCorrect += chap.score;
       }
     });
+    
+    // Update overall state values
     overall.totalCorrect = totalCorrect;
+    
+    // If this was the last chapter and it's now reset, the quiz is no longer complete
+    if (overall.completed && chapter.value === overall.totalChapters - 1) {
+      overall.completed = false;
+    }
+    
     // Save the updated overall state
     localStorage.setItem(OVERALL_STATE_KEY(topicKey), JSON.stringify(overall));
     overallStatsVersion.value++ // trigger reactivity
+    
+    console.log("Chapter reset successfully. Updated overall stats:", overall);
   }
-
-  fetchNextChapterQuestions(); // Reload current chapter's questions and reset state
+  // Use the updated fetchNextChapterQuestions with skipCompletionCheck=true
+  fetchNextChapterQuestions({ skipCompletionCheck: true });
 }
 
-async function fetchNextChapterQuestions() {
-  let filePath = ''
+async function fetchNextChapterQuestions(options = {}) {
+  const { skipCompletionCheck = false } = options;
+  
+  let filePath = '';
   if (props.topic.file) {
-    filePath = props.topic.file
+    filePath = props.topic.file;
   } else if (props.topic.topic) {
-    filePath = `${props.topic.topic}.json`
+    filePath = `${props.topic.topic}.json`;
   }
-  loading.value = true
-  errorMessage.value = ''
+  
+  loading.value = true;
+  errorMessage.value = '';
+  
   try {
-    questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE })
-    resetStateForChapter() // Always reset state after loading new questions
+    questions.value = await fetchQuestions(filePath, { page: chapter.value, size: CHAPTER_SIZE });
+    
+    // Skip completion check if this was called from restartChapter
+    if (!skipCompletionCheck) {
+      // First check if the overall quiz is completed
+      const overall = loadOverallState();
+      const isOverallCompleted = overall?.completed === true;
+      
+      // Then check if this specific chapter is marked as completed
+      const isChapterCompleted = overall?.chapters?.[chapter.value]?.completed === true;
+      
+      if (isChapterCompleted || isOverallCompleted) {
+        // If chapter or overall quiz was completed, set current to end to show stats page
+        console.log(`${isOverallCompleted ? 'Overall quiz' : 'Chapter'} is completed - showing stats page`);
+        current.value = questions.value.length;
+        timerRunning.value = false;
+        
+        // Ensure chapterStates reflects this completed status
+        let chapters = { ...chapterStates.value };
+        
+        // Use chapter data from overall state if available
+        if (isChapterCompleted && overall.chapters[chapter.value]) {
+          chapters[chapter.value] = {
+            score: overall.chapters[chapter.value].score || 0,
+            total: questions.value.length,
+            completed: true,
+            timeUsed: overall.chapters[chapter.value].timeUsed || 0
+          };
+        } else {
+          // Otherwise create a basic completed state
+          chapters[chapter.value] = {
+            score: currentChapterScore.value,
+            total: questions.value.length,
+            completed: true,
+            timeUsed: timerUsedSeconds.value || 0
+          };
+        }
+        chapterStates.value = chapters;
+        
+        // Make sure we save this state
+        saveChapterState();
+      } else {
+        // Only reset state if chapter is not already marked as completed
+        resetStateForChapter();
+      }    } else {
+      console.log('Skipping completion check as requested');
+      // When restarting a chapter, ensure the state is fully reset
+      resetStateForChapter();
+    }
   } catch (e) {
     questions.value = []
     errorMessage.value = 'Failed to load next chapter.'
@@ -493,9 +630,38 @@ const savedOverallStats = computed(() => {
 const savedCompletedChapters = computed(() => {
   const overall = savedOverallStats.value;
   if (!overall.chapters) return [];
-  return Object.entries(overall.chapters)
+  const result = Object.entries(overall.chapters)
     .filter(([_, chap]) => chap.completed)
-    .map(([idx, chap]) => ({ chapter: Number(idx) + 1, score: chap.score, total: chap.total }));
+    .map(([idx, chap]) => {
+      // Convert timeUsed to a number and ensure it's not NaN
+      const timeUsedNumber = typeof chap.timeUsed === 'number' && !isNaN(chap.timeUsed) 
+        ? chap.timeUsed 
+        : 0;
+      
+      return {
+        chapter: Number(idx) + 1, 
+        score: chap.score, 
+        total: chap.total,
+        timeUsed: timeUsedNumber
+      };
+    });
+  
+  // Debug output for chapter time data
+  console.log('Saved completed chapters with time:', result);
+  return result;
+});
+
+// Computed property to get the time used for the current chapter from saved stats
+const currentChapterTimeUsed = computed(() => {
+  const overall = savedOverallStats.value;
+  if (!overall?.chapters || !overall.chapters[chapter.value]) return 0;
+  
+  // Ensure we convert to a number and handle NaN cases
+  const timeUsed = overall.chapters[chapter.value].timeUsed;
+  const timeNumber = typeof timeUsed === 'number' && !isNaN(timeUsed) ? timeUsed : 0;
+  
+  console.log('Current chapter time used:', timeNumber, 'raw value:', timeUsed);
+  return timeNumber;
 });
 
 function isAllChaptersComplete() {
@@ -555,27 +721,33 @@ function startFresh() {
     });
 }
 
-// Timer settings
-const timerEnabled = ref(!!props.userSettings.enableTimer)
-const timerMinutes = ref(props.userSettings.timerMinutes || 0)
-const timerAutoTerminate = ref(!!props.userSettings.autoTerminate)
-const timerAllowNegative = ref(!!props.userSettings.allowNegative)
-const timerRunning = ref(true)
-const timerKey = ref(0) // for resetting timer
-let timerTickCounter = 0 // For throttling timer persistence
-
-// Computed: display value for timer (seconds)
+// Computed display value for timer (seconds)
 const timerDisplaySeconds = computed(() => {
   return timerResumeSeconds.value != null ? timerResumeSeconds.value : timerMinutes.value * 60;
 })
 
-const timerResumeMessageVisible = ref(false)
-let hasShownResumeMessage = false
-
 // Helper: determine if this is a true resume (not first start)
 const isTrueResume = computed(() => {
-  // Show resume only if timerUsedSeconds > 0 and timerResumeSeconds is less than full duration
-  return timerEnabled.value && timerResumeSeconds.value != null && timerUsedSeconds.value > 0 && timerResumeSeconds.value < timerMinutes.value * 60;
+  // Detect if the user has interacted with the quiz (actually answered any questions)
+  // We check current > 0 OR any answer was submitted (selectedOptions has values)
+  const hasQuizInteraction = current.value > 0 || 
+    (selectedOptions.value && 
+     ((Array.isArray(selectedOptions.value) && selectedOptions.value.length > 0) || 
+      (!Array.isArray(selectedOptions.value) && selectedOptions.value !== null && selectedOptions.value !== undefined)));
+      
+  // Show resume only if:
+  // 1. Timer is enabled
+  // 2. We have resumable timer seconds
+  // 3. Time has been used (timerUsedSeconds > 0)
+  // 4. We're resuming with less than the full duration (not a fresh start)
+  // 5. The chapter is active (not completed)
+  // 6. The user has actually interacted with the quiz (not just loaded it)
+  return timerEnabled.value && 
+         timerResumeSeconds.value != null && 
+         timerUsedSeconds.value > 0 && 
+         timerResumeSeconds.value < timerMinutes.value * 60 &&
+         isQuizActive.value &&
+         hasQuizInteraction;
 })
 
 // Show the resume message for 5 seconds only once per resume
@@ -604,8 +776,8 @@ const timerResumeInfo = computed(() => {
 function handleTimerTick(remaining) {
   timerTickCounter++
   timerResumeSeconds.value = remaining // keep resume info in sync
-  // Track time used (only if quiz is active)
-  if (timerEnabled.value && isQuizActive.value) {
+  // Track time used (only if quiz is active AND quiz has been started by user interaction)
+  if (timerEnabled.value && isQuizActive.value && quizStarted.value) {
     timerUsedSeconds.value++
   }
   // Reduce the frequency of localStorage writes (every 10 seconds instead of 5)
@@ -618,6 +790,11 @@ function handleTimerTick(remaining) {
   }
 }
 
+// Helper function to get the timer's remaining seconds
+function getTimerRemainingSeconds() {
+  return timerResumeSeconds.value !== null ? timerResumeSeconds.value : (timerMinutes.value * 60);
+}
+
 function handleTimerTimeout() {
   if (timerAutoTerminate.value) {
     // Auto-submit or end chapter
@@ -625,20 +802,19 @@ function handleTimerTimeout() {
     current.value = questions.value.length // End quiz
     answered.value = true
     transitioning.value = false
-    // Timer state is now part of chapter state, so just save
+    // Timer state is now part of chapter state, so just save with 0 remaining seconds
     saveChapterState(0)
   }
 }
 
-function saveChapterState(timerRemainingOverride) {
+function saveChapterState(remainingSeconds) {
   const topicKey = props.topic?.topic;
   if (!topicKey) return;
-  // Determine if chapter is completed
-  const isCompleted = (current.value >= questions.value.length - 1 && answered.value);
-  // Use override if provided, else use timerResumeSeconds
-  const timerRemaining = typeof timerRemainingOverride === 'number' ? timerRemainingOverride : timerResumeSeconds.value;
   
-  // Create a minimal state object without the full questions content
+  // Check if current question is the last one (stats page)
+  const isComplete = questions.value.length > 0 && current.value >= questions.value.length;
+  
+  // Build the state object
   const state = {
     chapter: chapter.value,
     current: current.value,
@@ -646,24 +822,40 @@ function saveChapterState(timerRemainingOverride) {
     isCorrect: isCorrect.value,
     selectedOptions: selectedOptions.value,
     score: currentChapterScore.value,
-    total: questions.value.length,
-    completed: isCompleted,
-    timerRemaining: timerRemaining,
-    timerUsed: timerUsedSeconds.value,
+    completed: isComplete,
+    // If timer is enabled and running, save the remaining time for resume
+    // Use provided remainingSeconds if available, otherwise get from timer state
+    timerRemaining: timerEnabled.value ? 
+      (typeof remainingSeconds === 'number' ? remainingSeconds : getTimerRemainingSeconds()) : 
+      null,
+    timerUsed: timerEnabled.value ? timerUsedSeconds.value : null
   };
   
+  // Update chapter states for the current chapter
+  let chapters = { ...chapterStates.value };
+  chapters[chapter.value] = {
+    score: currentChapterScore.value,
+    total: questions.value.length,
+    completed: isComplete,
+    timeUsed: timerUsedSeconds.value || 0
+  };
+  chapterStates.value = chapters;
+
+  // Save to localStorage with validation
   try {
     const stateString = JSON.stringify(state);
-    // Check if the string is too large for localStorage (typical limit ~5MB)
-    if (stateString.length > 4 * 1024 * 1024) {
-      console.error('State too large for localStorage');
-      return false;
+    if (stateString.length < 1024 * 1024) { // Check if less than 1MB
+      localStorage.setItem(CHAPTER_STATE_KEY(topicKey), stateString);
+    } else {
+      console.error("Chapter state too large to store in localStorage");
     }
-    localStorage.setItem(CHAPTER_STATE_KEY(topicKey), stateString);
-    return true;
   } catch (e) {
-    console.error('Failed to save state to localStorage:', e);
-    return false;
+    console.error("Error saving chapter state", e);
+  }
+
+  // Update overall state if chapter is completed
+  if (isComplete) {
+    saveOverallState();
   }
 }
 
@@ -675,12 +867,19 @@ function loadChapterState() {
   try {
     const state = JSON.parse(stateStr);
     if (state && state.chapter !== undefined) {
-      chapter.value = state.chapter;
+      chapter.value = state.chapter;      
       current.value = state.current;
       answered.value = state.answered;
       isCorrect.value = state.isCorrect;
       selectedOptions.value = state.selectedOptions;
       currentChapterScore.value = state.score;
+      
+      // If we have a saved state with a current value > 0 or valid selectedOptions,
+      // it means the user has interacted with the quiz
+      quizStarted.value = current.value > 0 || 
+                         (selectedOptions.value && 
+                          ((Array.isArray(selectedOptions.value) && selectedOptions.value.length > 0) || 
+                           (!Array.isArray(selectedOptions.value) && selectedOptions.value !== null && selectedOptions.value !== undefined)));
       // Restore timer remaining if present
       if (typeof state.timerRemaining === 'number' && state.timerRemaining > 0) {
         timerResumeSeconds.value = state.timerRemaining
@@ -690,10 +889,30 @@ function loadChapterState() {
         timerResumeSeconds.value = null
       }
       // Restore timer used if present
-      timerUsedSeconds.value = typeof state.timerUsed === 'number' ? state.timerUsed : 0
-      // If chapter is completed, show stats page (i.e., set isQuizActive to false)
+      timerUsedSeconds.value = typeof state.timerUsed === 'number' ? state.timerUsed : 0      // If chapter is completed in localStorage state, show stats page
       if (state.completed) {
         current.value = questions.value.length; // This will make isQuizActive false
+        timerRunning.value = false; // Ensure timer isn't running for completed chapters
+      } else {
+        // Double check if chapter is completed in overall state even if local state doesn't show it
+        const overall = loadOverallState();
+        const isChapterCompletedInOverall = overall?.chapters?.[chapter.value]?.completed === true;
+        
+        if (isChapterCompletedInOverall) {
+          console.log(`Chapter ${chapter.value} is completed in overall state but not in local state - fixing`);
+          current.value = questions.value.length; // Show stats view
+          timerRunning.value = false; // Ensure timer isn't running
+          
+          // Update local state to match overall state
+          let chapters = { ...chapterStates.value };
+          chapters[chapter.value] = {
+            score: overall.chapters[chapter.value].score || currentChapterScore.value,
+            total: questions.value.length,
+            completed: true,
+            timeUsed: overall.chapters[chapter.value].timeUsed || 0
+          };
+          chapterStates.value = chapters;
+        }
       }
       return true;
     }
@@ -709,14 +928,13 @@ function saveOverallState({ initializing = false } = {}) {
     totalCorrect: 0,
     totalQuestions: questionsData.value.length || 0,
     totalChapters: getTotalChapters(),
-    completed: false,
-  };
-  if (!initializing) {
+    completed: false,  };  if (!initializing) {
     // Only update chapters when moving to a new chapter (not on first answer)
     overall.chapters[chapter.value] = {
       score: currentChapterScore.value,
       total: questions.value.length,
       completed: true,
+      timeUsed: timerUsedSeconds.value, // Add time used to chapter stats (use .value for the ref)
     };
     // Recompute totals
     let totalCorrect = 0;
@@ -760,10 +978,29 @@ function clearStates() {
 
 // On mount/load, try to load both states
 onMounted(() => {
-  if (!loadChapterState()) {
+  // Load overall state first to check for quiz completion status
+  const overall = loadOverallState();
+  const isOverallCompleted = overall?.completed === true;
+  
+  // Then load chapter state
+  const chapterLoaded = loadChapterState();
+  
+  if (!chapterLoaded) {
     resetStateForChapter();
+    // Ensure timer settings are correctly initialized for fresh starts
+    initializeTimerSettings();
+  } else {
+    // Double check if this chapter is in the completed chapters list
+    const isChapterCompletedInOverall = overall?.chapters?.[chapter.value]?.completed === true;
+    
+    // If chapter is completed in overall state but not properly shown as complete in UI,
+    // force it to display the stats page
+    if (isChapterCompletedInOverall && current.value < questions.value.length) {
+      console.log(`Chapter ${chapter.value} is completed in overall state - showing stats page`);
+      current.value = questions.value.length; // Force to stats view
+      timerRunning.value = false; // Ensure timer isn't running
+    }
   }
-  // Optionally, load overall state for stats display
 });
 
 // For stats display
@@ -831,25 +1068,122 @@ function getTotalChapters() {
   return Math.ceil((questionsData.value.length || 0) / CHAPTER_SIZE) || 1;
 }
 
-// Watch for changes in userSettings prop and update timer settings
-watch(() => props.userSettings, (newSettings, oldSettings) => {
+// Function to initialize or update timer settings from user preferences
+function initializeTimerSettings() {
   const prevEnabled = timerEnabled.value
-  timerEnabled.value = !!newSettings.enableTimer
-  timerMinutes.value = newSettings.timerMinutes || 0
-  timerAutoTerminate.value = !!newSettings.autoTerminate
-  timerAllowNegative.value = !!newSettings.allowNegative
-  // If timerEnabled changes, force Timer re-mount
+  
+  // Get direct settings from localStorage to ensure we have the latest values
+  const storedSettings = getUserSettings();
+  
+  // Prioritize props.userSettings but fall back to localStorage if needed
+  timerEnabled.value = !!(props.userSettings.enableTimer || storedSettings.enableTimer)
+  timerMinutes.value = props.userSettings.timerMinutes || storedSettings.timerMinutes || 0
+  timerAutoTerminate.value = !!(props.userSettings.autoTerminate || storedSettings.autoTerminate)
+  timerAllowNegative.value = !!(props.userSettings.allowNegative || storedSettings.allowNegative)
+  timerRunning.value = true // Ensure timer is running on fresh start
+  
+  // Debug log to help track timer visibility issues
+  console.log('Timer settings initialized:', { 
+    enabled: timerEnabled.value, 
+    minutes: timerMinutes.value, 
+    autoTerminate: timerAutoTerminate.value,
+    allowNegative: timerAllowNegative.value,
+    propsSettings: props.userSettings,
+    storedSettings: storedSettings
+  });
+  
+  // If timer is being enabled, force re-mount of the timer component
   if (timerEnabled.value !== prevEnabled) {
     timerKey.value++
+    console.log('Timer component remounted due to enabled state change');
+  }
+}
+
+// Watch for changes in userSettings prop and update timer settings
+watch(() => props.userSettings, (newSettings, oldSettings) => {
+  // Only update if there's an actual change in timer-related settings
+  if (
+    newSettings.enableTimer !== oldSettings.enableTimer ||
+    newSettings.timerMinutes !== oldSettings.timerMinutes ||
+    newSettings.autoTerminate !== oldSettings.autoTerminate ||
+    newSettings.allowNegative !== oldSettings.allowNegative
+  ) {
+    initializeTimerSettings();
   }
 }, { deep: true })
 
-// Watch for quiz completion to stop timer
+// Watch for quiz active state to properly handle timer
 watch(isQuizActive, (active) => {
   if (!active) {
-    timerRunning.value = false
+    // Quiz is not active (either on stats page or no questions loaded)
+    // Stop the timer and ensure it's not displayed when viewing stats
+    timerRunning.value = false;
+    // If we're on the stats page (i.e., chapter completed), update the chapter state
+    if (quizStarted.value && questions.value.length > 0 && current.value >= questions.value.length) {
+      saveChapterState(); // This will mark the chapter as completed
+    }
+  } else if (timerEnabled.value && quizStarted.value) {
+    // Quiz is active and timer is enabled, restart timer
+    timerRunning.value = true;
   }
 })
+
+function toggleTimer() {
+  // Don't start timer if we're viewing the stats page
+  if (!isQuizActive.value) {
+    timerRunning.value = false;
+    return;
+  }
+
+  timerRunning.value = !timerRunning.value;
+  console.log(`Timer is now ${timerRunning.value ? 'running' : 'paused'}`);
+}
+
+function handleContinue() {
+  clearFeedback();
+  clearSelectedOptions();
+  isCorrect.value = false;
+  
+  // Check if we've reached the end of the chapter
+  if (current.value >= questions.value.length) {
+    // If this is the last chapter, reset to the first chapter
+    if (chapter.value >= getTotalChapters(props.topic)) {
+      chapter.value = 1;
+      current.value = 0;
+      answered.value = [];
+      currentChapterScore.value = 0;
+      timerUsedSeconds.value = 0;
+      saveChapterState();
+      // For fresh start of a new chapter, we can start the timer
+      if (timerEnabled.value) {
+        timerRunning.value = true;
+        timerResumeSeconds.value = null;
+      }
+    } else {
+      // Move to the next chapter
+      chapter.value++;
+      current.value = 0;
+      answered.value = [];
+      currentChapterScore.value = 0;
+      timerUsedSeconds.value = 0;
+      saveChapterState();
+      // For fresh start of a new chapter, we can start the timer
+      if (timerEnabled.value) {
+        timerRunning.value = true;
+        timerResumeSeconds.value = null;
+      }
+    }
+    fetchQuestions();
+  } else {
+    // Navigate to the next question in the current chapter
+    current.value++;
+    // Check if we've now reached the stats page (end of questions)
+    if (current.value >= questions.value.length) {
+      timerRunning.value = false; // Stop timer when reaching stats page
+    }
+    saveChapterState();
+  }
+}
 </script>
 
 <style>
