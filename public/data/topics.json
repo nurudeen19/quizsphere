@@ -27,7 +27,7 @@
     "description": "For new developers and students exploring AI-powered coding. Covers Copilot basics, supported languages, editor integration, code suggestions, security, and best practices for getting started.",
     "level": "Beginner",
     "badge": "AI Coding",
-    "questionsCount": 47
+    "questionsCount": 99
   },
   {
     "topic": "docker",

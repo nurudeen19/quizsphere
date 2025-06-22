@@ -130,19 +130,6 @@
         "explanation": "Copilot uses AI to understand your current code context and predict what you might want next."
     },
     {
-        "question": "Can Copilot suggest code comments?",
-        "options": [
-            "Yes",
-            "No",
-            "Only in Python",
-            "Only in Java"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot can suggest comments based on natural language input."
-    },
-    {
         "question": "Does GitHub Copilot write perfect, production-ready code?",
         "options": [
             "Yes, always",
@@ -154,45 +141,6 @@
             1
         ],
         "explanation": "Copilot suggestions should be reviewed and tested like any other code before production use."
-    },
-    {
-        "question": "How does GitHub Copilot generate suggestions?",
-        "options": [
-            "By searching Stack Overflow in real time",
-            "By using AI to predict code based on context",
-            "By executing your code and analyzing output",
-            "By copying code from GitHub repositories"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Copilot uses AI to understand your current code context and predict what you might want next."
-    },
-    {
-        "question": "Church study grow guy test attention break.?",
-        "options": [
-            "Yes",
-            "No",
-            "Only for the first 30 days",
-            "Only in the US"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot is free for verified students and maintainers of popular open-source projects."
-    },
-    {
-        "question": "Card but from away song.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
     },
     {
         "question": "What is GitHub Copilot primarily used for?",
@@ -209,136 +157,6 @@
     },
     {
         "question": "What language does Copilot support?",
-        "options": [
-            "Python",
-            "JavaScript",
-            "Ruby",
-            "All of the above"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "Decide ability return charge middle.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
-    },
-    {
-        "question": "Study morning picture rest sound hundred free.?",
-        "options": [
-            "Python",
-            "JavaScript",
-            "Ruby",
-            "All of the above"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "Southern end possible development this family air dream discussion sing.?",
-        "options": [
-            "Python",
-            "JavaScript",
-            "Ruby",
-            "All of the above"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "Left officer population level opportunity show newspaper.?",
-        "options": [
-            "In the problems tab",
-            "As ghost text in the editor",
-            "In the terminal",
-            "In the source control panel"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Suggestions appear as ghost text directly in the editor."
-    },
-    {
-        "question": "Beyond all half brother across so group guy edge sometimes.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "How does Copilot handle security risks?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
-    },
-    {
-        "question": "Action their throughout account agree others even herself certainly approach.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
-    },
-    {
-        "question": "Until financial rich interview computer minute soldier member.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
-    },
-    {
-        "question": "Talk try ever good significant management.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "Owner score myself democratic house clearly matter plant adult arrive.?",
         "options": [
             "Python",
             "JavaScript",
@@ -377,71 +195,6 @@
         "explanation": "Copilot supports major IDEs like VS Code, Visual Studio, JetBrains, and Neovim."
     },
     {
-        "question": "War hot billion hit yes safe situation reveal wife thank.?",
-        "options": [
-            "Python",
-            "JavaScript",
-            "Ruby",
-            "All of the above"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "Result several short court toward participant collection ground yeah condition.?",
-        "options": [
-            "Python",
-            "JavaScript",
-            "Ruby",
-            "All of the above"
-        ],
-        "answer": [
-            3
-        ],
-        "explanation": "Copilot supports a wide range of languages, including Python, JavaScript, Ruby, and more."
-    },
-    {
-        "question": "Together bring really four perhaps stay think.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
-    },
-    {
-        "question": "Stage marriage without drive office question society accept from.?",
-        "options": [
-            "In the problems tab",
-            "As ghost text in the editor",
-            "In the terminal",
-            "In the source control panel"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Suggestions appear as ghost text directly in the editor."
-    },
-    {
-        "question": "Nearly purpose specific senior husband ago her just manage.?",
-        "options": [
-            "Yes",
-            "No",
-            "Only for the first 30 days",
-            "Only in the US"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot is free for verified students and maintainers of popular open-source projects."
-    },
-    {
         "question": "Is Copilot trained on private code?",
         "options": [
             "Yes, always",
@@ -453,58 +206,6 @@
             2
         ],
         "explanation": "Copilot is trained only on publicly available source code and other public content."
-    },
-    {
-        "question": "Late which miss hospital blue.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "Certain do summer with will would reduce style.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "Think read avoid rule street hundred hotel style.?",
-        "options": [
-            "Yes",
-            "No",
-            "Only in Python",
-            "Only in Java"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot can suggest comments based on natural language input."
-    },
-    {
-        "question": "Less general film hit draw brother medical win.?",
-        "options": [
-            "It guarantees secure code",
-            "It scans all files in your repo",
-            "Users must validate and review all suggestions",
-            "It blocks insecure code"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "Developers must review all code suggestions for correctness and security."
     },
     {
         "question": "How does GitHub Copilot improve over time?",
@@ -520,58 +221,6 @@
         "explanation": "Copilot is improved through user feedback and updated models from OpenAI."
     },
     {
-        "question": "Offer set tell education manager may assume chair difference.?",
-        "options": [
-            "Yes",
-            "No",
-            "Only for the first 30 days",
-            "Only in the US"
-        ],
-        "answer": [
-            0
-        ],
-        "explanation": "Copilot is free for verified students and maintainers of popular open-source projects."
-    },
-    {
-        "question": "Decision trial stay memory.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "Own character change car identify.?",
-        "options": [
-            "Google",
-            "Meta",
-            "GitHub and OpenAI",
-            "Amazon"
-        ],
-        "answer": [
-            2
-        ],
-        "explanation": "GitHub Copilot was developed by GitHub in collaboration with OpenAI."
-    },
-    {
-        "question": "Order camera assume their popular woman shoulder open.?",
-        "options": [
-            "In the problems tab",
-            "As ghost text in the editor",
-            "In the terminal",
-            "In the source control panel"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Suggestions appear as ghost text directly in the editor."
-    },
-    {
         "question": "How can a developer accept a Copilot suggestion in VS Code?",
         "options": [
             "Click the green check icon",
@@ -585,19 +234,6 @@
         "explanation": "The default key to accept a Copilot suggestion in VS Code is Tab."
     },
     {
-        "question": "Relationship collection glass space soldier box admit staff soon.?",
-        "options": [
-            "In the problems tab",
-            "As ghost text in the editor",
-            "In the terminal",
-            "In the source control panel"
-        ],
-        "answer": [
-            1
-        ],
-        "explanation": "Suggestions appear as ghost text directly in the editor."
-    },
-    {
         "question": "Which AI model powers GitHub Copilot?",
         "options": [
             "DALL·E",
@@ -609,5 +245,1045 @@
             1
         ],
         "explanation": "GitHub Copilot is powered by OpenAI Codex, a model trained on a large amount of public code."
+    },
+    {
+        "question": "What happens when you press Alt+[ in VS Code with Copilot?",
+        "options": [
+            "It opens Copilot settings",
+            "It shows the previous suggestion",
+            "It toggles Copilot on/off",
+            "It generates a whole function"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Alt+[ (or Option+[ on Mac) cycles to the previous suggestion in the list of available suggestions."
+    },
+    {
+        "question": "What happens when you press Alt+] in VS Code with Copilot?",
+        "options": [
+            "It opens Copilot settings",
+            "It shows the next suggestion",
+            "It toggles Copilot on/off",
+            "It generates a whole function"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Alt+] (or Option+] on Mac) cycles to the next suggestion in the list of available suggestions."
+    },
+    {
+        "question": "How can you trigger GitHub Copilot to generate a suggestion explicitly?",
+        "options": [
+            "Ctrl+Enter",
+            "Alt+Enter",
+            "Ctrl+Space then Ctrl+Enter",
+            "By writing a comment describing what you need"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You can press Ctrl+Space to see suggestions from Copilot, and then Ctrl+Enter to see more alternatives."
+    },
+    {
+        "question": "What happens if Copilot suggests code that contains a security vulnerability?",
+        "options": [
+            "It automatically fixes it before showing it to you",
+            "GitHub takes legal responsibility",
+            "You are responsible for reviewing and fixing any security issues",
+            "It displays a security warning alongside the suggestion"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Developers are responsible for reviewing, testing, and ensuring the security of any code, including Copilot suggestions."
+    },
+    {
+        "question": "What is GitHub Copilot X?",
+        "options": [
+            "A premium subscription tier",
+            "An experimental version with advanced AI features",
+            "A version for large enterprises only",
+            "A community-driven fork of Copilot"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot X is an evolution of GitHub Copilot that includes chat interfaces, terminal assistance, and more advanced AI capabilities."
+    },
+    {
+        "question": "How can Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "Which AI model powers GitHub Copilot?",
+        "options": [
+            "GPT-3",
+            "Codex",
+            "BERT",
+            "Transformer-XL"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot is powered by OpenAI Codex, a model trained on a large amount of public code."
+    },
+    {
+        "question": "Which AI model powers GitHub GitHub Copilot?",
+        "options": [
+            "GPT-3",
+            "Codex",
+            "BERT",
+            "Transformer-XL"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot is powered by OpenAI Codex, a model trained on a large amount of public code."
+    },
+    {
+        "question": "What is GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "Can Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "Which AI model powers GitHub GitHub Copilot?",
+        "options": [
+            "GPT-3",
+            "Codex",
+            "BERT",
+            "Transformer-XL"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot is powered by OpenAI Codex, a model trained on a large amount of public code."
+    },
+    {
+        "question": "What is GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "How do Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What action typically accepts a Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What is a best practice when using code suggestions from Copilot?",
+        "options": [
+            "Use without modification",
+            "Always validate and test the code",
+            "Assume it's secure by default",
+            "Copy and paste it without review"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot suggestions should always be reviewed and tested before use in production."
+    },
+    {
+        "question": "What action typically accepts a GitHub Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "Can GitHub Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "What is a best practice when using code suggestions from GitHub Copilot?",
+        "options": [
+            "Use without modification",
+            "Always validate and test the code",
+            "Assume it's secure by default",
+            "Copy and paste it without review"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot suggestions should always be reviewed and tested before use in production."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "Which IDEs are supported by GitHub Copilot?",
+        "options": [
+            "Visual Studio Code only",
+            "JetBrains IDEs only",
+            "VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "Sublime Text only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "GitHub Copilot supports multiple IDEs, including VS Code, Visual Studio, JetBrains, and Neovim."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "Can GitHub Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What action typically accepts a GitHub Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "What action typically accepts a GitHub Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "What is a best practice when using code suggestions from GitHub Copilot?",
+        "options": [
+            "Use without modification",
+            "Always validate and test the code",
+            "Assume it's secure by default",
+            "Copy and paste it without review"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot suggestions should always be reviewed and tested before use in production."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "Can GitHub Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "What is a best practice when using code suggestions from GitHub Copilot?",
+        "options": [
+            "Use without modification",
+            "Always validate and test the code",
+            "Assume it's secure by default",
+            "Copy and paste it without review"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot suggestions should always be reviewed and tested before use in production."
+    },
+    {
+        "question": "What action typically accepts a GitHub Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "Can GitHub Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "What action typically accepts a GitHub Copilot suggestion in VS Code?",
+        "options": [
+            "Pressing Enter",
+            "Typing the word 'accept'",
+            "Pressing Tab",
+            "Clicking a button in the sidebar"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "You press the Tab key to accept a Copilot suggestion by default."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "Which IDEs are supported by GitHub GitHub Copilot?",
+        "options": [
+            "Visual Studio Code only",
+            "JetBrains IDEs only",
+            "VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "Sublime Text only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "GitHub Copilot supports multiple IDEs, including VS Code, Visual Studio, JetBrains, and Neovim."
+    },
+    {
+        "question": "Which AI model powers GitHub GitHub Copilot?",
+        "options": [
+            "GPT-3",
+            "Codex",
+            "BERT",
+            "Transformer-XL"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot is powered by OpenAI Codex, a model trained on a large amount of public code."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "Which IDEs are supported by GitHub GitHub Copilot?",
+        "options": [
+            "Visual Studio Code only",
+            "JetBrains IDEs only",
+            "VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "Sublime Text only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "GitHub Copilot supports multiple IDEs, including VS Code, Visual Studio, JetBrains, and Neovim."
+    },
+    {
+        "question": "Which IDEs are supported by GitHub GitHub Copilot?",
+        "options": [
+            "Visual Studio Code only",
+            "JetBrains IDEs only",
+            "VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "Sublime Text only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "GitHub Copilot supports multiple IDEs, including VS Code, Visual Studio, JetBrains, and Neovim."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What kind of data was used to train the Codex model?",
+        "options": [
+            "Private enterprise repositories",
+            "Only GitHub Enterprise Server data",
+            "Publicly available code from GitHub and other sources",
+            "Stack Overflow answers only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Codex was trained on publicly available code, not private or enterprise repositories."
+    },
+    {
+        "question": "What is a best practice when using code suggestions from GitHub Copilot?",
+        "options": [
+            "Use without modification",
+            "Always validate and test the code",
+            "Assume it's secure by default",
+            "Copy and paste it without review"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Copilot suggestions should always be reviewed and tested before use in production."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot designed to do?",
+        "options": [
+            "Create repositories automatically",
+            "Generate code suggestions as you type",
+            "Compile and run programs",
+            "Test applications automatically"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot helps developers by suggesting code in real time based on the context."
+    },
+    {
+        "question": "Can GitHub Copilot generate unit test functions?",
+        "options": [
+            "Yes, based on function names or docstrings",
+            "No, it can only write main code logic",
+            "Only in C++",
+            "Only when GitHub Actions is enabled"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Copilot can suggest unit test functions based on your code and comments."
+    },
+    {
+        "question": "How do GitHub Copilot suggestions appear in the editor?",
+        "options": [
+            "As console messages",
+            "As ghost text inline",
+            "As popup alerts",
+            "As comments above the code"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Suggestions from Copilot appear as ghost text directly in your editor."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
+    },
+    {
+        "question": "What is GitHub GitHub Copilot Chat?",
+        "options": [
+            "A tool to talk with team members",
+            "A feature to ask questions about code using natural language",
+            "An app for bug tracking",
+            "A real-time messaging service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "GitHub Copilot Chat allows developers to use natural language to ask questions about their code."
+    },
+    {
+        "question": "Which IDEs are supported by GitHub GitHub Copilot?",
+        "options": [
+            "Visual Studio Code only",
+            "JetBrains IDEs only",
+            "VS Code, Visual Studio, JetBrains IDEs, and Neovim",
+            "Sublime Text only"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "GitHub Copilot supports multiple IDEs, including VS Code, Visual Studio, JetBrains, and Neovim."
+    },
+    {
+        "question": "How can GitHub Copilot be enabled in Visual Studio Code?",
+        "options": [
+            "Via GitHub Copilot extension",
+            "From the terminal",
+            "By opening GitHub.com",
+            "Through the Azure Portal"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "You enable GitHub Copilot in VS Code by installing and activating the GitHub Copilot extension."
     }
 ]
