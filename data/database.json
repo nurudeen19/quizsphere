@@ -1,0 +1,678 @@
+[
+    {
+        "question": "What does ACID stand for in database systems?",
+        "options": [
+            "Atomicity, Consistency, Isolation, Durability",
+            "Availability, Consistency, Integrity, Durability",
+            "Atomicity, Concurrency, Isolation, Durability",
+            "Automation, Consistency, Integration, Distribution"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "ACID guarantees reliable transaction processing: Atomicity (all-or-nothing), Consistency (valid state transitions), Isolation (concurrent transactions don't interfere), Durability (committed transactions survive failures)."
+    },
+    {
+        "question": "Which database type is best for storing JSON documents with flexible schemas?",
+        "options": [
+            "Relational Database",
+            "Document Database",
+            "Graph Database",
+            "Columnar Database"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Document databases like MongoDB allow storing semi-structured data without fixed schemas."
+    },
+    {
+        "question": "What does the CAP theorem state about distributed databases?",
+        "options": [
+            "A database can only guarantee two of: Consistency, Availability, Partition Tolerance",
+            "All databases must prioritize Consistency over Availability",
+            "Partition Tolerance is optional in modern systems",
+            "ACID properties override CAP constraints"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "CAP theorem defines tradeoffs: Consistency (all nodes see same data), Availability (every request gets response), Partition Tolerance (system works despite network failures)."
+    },
+    {
+        "question": "What is the primary purpose of database normalization?",
+        "options": [
+            "To improve write performance",
+            "To reduce data redundancy",
+            "To enable full-text search",
+            "To simplify backup procedures"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Normalization minimizes duplication through schema design."
+    },
+    {
+        "question": "Which statement about database indexes is correct?",
+        "options": [
+            "Indexes always improve query performance",
+            "Indexes reduce storage requirements",
+            "Indexes can slow down write operations",
+            "A table should have as many indexes as possible"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Indexes introduce overhead on INSERT/UPDATE/DELETE operations."
+    },
+    {
+        "question": "What is a deadlock in database systems?",
+        "options": [
+            "When two transactions wait indefinitely for each other to release locks",
+            "When the database connection times out",
+            "When a query uses too much memory",
+            "When the transaction log is full"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Deadlocks occur with circular wait dependencies."
+    },
+    {
+        "question": "Which isolation level prevents dirty reads but allows non-repeatable reads?",
+        "options": [
+            "Read Uncommitted",
+            "Read Committed",
+            "Repeatable Read",
+            "Serializable"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Read Committed is the default in many databases."
+    },
+    {
+        "question": "What is denormalization typically used for?",
+        "options": [
+            "To enforce data integrity constraints",
+            "To improve read performance at the cost of redundancy",
+            "To reduce storage requirements",
+            "To simplify transaction management"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Denormalization trades storage for query efficiency."
+    },
+    {
+        "question": "Which database type is optimized for relationship-heavy data?",
+        "options": [
+            "Key-Value Store",
+            "Document Database",
+            "Graph Database",
+            "Columnar Database"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Graph databases excel at relationship traversal."
+    },
+    {
+        "question": "What is the purpose of a database view?",
+        "options": [
+            "To physically store derived data",
+            "To provide a virtual table based on a query",
+            "To improve write performance",
+            "To replace tables entirely"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Views abstract underlying table structures."
+    },
+    {
+        "question": "What does BASE stand for in NoSQL databases?",
+        "options": [
+            "Basic Availability, Soft state, Eventual consistency",
+            "Backup, Availability, Speed, Efficiency",
+            "Binary, Atomic, Secure, Elastic",
+            "Batch, Atomicity, Speed, Eventual"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "BASE contrasts with ACID for distributed systems."
+    },
+    {
+        "question": "Which component is responsible for transaction management in databases?",
+        "options": [
+            "Query Optimizer",
+            "Transaction Manager",
+            "Storage Engine",
+            "Connection Pool"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Transaction Manager handles ACID properties and concurrency control."
+    },
+    {
+        "question": "What is a composite key?",
+        "options": [
+            "An encrypted primary key",
+            "A key spanning multiple columns",
+            "A foreign key referencing multiple tables",
+            "A key that changes over time"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Composite keys use multiple columns to uniquely identify rows."
+    },
+    {
+        "question": "Which normal form requires eliminating transitive dependencies?",
+        "options": [
+            "First Normal Form (1NF)",
+            "Second Normal Form (2NF)",
+            "Third Normal Form (3NF)",
+            "Boyce-Codd Normal Form (BCNF)"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "3NF removes dependencies between non-key attributes."
+    },
+    {
+        "question": "What is the purpose of connection pooling?",
+        "options": [
+            "To combine query results from multiple databases",
+            "To reuse database connections for efficiency",
+            "To group related database objects",
+            "To synchronize database replicas"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Connection pooling reduces overhead by reusing existing connections."
+    },
+    {
+        "question": "Which database type is optimized for time-series data?",
+        "options": [
+            "Relational Database",
+            "Document Database",
+            "Graph Database",
+            "Time-Series Database"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "TSDBs efficiently store and query timestamped data points."
+    },
+    {
+        "question": "What is sharding in database systems?",
+        "options": [
+            "Splitting data across multiple machines",
+            "Compressing database files",
+            "Creating read replicas",
+            "Backing up transaction logs"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Sharding horizontally partitions data to distribute load."
+    },
+    {
+        "question": "Which statement about database replication is correct?",
+        "options": [
+            "Always improves write performance",
+            "Provides data redundancy and availability",
+            "Eliminates the need for backups",
+            "Only works with SQL databases"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Replication creates copies of data for fault tolerance."
+    },
+    {
+        "question": "What is an OLAP database optimized for?",
+        "options": [
+            "Transaction processing",
+            "Complex analytical queries",
+            "Real-time data ingestion",
+            "Simple CRUD operations"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "OLAP (Online Analytical Processing) handles complex analytics."
+    },
+    {
+        "question": "Which is a characteristic of columnar databases?",
+        "options": [
+            "Efficient for row-based operations",
+            "Optimized for aggregate queries",
+            "Poor compression ratios",
+            "Best for transactional workloads"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Columnar storage excels at analytical queries aggregating specific columns."
+    },
+    {
+        "question": "What is the purpose of a database trigger?",
+        "options": [
+            "To start database backups",
+            "To automatically execute code on data changes",
+            "To activate replication streams",
+            "To terminate long-running queries"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Triggers fire custom logic when specified events occur."
+    },
+    {
+        "question": "Which statement about database indexes is true?",
+        "options": [
+            "Hash indexes support range queries",
+            "B-tree indexes are self-balancing",
+            "Bitmap indexes are ideal for high-cardinality columns",
+            "Full-text indexes only work on numeric data"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "B-trees maintain sorted data and efficient search operations."
+    },
+    {
+        "question": "What is the role of a database cursor?",
+        "options": [
+            "To define database schemas",
+            "To navigate query result sets row by row",
+            "To encrypt sensitive data",
+            "To visualize query execution plans"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cursors allow iterative processing of result sets."
+    },
+    {
+        "question": "Which backup type captures only changed data since last backup?",
+        "options": [
+            "Full Backup",
+            "Incremental Backup",
+            "Differential Backup",
+            "Snapshot Backup"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Incremental backups save changes since last backup of any type."
+    },
+    {
+        "question": "What is materialized view?",
+        "options": [
+            "A virtual table that doesn't store data",
+            "A precomputed result set stored physically",
+            "A temporary result set for complex queries",
+            "A read-only replica of a table"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Materialized views persist computed results for faster access."
+    },
+    {
+        "question": "Which database component is responsible for parsing SQL queries?",
+        "options": [
+            "Storage Engine",
+            "Query Optimizer",
+            "Parser",
+            "Transaction Manager"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "The parser validates and interprets SQL syntax."
+    },
+    {
+        "question": "What is the purpose of database connection pooling?",
+        "options": [
+            "To combine multiple database connections",
+            "To reduce connection overhead",
+            "To encrypt database traffic",
+            "To balance read replicas"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Reusing connections minimizes setup/teardown costs."
+    },
+    {
+        "question": "Which statement about database locks is true?",
+        "options": [
+            "Shared locks allow concurrent writes",
+            "Exclusive locks prevent all access",
+            "Read locks block other readers",
+            "Write locks allow concurrent reads"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Exclusive locks restrict all access during writes."
+    },
+    {
+        "question": "What is a database schema?",
+        "options": [
+            "The physical storage layout",
+            "The logical structure of data",
+            "The query execution plan",
+            "The backup strategy"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Schema defines tables, columns, relationships, and constraints."
+    },
+    {
+        "question": "Which database type uses key-value pairs?",
+        "options": [
+            "MySQL",
+            "MongoDB",
+            "Redis",
+            "Cassandra"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Redis is an in-memory key-value store."
+    },
+    {
+        "question": "What is the purpose of the EXPLAIN command?",
+        "options": [
+            "To view database schema",
+            "To analyze query execution plans",
+            "To decrypt database objects",
+            "To export data to external files"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "EXPLAIN shows how queries will be executed."
+    },
+    {
+        "question": "Which is a characteristic of graph databases?",
+        "options": [
+            "Optimized for JOIN operations",
+            "Store data in documents",
+            "Use edges and nodes",
+            "Require fixed schemas"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Graph databases model relationships as edges between nodes."
+    },
+    {
+        "question": "What is database connection pooling?",
+        "options": [
+            "Combining multiple database connections",
+            "Reusing existing database connections",
+            "Grouping database servers",
+            "Sharing connection credentials"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Connection pooling improves performance by reusing connections."
+    },
+    {
+        "question": "Which statement about database transactions is true?",
+        "options": [
+            "Can be partially committed",
+            "Must satisfy ACID properties",
+            "Don't require isolation",
+            "Are only for read operations"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Transactions ensure data integrity through ACID."
+    },
+    {
+        "question": "What is database replication?",
+        "options": [
+            "Copying data to multiple locations",
+            "Compressing database files",
+            "Encrypting sensitive data",
+            "Partitioning large tables"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Replication creates copies of data across servers."
+    },
+    {
+        "question": "Which is a NoSQL database?",
+        "options": [
+            "PostgreSQL",
+            "MongoDB",
+            "SQL Server",
+            "Oracle"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "MongoDB is a document-based NoSQL database."
+    },
+    {
+        "question": "What is database indexing?",
+        "options": [
+            "Encrypting database files",
+            "Creating a data structure for faster retrieval",
+            "Partitioning large tables",
+            "Compressing database backups"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Indexes optimize data lookup operations."
+    },
+    {
+        "question": "Which database model uses tables with rows and columns?",
+        "options": [
+            "Document",
+            "Key-Value",
+            "Relational",
+            "Graph"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Relational databases use tabular structures."
+    },
+    {
+        "question": "What is database normalization?",
+        "options": [
+            "Scaling database servers",
+            "Reducing data redundancy",
+            "Encrypting sensitive data",
+            "Compressing database files"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Normalization minimizes duplicate data through schema design."
+    },
+    {
+        "question": "Which is a benefit of using stored procedures?",
+        "options": [
+            "Reduce network traffic",
+            "Improve data compression",
+            "Simplify database replication",
+            "Automate backups"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Stored procedures execute on the server, reducing client-server data transfer."
+    },
+    {
+        "question": "What is a database foreign key?",
+        "options": [
+            "An encrypted primary key",
+            "A field linking to another table's primary key",
+            "A unique identifier for each row",
+            "A special index type"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Foreign keys enforce referential integrity between tables."
+    },
+    {
+        "question": "Which statement about database views is true?",
+        "options": [
+            "Store physical copies of data",
+            "Can improve security by hiding columns",
+            "Always improve query performance",
+            "Require manual refresh"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Views can restrict access to sensitive columns."
+    },
+    {
+        "question": "What is database deadlock?",
+        "options": [
+            "When a query runs indefinitely",
+            "When two transactions block each other",
+            "When database server crashes",
+            "When backup process fails"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Deadlocks occur when transactions wait for each other's resources."
+    },
+    {
+        "question": "Which is a characteristic of in-memory databases?",
+        "options": [
+            "Persistence on disk",
+            "Slower read performance",
+            "Faster data access",
+            "Better for archival data"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "In-memory databases store data in RAM for faster access."
+    },
+    {
+        "question": "What is database partitioning?",
+        "options": [
+            "Splitting tables into smaller pieces",
+            "Replicating data across servers",
+            "Encrypting sensitive columns",
+            "Compressing large objects"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Partitioning divides large tables into manageable segments."
+    },
+    {
+        "question": "Which statement about database backups is true?",
+        "options": [
+            "Full backups are fastest to perform",
+            "Incremental backups save all data",
+            "Backups should be stored offsite",
+            "Backups replace transaction logs"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Offsite storage protects against physical disasters."
+    },
+    {
+        "question": "Which is a type of database index?",
+        "options": [
+            "B-tree",
+            "Hash table",
+            "Linked list",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Different index types optimize different query patterns."
+    },
+    {
+        "question": "What is database sharding?",
+        "options": [
+            "Horizontal partitioning across servers",
+            "Vertical partitioning of columns",
+            "Compressing database files",
+            "Encrypting sensitive data"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Sharding distributes data across multiple machines."
+    },
+    {
+        "question": "Which is a database transaction property?",
+        "options": [
+            "Atomicity",
+            "Availability",
+            "Scalability",
+            "Modularity"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Atomicity ensures all-or-nothing execution."
+    },
+    {
+        "question": "What is database replication lag?",
+        "options": [
+            "Delay in applying changes to replicas",
+            "Network latency during backups",
+            "Query optimization time",
+            "Index rebuild duration"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Replication lag is the delay between primary and replica updates."
+    },
+    {
+        "question": "Which database type is schema-less?",
+        "options": [
+            "Relational",
+            "NoSQL",
+            "NewSQL",
+            "All databases require schemas"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Many NoSQL databases allow flexible schemas."
+    },
+    {
+        "question": "Which is a database security measure?",
+        "options": [
+            "Regular backups",
+            "Query optimization",
+            "Connection pooling",
+            "Role-based access control"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "RBAC restricts data access based on user roles."
+    }
+]

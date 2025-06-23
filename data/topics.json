@@ -10,16 +10,25 @@
     "questionsCount": 278
   },
   {
+    "topic": "github-copilot-exam",
+    "file": "data/github-copilot-exam.json",
+    "title": "GitHub Copilot Certification Prep",
+    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "description": "For developers and AI practitioners preparing for the GitHub Copilot Certification. Practice questions cover Responsible AI, Copilot features, data handling, prompt engineering, use cases, testing, and privacy.",
+    "level": "Intermediate",
+    "badge": "AI Coding",
+    "questionsCount": 130
+  },
+  {
     "topic": "github-copilot",
     "file": "data/github-copilot.json",
-    "title": "GitHub Copilot",
+    "title": "GitHub Copilot for Beginners",
     "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    "description": "Explore AI-powered coding with GitHub Copilot and related tools.",
+    "description": "For new developers and students exploring AI-powered coding. Covers Copilot basics, supported languages, editor integration, code suggestions, security, and best practices for getting started.",
     "level": "Beginner",
     "badge": "AI Coding",
-    "questionsCount": 107
+    "questionsCount": 99
   },
-  
   {
     "topic": "docker",
     "file": "data/docker.json",
@@ -35,10 +44,10 @@
     "file": "data/cloud-computing.json",
     "title": "Cloud Computing",
     "image": "https://cdn-icons-png.flaticon.com/512/4144/4144717.png",
-    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios.",
+    "description": "Master cloud computing concepts, architectures, deployment models, security, and real-world scenarios. Suitable for certification prep (AWS/Azure/GCP), technical interviews, and cloud engineers.",
     "level": "Intermediate",
     "badge": "Cloud",
-    "questionsCount": 10
+    "questionsCount": 188
   },
   {
     "topic": "kubernetes-advanced",
@@ -51,13 +60,23 @@
     "questionsCount": 71
   },
   {
-    "topic": "github-copilot-exam",
-    "file": "data/github-copilot-exam.json",
-    "title": "GitHub Copilot Exam Preparation",
-    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-    "description": "Comprehensive practice for the GitHub Copilot Exam: fundamentals, prompt engineering, security, privacy, and more.",
-    "level": "Intermediate",
-    "badge": "AI Coding",
+    "topic": "database",
+    "file": "data/database.json",
+    "title": "Database Fundamentals",
+    "image": "https://cdn-icons-png.flaticon.com/512/2721/2721278.png",
+    "description": "Fundamental database concepts covering relational and non-relational systems, ACID properties, CAP theorem, and basic design principles.",
+    "level": "Beginner",
+    "badge": "Data",
     "questionsCount": 52
+  },
+  {
+    "topic": "databases-sql",
+    "file": "data/databases-sql.json",
+    "title": "SQL Databases & Querying",
+    "image": "https://cdn-icons-png.flaticon.com/512/4248/4248443.png",
+    "description": "SQL database concepts with practical query writing, optimization, and transaction management. For students, developers, and data professionals learning SQL. Covers query writing, optimization, transactions, and practical database management.",
+    "level": "Intermediate",
+    "badge": "SQL",
+    "questionsCount": 100
   }
 ]

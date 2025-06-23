@@ -1,0 +1,1102 @@
+[
+    {
+      "question": "Which SQL clause filters groups after aggregation?",
+      "options": [
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "FILTER"
+      ],
+      "answer": [2],
+      "explanation": "HAVING applies conditions to aggregated results."
+    },
+    {
+      "question": "What does this query return?\n\n```sql\nSELECT * FROM employees WHERE department = 'Sales' ORDER BY hire_date DESC LIMIT 5;\n```",
+      "options": [
+        "First 5 sales employees hired",
+        "Last 5 sales employees hired",
+        "All sales employees",
+        "5 random sales employees"
+      ],
+      "answer": [1],
+      "explanation": "DESC sorts newest first, LIMIT takes top 5."
+    },
+    {
+      "question": "Which command creates a new table?",
+      "options": [
+        "NEW TABLE",
+        "CREATE TABLE",
+        "ADD TABLE",
+        "BUILD TABLE"
+      ],
+      "answer": [1],
+      "explanation": "CREATE TABLE is standard SQL syntax."
+    },
+    {
+      "question": "What does NULL represent in SQL?",
+      "options": [
+        "Zero value",
+        "Empty string",
+        "Missing/unknown data",
+        "Negative infinity"
+      ],
+      "answer": [2],
+      "explanation": "NULL indicates absence of a value."
+    },
+    {
+      "question": "Which operator combines multiple conditions?",
+      "options": [
+        "COMBINE",
+        "UNION",
+        "AND",
+        "PLUS"
+      ],
+      "answer": [2],
+      "explanation": "AND combines multiple WHERE conditions."
+    },
+    {
+      "question": "What does COUNT(*) return?",
+      "options": [
+        "Number of columns",
+        "Number of rows",
+        "Sum of values",
+        "Average value"
+      ],
+      "answer": [1],
+      "explanation": "COUNT(*) counts all rows in result set."
+    },
+    {
+      "question": "Which join returns all rows from both tables?",
+      "options": [
+        "INNER JOIN",
+        "LEFT JOIN",
+        "FULL OUTER JOIN",
+        "CROSS JOIN"
+      ],
+      "answer": [2],
+      "explanation": "FULL OUTER JOIN combines all records from both tables."
+    },
+    {
+      "question": "What is the default sort order for ORDER BY?",
+      "options": [
+        "Random",
+        "Descending",
+        "Ascending",
+        "By primary key"
+      ],
+      "answer": [2],
+      "explanation": "ORDER BY sorts ascending by default."
+    },
+    {
+      "question": "Which constraint ensures unique values?",
+      "options": [
+        "PRIMARY KEY",
+        "FOREIGN KEY",
+        "NOT NULL",
+        "CHECK"
+      ],
+      "answer": [0],
+      "explanation": "PRIMARY KEY enforces uniqueness and not null."
+    },
+    {
+      "question": "What does DELETE FROM table; do?",
+      "options": [
+        "Removes all rows",
+        "Deletes table structure",
+        "Clears indexes",
+        "Drops database"
+      ],
+      "answer": [0],
+      "explanation": "DELETE without WHERE removes all rows."
+    },
+    {
+      "question": "Which function converts text to uppercase?",
+      "options": [
+        "TOUPPER()",
+        "UPPER()",
+        "CAPITALIZE()",
+        "CASE()"
+      ],
+      "answer": [1],
+      "explanation": "UPPER() is standard SQL function."
+    },
+    {
+      "question": "What does the % wildcard match?",
+      "options": [
+        "Single character",
+        "Numbers only",
+        "Zero or more characters",
+        "Special characters"
+      ],
+      "answer": [2],
+      "explanation": "% matches any sequence of characters in LIKE."
+    },
+    {
+      "question": "Which command makes changes permanent?",
+      "options": [
+        "SAVE",
+        "COMMIT",
+        "END",
+        "KEEP"
+      ],
+      "answer": [1],
+      "explanation": "COMMIT finalizes transactions."
+    },
+    {
+      "question": "What does ALTER TABLE do?",
+      "options": [
+        "Modifies table structure",
+        "Deletes all data",
+        "Changes database",
+        "Creates new table"
+      ],
+      "answer": [0],
+      "explanation": "ALTER TABLE modifies existing table schema."
+    },
+    {
+      "question": "Which is a valid data type for monetary values?",
+      "options": [
+        "INT",
+        "VARCHAR",
+        "DECIMAL",
+        "BOOLEAN"
+      ],
+      "answer": [2],
+      "explanation": "DECIMAL or NUMERIC for precise calculations."
+    },
+    {
+      "question": "What does SELECT DISTINCT do?",
+      "options": [
+        "Returns unique rows",
+        "Filters null values",
+        "Sorts results",
+        "Groups data"
+      ],
+      "answer": [0],
+      "explanation": "DISTINCT eliminates duplicate values."
+    },
+    {
+      "question": "Which clause filters rows before grouping?",
+      "options": [
+        "HAVING",
+        "WHERE",
+        "FILTER",
+        "GROUP BY"
+      ],
+      "answer": [1],
+      "explanation": "WHERE filters before aggregation."
+    },
+    {
+      "question": "What is the purpose of FOREIGN KEY?",
+      "options": [
+        "Ensure uniqueness",
+        "Link to another table",
+        "Prevent null values",
+        "Speed up queries"
+      ],
+      "answer": [1],
+      "explanation": "Foreign keys enforce referential integrity."
+    },
+    {
+      "question": "Which function returns current date?",
+      "options": [
+        "NOW()",
+        "CURRENT_DATE()",
+        "TODAY()",
+        "GETDATE()"
+      ],
+      "answer": [1],
+      "explanation": "CURRENT_DATE is standard SQL."
+    },
+    {
+      "question": "What does TRUNCATE TABLE do?",
+      "options": [
+        "Deletes all rows quickly",
+        "Removes table structure",
+        "Backs up data",
+        "Compresses table"
+      ],
+      "answer": [0],
+      "explanation": "TRUNCATE is faster than DELETE for full table clear."
+    },
+    {
+      "question": "Given schema:\nPRODUCTS (id, name, price)\nORDERS (id, order_date)\nORDER_ITEMS (order_id, product_id, quantity)\n\nWrite query to find top 5 products by revenue:",
+      "options": [
+        "SELECT p.name, SUM(oi.quantity * p.price) AS revenue FROM products p JOIN order_items oi ON p.id = oi.product_id GROUP BY p.name ORDER BY revenue DESC LIMIT 5",
+        "SELECT p.name, oi.quantity * p.price AS revenue FROM products p, order_items oi WHERE p.id = oi.product_id ORDER BY revenue DESC LIMIT 5",
+        "SELECT name, (SELECT SUM(quantity) FROM order_items WHERE product_id = p.id) * price AS revenue FROM products p ORDER BY revenue DESC LIMIT 5",
+        "SELECT p.name, MAX(oi.quantity * p.price) AS revenue FROM products p JOIN order_items oi ON p.id = oi.product_id GROUP BY p.name ORDER BY revenue DESC LIMIT 5"
+      ],
+      "answer": [0],
+      "explanation": "Correct aggregation with JOIN and GROUP BY."
+    },
+    {
+      "question": "Which index optimizes: SELECT * FROM transactions WHERE account_id = 1001 AND transaction_date BETWEEN '2023-01-01' AND '2023-12-31';",
+      "options": [
+        "Index on account_id",
+        "Index on transaction_date",
+        "Composite index (account_id, transaction_date)",
+        "Full-text index"
+      ],
+      "answer": [2],
+      "explanation": "Composite index supports equality + range queries."
+    },
+    {
+      "question": "What does this transaction ensure?\nBEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;",
+      "options": [
+        "Atomic money transfer",
+        "Isolated balance checks",
+        "Durable audit trail",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Wrapped transaction provides full ACID guarantees."
+    },
+    {
+      "question": "Which normalization issue exists?\nORDERS (order_id, customer_name, product_name, price, quantity)",
+      "options": [
+        "Insertion anomaly",
+        "Update anomaly",
+        "Deletion anomaly",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "All anomalies present in unnormalized table."
+    },
+    {
+      "question": "Write query to find employees earning more than their managers:\nEMPLOYEES (id, name, salary, manager_id)",
+      "options": [
+        "SELECT e.name FROM employees e JOIN employees m ON e.manager_id = m.id WHERE e.salary > m.salary",
+        "SELECT e.name FROM employees e, employees m WHERE e.manager_id = m.id AND e.salary > m.salary",
+        "SELECT name FROM employees WHERE salary > (SELECT salary FROM employees WHERE id = manager_id)",
+        "Both A and B"
+      ],
+      "answer": [3],
+      "explanation": "Self-join solution is more efficient than subquery."
+    },
+    {
+      "question": "Which isolation level prevents phantom reads?",
+      "options": [
+        "Read Committed",
+        "Repeatable Read",
+        "Serializable",
+        "Snapshot"
+      ],
+      "answer": [2],
+      "explanation": "Serializable prevents phantoms via strict locking."
+    },
+    {
+      "question": "Optimize this query: SELECT * FROM orders WHERE YEAR(order_date) = 2023;",
+      "options": [
+        "Use index on order_date",
+        "Rewrite as: WHERE order_date BETWEEN '2023-01-01' AND '2023-12-31'",
+        "Create function-based index",
+        "Both B and C"
+      ],
+      "answer": [3],
+      "explanation": "Function wrapping prevents index use."
+    },
+    {
+      "question": "What does this window function do?\nSELECT name, salary, AVG(salary) OVER (PARTITION BY department) FROM employees;",
+      "options": [
+        "Company-wide average salary",
+        "Department average next to each row",
+        "Cumulative average",
+        "Rank salaries"
+      ],
+      "answer": [1],
+      "explanation": "PARTITION BY computes per-department average."
+    },
+    {
+      "question": "Which prevents SQL injection?",
+      "options": [
+        "Parameterized queries",
+        "Stored procedures",
+        "Input validation",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Multiple layers of defense needed."
+    },
+    {
+      "question": "Recursive CTE to find management chain for employee 101:\nEMPLOYEES (id, name, manager_id)",
+      "options": [
+        "WITH RECURSIVE chain AS (SELECT id, name, manager_id FROM employees WHERE id = 101 UNION ALL SELECT e.id, e.name, e.manager_id FROM employees e JOIN chain c ON e.manager_id = c.id)",
+        "WITH RECURSIVE chain AS (SELECT id, name, manager_id FROM employees WHERE id = 101 UNION ALL SELECT e.id, e.name, e.manager_id FROM employees e JOIN chain c ON e.id = c.manager_id)",
+        "WITH RECURSIVE chain AS (SELECT id, name, manager_id FROM employees WHERE manager_id = 101 UNION ALL SELECT e.id, e.name, e.manager_id FROM employees e JOIN chain c ON e.manager_id = c.id)",
+        "WITH RECURSIVE chain AS (SELECT id, name, manager_id FROM employees WHERE id = 101 UNION SELECT e.id, e.name, e.manager_id FROM employees e, chain c WHERE e.manager_id = c.id)"
+      ],
+      "answer": [1],
+      "explanation": "Traverse from employee up to CEO."
+    },
+    {
+      "question": "Which index type is best for IP address ranges?",
+      "options": [
+        "B-tree",
+        "Hash",
+        "GiST",
+        "GIN"
+      ],
+      "answer": [2],
+      "explanation": "GiST handles range types efficiently."
+    },
+    {
+      "question": "What's the difference between UNION and UNION ALL?",
+      "options": [
+        "UNION removes duplicates",
+        "UNION ALL is faster",
+        "UNION requires same columns",
+        "Both A and B"
+      ],
+      "answer": [3],
+      "explanation": "UNION ALL preserves duplicates and is faster."
+    },
+    {
+      "question": "Which query finds customers with no orders?\nCUSTOMERS (id, name)\nORDERS (id, customer_id)",
+      "options": [
+        "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders)",
+        "SELECT c.name FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.id IS NULL",
+        "SELECT name FROM customers WHERE NOT EXISTS (SELECT 1 FROM orders WHERE customer_id = customers.id)",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "All are valid anti-join patterns."
+    },
+    {
+      "question": "What is a covering index?",
+      "options": [
+        "Index that includes all query columns",
+        "Index that spans multiple tables",
+        "Index with included columns",
+        "Both A and C"
+      ],
+      "answer": [3],
+      "explanation": "Allows index-only scans for faster queries."
+    },
+    {
+      "question": "Which ACID property ensures transaction isolation?",
+      "options": [
+        "Locking",
+        "MVCC",
+        "WAL",
+        "Both A and B"
+      ],
+      "answer": [3],
+      "explanation": "Isolation achieved via locking or MVCC."
+    },
+    {
+      "question": "Write query to get nth highest salary:",
+      "options": [
+        "SELECT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET n-1",
+        "SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET n-1",
+        "SELECT salary FROM employees e WHERE n-1 = (SELECT COUNT(DISTINCT salary) FROM employees WHERE salary > e.salary)",
+        "Both B and C"
+      ],
+      "answer": [3],
+      "explanation": "OFFSET method efficient with index, subquery handles ties."
+    },
+    {
+      "question": "Which is true about database locks?",
+      "options": [
+        "Shared locks allow reads",
+        "Exclusive locks prevent writes",
+        "Deadlocks require intervention",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "All statements are correct about locking."
+    },
+    {
+      "question": "What's the purpose of EXPLAIN ANALYZE?",
+      "options": [
+        "Show query plan",
+        "Execute and show actual performance",
+        "Optimize indexes",
+        "Validate SQL syntax"
+      ],
+      "answer": [1],
+      "explanation": "ANALYZE actually executes the query."
+    },
+    {
+      "question": "Which normal form requires no partial dependencies?",
+      "options": [
+        "1NF",
+        "2NF",
+        "3NF",
+        "BCNF"
+      ],
+      "answer": [1],
+      "explanation": "2NF: non-prime attributes depend on whole PK."
+    },
+    {
+      "question": "What does this window function do? ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC)",
+      "options": [
+        "Ranks salaries globally",
+        "Numbers employees per department by salary",
+        "Calculates cumulative salary",
+        "Assigns department numbers"
+      ],
+      "answer": [1],
+      "explanation": "Row number resets per department partition."
+    },
+    {
+      "question": "Which execution plan operation is most efficient for large sorted data?",
+      "options": [
+        "Nested Loop Join",
+        "Hash Join",
+        "Merge Join",
+        "Bitmap Index Scan"
+      ],
+      "answer": [2],
+      "explanation": "Merge joins are optimal for pre-sorted data."
+    },
+    {
+      "question": "What is predicate pushdown?",
+      "options": [
+        "Early filtering in query execution",
+        "Pushing WHERE clauses to storage layer",
+        "Optimizing JOIN conditions",
+        "Both A and B"
+      ],
+      "answer": [3],
+      "explanation": "Reduces data processing early in pipeline."
+    },
+    {
+      "question": "Which isolation level uses optimistic concurrency?",
+      "options": [
+        "Read Committed",
+        "Repeatable Read",
+        "Snapshot Isolation",
+        "Serializable"
+      ],
+      "answer": [2],
+      "explanation": "Snapshot Isolation avoids locks via versioning."
+    },
+    {
+      "question": "How to implement soft deletes?",
+      "options": [
+        "DELETE + archive",
+        "is_deleted flag with filtered views",
+        "Triggers to move data",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Multiple valid implementations exist."
+    },
+    {
+      "question": "What is index skipping scan?",
+      "options": [
+        "Skipping non-qualifying index entries",
+        "Partial index scan",
+        "Converting range to IN list",
+        "All of the above"
+      ],
+      "answer": [0],
+      "explanation": "Optimization for sparse composite indexes."
+    },
+    {
+      "question": "Which is true about BRIN indexes?",
+      "options": [
+        "Small size for large datasets",
+        "Inefficient for random access",
+        "Best for ordered data",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Block Range Indexes optimize large ordered tables."
+    },
+    {
+      "question": "How to prevent phantom reads without SERIALIZABLE?",
+      "options": [
+        "Range locks",
+        "Materialized views",
+        "Predicate locks",
+        "Not possible"
+      ],
+      "answer": [2],
+      "explanation": "Predicate locking is expensive but effective."
+    },
+    {
+      "question": "Which CTE pattern traverses graphs?",
+      "options": [
+        "Recursive CTE with UNION ALL",
+        "Multiple non-recursive CTEs",
+        "CTE with window functions",
+        "Materialized CTE"
+      ],
+      "answer": [0],
+      "explanation": "Recursive CTEs traverse hierarchical/graph data."
+    },
+    {
+      "question": "What is index-only scan?",
+      "options": [
+        "Scanning without table access",
+        "Covering index usage",
+        "Avoiding heap lookups",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "All options describe index-only scans."
+    },
+    {
+      "question": "Which partitioning strategy is best for time-series?",
+      "options": [
+        "Range partitioning by date",
+        "Hash partitioning",
+        "List partitioning",
+        "Round-robin"
+      ],
+      "answer": [0],
+      "explanation": "Range partitioning aligns with time-based queries."
+    },
+    {
+      "question": "Identify the bug in this query:\nSELECT product_name, AVG(price)\nFROM products\nWHERE price > 100;",
+      "options": [
+        "Missing comma after product_name",
+        "AVG() requires GROUP BY",
+        "WHERE can't be used with aggregate",
+        "Missing semicolon"
+      ],
+      "answer": [1],
+      "explanation": "Aggregate functions like AVG() require GROUP BY when selecting non-aggregated columns."
+    },
+    {
+      "question": "Complete the query to find duplicate emails:\nSELECT email, COUNT(*) \nFROM users\n_________",
+      "options": [
+        "GROUP BY email HAVING COUNT(*) > 1",
+        "WHERE COUNT(*) > 1",
+        "ORDER BY COUNT(*) DESC",
+        "UNIQUE email"
+      ],
+      "answer": [0],
+      "explanation": "GROUP BY with HAVING filters aggregated results."
+    },
+    {
+      "question": "Fix the syntax error:\nUPDATE employees \nSET salary = salary * 1.1\n department = 'Engineering';",
+      "options": [
+        "Add COMMA after 1.1",
+        "Add WHERE before department",
+        "Change = to WHERE",
+        "Both B and C"
+      ],
+      "answer": [3],
+      "explanation": "Missing WHERE clause for conditional update."
+    },
+    {
+      "question": "Why does this query timeout on large datasets?\nSELECT * \nFROM orders \nWHERE YEAR(order_date) = 2023\nORDER BY total DESC;",
+      "options": [
+        "Missing index on order_date",
+        "YEAR() prevents index usage",
+        "ORDER BY requires full scan",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Function on indexed column + sorting large results causes performance issues."
+    },
+    {
+      "question": "Fix the N+1 query problem:\n-- For each user:\nSELECT * FROM orders WHERE user_id = ?;",
+      "options": [
+        "Add LIMIT 1",
+        "Use JOIN: SELECT u.*, o.* FROM users u JOIN orders o ON u.id = o.user_id",
+        "Create stored procedure",
+        "Use UNION ALL"
+      ],
+      "answer": [1],
+      "explanation": "JOIN retrieves all data in single query instead of per-user."
+    },
+    {
+      "question": "Complete the deadlock prevention:\nBEGIN TRANSACTION;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\n_________\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;",
+      "options": [
+        "Add WAITFOR DELAY '00:00:01'",
+        "Add SELECT * FROM accounts WHERE id = 2 FOR UPDATE",
+        "Reorder IDs: Always update lower ID first",
+        "Add SET DEADLOCK_PRIORITY LOW"
+      ],
+      "answer": [2],
+      "explanation": "Consistent resource ordering prevents circular waits."
+    },
+    {
+      "question": "Identify the security vulnerability:\nquery = \"SELECT * FROM users WHERE username = '\" + input + \"' AND password = '\" + pwd + \"'\"",
+      "options": [
+        "Clear-text passwords",
+        "SQL injection",
+        "Missing encryption",
+        "No transaction"
+      ],
+      "answer": [1],
+      "explanation": "Concatenated inputs allow SQL injection attacks."
+    },
+    {
+      "question": "Optimize this slow query:\nSELECT * \nFROM products \nWHERE category_id IN (SELECT id FROM categories WHERE name = 'Electronics');",
+      "options": [
+        "Add index on category_id",
+        "Replace IN with JOIN",
+        "Both A and B",
+        "Use EXISTS instead"
+      ],
+      "answer": [2],
+      "explanation": "JOIN is more efficient than IN with subqueries."
+    },
+    {
+      "question": "Fix the incorrect result:\nSELECT department, COUNT(*) \nFROM employees \nWHERE salary > 50000 \nGROUP BY department; -- Returns 0 rows for some departments",
+      "options": [
+        "Use LEFT JOIN",
+        "Change COUNT(*) to COUNT(salary)",
+        "Move condition to HAVING",
+        "Use COALESCE"
+      ],
+      "answer": [0],
+      "explanation": "Use LEFT JOIN with departments table to include empty groups."
+    },
+    {
+      "question": "Complete the pagination query:\nSELECT id, name \nFROM products \nORDER BY created_at DESC\n_________",
+      "options": [
+        "LIMIT 10 OFFSET 20;",
+        "TOP 10 SKIP 20;",
+        "WHERE ROWNUM > 20;",
+        "PAGE 20 SIZE 10;"
+      ],
+      "answer": [0],
+      "explanation": "Standard pagination with LIMIT/OFFSET."
+    },
+    {
+      "question": "Why does this transaction fail?\nBEGIN;\nSAVEPOINT sp1;\nUPDATE inventory SET qty = qty - 1 WHERE product_id = 100;\n-- Application error occurs\nROLLBACK TO sp1; \nCOMMIT;",
+      "options": [
+        "Can't COMMIT after ROLLBACK",
+        "Missing RELEASE SAVEPOINT",
+        "ROLLBACK TO doesn't preserve transaction",
+        "Inventory update needs COMMIT first"
+      ],
+      "answer": [0],
+      "explanation": "ROLLBACK TO savepoint doesn't end transaction - need to COMMIT."
+    },
+    {
+      "question": "Fix the division by zero:\nSELECT total / quantity AS unit_price\nFROM orders;",
+      "options": [
+        "WHERE quantity > 0",
+        "NULLIF(quantity, 0)",
+        "CASE WHEN quantity > 0 THEN total/quantity END",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Multiple safe division techniques."
+    },
+    {
+      "question": "Complete the UPSERT pattern:\nINSERT INTO users (id, email) \nVALUES (1, 'test@test.com')\n_________",
+      "options": [
+        "IF NOT EXISTS (SELECT 1 FROM users WHERE id=1);",
+        "ON DUPLICATE KEY UPDATE email='test@test.com';",
+        "WHERE NOT DUPLICATE;",
+        "EXCEPT SELECT id FROM users;"
+      ],
+      "answer": [1],
+      "explanation": "Standard UPSERT syntax in MySQL."
+    },
+    {
+      "question": "Fix the CTE infinite recursion:\nWITH RECURSIVE cte AS (\n  SELECT id, parent_id FROM categories WHERE id = 1\n  UNION ALL\n  SELECT c.id, c.parent_id FROM categories c\n  JOIN cte ON cte.id = c.parent_id\n)",
+      "options": [
+        "Add WHERE c.id != cte.id",
+        "Change JOIN to LEFT JOIN",
+        "Add depth counter and LIMIT",
+        "Both A and C"
+      ],
+      "answer": [2],
+      "explanation": "Prevent infinite loops with recursion depth control."
+    },
+    {
+      "question": "Optimize this window function:\nSELECT id, name, \n  (SELECT AVG(salary) FROM employees e2 \n   WHERE e2.department = e1.department) AS dept_avg\nFROM employees e1;",
+      "options": [
+        "Use PARTITION BY: AVG(salary) OVER (PARTITION BY department)",
+        "Create materialized view",
+        "Pre-calculate in application",
+        "All of the above"
+      ],
+      "answer": [0],
+      "explanation": "Window functions eliminate correlated subquery overhead."
+    },
+    {
+      "question": "Debug the locking issue:\n-- Session 1:\nBEGIN;\nSELECT * FROM accounts WHERE id=1 FOR UPDATE;\n\n-- Session 2 hangs:\nUPDATE accounts SET balance=100 WHERE id=2;",
+      "options": [
+        "Deadlock on unrelated rows",
+        "Table-level locking",
+        "Missing index on id",
+        "Isolation level too strict"
+      ],
+      "answer": [1],
+      "explanation": "FOR UPDATE without index can escalate to table lock."
+    },
+    {
+      "question": "Complete the pivot query:\nSELECT * FROM (\n  SELECT year, product, sales\n  FROM sales_data\n) \n_________",
+      "options": [
+        "PIVOT (SUM(sales) FOR product IN ('A','B','C'));",
+        "CROSS APPLY (VALUES product, sales);",
+        "UNPIVOT (sales FOR product IN ('A','B','C'));",
+        "GROUP BY year, PIVOT product;"
+      ],
+      "answer": [0],
+      "explanation": "Standard PIVOT syntax (SQL Server/Oracle)."
+    },
+    {
+      "question": "Fix the statistics misestimation:\nSELECT * \nFROM orders \nWHERE status = 'shipped' \nAND created_at > '2023-01-01';\n-- 100x more rows than estimated",
+      "options": [
+        "UPDATE STATISTICS orders;",
+        "Add OPTION (RECOMPILE);",
+        "Use index hint",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Stale statistics cause poor query plans."
+    },
+    {
+      "question": "Why does this return incorrect totals?\nSELECT category, SUM(price * qty)\nFROM orders\nGROUP BY category; -- Excludes discounted items",
+      "options": [
+        "Missing discount in calculation",
+        "Needs LEFT JOIN to products",
+        "SUM ignores NULLs",
+        "GROUP BY wrong column"
+      ],
+      "answer": [0],
+      "explanation": "Missing discount factor: SUM((price - discount) * qty)"
+    },
+    {
+      "question": "Complete the soft delete pattern:\nCREATE VIEW active_users AS\nSELECT * FROM users\n_________",
+      "options": [
+        "WHERE deleted_at IS NULL;",
+        "EXCEPT SELECT * FROM deleted_users;",
+        "WITH CHECK OPTION;",
+        "WHERE status = 'active';"
+      ],
+      "answer": [0],
+      "explanation": "Standard soft delete implementation."
+    },
+    {
+      "question": "Fix the timezone issue:\nSELECT * \nFROM events \nWHERE event_time > '2023-01-01'; -- Misses events in UTC+2",
+      "options": [
+        "Use UTC_TIMESTAMP()",
+        "Store as TIMESTAMP WITH TIME ZONE",
+        "Convert input: WHERE event_time > CONVERT_TZ('2023-01-01', 'UTC', @@time_zone)",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Time zone handling requires consistent approach."
+    },
+    {
+      "question": "Debug the phantom read:\n-- Session 1:\nSELECT COUNT(*) FROM orders; -- Returns 100\n-- Session 2 inserts 10 rows\nSELECT COUNT(*) FROM orders; -- Returns 110\n-- But within same transaction!",
+      "options": [
+        "Use SERIALIZABLE isolation",
+        "Add WITH (HOLDLOCK)",
+        "Use SNAPSHOT isolation",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Higher isolation levels prevent phantom reads."
+    },
+    {
+      "question": "Complete the data archiving:\nINSERT INTO orders_archive\nSELECT * FROM orders\nWHERE order_date < '2020-01-01';\n_________",
+      "options": [
+        "TRUNCATE orders;",
+        "DELETE FROM orders WHERE order_date < '2020-01-01';",
+        "DROP TABLE orders;",
+        "COMMIT;"
+      ],
+      "answer": [1],
+      "explanation": "Delete source data after archival."
+    },
+    {
+      "question": "Fix the JSON query:\nSELECT data->>'name' \nFROM users \nWHERE data @> '{\"status\":\"active\"}'; -- Syntax error",
+      "options": [
+        "Use data->'name' instead",
+        "Change to JSON_VALUE(data, '$.name')",
+        "Use single quotes: @> '{\"status\":\"active\"}'",
+        "Both B and C"
+      ],
+      "answer": [3],
+      "explanation": "Vendor-specific JSON syntax fixes."
+    },
+    {
+      "question": "Why does this index not work?\nCREATE INDEX idx_name ON users (first_name, last_name);\n\nSELECT * FROM users \nWHERE last_name = 'Smith';",
+      "options": [
+        "Missing first_name in WHERE",
+        "Index should be (last_name, first_name)",
+        "Needs covering index",
+        "Both A and B"
+      ],
+      "answer": [1],
+      "explanation": "Composite index left-prefix rule."
+    },
+    {
+      "question": "Complete the full-text search:\nSELECT * FROM articles \nWHERE _________ 'database systems';",
+      "options": [
+        "TEXT_MATCH(title,",
+        "CONTAINS(title,",
+        "MATCH(title) AGAINST(",
+        "SEARCH(title,"
+      ],
+      "answer": [2],
+      "explanation": "Standard full-text search syntax."
+    },
+    {
+      "question": "Fix the transaction isolation:\nSET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;\nSELECT balance FROM accounts; -- Reads dirty data",
+      "options": [
+        "Use READ COMMITTED",
+        "Add WITH (NOLOCK)",
+        "Use SNAPSHOT isolation",
+        "Both A and C"
+      ],
+      "answer": [3],
+      "explanation": "Higher isolation prevents dirty reads."
+    },
+    {
+      "question": "Debug the performance regression:\n-- Fast: SELECT * FROM logs WHERE created_at > NOW() - INTERVAL '1 day';\n-- Slow: SELECT * FROM logs WHERE created_at > '2023-06-01';",
+      "options": [
+        "Date function prevents index use",
+        "Implicit type conversion",
+        "Statistics outdated for old dates",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Multiple factors affect date range queries."
+    },
+    {
+      "question": "Fix the incorrect date comparison:\nSELECT * FROM events\nWHERE event_date > '2023-06-01'\nAND event_date < '2023-06-30'; -- Misses June 30 events",
+      "options": [
+        "Use BETWEEN",
+        "Change to event_date <= '2023-06-30'",
+        "Use DATE_TRUNC()",
+        "Add OR event_date = '2023-06-30'"
+      ],
+      "answer": [1],
+      "explanation": "< operator excludes the end date."
+    },
+    {
+      "question": "Why does this query return no results?\nSELECT * FROM orders\nWHERE total > (SELECT AVG(total) FROM orders)\nAND status = 'pending'; -- Subquery returns NULL",
+      "options": [
+        "Add COALESCE to subquery",
+        "Use WHERE status IS NOT NULL",
+        "Add HAVING clause",
+        "Change to correlated subquery"
+      ],
+      "answer": [0],
+      "explanation": "COALESCE((SELECT ...), 0) handles NULL averages."
+    },
+    {
+      "question": "Complete the batch update:\nUPDATE large_table\nSET status = 'archived'\nWHERE created_at < '2020-01-01'\n_________; -- Prevent lock escalation",
+      "options": [
+        "LIMIT 1000",
+        "BATCHSIZE 1000",
+        "AND ROWCOUNT <= 1000",
+        "OPTION (LOOP JOIN)"
+      ],
+      "answer": [0],
+      "explanation": "LIMIT clauses prevent long table locks."
+    },
+    {
+      "question": "Debug the foreign key error:\nINSERT INTO orders (user_id, total)\nVALUES (999, 100.00); -- user_id 999 doesn't exist",
+      "options": [
+        "Disable FK constraint",
+        "Add ON DELETE CASCADE",
+        "First insert into users",
+        "Use NULL user_id"
+      ],
+      "answer": [2],
+      "explanation": "Parent record must exist before child."
+    },
+    {
+      "question": "Fix the incorrect GROUP BY:\nSELECT department, COUNT(*), AVG(salary)\nFROM employees\nGROUP BY department; -- Error: 'salary' not in GROUP BY",
+      "options": [
+        "Add salary to GROUP BY",
+        "Use ANY_VALUE(salary)",
+        "Remove AVG()",
+        "Use subquery"
+      ],
+      "answer": [1],
+      "explanation": "ANY_VALUE() allows aggregation without grouping."
+    },
+    {
+      "question": "Complete the backup restoration test:\nCREATE DATABASE restore_test\n_________\nFROM DISK = '/backups/prod.bak'\nWITH STANDBY = '/undo.ldf';",
+      "options": [
+        "RESTORE DATABASE",
+        "RESTORE FILELISTONLY",
+        "BACKUP LOG",
+        "LOAD DATABASE"
+      ],
+      "answer": [0],
+      "explanation": "Standard restore syntax."
+    },
+    {
+      "question": "Why is this query slow?\nSELECT * FROM products\nWHERE UPPER(name) = 'LAPTOP'; -- Index exists on name",
+      "options": [
+        "UPPER() prevents index usage",
+        "Missing index on UPPER(name)",
+        "Use LIKE instead",
+        "Both A and B"
+      ],
+      "answer": [3],
+      "explanation": "Function-based indexes needed for case-insensitive search."
+    },
+    {
+      "question": "Fix the transaction scope:\nBEGIN TRY\n  BEGIN TRANSACTION\n  UPDATE...\n  COMMIT\nEND TRY\nBEGIN CATCH\n  _________\nEND CATCH",
+      "options": [
+        "ROLLBACK",
+        "COMMIT",
+        "RETRY TRANSACTION",
+        "THROW"
+      ],
+      "answer": [0],
+      "explanation": "Must rollback in catch block on error."
+    },
+    {
+      "question": "Complete the data validation:\nALTER TABLE employees\nADD CONSTRAINT chk_salary\n_________;",
+      "options": [
+        "VALIDATE salary > 0",
+        "CHECK (salary > 0)",
+        "WHERE salary IS NOT NULL",
+        "FILTER salary > 0"
+      ],
+      "answer": [1],
+      "explanation": "CHECK constraints enforce data rules."
+    },
+    {
+      "question": "Debug the incorrect SUM:\nSELECT user_id, SUM(amount)\nFROM transactions\nGROUP BY user_id; -- Includes refunds as positive",
+      "options": [
+        "Add WHERE amount > 0",
+        "Use ABS(amount)",
+        "Add transaction_type filter",
+        "Use CASE WHEN type='refund' THEN -amount ELSE amount END"
+      ],
+      "answer": [3],
+      "explanation": "Refunds should be negative values."
+    },
+    {
+      "question": "Fix the recursive CTE base case:\nWITH RECURSIVE org_tree AS (\n  SELECT id, name, manager_id\n  FROM employees\n  WHERE _________\n  UNION ALL...",
+      "options": [
+        "manager_id = 0",
+        "manager_id IS NULL",
+        "id = 1",
+        "level = 1"
+      ],
+      "answer": [1],
+      "explanation": "Root nodes have no manager."
+    },
+    {
+      "question": "Complete the index creation for JSONB:\nCREATE INDEX idx_profile_email \nON users\n_________;",
+      "options": [
+        "(profile->>'email')",
+        "(profile->'email')",
+        "(profile @> 'email')",
+        "USING GIN (profile)"
+      ],
+      "answer": [0],
+      "explanation": "->> extracts text for b-tree index."
+    },
+    {
+      "question": "Why does this trigger fail?\nCREATE TRIGGER update_inventory\nAFTER INSERT ON orders\nFOR EACH ROW\nUPDATE products\nSET stock = stock - NEW.quantity\nWHERE id = NEW.product_id; -- Error on bulk insert",
+      "options": [
+        "Use FOR EACH STATEMENT",
+        "Add BEGIN/END block",
+        "Use SET NOCOUNT ON",
+        "Handle batch updates"
+      ],
+      "answer": [3],
+      "explanation": "Row triggers need special handling for bulk ops."
+    },
+    {
+      "question": "Fix the timezone conversion:\nSELECT event_time AT TIME ZONE 'UTC'\nFROM events; -- Returns type TIMESTAMPTZ",
+      "options": [
+        "Use CONVERT_TZ()",
+        "Cast to TIMESTAMP: (event_time AT TIME ZONE 'UTC')::TIMESTAMP",
+        "Use DATE_TRUNC()",
+        "Add AT LOCAL"
+      ],
+      "answer": [1],
+      "explanation": "Explicit cast to remove timezone info."
+    },
+    {
+      "question": "Complete the vacuum command:\n_________ orders\nWHERE created_at < '2020-01-01';",
+      "options": [
+        "DELETE FROM",
+        "ARCHIVE",
+        "PURGE",
+        "TRUNCATE PARTITION"
+      ],
+      "answer": [0],
+      "explanation": "Standard deletion syntax."
+    },
+    {
+      "question": "Debug the permission error:\nCREATE TABLE audit_log (...);\n-- Fails with 'permission denied'",
+      "options": [
+        "Use CREATE TEMP TABLE",
+        "GRANT CREATE ON SCHEMA",
+        "Run as SA user",
+        "Disable security policies"
+      ],
+      "answer": [1],
+      "explanation": "User needs schema permissions."
+    },
+    {
+      "question": "Fix the window frame:\nSELECT SUM(sales) OVER (\n  ORDER BY sale_date\n  _________\n) FROM daily_sales; -- Default includes future rows",
+      "options": [
+        "ROWS UNBOUNDED PRECEDING",
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "RANGE CURRENT ROW",
+        "GROUPS 1 PRECEDING"
+      ],
+      "answer": [1],
+      "explanation": "Correct frame for cumulative sum."
+    },
+    {
+      "question": "Optimize the full table scan:\nEXPLAIN SELECT * FROM customers\nWHERE phone LIKE '%555%'; -- Always scans all rows",
+      "options": [
+        "Create trigram index",
+        "Use full-text search",
+        "Materialize view",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Leading wildcards prevent b-tree usage."
+    },
+    {
+      "question": "Complete the shard routing:\nCREATE FUNCTION get_shard(id INT)\nRETURNS INT AS $$\nBEGIN\n  RETURN _________;\nEND;\n$$ LANGUAGE plpgsql;",
+      "options": [
+        "id % 10",
+        "HASH(id)",
+        "DATABASE_ID()",
+        "SHARDKEY(id)"
+      ],
+      "answer": [0],
+      "explanation": "Modulo-based shard distribution."
+    },
+    {
+      "question": "Debug the replication lag:\n-- Write to primary\nINSERT...\n-- Read from replica: not visible",
+      "options": [
+        "SET synchronous_commit = ON",
+        "Use READ COMMITTED on replica",
+        "Check replication delay",
+        "All of the above"
+      ],
+      "answer": [3],
+      "explanation": "Asynchronous replication causes delays."
+    },
+    {
+      "question": "Fix the CTE materialization:\nWITH cte AS MATERIALIZED (\n  SELECT * FROM large_table\n)\nSELECT * FROM cte JOIN... -- Slow performance",
+      "options": [
+        "Remove MATERIALIZED",
+        "Add INDEX on CTE",
+        "Use NOT MATERIALIZED",
+        "Break into temporary table"
+      ],
+      "answer": [2],
+      "explanation": "Prevents unnecessary materialization."
+    },
+    {
+      "question": "Complete the disaster recovery:\n_________ FROM \nLATEST IN 's3://backups/'\nWITH SNAPSHOT;",
+      "options": [
+        "RESTORE DATABASE prod",
+        "RECOVER DATABASE",
+        "CREATE DATABASE prod_restore AS",
+        "CLONE DATABASE prod"
+      ],
+      "answer": [0],
+      "explanation": "Cloud restore syntax."
+    }
+]

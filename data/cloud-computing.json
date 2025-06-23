@@ -1,585 +1,2446 @@
 [
-  {
-    "question": "What is cloud computing?",
-    "options": [
-      "A way to run applications on a local server only.",
-      "The delivery of computing services over the internet.",
-      "A type of hardware device.",
-      "A programming language."
-    ],
-    "answer": [1],
-    "explanation": "Cloud computing is the delivery of computing services (servers, storage, databases, networking, software, analytics, etc.) over the internet."
-  },
-  {
-    "question": "Which of the following is NOT a cloud service model?",
-    "options": [
-      "IaaS",
-      "PaaS",
-      "SaaS",
-      "CaaS"
-    ],
-    "answer": [3],
-    "explanation": "CaaS (Container as a Service) is a real model, but the main three are IaaS, PaaS, and SaaS."
-  },
-  {
-    "question": "Which cloud deployment model provides resources exclusively for a single organization?",
-    "options": [
-      "Public Cloud",
-      "Private Cloud",
-      "Hybrid Cloud",
-      "Community Cloud"
-    ],
-    "answer": [1],
-    "explanation": "A private cloud is dedicated to a single organization."
-  },
-  {
-    "question": "What is the main benefit of elasticity in cloud computing?",
-    "options": [
-      "Fixed resource allocation",
-      "Automatic scaling of resources based on demand",
-      "Manual server provisioning",
-      "Increased hardware costs"
-    ],
-    "answer": [1],
-    "explanation": "Elasticity allows resources to scale up or down automatically as needed."
-  },
-  {
-    "question": "Which of the following is a leading public cloud provider?",
-    "options": [
-      "AWS",
-      "Cisco",
-      "Dell",
-      "Oracle Database"
-    ],
-    "answer": [0],
-    "explanation": "Amazon Web Services (AWS) is a leading public cloud provider."
-  },
-  {
-    "question": "What does 'serverless' mean in cloud computing?",
-    "options": [
-      "No servers are used at all.",
-      "Developers do not manage the underlying infrastructure.",
-      "Servers are managed manually.",
-      "Applications run only on physical machines."
-    ],
-    "answer": [1],
-    "explanation": "Serverless means the cloud provider manages the infrastructure, and developers focus on code."
-  },
-  {
-    "question": "Which service is typically used for scalable object storage in the cloud?",
-    "options": [
-      "Amazon S3",
-      "Amazon EC2",
-      "Amazon RDS",
-      "Amazon VPC"
-    ],
-    "answer": [0],
-    "explanation": "Amazon S3 is a scalable object storage service."
-  },
-  {
-    "question": "What is a key advantage of using a hybrid cloud?",
-    "options": [
-      "No on-premises resources",
-      "Combining private and public cloud resources for flexibility",
-      "Only public cloud resources",
-      "No scalability"
-    ],
-    "answer": [1],
-    "explanation": "Hybrid cloud combines private and public resources for greater flexibility."
-  },
-  {
-    "question": "Which of the following best describes 'multi-cloud'?",
-    "options": [
-      "Using multiple cloud services from the same provider.",
-      "Using services from multiple cloud providers.",
-      "Using only on-premises resources.",
-      "Using a single cloud provider."
-    ],
-    "answer": [1],
-    "explanation": "Multi-cloud means using services from more than one cloud provider."
-  },
-  {
-    "question": "Which security concept is critical in cloud computing?",
-    "options": [
-      "Least privilege",
-      "Open access",
-      "No encryption",
-      "Manual backups only"
-    ],
-    "answer": [0],
-    "explanation": "Least privilege ensures users have only the access they need, improving security."
-  },
-  {
-    "question": "Which of the following is a benefit of cloud computing for businesses?",
-    "options": [
-      "Higher upfront capital costs",
-      "On-demand resource provisioning",
-      "Longer deployment times",
-      "Manual scaling only"
-    ],
-    "answer": [1],
-    "explanation": "Cloud computing allows businesses to provision resources on demand, reducing upfront costs and deployment times."
-  },
-  {
-    "question": "What is the primary responsibility of the customer in the IaaS model?",
-    "options": [
-      "Managing physical servers",
-      "Managing virtual machines and operating systems",
-      "Managing the cloud network infrastructure",
-      "Managing the underlying hardware"
-    ],
-    "answer": [1],
-    "explanation": "In IaaS, the customer manages VMs, OS, and applications, while the provider manages the infrastructure."
-  },
-  {
-    "question": "Which cloud model is best for rapid application development without managing infrastructure?",
-    "options": [
-      "IaaS",
-      "PaaS",
-      "SaaS",
-      "On-premises"
-    ],
-    "answer": [1],
-    "explanation": "PaaS provides a platform for developers to build and deploy applications without managing infrastructure."
-  },
-  {
-    "question": "Which AWS service is used for scalable, managed relational databases?",
-    "options": [
-      "Amazon S3",
-      "Amazon EC2",
-      "Amazon RDS",
-      "Amazon Lambda"
-    ],
-    "answer": [2],
-    "explanation": "Amazon RDS is a managed relational database service."
-  },
-  {
-    "question": "What is the main advantage of using SaaS?",
-    "options": [
-      "Users manage the application code",
-      "No need to install or maintain software locally",
-      "Requires manual updates",
-      "Limited accessibility"
-    ],
-    "answer": [1],
-    "explanation": "SaaS applications are accessed over the internet and managed by the provider."
-  },
-  {
-    "question": "Which of the following is a common use case for cloud storage?",
-    "options": [
-      "Data backup and disaster recovery",
-      "Running a web server only",
-      "Manual data migration",
-      "On-premises file sharing only"
-    ],
-    "answer": [0],
-    "explanation": "Cloud storage is commonly used for backup, disaster recovery, and scalable file storage."
-  },
-  {
-    "question": "Which cloud provider offers Google Compute Engine?",
-    "options": [
-      "AWS",
-      "Azure",
-      "Google Cloud Platform",
-      "IBM Cloud"
-    ],
-    "answer": [2],
-    "explanation": "Google Compute Engine is part of Google Cloud Platform."
-  },
-  {
-    "question": "What is the purpose of a Virtual Private Cloud (VPC)?",
-    "options": [
-      "To provide isolated network environments in the cloud",
-      "To run serverless functions",
-      "To store objects",
-      "To manage billing"
-    ],
-    "answer": [0],
-    "explanation": "A VPC provides an isolated network environment for resources in the cloud."
-  },
-  {
-    "question": "Which of the following is a key feature of cloud scalability?",
-    "options": [
-      "Manual server upgrades only",
-      "Automatic resource scaling based on demand",
-      "Fixed resource allocation",
-      "No scaling options"
-    ],
-    "answer": [1],
-    "explanation": "Cloud platforms can automatically scale resources up or down based on demand."
-  },
-  {
-    "question": "Which service is used for event-driven, serverless compute in AWS?",
-    "options": [
-      "Amazon EC2",
-      "Amazon Lambda",
-      "Amazon S3",
-      "Amazon VPC"
-    ],
-    "answer": [1],
-    "explanation": "AWS Lambda is a serverless compute service that runs code in response to events."
-  },
-  {
-    "question": "Which of the following is a primary benefit of cloud disaster recovery?",
-    "options": [
-      "Manual failover only",
-      "Automated, rapid recovery of services",
-      "No backup options",
-      "On-premises only"
-    ],
-    "answer": [1],
-    "explanation": "Cloud disaster recovery enables automated, rapid recovery of services in case of failure."
-  },
-  {
-    "question": "What is a cloud region?",
-    "options": [
-      "A data center in a single city",
-      "A geographic area containing multiple data centers",
-      "A single server",
-      "A type of cloud service"
-    ],
-    "answer": [1],
-    "explanation": "A cloud region is a geographic area with multiple data centers for redundancy and availability."
-  },
-  {
-    "question": "Which technology enables the creation of isolated environments for running applications in the cloud?",
-    "options": [
-      "Containers",
-      "Physical servers",
-      "Mainframes",
-      "Bare metal only"
-    ],
-    "answer": [0],
-    "explanation": "Containers provide isolated environments for running applications, improving portability and scalability."
-  },
-  {
-    "question": "What is the main purpose of a Content Delivery Network (CDN) in cloud computing?",
-    "options": [
-      "To store backups",
-      "To deliver content to users with low latency",
-      "To manage billing",
-      "To run databases"
-    ],
-    "answer": [1],
-    "explanation": "A CDN delivers content to users from locations close to them, reducing latency."
-  },
-  {
-    "question": "Which of the following is a common security measure in cloud environments?",
-    "options": [
-      "Multi-factor authentication (MFA)",
-      "No encryption",
-      "Open public access",
-      "Manual password sharing"
-    ],
-    "answer": [0],
-    "explanation": "MFA is a common security measure to protect cloud accounts."
-  },
-  {
-    "question": "Which cloud service is best for hosting a static website?",
-    "options": [
-      "Object storage (e.g., Amazon S3)",
-      "Relational database",
-      "Virtual machine",
-      "Serverless compute only"
-    ],
-    "answer": [0],
-    "explanation": "Object storage services like Amazon S3 are ideal for hosting static websites."
-  },
-  {
-    "question": "What is the main advantage of Infrastructure as Code (IaC) in cloud computing?",
-    "options": [
-      "Manual server configuration",
-      "Automated, repeatable infrastructure deployment",
-      "No version control",
-      "Physical hardware management"
-    ],
-    "answer": [1],
-    "explanation": "IaC allows automated, repeatable, and version-controlled infrastructure deployment."
-  },
-  {
-    "question": "Which of the following is a managed Kubernetes service?",
-    "options": [
-      "Amazon EKS",
-      "Amazon S3",
-      "Amazon RDS",
-      "Amazon VPC"
-    ],
-    "answer": [0],
-    "explanation": "Amazon EKS is a managed Kubernetes service."
-  },
-  {
-    "question": "What is the purpose of a cloud service level agreement (SLA)?",
-    "options": [
-      "To define the provider's uptime and support commitments",
-      "To manage billing only",
-      "To set user passwords",
-      "To configure firewalls"
-    ],
-    "answer": [0],
-    "explanation": "An SLA defines the provider's commitments for uptime, support, and service quality."
-  },
-  {
-    "question": "Which of the following is a benefit of cloud auto-scaling?",
-    "options": [
-      "Manual resource allocation",
-      "Automatic adjustment of resources based on demand",
-      "Fixed server count",
-      "No scaling options"
-    ],
-    "answer": [1],
-    "explanation": "Auto-scaling automatically adjusts resources to match demand, optimizing cost and performance."
-  },
-  {
-    "question": "Which cloud model provides the highest level of user control over the environment?",
-    "options": [
-      "SaaS",
-      "PaaS",
-      "IaaS",
-      "FaaS"
-    ],
-    "answer": [2],
-    "explanation": "IaaS provides users with the most control over operating systems, storage, and deployed applications."
-  },
-  {
-    "question": "What is a common use case for serverless computing?",
-    "options": [
-      "Running short-lived, event-driven functions",
-      "Hosting a database server",
-      "Managing physical hardware",
-      "Manual scaling of resources"
-    ],
-    "answer": [0],
-    "explanation": "Serverless is ideal for short-lived, event-driven workloads."
-  },
-  {
-    "question": "Which of the following is a cloud-native design principle?",
-    "options": [
-      "Monolithic architecture",
-      "Microservices architecture",
-      "Manual scaling",
-      "Single point of failure"
-    ],
-    "answer": [1],
-    "explanation": "Cloud-native applications are often built using microservices for scalability and resilience."
-  },
-  {
-    "question": "What is the main function of a cloud API gateway?",
-    "options": [
-      "To manage and secure API traffic",
-      "To store files",
-      "To run virtual machines",
-      "To manage billing"
-    ],
-    "answer": [0],
-    "explanation": "API gateways manage, secure, and monitor API traffic in cloud environments."
-  },
-  {
-    "question": "Which of the following is a benefit of cloud pay-as-you-go pricing?",
-    "options": [
-      "Pay only for resources used",
-      "Fixed monthly fees regardless of usage",
-      "Upfront hardware investment",
-      "Manual billing only"
-    ],
-    "answer": [0],
-    "explanation": "Pay-as-you-go allows users to pay only for the resources they consume."
-  },
-  {
-    "question": "Which cloud provider offers Azure Functions?",
-    "options": [
-      "AWS",
-      "Google Cloud Platform",
-      "Microsoft Azure",
-      "IBM Cloud"
-    ],
-    "answer": [2],
-    "explanation": "Azure Functions is a serverless compute service from Microsoft Azure."
-  },
-  {
-    "question": "What is the purpose of cloud monitoring tools?",
-    "options": [
-      "To track performance, availability, and security of cloud resources",
-      "To manage billing only",
-      "To run databases",
-      "To configure firewalls"
-    ],
-    "answer": [0],
-    "explanation": "Cloud monitoring tools help track and optimize resource usage, performance, and security."
-  },
-  {
-    "question": "Which of the following is a common cloud storage class for infrequently accessed data?",
-    "options": [
-      "Standard",
-      "Glacier/Archive",
-      "Premium",
-      "Express"
-    ],
-    "answer": [1],
-    "explanation": "Glacier/Archive storage classes are designed for infrequently accessed data at lower cost."
-  },
-  {
-    "question": "What is the main benefit of using managed database services in the cloud?",
-    "options": [
-      "Automatic backups and patching",
-      "Manual scaling only",
-      "No monitoring",
-      "On-premises only"
-    ],
-    "answer": [0],
-    "explanation": "Managed database services handle backups, patching, and scaling automatically."
-  },
-  {
-    "question": "Which of the following is a key feature of cloud networking?",
-    "options": [
-      "Virtual networks (VPC/VNet)",
-      "Manual cabling",
-      "Physical routers only",
-      "No isolation options"
-    ],
-    "answer": [0],
-    "explanation": "Virtual networks provide isolation and control over cloud resources."
-  },
-  {
-    "question": "Which AWS service is used for scalable NoSQL databases?",
-    "options": [
-      "Amazon RDS",
-      "Amazon DynamoDB",
-      "Amazon S3",
-      "Amazon EC2"
-    ],
-    "answer": [1],
-    "explanation": "Amazon DynamoDB is a managed NoSQL database service."
-  },
-  {
-    "question": "What is the main purpose of cloud identity and access management (IAM)?",
-    "options": [
-      "To control user and resource permissions",
-      "To store files",
-      "To run virtual machines",
-      "To manage billing"
-    ],
-    "answer": [0],
-    "explanation": "IAM controls who can access which resources in the cloud."
-  },
-  {
-    "question": "Which of the following is a benefit of cloud resource tagging?",
-    "options": [
-      "Improved resource organization and cost tracking",
-      "Manual billing only",
-      "No searchability",
-      "Physical labeling"
-    ],
-    "answer": [0],
-    "explanation": "Tagging helps organize, search, and track costs for cloud resources."
-  },
-  {
-    "question": "Which cloud provider offers Cloud Functions as a serverless compute service?",
-    "options": [
-      "AWS",
-      "Google Cloud Platform",
-      "Microsoft Azure",
-      "IBM Cloud"
-    ],
-    "answer": [1],
-    "explanation": "Google Cloud Functions is the serverless compute service from Google Cloud Platform."
-  },
-  {
-    "question": "What is the main advantage of using cloud-based DevOps tools?",
-    "options": [
-      "Collaboration and automation across distributed teams",
-      "Manual deployments only",
-      "No version control",
-      "On-premises only"
-    ],
-    "answer": [0],
-    "explanation": "Cloud-based DevOps tools enable collaboration, automation, and faster delivery."
-  },
-  {
-    "question": "Which of the following is a common use case for cloud message queues?",
-    "options": [
-      "Decoupling application components",
-      "Manual data entry",
-      "Physical mail delivery",
-      "On-premises backups only"
-    ],
-    "answer": [0],
-    "explanation": "Message queues help decouple application components for scalability and reliability."
-  },
-  {
-    "question": "What is the purpose of a cloud firewall?",
-    "options": [
-      "To control inbound and outbound network traffic",
-      "To store files",
-      "To run databases",
-      "To manage billing"
-    ],
-    "answer": [0],
-    "explanation": "Cloud firewalls control network traffic to and from cloud resources."
-  },
-  {
-    "question": "Which of the following is a benefit of cloud resource automation?",
-    "options": [
-      "Faster, error-free deployments",
-      "Manual configuration only",
-      "No repeatability",
-      "Physical hardware management"
-    ],
-    "answer": [0],
-    "explanation": "Automation enables faster, more reliable, and repeatable deployments."
-  },
-  {
-    "question": "Which cloud service is best for real-time analytics on large data streams?",
-    "options": [
-      "Serverless compute",
-      "Managed streaming services (e.g., AWS Kinesis, Azure Event Hubs)",
-      "Object storage",
-      "Relational database only"
-    ],
-    "answer": [1],
-    "explanation": "Managed streaming services are designed for real-time analytics on large data streams."
-  },
-  {
-    "question": "What is the main benefit of cloud resource versioning?",
-    "options": [
-      "Track and restore previous configurations",
-      "Manual backups only",
-      "No change history",
-      "Physical versioning"
-    ],
-    "answer": [0],
-    "explanation": "Versioning allows tracking and restoring previous resource configurations."
-  },
-  {
-    "question": "Which of the following is a key consideration for cloud cost optimization?",
-    "options": [
-      "Right-sizing resources",
-      "Over-provisioning",
-      "Manual billing only",
-      "Ignoring usage patterns"
-    ],
-    "answer": [0],
-    "explanation": "Right-sizing resources helps optimize cloud costs."
-  },
-  {
-    "question": "Which cloud service is best for hosting containerized applications?",
-    "options": [
-      "Managed Kubernetes (e.g., EKS, AKS, GKE)",
-      "Object storage",
-      "Relational database",
-      "Serverless compute only"
-    ],
-    "answer": [0],
-    "explanation": "Managed Kubernetes services are ideal for hosting containerized applications."
-  },
-  {
-    "question": "What is the main purpose of a cloud service catalog?",
-    "options": [
-      "To provide a list of available cloud services and resources",
-      "To manage billing only",
-      "To run databases",
-      "To configure firewalls"
-    ],
-    "answer": [0],
-    "explanation": "A service catalog lists available cloud services and resources for easy provisioning."
-  }
+    {
+        "question": "What is cloud computing?",
+        "options": [
+            "A way to run applications on a local server only.",
+            "The delivery of computing services over the internet.",
+            "A type of hardware device.",
+            "A programming language."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud computing is the delivery of computing services (servers, storage, databases, networking, software, analytics, etc.) over the internet."
+    },
+    {
+        "question": "Which of the following is NOT a cloud service model?",
+        "options": [
+            "IaaS",
+            "PaaS",
+            "SaaS",
+            "CaaS"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "CaaS (Container as a Service) is a real model, but the main three are IaaS, PaaS, and SaaS."
+    },
+    {
+        "question": "Which cloud deployment model provides resources exclusively for a single organization?",
+        "options": [
+            "Public Cloud",
+            "Private Cloud",
+            "Hybrid Cloud",
+            "Community Cloud"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "A private cloud is dedicated to a single organization."
+    },
+    {
+        "question": "What is the main benefit of elasticity in cloud computing?",
+        "options": [
+            "Fixed resource allocation",
+            "Automatic scaling of resources based on demand",
+            "Manual server provisioning",
+            "Increased hardware costs"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Elasticity allows resources to scale up or down automatically as needed."
+    },
+    {
+        "question": "Which of the following is a leading public cloud provider?",
+        "options": [
+            "AWS",
+            "Cisco",
+            "Dell",
+            "Oracle Database"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Amazon Web Services (AWS) is a leading public cloud provider."
+    },
+    {
+        "question": "What does 'serverless' mean in cloud computing?",
+        "options": [
+            "No servers are used at all.",
+            "Developers do not manage the underlying infrastructure.",
+            "Servers are managed manually.",
+            "Applications run only on physical machines."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Serverless means the cloud provider manages the infrastructure, and developers focus on code."
+    },
+    {
+        "question": "Which service is typically used for scalable object storage in the cloud?",
+        "options": [
+            "Amazon S3",
+            "Amazon EC2",
+            "Amazon RDS",
+            "Amazon VPC"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Amazon S3 is a scalable object storage service."
+    },
+    {
+        "question": "What is a key advantage of using a hybrid cloud?",
+        "options": [
+            "No on-premises resources",
+            "Combining private and public cloud resources for flexibility",
+            "Only public cloud resources",
+            "No scalability"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Hybrid cloud combines private and public resources for greater flexibility."
+    },
+    {
+        "question": "Which of the following best describes 'multi-cloud'?",
+        "options": [
+            "Using multiple cloud services from the same provider.",
+            "Using services from multiple cloud providers.",
+            "Using only on-premises resources.",
+            "Using a single cloud provider."
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Multi-cloud means using services from more than one cloud provider."
+    },
+    {
+        "question": "Which security concept is critical in cloud computing?",
+        "options": [
+            "Least privilege",
+            "Open access",
+            "No encryption",
+            "Manual backups only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Least privilege ensures users have only the access they need, improving security."
+    },
+    {
+        "question": "Which of the following is a benefit of cloud computing for businesses?",
+        "options": [
+            "Higher upfront capital costs",
+            "On-demand resource provisioning",
+            "Longer deployment times",
+            "Manual scaling only"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud computing allows businesses to provision resources on demand, reducing upfront costs and deployment times."
+    },
+    {
+        "question": "What is the primary responsibility of the customer in the IaaS model?",
+        "options": [
+            "Managing physical servers",
+            "Managing virtual machines and operating systems",
+            "Managing the cloud network infrastructure",
+            "Managing the underlying hardware"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "In IaaS, the customer manages VMs, OS, and applications, while the provider manages the infrastructure."
+    },
+    {
+        "question": "Which cloud model is best for rapid application development without managing infrastructure?",
+        "options": [
+            "IaaS",
+            "PaaS",
+            "SaaS",
+            "On-premises"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "PaaS provides a platform for developers to build and deploy applications without managing infrastructure."
+    },
+    {
+        "question": "Which AWS service is used for scalable, managed relational databases?",
+        "options": [
+            "Amazon S3",
+            "Amazon EC2",
+            "Amazon RDS",
+            "Amazon Lambda"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Amazon RDS is a managed relational database service."
+    },
+    {
+        "question": "What is the main advantage of using SaaS?",
+        "options": [
+            "Users manage the application code",
+            "No need to install or maintain software locally",
+            "Requires manual updates",
+            "Limited accessibility"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "SaaS applications are accessed over the internet and managed by the provider."
+    },
+    {
+        "question": "Which of the following is a common use case for cloud storage?",
+        "options": [
+            "Data backup and disaster recovery",
+            "Running a web server only",
+            "Manual data migration",
+            "On-premises file sharing only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Cloud storage is commonly used for backup, disaster recovery, and scalable file storage."
+    },
+    {
+        "question": "Which cloud provider offers Google Compute Engine?",
+        "options": [
+            "AWS",
+            "Azure",
+            "Google Cloud Platform",
+            "IBM Cloud"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Google Compute Engine is part of Google Cloud Platform."
+    },
+    {
+        "question": "What is the purpose of a Virtual Private Cloud (VPC)?",
+        "options": [
+            "To provide isolated network environments in the cloud",
+            "To run serverless functions",
+            "To store objects",
+            "To manage billing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A VPC provides an isolated network environment for resources in the cloud."
+    },
+    {
+        "question": "Which of the following is a key feature of cloud scalability?",
+        "options": [
+            "Manual server upgrades only",
+            "Automatic resource scaling based on demand",
+            "Fixed resource allocation",
+            "No scaling options"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud platforms can automatically scale resources up or down based on demand."
+    },
+    {
+        "question": "Which service is used for event-driven, serverless compute in AWS?",
+        "options": [
+            "Amazon EC2",
+            "Amazon Lambda",
+            "Amazon S3",
+            "Amazon VPC"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AWS Lambda is a serverless compute service that runs code in response to events."
+    },
+    {
+        "question": "Which of the following is a primary benefit of cloud disaster recovery?",
+        "options": [
+            "Manual failover only",
+            "Automated, rapid recovery of services",
+            "No backup options",
+            "On-premises only"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud disaster recovery enables automated, rapid recovery of services in case of failure."
+    },
+    {
+        "question": "What is a cloud region?",
+        "options": [
+            "A data center in a single city",
+            "A geographic area containing multiple data centers",
+            "A single server",
+            "A type of cloud service"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "A cloud region is a geographic area with multiple data centers for redundancy and availability."
+    },
+    {
+        "question": "Which technology enables the creation of isolated environments for running applications in the cloud?",
+        "options": [
+            "Containers",
+            "Physical servers",
+            "Mainframes",
+            "Bare metal only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Containers provide isolated environments for running applications, improving portability and scalability."
+    },
+    {
+        "question": "What is the main purpose of a Content Delivery Network (CDN) in cloud computing?",
+        "options": [
+            "To store backups",
+            "To deliver content to users with low latency",
+            "To manage billing",
+            "To run databases"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "A CDN delivers content to users from locations close to them, reducing latency."
+    },
+    {
+        "question": "Which of the following is a common security measure in cloud environments?",
+        "options": [
+            "Multi-factor authentication (MFA)",
+            "No encryption",
+            "Open public access",
+            "Manual password sharing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "MFA is a common security measure to protect cloud accounts."
+    },
+    {
+        "question": "Which cloud service is best for hosting a static website?",
+        "options": [
+            "Object storage (e.g., Amazon S3)",
+            "Relational database",
+            "Virtual machine",
+            "Serverless compute only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Object storage services like Amazon S3 are ideal for hosting static websites."
+    },
+    {
+        "question": "What is the main advantage of Infrastructure as Code (IaC) in cloud computing?",
+        "options": [
+            "Manual server configuration",
+            "Automated, repeatable infrastructure deployment",
+            "No version control",
+            "Physical hardware management"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "IaC allows automated, repeatable, and version-controlled infrastructure deployment."
+    },
+    {
+        "question": "Which of the following is a managed Kubernetes service?",
+        "options": [
+            "Amazon EKS",
+            "Amazon S3",
+            "Amazon RDS",
+            "Amazon VPC"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Amazon EKS is a managed Kubernetes service."
+    },
+    {
+        "question": "What is the purpose of a cloud service level agreement (SLA)?",
+        "options": [
+            "To define the provider's uptime and support commitments",
+            "To manage billing only",
+            "To set user passwords",
+            "To configure firewalls"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "An SLA defines the provider's commitments for uptime, support, and service quality."
+    },
+    {
+        "question": "Which of the following is a benefit of cloud auto-scaling?",
+        "options": [
+            "Manual resource allocation",
+            "Automatic adjustment of resources based on demand",
+            "Fixed server count",
+            "No scaling options"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Auto-scaling automatically adjusts resources to match demand, optimizing cost and performance."
+    },
+    {
+        "question": "Which cloud model provides the highest level of user control over the environment?",
+        "options": [
+            "SaaS",
+            "PaaS",
+            "IaaS",
+            "FaaS"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "IaaS provides users with the most control over operating systems, storage, and deployed applications."
+    },
+    {
+        "question": "What is a common use case for serverless computing?",
+        "options": [
+            "Running short-lived, event-driven functions",
+            "Hosting a database server",
+            "Managing physical hardware",
+            "Manual scaling of resources"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Serverless is ideal for short-lived, event-driven workloads."
+    },
+    {
+        "question": "Which of the following is a cloud-native design principle?",
+        "options": [
+            "Monolithic architecture",
+            "Microservices architecture",
+            "Manual scaling",
+            "Single point of failure"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud-native applications are often built using microservices for scalability and resilience."
+    },
+    {
+        "question": "What is the main function of a cloud API gateway?",
+        "options": [
+            "To manage and secure API traffic",
+            "To store files",
+            "To run virtual machines",
+            "To manage billing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "API gateways manage, secure, and monitor API traffic in cloud environments."
+    },
+    {
+        "question": "Which of the following is a benefit of cloud pay-as-you-go pricing?",
+        "options": [
+            "Pay only for resources used",
+            "Fixed monthly fees regardless of usage",
+            "Upfront hardware investment",
+            "Manual billing only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Pay-as-you-go allows users to pay only for the resources they consume."
+    },
+    {
+        "question": "Which cloud provider offers Azure Functions?",
+        "options": [
+            "AWS",
+            "Google Cloud Platform",
+            "Microsoft Azure",
+            "IBM Cloud"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Azure Functions is a serverless compute service from Microsoft Azure."
+    },
+    {
+        "question": "What is the purpose of cloud monitoring tools?",
+        "options": [
+            "To track performance, availability, and security of cloud resources",
+            "To manage billing only",
+            "To run databases",
+            "To configure firewalls"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Cloud monitoring tools help track and optimize resource usage, performance, and security."
+    },
+    {
+        "question": "Which of the following is a common cloud storage class for infrequently accessed data?",
+        "options": [
+            "Standard",
+            "Glacier/Archive",
+            "Premium",
+            "Express"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Glacier/Archive storage classes are designed for infrequently accessed data at lower cost."
+    },
+    {
+        "question": "What is the main benefit of using managed database services in the cloud?",
+        "options": [
+            "Automatic backups and patching",
+            "Manual scaling only",
+            "No monitoring",
+            "On-premises only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Managed database services handle backups, patching, and scaling automatically."
+    },
+    {
+        "question": "Which of the following is a key feature of cloud networking?",
+        "options": [
+            "Virtual networks (VPC/VNet)",
+            "Manual cabling",
+            "Physical routers only",
+            "No isolation options"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Virtual networks provide isolation and control over cloud resources."
+    },
+    {
+        "question": "Which AWS service is used for scalable NoSQL databases?",
+        "options": [
+            "Amazon RDS",
+            "Amazon DynamoDB",
+            "Amazon S3",
+            "Amazon EC2"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Amazon DynamoDB is a managed NoSQL database service."
+    },
+    {
+        "question": "What is the main purpose of cloud identity and access management (IAM)?",
+        "options": [
+            "To control user and resource permissions",
+            "To store files",
+            "To run virtual machines",
+            "To manage billing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "IAM controls who can access which resources in the cloud."
+    },
+    {
+        "question": "Which of the following is a benefit of cloud resource tagging?",
+        "options": [
+            "Improved resource organization and cost tracking",
+            "Manual billing only",
+            "No searchability",
+            "Physical labeling"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Tagging helps organize, search, and track costs for cloud resources."
+    },
+    {
+        "question": "Which cloud provider offers Cloud Functions as a serverless compute service?",
+        "options": [
+            "AWS",
+            "Google Cloud Platform",
+            "Microsoft Azure",
+            "IBM Cloud"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Google Cloud Functions is the serverless compute service from Google Cloud Platform."
+    },
+    {
+        "question": "What is the main advantage of using cloud-based DevOps tools?",
+        "options": [
+            "Collaboration and automation across distributed teams",
+            "Manual deployments only",
+            "No version control",
+            "On-premises only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Cloud-based DevOps tools enable collaboration, automation, and faster delivery."
+    },
+    {
+        "question": "Which of the following is a common use case for cloud message queues?",
+        "options": [
+            "Decoupling application components",
+            "Manual data entry",
+            "Physical mail delivery",
+            "On-premises backups only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Message queues help decouple application components for scalability and reliability."
+    },
+    {
+        "question": "What is the purpose of a cloud firewall?",
+        "options": [
+            "To control inbound and outbound network traffic",
+            "To store files",
+            "To run databases",
+            "To manage billing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Cloud firewalls control network traffic to and from cloud resources."
+    },
+    {
+        "question": "Which of the following is a benefit of cloud resource automation?",
+        "options": [
+            "Faster, error-free deployments",
+            "Manual configuration only",
+            "No repeatability",
+            "Physical hardware management"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Automation enables faster, more reliable, and repeatable deployments."
+    },
+    {
+        "question": "Which cloud service is best for real-time analytics on large data streams?",
+        "options": [
+            "Serverless compute",
+            "Managed streaming services (e.g., AWS Kinesis, Azure Event Hubs)",
+            "Object storage",
+            "Relational database only"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Managed streaming services are designed for real-time analytics on large data streams."
+    },
+    {
+        "question": "What is the main benefit of cloud resource versioning?",
+        "options": [
+            "Track and restore previous configurations",
+            "Manual backups only",
+            "No change history",
+            "Physical versioning"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Versioning allows tracking and restoring previous resource configurations."
+    },
+    {
+        "question": "Which of the following is a key consideration for cloud cost optimization?",
+        "options": [
+            "Right-sizing resources",
+            "Over-provisioning",
+            "Manual billing only",
+            "Ignoring usage patterns"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Right-sizing resources helps optimize cloud costs."
+    },
+    {
+        "question": "Which cloud service is best for hosting containerized applications?",
+        "options": [
+            "Managed Kubernetes (e.g., EKS, AKS, GKE)",
+            "Object storage",
+            "Relational database",
+            "Serverless compute only"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Managed Kubernetes services are ideal for hosting containerized applications."
+    },
+    {
+        "question": "What is the main purpose of a cloud service catalog?",
+        "options": [
+            "To provide a list of available cloud services and resources",
+            "To manage billing only",
+            "To run databases",
+            "To configure firewalls"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "A service catalog lists available cloud services and resources for easy provisioning."
+    },
+    {
+        "question": "Which cloud characteristic allows automatic resource scaling based on demand?",
+        "options": [
+            "Resource Pooling",
+            "Measured Service",
+            "On-Demand Self-Service",
+            "Rapid Elasticity"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Rapid elasticity enables automatic scaling of resources up/down based on real-time demand."
+    },
+    {
+        "question": "In the shared responsibility model, which security aspect is ALWAYS the customer's responsibility?",
+        "options": [
+            "Physical Data Center Security",
+            "Application Security",
+            "Hypervisor Management",
+            "Network Infrastructure"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Regardless of service model (IaaS/PaaS/SaaS), customers always retain responsibility for securing their applications and data."
+    },
+    {
+        "question": "Which strategy reduces latency for global users accessing static content?",
+        "options": [
+            "Auto Scaling Groups",
+            "Content Delivery Network (CDN)",
+            "Load Balancing",
+            "Database Read Replicas"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CDNs cache static content at edge locations close to users, significantly reducing latency."
+    },
+    {
+        "question": "What's the primary benefit of using infrastructure as code (IaC) for cloud deployments?",
+        "options": [
+            "Reduced compute costs",
+            "Environment consistency",
+            "Automatic security patching",
+            "Network bandwidth optimization"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "IaC ensures identical environment provisioning through version-controlled templates, eliminating configuration drift."
+    },
+    {
+        "question": "Which cost optimization technique leverages discounted pricing for predictable workloads?",
+        "options": [
+            "Spot Instances",
+            "Reserved Instances",
+            "Auto Scaling",
+            "Rightsizing"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Reserved Instances offer significant discounts (up to 75%) for committed usage over 1-3 years."
+    },
+    {
+        "question": "What does 'cattle vs pets' analogy represent in cloud architecture?",
+        "options": [
+            "Resource tagging strategy",
+            "Disposable vs stateful servers",
+            "Cold vs hot storage tiers",
+            "Public vs private cloud"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Treat servers as disposable cattle (automatically replaceable) rather than unique pets requiring manual care."
+    },
+    {
+        "question": "Which deployment model provides dedicated infrastructure behind a corporate firewall?",
+        "options": [
+            "Public Cloud",
+            "Hybrid Cloud",
+            "Community Cloud",
+            "Private Cloud"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Private clouds offer exclusive infrastructure for a single organization, typically on-premises."
+    },
+    {
+        "question": "What's the purpose of a bastion host in cloud security?",
+        "options": [
+            "DDoS protection",
+            "Secure administrative access",
+            "Data encryption at rest",
+            "Network traffic monitoring"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Bastion hosts provide controlled SSH/RDP access to private instances without exposing them to the internet."
+    },
+    {
+        "question": "Which serverless pattern handles event processing without persistent servers?",
+        "options": [
+            "Lift-and-Shift",
+            "Event-Driven Functions",
+            "Blue-Green Deployment",
+            "Circuit Breaker"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Serverless functions (e.g., AWS Lambda) execute code in response to events with no server management."
+    },
+    {
+        "question": "What does multi-AZ deployment protect against in AWS?",
+        "options": [
+            "Regional outages",
+            "Data corruption",
+            "Availability Zone failure",
+            "DDoS attacks"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Multi-AZ deployments replicate resources across physically separate data centers within a region."
+    },
+    {
+        "question": "Which storage class offers lowest cost for rarely accessed data?",
+        "options": [
+            "Standard",
+            "Infrequent Access",
+            "Archive/Glacier",
+            "Premium SSD"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Archival storage (e.g., AWS Glacier) provides lowest cost for data accessed less than once per year."
+    },
+    {
+        "question": "What's the primary purpose of container orchestration platforms?",
+        "options": [
+            "Network segmentation",
+            "Automated container management",
+            "Storage tier optimization",
+            "Identity federation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Platforms like Kubernetes automate deployment, scaling, and management of containerized applications."
+    },
+    {
+        "question": "Which factor MOST impacts cloud migration complexity?",
+        "options": [
+            "Network bandwidth",
+            "Application dependencies",
+            "Data volume",
+            "Operating system"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Interconnected applications create migration dependencies that require careful sequencing and testing."
+    },
+    {
+        "question": "What does 'Well-Architected Framework' prioritize?",
+        "options": [
+            "Vendor lock-in avoidance",
+            "Cost-performance balance",
+            "Operational excellence",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Cloud best practice frameworks address security, reliability, performance, cost, and operational excellence."
+    },
+    {
+        "question": "Which technique prevents cloud bill surprises?",
+        "options": [
+            "Resource tagging",
+            "Budget alerts",
+            "Reserved instances",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Combining tagging, budget alerts, and reserved capacity provides comprehensive cost control."
+    },
+    {
+        "question": "What's the key difference between horizontal and vertical scaling?",
+        "options": [
+            "Horizontal adds resources, vertical adds instances",
+            "Vertical adds resources, horizontal adds instances",
+            "Horizontal is manual, vertical is automatic",
+            "Vertical is cheaper than horizontal"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Horizontal scaling adds more instances (scale-out), vertical scaling upgrades instance size (scale-up)."
+    },
+    {
+        "question": "Which disaster recovery strategy has near-zero RPO?",
+        "options": [
+            "Pilot Light",
+            "Warm Standby",
+            "Multi-Region Active-Active",
+            "Backup & Restore"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Active-active deployments synchronize data across regions in real-time, minimizing data loss."
+    },
+    {
+        "question": "What's the main advantage of PaaS over IaaS?",
+        "options": [
+            "Lower network latency",
+            "Reduced management overhead",
+            "Finer security control",
+            "Cheaper storage"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "PaaS abstracts infrastructure management, allowing developers to focus solely on application code."
+    },
+    {
+        "question": "Which tool manages secrets in cloud environments?",
+        "options": [
+            "CloudTrail",
+            "KMS",
+            "Secrets Manager",
+            "CloudWatch"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Dedicated secrets managers (e.g., AWS Secrets Manager) securely store and rotate credentials."
+    },
+    {
+        "question": "What does blue/green deployment minimize?",
+        "options": [
+            "Infrastructure costs",
+            "Deployment downtime",
+            "Attack surface",
+            "Network hops"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "By maintaining two identical environments, cutover happens instantly with no service interruption."
+    },
+    {
+        "question": "Which cloud pattern decouples components using queues?",
+        "options": [
+            "Bulkhead",
+            "Circuit Breaker",
+            "Strangler Fig",
+            "Queue-Based Load Leveling"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Message queues absorb traffic spikes between components, preventing cascading failures."
+    },
+    {
+        "question": "What's the primary purpose of VPC peering?",
+        "options": [
+            "Connect VPCs across accounts",
+            "Extend on-premises networks",
+            "Access public internet",
+            "Enable global CDN"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "VPC peering allows private routing between VPCs using internal IP addresses."
+    },
+    {
+        "question": "Which factor determines suitability for containerization?",
+        "options": [
+            "Statelessness",
+            "Programming language",
+            "Database size",
+            "User traffic volume"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Stateless applications containerize most effectively since they don't require persistent local storage."
+    },
+    {
+        "question": "What does cloud 'bursting' refer to?",
+        "options": [
+            "DDoS attack mitigation",
+            "Auto-scaling beyond capacity",
+            "Hybrid cloud scaling",
+            "Data egress charges"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Bursting uses public cloud resources during peak demand when private infrastructure reaches capacity."
+    },
+    {
+        "question": "Which IAM principle grants minimum required permissions?",
+        "options": [
+            "Explicit deny",
+            "Permission boundaries",
+            "Least privilege",
+            "Role separation"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Least privilege restricts users/services to only permissions essential for their function."
+    },
+    {
+        "question": "Which database type is optimized for OLAP workloads?",
+        "options": [
+            "Key-Value Store",
+            "Document Database",
+            "Columnar Database",
+            "Graph Database"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Columnar databases (e.g., Redshift) store data by columns, optimizing analytical query performance."
+    },
+    {
+        "question": "What's the primary risk of spot instances?",
+        "options": [
+            "Higher latency",
+            "Unexpected termination",
+            "Data inconsistency",
+            "Limited regions"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud providers can reclaim spot instances with 2-minute warning when capacity is needed."
+    },
+    {
+        "question": "Which tool tracks API activity for auditing?",
+        "options": [
+            "CloudWatch",
+            "CloudTrail",
+            "Config",
+            "GuardDuty"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CloudTrail logs all API calls for security analysis and compliance auditing."
+    },
+    {
+        "question": "What does geo-redundant storage protect against?",
+        "options": [
+            "Disk failures",
+            "Ransomware attacks",
+            "Regional disasters",
+            "Accidental deletion"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Geo-replication stores data copies in separate geographical regions for disaster recovery."
+    },
+    {
+        "question": "Which migration strategy involves minimal code changes?",
+        "options": [
+            "Replatforming",
+            "Refactoring",
+            "Rehosting",
+            "Repurchasing"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Rehosting (lift-and-shift) moves applications with minimal modifications."
+    },
+    {
+        "question": "What's the main benefit of containerization?",
+        "options": [
+            "Reduced memory usage",
+            "Environment consistency",
+            "Automatic backups",
+            "Free licensing"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Containers package applications with dependencies, ensuring consistent execution across environments."
+    },
+    {
+        "question": "Which service provides DNS management in the cloud?",
+        "options": [
+            "Route 53",
+            "Direct Connect",
+            "API Gateway",
+            "CloudFront"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Route 53 is AWS's scalable DNS and domain registration service."
+    },
+    {
+        "question": "What does autoscaling group health checks monitor?",
+        "options": [
+            "Application responsiveness",
+            "OS vulnerabilities",
+            "User session counts",
+            "Database connections"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Health checks verify instance ability to respond to application requests."
+    },
+    {
+        "question": "Which factor determines cloud TCO savings?",
+        "options": [
+            "Elimination of hardware refresh",
+            "Reduced IT staffing",
+            "Pay-per-use billing",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Total Cost of Ownership savings come from multiple operational and capital expenditure reductions."
+    },
+    {
+        "question": "What's the purpose of a NAT gateway?",
+        "options": [
+            "Internet access for private instances",
+            "VPC-to-VPC encryption",
+            "DDoS protection",
+            "Global traffic management"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "NAT gateways allow private resources to initiate outbound internet connections."
+    },
+    {
+        "question": "Which security mechanism prevents credential theft?",
+        "options": [
+            "WAF",
+            "MFA",
+            "Security Groups",
+            "KMS"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Multi-factor authentication adds secondary verification beyond passwords."
+    },
+    {
+        "question": "What does 'immutable infrastructure' mean?",
+        "options": [
+            "Hardware cannot be upgraded",
+            "Servers are never modified",
+            "Data is write-once",
+            "No internet access"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Servers are replaced rather than modified, ensuring consistent configurations."
+    },
+    {
+        "question": "Which metric is CRITICAL for auto-scaling decisions?",
+        "options": [
+            "Disk I/O",
+            "CPU utilization",
+            "IP address count",
+            "SSL handshakes"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CPU utilization is the most common metric for triggering scaling events."
+    },
+    {
+        "question": "What's the main benefit of managed databases?",
+        "options": [
+            "Lower licensing costs",
+            "Automated patching",
+            "Faster queries",
+            "Smaller storage"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cloud providers handle database maintenance tasks like backups and patching."
+    },
+    {
+        "question": "Which protocol is used for object storage access?",
+        "options": [
+            "NFS",
+            "SMB",
+            "iSCSI",
+            "REST API"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Object storage (e.g., S3) uses RESTful APIs over HTTP/HTTPS."
+    },
+    {
+        "question": "What's the purpose of a WAF?",
+        "options": [
+            "Prevent DDoS attacks",
+            "Filter malicious web traffic",
+            "Encrypt data in transit",
+            "Manage API versions"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Web Application Firewalls inspect HTTP traffic for OWASP top 10 vulnerabilities."
+    },
+    {
+        "question": "Which storage option provides lowest latency?",
+        "options": [
+            "Object Storage",
+            "Block Storage",
+            "File Storage",
+            "Archive Storage"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Block storage (e.g., EBS) offers millisecond latency for transactional workloads."
+    },
+    {
+        "question": "What does 'cold start' refer to in serverless?",
+        "options": [
+            "Dormant function invocation",
+            "Regional failover",
+            "Storage class transition",
+            "Container initialization"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Initial invocation delay when a function hasn't been recently executed."
+    },
+    {
+        "question": "Which technique reduces serverless cold starts?",
+        "options": [
+            "Provisioned concurrency",
+            "Larger memory allocation",
+            "ARM architecture",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Multiple techniques can mitigate cold start latency in function-as-a-service."
+    },
+    {
+        "question": "What's the purpose of a transit gateway?",
+        "options": [
+            "Centralized VPC connectivity",
+            "Accelerated file transfers",
+            "Database replication",
+            "Container networking"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Simplifies network architecture by connecting VPCs through a central hub."
+    },
+    {
+        "question": "Which database provides millisecond latency for key-value access?",
+        "options": [
+            "Relational DB",
+            "Document DB",
+            "In-memory DB",
+            "Time-series DB"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "In-memory databases (e.g., Redis) deliver microsecond response times."
+    },
+    {
+        "question": "What's the main benefit of infrastructure as code?",
+        "options": [
+            "Lower compute costs",
+            "Version-controlled infrastructure",
+            "Automatic scaling",
+            "Free tier eligibility"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "IaC enables infrastructure changes to be tracked like application code."
+    },
+    {
+        "question": "Which compliance standard applies to healthcare data?",
+        "options": [
+            "PCI DSS",
+            "HIPAA",
+            "GDPR",
+            "SOC 2"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "HIPAA regulates protected health information (PHI) in the US."
+    },
+    {
+        "question": "What does 'rightsizing' optimize?",
+        "options": [
+            "Network topology",
+            "Instance types",
+            "Database indexes",
+            "Access policies"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Matching instance capacity to actual workload requirements eliminates waste."
+    },
+    {
+        "question": "Which service provides cloud-based source control?",
+        "options": [
+            "CodeBuild",
+            "CodePipeline",
+            "CodeCommit",
+            "CodeDeploy"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "CodeCommit is AWS's managed Git repository service."
+    },
+    {
+        "question": "What's the primary benefit of edge computing?",
+        "options": [
+            "Reduced bandwidth costs",
+            "Lower latency processing",
+            "Enhanced security",
+            "Simplified compliance"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Processing data near its source minimizes round-trip delays."
+    },
+    {
+        "question": "Which pattern gradually replaces legacy systems?",
+        "options": [
+            "Circuit Breaker",
+            "Strangler Fig",
+            "Bulkhead",
+            "Sidecar"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Incrementally migrate functionality from old to new systems."
+    },
+    {
+        "question": "What does 'sharding' achieve in databases?",
+        "options": [
+            "Automated backups",
+            "Horizontal partitioning",
+            "Query optimization",
+            "Encryption at rest"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Distributes data across multiple nodes to overcome scale limits."
+    },
+    {
+        "question": "Which tool enforces cloud resource policies?",
+        "options": [
+            "CloudTrail",
+            "Config",
+            "Systems Manager",
+            "Control Tower"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AWS Config continuously monitors and records resource configurations."
+    },
+    {
+        "question": "What's the main purpose of service mesh?",
+        "options": [
+            "Microservice networking",
+            "Storage tiering",
+            "User authentication",
+            "Cost allocation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Manages service-to-service communication in distributed architectures."
+    },
+    {
+        "question": "Which backup strategy meets 15-minute RPO?",
+        "options": [
+            "Daily snapshots",
+            "Continuous replication",
+            "Weekly archives",
+            "On-demand backups"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Near real-time replication minimizes potential data loss."
+    },
+    {
+        "question": "What does 'lift and shift' migration preserve?",
+        "options": [
+            "Application architecture",
+            "Cloud-native features",
+            "Licensing costs",
+            "Security posture"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Applications move to cloud without redesign, maintaining existing structure."
+    },
+    {
+        "question": "Which cloud component manages secrets?",
+        "options": [
+            "KMS",
+            "HSM",
+            "Secrets Manager",
+            "Certificate Manager"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Dedicated services for secure credential storage and rotation."
+    },
+    {
+        "question": "What's the purpose of a canary deployment?",
+        "options": [
+            "Reduce deployment costs",
+            "Minimize deployment risk",
+            "Accelerate network traffic",
+            "Compress storage requirements"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Gradual rollout to a subset of users before full deployment."
+    },
+    {
+        "question": "Which factor enables cloud elasticity?",
+        "options": [
+            "Virtualization",
+            "Content delivery",
+            "Tokenization",
+            "Blockchain"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Virtualization abstracts hardware allowing dynamic resource allocation."
+    },
+    {
+        "question": "What does 'vendor lock-in' refer to?",
+        "options": [
+            "Exclusive hardware contracts",
+            "Proprietary service dependencies",
+            "Long-term reserved instances",
+            "Encrypted data storage"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Difficulty migrating away from cloud-specific services and APIs."
+    },
+    {
+        "question": "Which service provides managed Kubernetes?",
+        "options": [
+            "AWS Fargate",
+            "Azure Functions",
+            "Google Cloud Run",
+            "AWS EKS"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Elastic Kubernetes Service handles control plane management."
+    },
+    {
+        "question": "What's the primary benefit of infrastructure as code?",
+        "options": [
+            "Lower network latency",
+            "Repeatable environments",
+            "Automatic secret rotation",
+            "Free monitoring"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "IaC templates ensure consistent provisioning across environments."
+    },
+    {
+        "question": "Which storage type is ideal for big data analytics?",
+        "options": [
+            "Object storage",
+            "Block storage",
+            "File storage",
+            "In-memory cache"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Object stores handle unstructured data at scale for analytics."
+    },
+    {
+        "question": "What does 'data egress' cost refer to?",
+        "options": [
+            "Data transfer into cloud",
+            "Data transfer out of cloud",
+            "Internal zone transfers",
+            "Backup operations"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Fees charged when data moves out of a cloud provider's network."
+    },
+    {
+        "question": "Which service provides serverless containers?",
+        "options": [
+            "AWS Fargate",
+            "Azure VMs",
+            "GCP Compute Engine",
+            "AWS Lightsail"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Fargate runs containers without managing servers."
+    },
+    {
+        "question": "What's the purpose of a cloud landing zone?",
+        "options": [
+            "Secure entry point for migrations",
+            "Content caching location",
+            "Database failover zone",
+            "Compliance documentation"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Pre-configured environment with security and governance foundations."
+    },
+    {
+        "question": "Which factor determines cloud region selection?",
+        "options": [
+            "Cost savings",
+            "Latency requirements",
+            "Compliance needs",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Multiple considerations impact optimal region selection."
+    },
+    {
+        "question": "What does 'FinOps' optimize?",
+        "options": [
+            "Network performance",
+            "Cloud spending",
+            "Application latency",
+            "Security policies"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Financial operations discipline for cloud cost management."
+    },
+    {
+        "question": "Which service provides centralized logging?",
+        "options": [
+            "CloudTrail",
+            "CloudWatch",
+            "X-Ray",
+            "GuardDuty"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CloudWatch aggregates logs from multiple cloud resources."
+    },
+    {
+        "question": "What's the primary use case for FPGAs in cloud?",
+        "options": [
+            "General web hosting",
+            "High-performance computing",
+            "Cold data storage",
+            "User authentication"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Field-programmable gate arrays accelerate specialized workloads."
+    },
+    {
+        "question": "Which technique prevents replay attacks?",
+        "options": [
+            "SSL/TLS encryption",
+            "Request signing",
+            "Nonce values",
+            "IP allowlisting"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Unique cryptographic nonces prevent request reuse."
+    },
+    {
+        "question": "What's the purpose of a cloud service catalog?",
+        "options": [
+            "List available services",
+            "Track resource costs",
+            "Enforce security policies",
+            "Automate deployments"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Centralized repository of approved cloud services."
+    },
+    {
+        "question": "Which database type handles JSON documents natively?",
+        "options": [
+            "Relational DB",
+            "Document DB",
+            "Time-series DB",
+            "Graph DB"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Document databases (e.g., MongoDB) store JSON/BSON documents."
+    },
+    {
+        "question": "What does 'data gravity' refer to?",
+        "options": [
+            "Backup retention policies",
+            "Migration difficulty",
+            "Attraction of services to data",
+            "Storage compression ratios"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "The concept that large datasets attract applications and services."
+    },
+    {
+        "question": "Which tool manages cloud resource dependencies?",
+        "options": [
+            "CloudFormation",
+            "Terraform",
+            "Ansible",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Infrastructure orchestration tools handle resource dependencies."
+    },
+    {
+        "question": "What's the primary benefit of content delivery networks?",
+        "options": [
+            "DDoS protection",
+            "Reduced latency",
+            "Data encryption",
+            "Cost savings"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CDNs cache content at edge locations closer to users."
+    },
+    {
+        "question": "Which storage feature enables version recovery?",
+        "options": [
+            "Replication",
+            "Versioning",
+            "Encryption",
+            "Lifecycle policies"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Object versioning preserves multiple iterations of files."
+    },
+    {
+        "question": "What does 'cold storage' optimize?",
+        "options": [
+            "Frequently accessed data",
+            "Rarely accessed data",
+            "Database indexes",
+            "In-memory caching"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Low-cost storage for archival data with retrieval delays."
+    },
+    {
+        "question": "Which cloud model provides full infrastructure control?",
+        "options": [
+            "SaaS",
+            "PaaS",
+            "IaaS",
+            "FaaS"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "IaaS offers maximum control over OS and infrastructure."
+    },
+    {
+        "question": "What's the purpose of a cloud access security broker?",
+        "options": [
+            "Network segmentation",
+            "Data loss prevention",
+            "Instance sizing",
+            "Cost allocation"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "CASBs enforce security policies for cloud applications."
+    },
+    {
+        "question": "Which service provides cloud-based virtual desktops?",
+        "options": [
+            "WorkSpaces",
+            "AppStream",
+            "Direct Connect",
+            "Storage Gateway"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS WorkSpaces offers managed desktop-as-a-service."
+    },
+    {
+        "question": "What does 'multi-tenancy' enable in cloud?",
+        "options": [
+            "Higher resource utilization",
+            "Improved security",
+            "Faster processors",
+            "Larger storage"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Shared infrastructure among multiple customers increases efficiency."
+    },
+    {
+        "question": "Which tool compares cloud costs?",
+        "options": [
+            "Cost Explorer",
+            "Trusted Advisor",
+            "Personal Health Dashboard",
+            "Service Catalog"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS Cost Explorer visualizes and analyzes spending patterns."
+    },
+    {
+        "question": "What's the primary benefit of hybrid cloud?",
+        "options": [
+            "Lowest possible cost",
+            "Maximum scalability",
+            "Flexibility in deployment",
+            "Simplest management"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Combines on-premises control with cloud scalability."
+    },
+    {
+        "question": "Which database service is serverless?",
+        "options": [
+            "RDS",
+            "Aurora Serverless",
+            "ElastiCache",
+            "Redshift"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Aurora Serverless automatically scales database capacity."
+    },
+    {
+        "question": "What does 'ephemeral storage' refer to?",
+        "options": [
+            "Long-term archives",
+            "Temporary instance storage",
+            "Encrypted volumes",
+            "Read-only snapshots"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Storage that persists only during instance lifetime."
+    },
+    {
+        "question": "Which technique reduces cloud storage costs?",
+        "options": [
+            "Lifecycle policies",
+            "Increased replication",
+            "Real-time compression",
+            "Frequent snapshots"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Automated tiering to cheaper storage classes based on access patterns."
+    },
+    {
+        "question": "What's the purpose of a cloud readiness assessment?",
+        "options": [
+            "Estimate migration costs",
+            "Identify technical hurdles",
+            "Evaluate organizational readiness",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Comprehensive evaluation before cloud adoption."
+    },
+    {
+        "question": "Which service provides cloud-based Active Directory?",
+        "options": [
+            "AWS Directory Service",
+            "AWS Organizations",
+            "AWS IAM",
+            "AWS SSO"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Managed Microsoft Active Directory in the cloud."
+    },
+    {
+        "question": "What does 'cloud bursting' enable?",
+        "options": [
+            "Hybrid scaling",
+            "Global load balancing",
+            "Automatic patching",
+            "Data anonymization"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Using cloud resources during on-premises capacity spikes."
+    },
+    {
+        "question": "Which factor is critical for database migration?",
+        "options": [
+            "Downtime tolerance",
+            "OS version",
+            "Instance type",
+            "Region selection"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "RTO/RPO requirements dictate migration strategy."
+    },
+    {
+        "question": "What's the primary use of cloud-init?",
+        "options": [
+            "Cost reporting",
+            "Instance initialization",
+            "Network encryption",
+            "User authentication"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Scripts that run during initial VM boot for configuration."
+    },
+    {
+        "question": "Which service provides distributed tracing?",
+        "options": [
+            "CloudTrail",
+            "X-Ray",
+            "GuardDuty",
+            "Inspector"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AWS X-Ray analyzes distributed application performance."
+    },
+    {
+        "question": "What does 'immutable infrastructure' prevent?",
+        "options": [
+            "Configuration drift",
+            "DDoS attacks",
+            "Data corruption",
+            "Vendor lock-in"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Replacing rather than modifying servers ensures consistency."
+    },
+    {
+        "question": "Which pattern isolates failures in microservices?",
+        "options": [
+            "Circuit Breaker",
+            "Strangler Fig",
+            "Sidecar",
+            "Event Sourcing"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Prevents cascading failures by stopping requests to failing services."
+    },
+    {
+        "question": "What's the purpose of a service level agreement?",
+        "options": [
+            "Define performance guarantees",
+            "List available services",
+            "Document security controls",
+            "Specify pricing tiers"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "SLAs commit to specific availability and performance metrics."
+    },
+    {
+        "question": "Which database type handles social networks?",
+        "options": [
+            "Relational DB",
+            "Document DB",
+            "Graph DB",
+            "Time-series DB"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Graph databases optimize relationship queries (e.g., friend-of-friend)."
+    },
+    {
+        "question": "What does 'shift left' mean in cloud security?",
+        "options": [
+            "Early security testing",
+            "Move security to edge",
+            "Left-align security groups",
+            "Prioritize western regions"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Integrating security earlier in development lifecycle."
+    },
+    {
+        "question": "Which service provides cloud-based DNS?",
+        "options": [
+            "CloudFront",
+            "Route 53",
+            "API Gateway",
+            "Direct Connect"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AWS Route 53 offers scalable domain management."
+    },
+    {
+        "question": "What's the primary benefit of ARM instances?",
+        "options": [
+            "Higher clock speeds",
+            "Better price-performance",
+            "Enhanced security",
+            "Larger memory"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "ARM-based Graviton processors offer cost efficiency."
+    },
+    {
+        "question": "Which tool creates cloud resource diagrams?",
+        "options": [
+            "CloudFormation Designer",
+            "CloudTrail Insights",
+            "Trusted Advisor",
+            "Cost Explorer"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Visual designer for infrastructure templates."
+    },
+    {
+        "question": "What does 'data residency' refer to?",
+        "options": [
+            "Physical data location",
+            "Database replication",
+            "Storage encryption",
+            "Backup retention"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Legal requirements for data storage geography."
+    },
+    {
+        "question": "Which service provides managed Hadoop?",
+        "options": [
+            "EMR",
+            "Athena",
+            "Glue",
+            "Redshift"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Elastic MapReduce simplifies big data processing."
+    },
+    {
+        "question": "What's the purpose of a jump box?",
+        "options": [
+            "Data compression",
+            "Secure access gateway",
+            "Load balancing",
+            "Cost reporting"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Controlled entry point to private network segments."
+    },
+    {
+        "question": "Which factor impacts cloud network performance?",
+        "options": [
+            "Instance type",
+            "OS version",
+            "Security groups",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Multiple configuration options affect network throughput."
+    },
+    {
+        "question": "What does 'disposable resources' enable?",
+        "options": [
+            "Rapid experimentation",
+            "Permanent storage",
+            "Compliance auditing",
+            "Long-term contracts"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Quickly create/destroy resources without long-term commitment."
+    },
+    {
+        "question": "Which service provides cloud-based workflows?",
+        "options": [
+            "Step Functions",
+            "Lambda",
+            "SQS",
+            "EventBridge"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS Step Functions coordinates distributed application components."
+    },
+    {
+        "question": "What's the primary benefit of spot fleets?",
+        "options": [
+            "Guanteed availability",
+            "Cost diversification",
+            "Enhanced security",
+            "Simpler management"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Combines spot, reserved, and on-demand instances for cost optimization."
+    },
+    {
+        "question": "Which database service is PostgreSQL-compatible?",
+        "options": [
+            "Aurora",
+            "DynamoDB",
+            "Redshift",
+            "Neptune"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Aurora offers high-performance PostgreSQL and MySQL variants."
+    },
+    {
+        "question": "What does 'cloud condensation' refer to?",
+        "options": [
+            "Data center cooling",
+            "Consolidating resources",
+            "Vapor to liquid transition",
+            "Latency reduction"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Optimizing resource utilization by combining workloads."
+    },
+    {
+        "question": "Which tool detects unusual cloud spending?",
+        "options": [
+            "Cost Anomaly Detection",
+            "Trusted Advisor",
+            "Config",
+            "CloudTrail"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Machine learning-powered cost monitoring service."
+    },
+    {
+        "question": "What's the purpose of a service control policy?",
+        "options": [
+            "Resource permission boundaries",
+            "Network throughput limits",
+            "Data retention rules",
+            "Instance size restrictions"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS Organizations policies for account governance."
+    },
+    {
+        "question": "Which pattern handles transient failures?",
+        "options": [
+            "Retry with backoff",
+            "Circuit breaker",
+            "Bulkhead",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Multiple resilience patterns address temporary failures."
+    },
+    {
+        "question": "What does 'data exfiltration' prevention require?",
+        "options": [
+            "Network ACLs",
+            "DLP solutions",
+            "Security groups",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Layered security controls prevent unauthorized data extraction."
+    },
+    {
+        "question": "Which service provides cloud-based SIEM?",
+        "options": [
+            "GuardDuty",
+            "Security Hub",
+            "Detective",
+            "Inspector"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "AWS Security Hub aggregates and analyzes security findings."
+    },
+    {
+        "question": "What's the primary benefit of cloud desktops?",
+        "options": [
+            "Hardware cost reduction",
+            "Performance enhancement",
+            "Simplified licensing",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "DaaS solutions offer multiple operational advantages."
+    },
+    {
+        "question": "Which factor determines database replication strategy?",
+        "options": [
+            "RTO requirements",
+            "OS compatibility",
+            "Programming language",
+            "UI framework"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Recovery Time Objectives dictate replication architecture."
+    },
+    {
+        "question": "What does 'cloud brokerage' provide?",
+        "options": [
+            "Multi-cloud management",
+            "Server leasing",
+            "Domain registration",
+            "SSL certificates"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Tools for managing resources across multiple cloud providers."
+    },
+    {
+        "question": "Which service provides cloud-based email?",
+        "options": [
+            "WorkMail",
+            "SES",
+            "Pinpoint",
+            "Chime"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS WorkMail offers managed enterprise email service."
+    },
+    {
+        "question": "What's the purpose of a golden image?",
+        "options": [
+            "Compliance certification",
+            "Pre-configured VM template",
+            "Storage encryption key",
+            "Cost allocation tag"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Standardized machine image for consistent deployments."
+    },
+    {
+        "question": "Which tool audits resource configurations?",
+        "options": [
+            "Config",
+            "CloudTrail",
+            "CloudWatch",
+            "X-Ray"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS Config evaluates resource configurations against rules."
+    },
+    {
+        "question": "What does 'serverless' NOT eliminate?",
+        "options": [
+            "Server management",
+            "Application logic",
+            "Scaling decisions",
+            "Security responsibilities"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Customers remain responsible for application-layer security."
+    },
+    {
+        "question": "Which service provides managed Apache Kafka?",
+        "options": [
+            "Kinesis",
+            "MSK",
+            "SQS",
+            "EventBridge"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Amazon Managed Streaming for Kafka."
+    },
+    {
+        "question": "What's the primary benefit of cloud marketplaces?",
+        "options": [
+            "Simplified procurement",
+            "Lower bandwidth costs",
+            "Enhanced security",
+            "Free migrations"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Streamlined purchasing of third-party cloud solutions."
+    },
+    {
+        "question": "Which database service scales horizontally automatically?",
+        "options": [
+            "RDS",
+            "DynamoDB",
+            "Redshift",
+            "Aurora"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "DynamoDB automatically partitions data across servers."
+    },
+    {
+        "question": "What does 'cloud sprawl' refer to?",
+        "options": [
+            "Unmanaged resource proliferation",
+            "Global data center expansion",
+            "Multi-cloud architectures",
+            "Content delivery networks"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Uncontrolled growth of cloud resources leading to waste."
+    },
+    {
+        "question": "Which service provides container registry?",
+        "options": [
+            "ECR",
+            "S3",
+            "EFS",
+            "EBS"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Elastic Container Registry stores Docker images."
+    },
+    {
+        "question": "What's the purpose of a launch template?",
+        "options": [
+            "Auto scaling configuration",
+            "Cost reporting",
+            "Security compliance",
+            "Data encryption"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "Predefined configurations for EC2 instance launches."
+    },
+    {
+        "question": "What does 'cloud washing' refer to?",
+        "options": [
+            "Data cleansing",
+            "Rebranding non-cloud products",
+            "Resource tagging",
+            "Compliance auditing"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Misrepresenting traditional products as cloud-native."
+    },
+    {
+        "question": "Which service provides cloud-based analytics?",
+        "options": [
+            "QuickSight",
+            "Kinesis",
+            "Athena",
+            "All of the above"
+        ],
+        "answer": [
+            3
+        ],
+        "explanation": "Multiple AWS services support analytics workloads."
+    },
+    {
+        "question": "What's the purpose of a placement group?",
+        "options": [
+            "Cost optimization",
+            "Low-latency networking",
+            "Automated backups",
+            "Security hardening"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "Cluster instances for high-performance computing needs."
+    },
+    {
+        "question": "Which database service is key-value?",
+        "options": [
+            "RDS",
+            "DynamoDB",
+            "Redshift",
+            "DocumentDB"
+        ],
+        "answer": [
+            1
+        ],
+        "explanation": "DynamoDB provides single-digit millisecond key-value access."
+    },
+    {
+        "question": "What does 'cloud native' emphasize?",
+        "options": [
+            "Lift-and-shift migrations",
+            "Legacy system preservation",
+            "Cloud-specific optimizations",
+            "On-premises equivalence"
+        ],
+        "answer": [
+            2
+        ],
+        "explanation": "Applications designed to leverage cloud capabilities."
+    },
+    {
+        "question": "Which service provides managed ETL?",
+        "options": [
+            "Glue",
+            "Data Pipeline",
+            "DMS",
+            "Athena"
+        ],
+        "answer": [
+            0
+        ],
+        "explanation": "AWS Glue prepares and transforms data for analytics."
+    }
 ]
