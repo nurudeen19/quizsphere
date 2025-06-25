@@ -2,11 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-blue: #3b82f6;
+  --primary-cyan: #0ea5e9;
+  --light-blue: #dbeafe;
+  --mobile-breakpoint: 640px;
+  --tablet-breakpoint: 768px;
+  --desktop-breakpoint: 1024px;
+}
+
+/* Base responsive resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Inter', 'Nunito', 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
   min-height: 100vh;
   color: #1e293b;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 640px) {
+  button, 
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  a {
+    display: inline-block;
+    min-height: 44px;
+    min-width: 44px;
+    line-height: 44px;
+  }
 }
 
 /* TopicList styles moved from component */
