@@ -14,7 +14,7 @@
         >
           <div class="topic-card-header flex flex-row items-center gap-3 p-3 min-h-[80px] bg-gradient-to-r from-blue-200 via-cyan-100 to-white border-b border-blue-200">
             <img
-              :src="topic.image || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`"
+              :src="topic.image"
               @error="onImageError($event, topic.title)"
               alt="Topic image"
               class="avatar-img w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-full border-2 border-cyan-200 shadow-sm"
@@ -151,25 +151,33 @@ const isLoading = ref(true)
 onMounted(async () => {
   try {
     isLoading.value = true
-    const data = await fetchTopics()
-    topics.value = data.map(topic => ({
-      ...topic,
-      topic: topic.topic_key, // maintain compatibility with existing code
-      badge: topic.badge || 'Quiz',
-      level: topic.level || 'Intermediate',
-      description: topic.description || 'This quiz covers the following key areas:',
-      areas: topic.topic_areas || [],
-      questionsCount: topic.questions_count || 0
-    }))
+    const response = await fetchTopics()
+    console.log('Fetched topics:', response)
+    
+    if (response.status === 'success' && response.data) {
+      topics.value = response.data.map(topic => ({
+        ...topic,
+        topic: topic.topic_key, // maintain compatibility with existing code
+        badge: topic.badge || 'Quiz',
+        level: topic.level || 'Intermediate',
+        description: topic.description || 'This quiz covers the following key areas:',
+        areas: topic.topic_areas || [],
+        questionsCount: topic.questions_count || 0,
+        image: topic.icon || `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(topic.title)}`
+      }))
+    } else {
+      throw new Error(response.message || 'Failed to load topics data')
+    }
   } catch (error) {
     console.error('Failed to fetch topics:', error)
-    loadError.value = error.response?.data?.message || 'Failed to load topics. Please try again later.'
+    loadError.value = error.response?.data?.message || error.message || 'Failed to load topics. Please try again later.'
   } finally {
     isLoading.value = false
     await nextTick()
     checkOverflow()
   }
 })
+
 watch(topics, checkOverflow)
 
 </script>

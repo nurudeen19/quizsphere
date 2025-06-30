@@ -1,6 +1,4 @@
-// Quiz logic (modularized for Vue)
-// This file will export quiz logic for use in Vue components
-// Suggest renaming this file to quiz-utils.js or quiz-logic.js
+import { topicsApi } from '../services/api';
 
 const PAGE_SIZE = 25;
 const SETTINGS_KEY = 'quizsphere-user-settings';
@@ -144,7 +142,7 @@ export async function fetchQuestions(file, opts = {}) {
   return data;
 }
 
-import { topicsApi } from '../services/api';
+
 
 // API Functions
 export async function fetchTopics() {
