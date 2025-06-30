@@ -5,7 +5,7 @@
       <div class="flex justify-between items-center h-16">
         <!-- Logo and Brand -->
         <router-link to="/" class="flex items-center space-x-3">
-          <img src="/favicon.svg" alt="QuizSphere Logo" class="w-8 h-8">
+          <!-- <img src="/favicon.png" alt="QuizSphere Logo" class="w-8 h-8"> -->
           <span class="text-xl font-bold text-blue-600">QuizSphere</span>
         </router-link>
 

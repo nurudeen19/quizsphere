@@ -27,7 +27,7 @@
           {{ topic.questions_count }} Questions
         </span>
         <router-link
-          :to="{ name: 'topic', params: { topic: topic.topic_key }}"
+          :to="{ name: 'topic', params: { topicKey: topic.topic_key }}"
           class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group"
         >
           Start Learning
