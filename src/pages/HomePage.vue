@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
     <!-- Hero Section -->
     <section class="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28">
-      <div class="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      <div class="absolute inset-0 bg-[url('/grid.svg')] bg-repeat bg-[length:20px_20px] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       <div class="relative container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
           <h1 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6">

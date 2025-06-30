@@ -1,0 +1,8 @@
+&lt;svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;defs&gt;
+    &lt;pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"&gt;
+      &lt;path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(99, 102, 241, 0.1)" stroke-width="0.5"&gt;&lt;/path&gt;
+    &lt;/pattern&gt;
+  &lt;/defs&gt;
+  &lt;rect width="100" height="100" fill="url(#grid)" /&gt;
+&lt;/svg&gt;

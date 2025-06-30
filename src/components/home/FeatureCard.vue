@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 shadow-lg hover:shadow-xl transition-all">
     <component 
-      :is="iconComponent" 
+      :is="getIcon" 
       class="w-12 h-12 text-blue-600 mb-4"
       aria-hidden="true"
     />
@@ -10,46 +10,41 @@
   </div>
 </template>
 
-<script>
-import AcademicIcon from '../icons/AcademicIcon.vue'
-import ChartIcon from '../icons/ChartIcon.vue'
-import CloudIcon from '../icons/CloudIcon.vue'
-import RefreshIcon from '../icons/RefreshIcon.vue'
-import ClockIcon from '../icons/ClockIcon.vue'
-import UsersIcon from '../icons/UsersIcon.vue'
+<script setup>
+import { computed } from 'vue'
+import {
+  AcademicCapIcon,
+  ChartBarIcon,
+  CloudIcon,
+  ArrowPathIcon,
+  ClockIcon,
+  UserGroupIcon
+} from '@heroicons/vue/24/outline'
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  icon: {
+    type: String,
+    required: true,
+    validator: (value) => ['academic', 'chart', 'cloud', 'refresh', 'clock', 'users'].includes(value)
+  }
+})
 
 const iconMap = {
-  academic: AcademicIcon,
-  chart: ChartIcon,
-  cloud: CloudIcon,
-  refresh: RefreshIcon,
-  clock: ClockIcon,
-  users: UsersIcon
+  'academic': AcademicCapIcon,
+  'chart': ChartBarIcon,
+  'cloud': CloudIcon,
+  'refresh': ArrowPathIcon,
+  'clock': ClockIcon,
+  'users': UserGroupIcon
 }
 
-export default {
-  name: 'FeatureCard',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    icon: {
-      type: String,
-      required: true,
-      validator: function(value) {
-        return ['academic', 'chart', 'cloud', 'refresh', 'clock', 'users'].includes(value)
-      }
-    }
-  },
-  computed: {
-    iconComponent() {
-      return iconMap[this.icon]
-    }
-  }
-}
+const getIcon = computed(() => iconMap[props.icon])
 </script>
