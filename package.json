@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@heroicons/vue": "^2.1.1",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.10.0",
     "canvas-confetti": "^1.9.3",
     "dompurify": "^3.0.11",
     "marked": "^15.0.12",
-    "vue": "^3.4.0"
+    "vue": "^3.4.0",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",

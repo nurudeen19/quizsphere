@@ -1,98 +1,177 @@
 <!-- filepath: src/App.vue -->
 <template>
-  <div id="app">
-    <header class="main-header">
-      <div class="logo">
-        <img src="/src/assets/vue.svg" alt="QuizSphere Logo" class="logo-img" />
-        <span class="logo-text">QuizSphere</span>
-      </div>
-      <nav class="main-nav">
-        <a href="/" class="nav-link active"><i class="fas fa-home"></i> <span class="nav-text">Home</span></a>
-        <a href="https://github.com/nurudeen19/quizsphere" target="_blank" class="nav-link">
-          <i class="fab fa-github"></i> <span class="nav-text">GitHub</span>
-        </a>
-        <button @click="showSettings = !showSettings" class="ml-2 md:ml-4 nav-link settings-btn" title="Quiz Settings">
-          <i class="fas fa-cog"></i>
-        </button>
-        <button 
-          class="mobile-menu-btn ml-1 nav-link md:hidden" 
-          @click="mobileMenuOpen = !mobileMenuOpen" 
-          title="Menu"
-          aria-label="Mobile menu"
-        >
-          <i class="fas" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-        </button>
-      </nav>
-    </header>
-    <!-- Mobile Menu -->
-    <div 
-      class="mobile-menu" 
-      :class="{'mobile-menu-open': mobileMenuOpen}"
-      @click="mobileMenuOpen = false"
+  <div id="app" class="min-h-screen">
+    <MainNav />
+    
+    <!-- Error Toast -->
+    <transition
+      enter-active-class="transform ease-out duration-300 transition"
+      enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+      enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+      leave-active-class="transition ease-in duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
-      <div class="mobile-menu-content" @click.stop>
-        <a href="/" class="mobile-menu-link"><i class="fas fa-home mr-2"></i> Home</a>
-        <a href="https://github.com/nurudeen19/quizsphere" target="_blank" class="mobile-menu-link">
-          <i class="fab fa-github mr-2"></i> GitHub
-        </a>
-        <button @click="openMobileSettings" class="mobile-menu-link text-left w-full">
-          <i class="fas fa-cog mr-2"></i> Settings
-        </button>
-      </div>
-    </div>
-    <transition name="modal-fade-scale">
-      <SettingsPanel v-if="showSettings" :key="settingsPanelKey" @settings-changed="handleSettingsChanged" @close="showSettings = false" :disabled="!!selectedTopic" />
-    </transition>
-    <main class="main-content">
-      <section class="welcome-section">
-        <h1 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl">Welcome to <span class="brand">QuizSphere</span>!</h1>
-        <p class="subtitle text-xs sm:text-sm md:text-base">Explore various topics and test your knowledge!</p>
-      </section>
-      <section v-if="selectedTopic" class="quiz-section animate-fade-in px-3 py-4 sm:px-4 sm:py-6 md:px-6 md:py-8 lg:px-8 lg:py-10 bg-gradient-to-br from-blue-50 via-cyan-50 to-white rounded-lg md:rounded-xl lg:rounded-2xl xl:rounded-3xl shadow-lg md:shadow-xl lg:shadow-2xl border-2 border-blue-100 max-w-full md:max-w-5xl mx-auto mt-3 md:mt-4 lg:mt-6 mb-4 md:mb-6 lg:mb-8 relative flex flex-col items-center min-h-[400px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px] overflow-hidden">
-        <button
-          @click="selectedTopic = null"
-          class="inline-flex items-center gap-1 md:gap-2 px-2 py-1 md:px-3 md:py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-200 text-blue-800 font-semibold shadow hover:from-cyan-200 hover:to-blue-200 focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-1 transition-all mb-2 md:mb-3 lg:mb-4 text-xs md:text-sm lg:text-base tracking-wide drop-shadow border border-blue-200 cursor-pointer absolute left-2 md:left-4 top-2 md:top-4 z-10"
-        >
-          <i class="fas fa-arrow-left text-xs md:text-sm"></i> <span>Back to Topics</span>
-        </button>
-        <div class="flex flex-col items-center w-full max-w-full overflow-x-hidden px-1 sm:px-2 md:px-4">
-          <QuizView :topic="selectedTopic" :user-settings="userSettings" />
+      <div
+        v-if="errorMessage"
+        class="fixed bottom-4 right-4 z-50 max-w-md w-full bg-red-50 border border-red-200 rounded-lg shadow-lg pointer-events-auto"
+      >
+        <div class="p-4">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="ml-3 w-0 flex-1">
+              <p class="text-sm font-medium text-red-800">
+                {{ errorMessage }}
+              </p>
+            </div>
+            <div class="ml-4 flex-shrink-0 flex">
+              <button
+                @click="errorMessage = ''"
+                class="rounded-md inline-flex text-red-400 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+              >
+                <span class="sr-only">Close</span>
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-      </section>
-      <transition name="fade-slide" mode="out-in">
-        <section v-if="!selectedTopic" class="w-full min-w-0 min-h-0 animate-fade-in px-0 sm:px-2 md:px-4">
-          <TopicList @select-topic="selectTopic" />        
-        </section>
-      </transition>
+      </div>
+    </transition>
+
+    <!-- Main Content with Route Transitions -->
+    <main class="pt-16">
+      <router-view v-slot="{ Component, route }">
+        <transition
+          enter-active-class="transform-gpu transition-all duration-300 ease-out"
+          enter-from-class="opacity-0 translate-y-4"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transform-gpu transition-all duration-200 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 translate-y-4"
+          mode="out-in"
+        >
+          <component :is="Component" :key="route.path" />
+        </transition>
+      </router-view>
     </main>
-    <footer class="main-footer">
-      <span class="text-xs md:text-sm">Made with <i class="fas fa-heart"></i> by QuizSphere Team &copy; {{ new Date().getFullYear() }}</span>
-    </footer>
+
+    <!-- Settings Panel -->
+    <transition
+      enter-active-class="transform transition-transform duration-300"
+      enter-from-class="translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-active-class="transform transition-transform duration-200"
+      leave-from-class="translate-x-0"
+      leave-to-class="translate-x-full"
+    >
+      <SettingsPanel 
+        v-if="showSettings" 
+        :key="settingsPanelKey" 
+        @settings-changed="handleSettingsChanged" 
+        @close="showSettings = false" 
+      />
+    </transition>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+      <router-view v-slot="{ Component }">
+        <transition 
+          name="page" 
+          mode="out-in"
+          @before-leave="beforeLeave"
+          @enter="enter"
+          @after-enter="afterEnter"
+        >
+          <component :is="Component" :key="$route.fullPath" />
+        </transition>
+      </router-view>
+    </main>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import TopicList from './components/TopicList.vue'
-import QuizView from './components/QuizView.vue'
+import { ref, provide, onMounted, onUnmounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { useHead } from '@vueuse/head'
+import MainNav from './components/layout/MainNav.vue'
 import SettingsPanel from './components/SettingsPanel.vue'
-import { getUserSettings } from './quiz/quiz-utils.js'
 
-const selectedTopic = ref(null)
-function selectTopic(topic) {
-  selectedTopic.value = topic
-  mobileMenuOpen.value = false // Close mobile menu when selecting a topic
-}
-
-const showSettings = ref(false)
+// Initialize settings store
 const userSettings = ref({})
-const settingsPanelKey = ref(0) // for resetting panel if needed
-const mobileMenuOpen = ref(false) // Track mobile menu state
 
-// Function to handle opening settings from mobile menu
+// Global metadata
+useHead({
+  titleTemplate: '%s - QuizSphere',
+  meta: [
+    { name: 'theme-color', content: '#3b82f6' },
+    { 
+      name: 'description', 
+      content: 'Master tech skills with interactive quizzes. Practice cloud computing, programming, and DevOps through hands-on learning.' 
+    },
+    { property: 'og:site_name', content: 'QuizSphere' },
+    { name: 'twitter:card', content: 'summary_large_image' }
+  ],
+  link: [
+    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+  ]
+})
+
+const router = useRouter()
+const showSettings = ref(false)
+const settingsPanelKey = ref(0)
+const errorMessage = ref('')
+const mobileMenuOpen = ref(false)
+
+// Provide error handling to child components
+const showError = (message) => {
+  errorMessage.value = message
+  setTimeout(() => {
+    errorMessage.value = ''
+  }, 5000)
+}
+provide('showError', showError)
+
+// Global error handler
+const handleError = (error) => {
+  console.error('App Error:', error)
+  showError(error.message || 'An unexpected error occurred. Please try again.')
+}
+provide('handleError', handleError)
+
+// Route error handling
+router.onError((error) => {
+  handleError(error)
+})
+
 function openMobileSettings() {
   showSettings.value = true
   mobileMenuOpen.value = false
+}
+
+function handleSettingsChanged(settings) {
+  // Update settings in the reactive store
+  userSettings.value = { ...settings }
+  // Increment key to force settings panel to re-render with new values
+  settingsPanelKey.value++
+}
+
+// Page transition handlers
+function beforeLeave(el) {
+  document.documentElement.style.overflow = 'hidden'
+}
+
+function enter(el) {
+  document.documentElement.style.overflow = 'hidden'
+}
+
+function afterEnter(el) {
+  document.documentElement.style.overflow = ''
 }
 
 // Close mobile menu when screen resizes past mobile breakpoint
@@ -102,24 +181,30 @@ function handleResize() {
   }
 }
 
-// Watch for selected topic changes to close settings if needed
-watch(selectedTopic, (newValue) => {
-  if (newValue && showSettings.value) {
-    showSettings.value = false
-  }
-})
-
 // Initialize settings from localStorage on mount and add resize listener
 onMounted(() => {
-  userSettings.value = getUserSettings() || {}
+  const savedSettings = localStorage.getItem('quizsphere-settings')
+  if (savedSettings) {
+    try {
+      userSettings.value = JSON.parse(savedSettings)
+    } catch (error) {
+      handleError(new Error('Failed to load saved settings'))
+    }
+  }
   window.addEventListener('resize', handleResize)
 })
 
-function handleSettingsChanged(newSettings) {
-  userSettings.value = { ...newSettings }
-  // Optionally close panel on save
-  // showSettings.value = false
-}
+// Cleanup on unmount
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
+// Watch for settings changes to store them
+watch(userSettings, (newSettings) => {
+  if (Object.keys(newSettings).length > 0) {
+    localStorage.setItem('quizsphere-settings', JSON.stringify(newSettings))
+  }
+}, { deep: true })
 </script>
 
 <style>
