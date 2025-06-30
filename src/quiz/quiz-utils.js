@@ -144,4 +144,19 @@ export async function fetchQuestions(file, opts = {}) {
   return data;
 }
 
+import { topicsApi } from '../services/api';
+
+// API Functions
+export async function fetchTopics() {
+    return topicsApi.getAll();
+}
+
+export async function fetchTopicByKey(topicKey) {
+    return topicsApi.getByKey(topicKey);
+}
+
+export async function fetchQuestionsForTopic(topicKey) {
+    return topicsApi.getQuestions(topicKey);
+}
+
 export { getQuizQuestionsPage, shuffleArray, shuffleOptionsAndRemapAnswers, getPageSize, getUserSettings, PAGE_SIZE };

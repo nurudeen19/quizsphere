@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-if="loadError" class="text-center text-red-600 font-bold py-8">{{ loadError }}</div>
+    <div v-if="isLoading" class="text-center py-8">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
+      <p class="mt-2 text-blue-700">Loading topics...</p>
+    </div>
+    <div v-else-if="loadError" class="text-center text-red-600 font-bold py-8">{{ loadError }}</div>
     <div v-else class="container-fluid max-w-[2400px] mx-auto px-3 sm:px-4 lg:px-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 my-4">
         <div
@@ -84,7 +88,7 @@
 import { ref, onMounted, nextTick, watch } from 'vue'
 import QuizButton from './QuizButton.vue'
 import { topicAreas } from './topicAreas.js'
-import { fetchQuestions } from '../quiz/quiz-utils.js'
+import { fetchQuestions, fetchTopics } from '../quiz/quiz-utils.js'
 
 const emit = defineEmits(['selectTopic'])
 function onImageError(event, title) {
@@ -142,73 +146,29 @@ function checkOverflow() {
   })
 }
 
+const isLoading = ref(true)
+
 onMounted(async () => {
   try {
-    const res = await fetch('/quizsphere/data/topics.json')
-    if (!res.ok) throw new Error('Failed to load topics')
-    const data = await res.json()
-    // For each topic, fetch the question count and add demo areas
-    topics.value = await Promise.all(data.map(async t => {
-      let questionsCount = 0
-      let areas = t.areas || []
-      // Use topic key to get areas from topicAreas mapping
-      if (!areas.length && topicAreas[t.topic]) {
-        areas = topicAreas[t.topic]
-      } else if (!areas.length) {
-        // Fallback: legacy partial match for backward compatibility
-        const topicKey = Object.keys(topicAreas).find(key =>
-          t.topic && t.topic.toLowerCase().includes(key)
-        );
-        if (topicKey) {
-          areas = topicAreas[topicKey];
-        }
-      }
-      // Use questionsCount from metadata if available
-      if (typeof t.questionsCount === 'number') {
-        questionsCount = t.questionsCount
-      } else if (t.file || t.topic) {
-        try {
-          let filePath = ''
-          if (t.file) {
-            filePath = t.file
-          } else if (t.topic) {
-            filePath = `${t.topic}.json`
-          }
-          if (!filePath.startsWith('data/')) {
-            filePath = 'data/' + filePath.replace(/^\/+/, '')
-          }
-          filePath = filePath.replace(/^\/+/, '')
-          
-          // Use a HEAD request instead of fetching the full content
-          // This gets content-length header without downloading the entire file
-          const response = await fetch('/' + filePath, { method: 'HEAD' });
-          if (response.ok) {
-            // Estimate question count based on file size (rough approximation)
-            const contentLength = response.headers.get('content-length');
-            if (contentLength) {
-              const sizeKB = parseInt(contentLength) / 1024;
-              // Rough estimate: ~1KB per question on average
-              questionsCount = Math.max(Math.round(sizeKB / 1), 1);
-            }
-          }
-        } catch (e) {
-          // ignore error, leave questionsCount as 0
-        }
-      }
-      return {
-        ...t,
-        questionsCount,
-        badge: t.badge || 'Quiz',
-        level: t.level || 'Intermediate',
-        description: t.description || 'This quiz covers the following key areas:',
-        areas
-      }
+    isLoading.value = true
+    const data = await fetchTopics()
+    topics.value = data.map(topic => ({
+      ...topic,
+      topic: topic.topic_key, // maintain compatibility with existing code
+      badge: topic.badge || 'Quiz',
+      level: topic.level || 'Intermediate',
+      description: topic.description || 'This quiz covers the following key areas:',
+      areas: topic.topic_areas || [],
+      questionsCount: topic.questions_count || 0
     }))
-  } catch (e) {
-    loadError.value = 'Failed to load topics. Please try again later.'
+  } catch (error) {
+    console.error('Failed to fetch topics:', error)
+    loadError.value = error.response?.data?.message || 'Failed to load topics. Please try again later.'
+  } finally {
+    isLoading.value = false
+    await nextTick()
+    checkOverflow()
   }
-  await nextTick()
-  checkOverflow()
 })
 watch(topics, checkOverflow)
 
