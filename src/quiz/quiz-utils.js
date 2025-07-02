@@ -157,4 +157,37 @@ export async function fetchQuestionsForTopic(topicKey) {
     return topicsApi.getQuestions(topicKey);
 }
 
+async function getQuestionsByTopicArea(topicPath, topicArea = null) {
+  try {
+    let questions = await getQuestions(topicPath);
+    
+    if (topicArea) {
+      questions = questions.filter(q => q.topic_areas && q.topic_areas.includes(topicArea));
+    }
+    
+    return questions;
+  } catch (error) {
+    console.error('Error fetching questions by topic area:', error);
+    return [];
+  }
+}
+
+async function getTopicAreas(topicPath) {
+  try {
+    const questions = await getQuestions(topicPath);
+    const topicAreas = new Set();
+    
+    questions.forEach(q => {
+      if (q.topic_areas && Array.isArray(q.topic_areas)) {
+        q.topic_areas.forEach(area => topicAreas.add(area));
+      }
+    });
+    
+    return Array.from(topicAreas).sort();
+  } catch (error) {
+    console.error('Error getting topic areas:', error);
+    return [];
+  }
+}
+
 export { getQuizQuestionsPage, shuffleArray, shuffleOptionsAndRemapAnswers, getPageSize, getUserSettings, PAGE_SIZE };

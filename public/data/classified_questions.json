@@ -1,0 +1,1436 @@
+{
+  "Observability & Monitoring": [
+    {
+      "question": "What is the primary purpose of a readiness probe in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which CNCF project provides distributed tracing capabilities?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which tool is commonly used with Prometheus for visualization?",
+      "difficulty": 2
+    },
+    {
+      "question": "What does a liveness probe do in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which tool is commonly used to collect and visualize metrics in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which monitoring solution is responsible for collecting and aggregating metrics?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are not the metrics for Site Reliability Engineering?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is PromQL primarily used for in Prometheus?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid probe type in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Who was the original creator of Prometheus before it was donated to CNCF?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the built-in query language used by Prometheus?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is NOT a valid type of Kubernetes probe?",
+      "difficulty": 2
+    }
+  ],
+  "Cluster Architecture & Components": [
+    {
+      "question": "Which kubectl command is used to forward a local port to a port in a pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "What does the 'ImagePullBackOff' status indicate for a pod?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the main purpose of a Pod Security Admission in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command shows events related to a specific pod?",
+      "difficulty": 2
+    },
+    {
+      "question": "What problem does GitOps solve in Kubernetes deployments?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which command creates a temporary interactive pod?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which resource would you check first when a pod stays in 'Pending' status?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command safely restarts all pods in a deployment?",
+      "difficulty": 2
+    },
+    {
+      "question": "What information would you check first when a service can't reach its pods?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which command shows resource requests/limits for all pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the primary purpose of a Horizontal Pod Autoscaler?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes controllers?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which component of Kubernetes is responsible for managing the state of the cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is a Pod in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to create a deployment in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are core components of the Kubernetes control plane?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the role of the kube-scheduler in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Horizontal Pod Autoscaler in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Vertical Pod Autoscaler in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a PodDisruptionBudget in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a PodSecurityPolicy in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a PodSecurityAdmission in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes object is used to define a set of network rules for pods?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to scale a deployment?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which field in a PodSpec defines the container image?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to get the logs of a pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the command to scale a deployment in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the command to get a list of all pods in a Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "In which framework do the developers no longer have to deal with capacity, deployments, scaling and fault tolerance, and OS?",
+      "difficulty": 2
+    },
+    {
+      "question": "You have a Kubernetes cluster hosted in a public cloud provider. When trying to create a Service of type LoadBalancer, the external-ip is stuck in the 'Pending' state. Which Kubernetes component is failing?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a built-in Kubernetes resource for scheduling pods on nodes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What Kubernetes resource is used to expose an application running on a set of pods as a network service?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the primary component of a Kubernetes control plane that manages API requests?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which component of a Kubernetes node is responsible for managing network rules and IP addresses?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which component of the Kubernetes control plane exposes the RESTful API that serves as the primary entry point for managing the cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the primary advantage of using containers in application deployment?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is responsible for determining which nodes can run a pod in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What role does a node\u2019s taint play in Kubernetes scheduling?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which component in Kubernetes is responsible for maintaining the desired state of applications?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of Pod Security Policies in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which networking model does Kubernetes primarily use to enable communication between Pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a Horizontal Pod Autoscaler?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Custom Controller in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes admission controllers?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a PodPreset in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to view the status of nodes in a Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to view the details of a specific pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command lists all pods in all namespaces?",
+      "difficulty": 2
+    },
+    {
+      "question": "Who is responsible for overseeing node availability in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "In the context of container images, which term refers to a self-contained software package that includes all necessary components and dependencies to run an application?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes component is responsible for maintaining the desired state of the cluster and triggering actions to reconcile any deviations?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is etcd in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which namespace is used by Kubernetes to create its own control plane components?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the command to scale a Deployment to a specific number of replicas in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "When container images are being downloaded for a Pod in Kubernetes, what is the typical state of the Pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which statement accurately describes Pod-to-Pod communication within the same node in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "In a Kubernetes YAML manifest file, which attributes controls the behaviour of the kubelet when pulling a specified container image?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes object is responsible for ensuring that a specific pod runs on every node in a cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to safely evict all pods from a node?",
+      "difficulty": 1
+    },
+    {
+      "question": "What must be done as a best practice before upgrading the worker nodes in a Kubernetes cluster?",
+      "difficulty": 3
+    },
+    {
+      "question": "How can you generate or load data required before the main containers start in a Kubernetes Pod?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which storage object in Kubernetes represents a discrete unit of storage in the cluster, provisioned either by an administrator or dynamically through storage classes, and can be mounted as volumes in pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "In Kubernetes, if a Pod is deployed without an explicitly assigned Service Account, which Service Account is automatically assigned?",
+      "difficulty": 2
+    },
+    {
+      "question": "How do NetworkPolicies behave when multiple policies are applied to a set of pods in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "What are the two main components of a Service Mesh?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the primary function of the Kubernetes Horizontal Pod Autoscaler (HPA)?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes autoscaling solution allows workloads to scale down to zero pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "In a cloud-native ecosystem, which role is primarily responsible for creating and managing the infrastructure for developers that supports efficient deployment and operation of applications?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which feature in Kubernetes enables Kubelet to seamlessly integrate with multiple container runtimes without requiring recompilation of cluster components?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Autoscaler allows you to automatically manage the number of nodes in your cluster to meet demand.",
+      "difficulty": 2
+    },
+    {
+      "question": "In the context of telemetry, which component is mainly used to track and analyze the journey of a request across different services in a distributed system?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to update a running deployment?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which field in a Deployment manifest specifies the number of pod replicas?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a Pod in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a Deployment in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What role does a kubelet play in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which of the below is a part of Control Plane?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of the Kubernetes Scheduler?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which component serves as the default Domain Name System (DNS) solution for service discovery and name resolution within the Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is not the part of Kubernetes Control Plane?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which kubectl command would you use to get detailed information about a specific pod in a Kubernetes cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "How to access a container running inside a pod?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is a PodDisruptionBudget?",
+      "difficulty": 1
+    },
+    {
+      "question": "How does a StatefulSet differ from a Deployment in terms of storage?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the primary difference between Deployments and StatefulSets in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes object is used to define rules for ingress and egress traffic to/from a pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the default behaviour of a pod in a Kubernetes cluster that does not have any NetworkPolicies applied to it?",
+      "difficulty": 1
+    },
+    {
+      "question": "You need to ensure that a set of Pods always run on specific nodes with GPU hardware. Which Kubernetes feature should you use?",
+      "difficulty": 2
+    },
+    {
+      "question": "A production deployment must ensure zero downtime during rolling updates. Which deployment strategy and configuration should you use?",
+      "difficulty": 2
+    },
+    {
+      "question": "You want to restrict a namespace so that only a certain number of Pods can be created. Which resource should you use?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which controller is responsible for ensuring the specified number of pod replicas are running at all times?",
+      "difficulty": 2
+    },
+    {
+      "question": "You need to run a batch job that must complete successfully only once, even if the node fails. Which Kubernetes resource is best suited?",
+      "difficulty": 2
+    },
+    {
+      "question": "How can you ensure that a Pod is scheduled only if a specific PersistentVolume is available and bound?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which object would you use to ensure a Pod is always running on every node in the cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which resource allows you to define network access rules between pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "You need to run a stateful application that requires stable network identities and persistent storage. Which controller should you use?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the function of the kube-proxy component in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which type of volume is suitable for storing data that should persist across pod restarts and is not tied to the lifecycle of a specific pod?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command would you use to view the logs of a pod named 'my-pod'?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes object would you use to manage a set of identical, replicated Pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of the Kubernetes Scheduler?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes resource can be used to automatically scale the number of pod replicas based on CPU utilization?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the role of etcd in a Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "How do you perform a rolling update for a Deployment in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "What happens when you delete a Pod in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "How can you restrict a container in a Pod from using more than its allocated CPU and memory resources?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the default behavior of a Kubernetes Deployment's strategy type during an update?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following commands would you use to scale a Deployment named 'my-deployment' to 3 replicas?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the function of the Kubernetes kubelet?",
+      "difficulty": 1
+    },
+    {
+      "question": "How does Kubernetes handle service discovery for pods?",
+      "difficulty": 2
+    },
+    {
+      "question": "How can you ensure that a specific version of an image is used for a container in a pod?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the effect of setting the terminationGracePeriodSeconds field in a pod specification?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes PodDisruptionBudget?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command would you use to view detailed information about a specific pod's configuration?",
+      "difficulty": 2
+    },
+    {
+      "question": "How can you ensure that a Kubernetes Deployment always pulls the latest image version?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the role of the Kubernetes Controller Manager?",
+      "difficulty": 1
+    },
+    {
+      "question": "How can you restrict network access to a pod in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the effect of setting a Pod's restartPolicy to 'Never'?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes Admission Controller?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command would you use to delete a pod named 'my-pod'?",
+      "difficulty": 2
+    },
+    {
+      "question": "How can you increase the resource limits for a running container in a pod?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the default value for the replicas field in a Kubernetes Deployment?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes PodTemplate?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid reason to use a Kubernetes Service of type NodePort?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following best describes the Kubernetes control plane?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of the Kubernetes HorizontalPodAutoscaler?",
+      "difficulty": 1
+    }
+  ],
+  "Cloud Native Concepts": [
+    {
+      "question": "What is the primary advantage of using a sidecar container pattern?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which CNCF project provides serverless capabilities on Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What information does the Downward API provide to containers?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the primary benefit of immutable container tags?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Sidecar container in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which OCI specification defines the format of a container image?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following statements about containers is true?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the primary function of a container orchestration platform like Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What does CNCF stands for?",
+      "difficulty": 3
+    },
+    {
+      "question": "What Linux feature is used to provide isolation for containers?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes feature would you use to perform tasks like database migrations or configuration setup before the main container starts running?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is a Sidecar Container in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "How are conflicts typically resolved within Cloud Native Computing Foundation (CNCF) projects?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the reference implementation of the OCI runtime specification?",
+      "difficulty": 1
+    },
+    {
+      "question": "What specification does the Open Container Initiative outline for running a filesystem bundle?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which of the following is not a type of telemetry in the context of Cloud Native Observability?",
+      "difficulty": 2
+    },
+    {
+      "question": "What are the four key pillars of Cloud Native Architecture?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which of the following is a key benefit of using Kubernetes for container orchestration?",
+      "difficulty": 2
+    }
+  ],
+  "Cluster Administration": [
+    {
+      "question": "Which Kubernetes resource would you use to limit CPU usage per container in a namespace?",
+      "difficulty": 2
+    },
+    {
+      "question": "What does 'kubectl api-resources' display?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the purpose of a Namespace in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes namespaces?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource quotas?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a LimitRange in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the default namespace in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which command is used to create a new namespace in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes resource is used to define resource limits for a namespace?",
+      "difficulty": 1
+    },
+    {
+      "question": "In which framework the developers are not responsible to deal with capacity, scaling and fault tolerance?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following best distinguishes horizontal scaling from vertical scaling in terms of resource allocation and capacity management?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to create a namespace?",
+      "difficulty": 1
+    },
+    {
+      "question": "What are the default namespaces created in a typical Kubernetes installation?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the command to create or update a Kubernetes object?",
+      "difficulty": 1
+    },
+    {
+      "question": "An application is approaching its usage limit. To handle more users, you allocate additional memory resources to each instance of the application. What type of scaling does this represent?",
+      "difficulty": 3
+    },
+    {
+      "question": "What does the kubectl top command do in a Kubernetes cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a Namespace in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "How would you recover a deleted namespace in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "What does the kubectl apply command do?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following best describes a Kubernetes Namespace?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following commands would you use to create a namespace in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following commands would you use to view the events in a namespace?",
+      "difficulty": 2
+    }
+  ],
+  "Security": [
+    {
+      "question": "Which security context setting prevents privilege escalation?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which RBAC resource grants permissions within a specific namespace?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which tool scans Kubernetes manifests for security issues?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which CNCF project provides runtime security monitoring?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a Role in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ClusterRole in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a RoleBinding in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ClusterRoleBinding in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the primary role of a container runtime in a Kubernetes environment?",
+      "difficulty": 1
+    },
+    {
+      "question": "What default level of protection is applied to the data in Secrets in the Kubernetes API?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which role can be considered the bridge between traditional IT Security and DevOps?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is RBAC in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "In cloud computing, which approach is most effective for managing security threats while optimizing costs by detecting unusual activities?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following statements is correct concerning Open Policy Agent (OPA)?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which role focuses more on reliability, including factors like uptime, availability, scalability, resilience, and robustness?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the primary role of Argo in the Cloud Native Application Delivery and GitOps?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes ClusterRole?",
+      "difficulty": 1
+    }
+  ],
+  "Configuration": [
+    {
+      "question": "What is the purpose of OpenTelemetry in cloud-native environments?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ConfigMap in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the most common way to scale the application in the cloud environment?",
+      "difficulty": 1
+    },
+    {
+      "question": "What does YAML stand for?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is a primary purpose of KubeCost in cloud native environments?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid use of a ConfigMap in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is a ConfigMap used for in Kubernetes?",
+      "difficulty": 1
+    }
+  ],
+  "Services & Networking": [
+    {
+      "question": "What is the primary function of CoreDNS in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the primary purpose of a ServiceAccount?",
+      "difficulty": 1
+    },
+    {
+      "question": "What problem does a headless service solve?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which metric type is most important for SLO-based autoscaling?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a Service in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the primary purpose of a Kubernetes Service?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a NetworkPolicy in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ServiceAccount in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Service Mesh in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following container runtime options is supported by Kubernetes natively?",
+      "difficulty": 2
+    },
+    {
+      "question": "In Kubernetes networking, which of the following is responsible for exposing services to external traffic?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are key features provided by a service mesh?",
+      "difficulty": 2
+    },
+    {
+      "question": "How do service meshes benefit microservices architectures?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which Kubernetes API object is used to manage external access to services in a cluster, typically HTTP/S?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following statements is true regarding the Kubernetes networking model?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is not a valid service type in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What are the supported authorization mechanisms in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "What best describes cloud native service discovery?",
+      "difficulty": 3
+    },
+    {
+      "question": "In Kubernetes which software is widely used as a lightweight proxy to handle the traffic management between microservices?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is true about Ingress in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following Service Level Indicators are used to measure the performance of a system?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes object is used to expose HTTP and HTTPS routes from outside the cluster to services within the cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the default type of Kubernetes Service?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid use of a Service in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "What does Service refer to in Kubernetes?",
+      "difficulty": 3
+    },
+    {
+      "question": "How long should a stable API element in Kubernetes be supported (at minimum) after deprecation?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which type of Kubernetes object is commonly used for applications that require stable, unique network identifiers and persistent storage?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the main purpose of a NetworkPolicy in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is a Service Mesh in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the common standard for Service Meshes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which networking strategy in containerized applications utilizes a Sidecar pattern, placing an auxiliary container alongside the main container to manage port mapping and traffic routing?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a service mesh designed specifically for Kubernetes, known for its simplicity and ease of use?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the Container Network Interface (CNI)?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which technical role is responsible for monitoring and maintaining Service Level Agreements (SLAs), Service Level Indicators (SLIs), and Service Level Objectives (SLOs) to ensure reliable and high-performance services?",
+      "difficulty": 2
+    },
+    {
+      "question": "You want to expose a service externally using a cloud provider's load balancer. Which Service type should you use?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the default port for the Kubernetes API server?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid selector for a Kubernetes Service of type ClusterIP?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is NOT a valid Kubernetes Service type?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of the Kubernetes Ingress resource?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes ServiceAccount?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the function of the Kubernetes DNS Addon?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of the Kubernetes NetworkPolicy?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid way to expose a service to external traffic in Kubernetes?",
+      "difficulty": 2
+    }
+  ],
+  "Workloads & Scheduling": [
+    {
+      "question": "What is the main advantage of using Init Containers over startup scripts?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ReplicaSet in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which objects in Kubernetes are used to manage replicated applications?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a DaemonSet in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a StatefulSet in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Job in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a CronJob in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a Init container in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid update strategy for StatefulSets?",
+      "difficulty": 2
+    },
+    {
+      "question": "What's the most cost-effective method to run 1000 compute jobs weekly in a cloud Kubernetes cluster?",
+      "difficulty": 3
+    },
+    {
+      "question": "When a CronJob is scheduled to run every hour by a user, what happens in the Kubernetes cluster at the scheduled time",
+      "difficulty": 3
+    },
+    {
+      "question": "Which GitOps engine is capable of orchestrating parallel jobs on Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid reason to use a StatefulSet?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a StatefulSet in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a DaemonSet in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a Job in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use of a CronJob in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "By default, in which time zone do CronJobs run in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is a Kubernetes Job?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is an Init Container in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is a valid use of a ReplicaSet in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid reason to use a DaemonSet?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes object would you use to run a job that must be completed successfully only once?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a common use case for Kubernetes Jobs?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following best describes a Kubernetes StatefulSet?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid reason to use a ReplicaSet?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid use case for a Kubernetes CronJob?",
+      "difficulty": 2
+    }
+  ],
+  "Other": [
+    {
+      "question": "What is the purpose of the KEP (Kubernetes Enhancement Proposal) process?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource types?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes labels?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes annotations?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes API operations?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource limits?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource requests?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource selectors?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource kinds?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource fields?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource statuses?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource configurations?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a Custom Resource in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a ResourceQuota in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes resource is used to store sensitive information?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following is NOT a valid Kubernetes resource type?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes object is used for batch processing?",
+      "difficulty": 1
+    },
+    {
+      "question": "What fundamental concept allows Kubernetes to maintain the desired state declared by the user?",
+      "difficulty": 3
+    },
+    {
+      "question": "How does the Kubernetes API ensure that different clients can interact with the cluster autonomously and in a consistent manner?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following are best practices for securing a Kubernetes cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "The Kubernetes project work is carried primarily by SIGs. What does SIG stand for?",
+      "difficulty": 3
+    },
+    {
+      "question": "How does Serverless (e.g., FaaS like AWS Lambda or Knative Serving) primarily differ from traditional PaaS offerings?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to apply a configuration file in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes scheduling policies?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to delete a resource in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes resource versions?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which command is used to view the events in a Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following statements about Kubernetes is correct?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the name of the lightweight Kubernetes distribution built for IoT and edge computing?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which API object is recommended to run a scalable, stateless application on your cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes feature allows resources to be divided into separate groups within a single cluster?",
+      "difficulty": 2
+    },
+    {
+      "question": "What feature allows you to extend the Kubernetes API by defining new resource types?",
+      "difficulty": 3
+    },
+    {
+      "question": "In cloud computing, what do CloudEvents refer to?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which Kubernetes object grants access to resources at the cluster level?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the default value for authorization mode in Kubernetes API server?",
+      "difficulty": 1
+    },
+    {
+      "question": "If the --authorization-mode flag is not specified when starting the API server, what default mode does the Kubernetes API server use?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which aspect of cloud cost management is improved by identifying cloud anomalies?",
+      "difficulty": 2
+    },
+    {
+      "question": "What are the key benefits of Open Standards in computing and software development?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which cloud-native tools allow Kubernetes clusters to be automatically synchronized with Git repositories?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a declarative way to manage Kubernetes resources?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid label selector?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which Kubernetes resource is used to manage configuration data separately from application code?",
+      "difficulty": 1
+    },
+    {
+      "question": "The smallest deployable unit in Kubernetes is?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which of the following methods are used to attach additional descriptive information to Kubernetes objects?",
+      "difficulty": 1
+    },
+    {
+      "question": "In Kubernetes, what is the primary purpose of an Endpoint?",
+      "difficulty": 1
+    },
+    {
+      "question": "In Kubernetes, which resource is best suited for running tasks on a scheduled, recurring basis?",
+      "difficulty": 2
+    },
+    {
+      "question": "In the context of authentication and authorization, what does the acronym OIDC stand for?",
+      "difficulty": 3
+    },
+    {
+      "question": "Which tool is widely used for installing, upgrading, and managing applications in a Kubernetes cluster?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following commands is used to check for errors or misconfigurations?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the primary responsibility of a Cloud Architect?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which DevOps methodology involves managing infrastructure configurations declaratively through code?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following represents the three pillars of observability in modern systems?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of the Kubernetes Dashboard?",
+      "difficulty": 1
+    },
+    {
+      "question": "How can you secure sensitive data, such as passwords, in a Kubernetes cluster?",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the purpose of the Kubernetes ResourceQuota object?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the function of the Kubernetes API Aggregation Layer?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the function of the Kubernetes API Server?",
+      "difficulty": 1
+    },
+    {
+      "question": "How can you access the Kubernetes Dashboard?",
+      "difficulty": 3
+    }
+  ],
+  "Storage": [
+    {
+      "question": "What is the purpose of a PersistentVolumeClaim in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following are valid Kubernetes volume types?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a PersistentVolume in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a PersistentVolumeClaim?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is the purpose of a PersistentVolumeClaim (PVC) in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which Kubernetes object allows dynamic provisioning of storage in Kubernetes?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which software is commonly used in Kubernetes for Cloud Native Storage orchestration?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the purpose of a Persistent Volume (PV) in Kubernetes?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following best describes a Kubernetes Volume?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid PersistentVolumeClaim status?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is NOT a valid Kubernetes Volume type?",
+      "difficulty": 2
+    },
+    {
+      "question": "Which of the following is a valid PersistentVolumeReclaimPolicy?",
+      "difficulty": 2
+    }
+  ],
+  "Extending Kubernetes": [
+    {
+      "question": "What is the purpose of a Custom Resource Definition (CRD) in Kubernetes?",
+      "difficulty": 1
+    }
+  ],
+  "CI/CD & GitOps": [
+    {
+      "question": "Which concept is part of GitOps delivery in cloud-native apps?",
+      "difficulty": 2
+    },
+    {
+      "question": "CI/CD stands for:",
+      "difficulty": 3
+    },
+    {
+      "question": "What is the core functionality of GitOps tools like Argo CD and Flux?",
+      "difficulty": 1
+    },
+    {
+      "question": "GitOps can be best described as -",
+      "difficulty": 3
+    }
+  ],
+  "Helm & Package Management": [
+    {
+      "question": "What is a Helm?",
+      "difficulty": 1
+    },
+    {
+      "question": "Which of the following files contains metadata about the helm chart?",
+      "difficulty": 2
+    },
+    {
+      "question": "What is the main purpose of using helm?",
+      "difficulty": 1
+    },
+    {
+      "question": "What is a Helm Chart in Kubernetes?",
+      "difficulty": 1
+    }
+  ]
+}

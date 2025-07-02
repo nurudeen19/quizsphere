@@ -4,12 +4,24 @@
     <section class="relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28">
       <div class="absolute inset-0 overflow-hidden [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]">
         <div class="absolute inset-0 grid place-items-center">
-          <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-16 gap-8">
+          <div class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-16 gap-4 md:gap-6 lg:gap-8 opacity-75">
             <template v-for="n in 96" :key="n">
-              <Squares2X2Icon class="w-5 h-5 text-blue-200/30" />
+              <Squares2X2Icon 
+                class="w-4 h-4 sm:w-5 sm:h-5 text-blue-200/30 transform transition-all duration-700 hover:text-blue-300/40 hover:rotate-90"
+                :style="{ 'animation-delay': `${n * 50}ms` }"
+              />
             </template>
           </div>
         </div>
+      </div>
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#featured-topics" class="flex flex-col items-center text-blue-600/70 hover:text-blue-600 transition-colors" aria-label="Scroll to featured topics">
+          <span class="text-sm font-medium mb-2">Explore More</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
       </div>
       <div class="relative container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
@@ -45,13 +57,22 @@
     <section class="py-12 bg-white/80 backdrop-blur-sm border-y border-blue-100">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          <StatsCard
-            v-for="stat in stats"
-            :key="stat.label"
-            :value="stat.value"
-            :label="stat.label"
-            :icon="stat.icon"
-          />
+          <div v-if="isLoading" class="col-span-2 lg:col-span-4 py-8">
+            <div class="animate-pulse flex flex-col items-center space-y-4">
+              <div class="h-8 w-24 bg-blue-200 rounded"></div>
+              <div class="h-4 w-32 bg-blue-100 rounded"></div>
+            </div>
+          </div>
+          <template v-else>
+            <StatsCard
+              v-for="stat in stats"
+              :key="stat.label"
+              :value="stat.value"
+              :label="stat.label"
+              :icon="stat.icon"
+              class="transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            />
+          </template>
         </div>
       </div>
     </section>
@@ -63,12 +84,24 @@
           <h2 class="text-3xl font-bold text-blue-900 mb-4">Popular Learning Paths</h2>
           <p class="text-lg text-blue-600">Start your journey with our most popular topics</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div v-if="isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div v-for="n in 6" :key="n" class="animate-pulse">
+            <div class="rounded-xl bg-white shadow-lg border border-blue-100 overflow-hidden">
+              <div class="aspect-w-16 aspect-h-9 bg-blue-100"></div>
+              <div class="p-4 space-y-3">
+                <div class="h-4 bg-blue-100 rounded w-3/4"></div>
+                <div class="h-3 bg-blue-50 rounded w-1/2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <TopicCard
             v-for="topic in featuredTopics"
             :key="topic.id"
             :topic="topic"
             class="featured-card"
+            :aria-label="'Learn about ' + topic.title"
           />
         </div>
         <div class="text-center">
@@ -133,12 +166,14 @@ import TopicCard from '../components/home/TopicCard.vue'
 import StatsCard from '../components/home/StatsCard.vue'
 import { Squares2X2Icon } from '@heroicons/vue/24/outline'
 
+const isLoading = ref(true)
 const featuredTopics = ref([])
+// Define types for better type safety
 const stats = ref([
-  { label: 'Active Topics', value: '0', icon: 'book' },
-  { label: 'Total Questions', value: '0', icon: 'question' },
-  { label: 'Learning Paths', value: '0', icon: 'academic' },
-  { label: 'Daily Active Users', value: '0', icon: 'users' }
+  { label: 'Active Topics', value: '0', icon: 'book', key: 'totalTopics' },
+  { label: 'Total Questions', value: '0', icon: 'question', key: 'totalQuestions' },
+  { label: 'Learning Paths', value: '0', icon: 'academic', key: 'totalLearningPaths' },
+  { label: 'Daily Active Users', value: '0', icon: 'users', key: 'dailyActiveUsers' }
 ])
 
 const features = [
@@ -174,26 +209,29 @@ const features = [
   }
 ]
 
+// Optimized data fetching
 onMounted(async () => {
   try {
-    const response = await fetchTopics()
+    // Fetch homepage data with optimized response
+    const response = await fetchTopics('/api/homepage')
     if (response.status === 'success' && response.data) {
-      // Get top 6 topics by questions count
-      featuredTopics.value = response.data
-        .sort((a, b) => b.questions_count - a.questions_count)
-        .slice(0, 6)
-        .map(topic => ({
-          ...topic,
-          image: topic.icon || `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(topic.title)}`
-        }))
+      const { featuredTopics: featured, statistics } = response.data
+
+      // Set featured topics directly from API
+      featuredTopics.value = featured.map(topic => ({
+        ...topic,
+        image: topic.icon || `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(topic.title)}`
+      }))
       
-      // Update stats
-      stats.value[0].value = response.data.length.toString()
-      stats.value[1].value = response.data.reduce((acc, topic) => acc + topic.questions_count, 0).toString()
-      stats.value[2].value = new Set(response.data.flatMap(t => t.topic_areas || [])).size.toString()
+      // Update stats from pre-calculated values
+      stats.value.forEach(stat => {
+        stat.value = statistics[stat.key]?.toString() || '0'
+      })
     }
   } catch (error) {
-    console.error('Failed to fetch featured topics:', error)
+    console.error('Failed to fetch homepage data:', error)
+  } finally {
+    isLoading.value = false
   }
 })
 </script>
@@ -201,10 +239,23 @@ onMounted(async () => {
 <style scoped>
 .featured-card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .featured-card:hover {
   transform: translateY(-4px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -215,5 +266,17 @@ onMounted(async () => {
   .featured-card:nth-child(3n-1):hover {
     transform: translateY(calc(2rem - 4px));
   }
+  
+  .featured-card:nth-child(1) { animation-delay: 100ms; }
+  .featured-card:nth-child(2) { animation-delay: 200ms; }
+  .featured-card:nth-child(3) { animation-delay: 300ms; }
+  .featured-card:nth-child(4) { animation-delay: 400ms; }
+  .featured-card:nth-child(5) { animation-delay: 500ms; }
+  .featured-card:nth-child(6) { animation-delay: 600ms; }
+}
+
+/* Add smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
 }
 </style>
