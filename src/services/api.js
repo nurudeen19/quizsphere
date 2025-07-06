@@ -43,15 +43,38 @@ api.interceptors.response.use(
     }
 );
 
+// Utility function for caching API responses
+const getCachedData = (key) => {
+    const cachedData = sessionStorage.getItem(key);
+    return cachedData ? JSON.parse(cachedData) : null;
+};
+
+const setCachedData = (key, data) => {
+    sessionStorage.setItem(key, JSON.stringify(data));
+};
+
 // API endpoints
 export const apiEndpoints = {
     getTopics: () => api.get('/topics'),
-    getTopicByKey: (topicKey) => api.get(`/topics/${topicKey}`),
-    getTopicQuestions: (topicKey) => api.get(`/topics/${topicKey}/questions`),
-    getHomepageData: (sections = [], options = {}) =>
-        api.get('/homepage', {
-            params: { sections: sections, options: options }
-        }),
+    getTopicById: (topicId) => api.get(`/topics/${topicId}`),
+    getTopicQuestions: (topicId) => api.get(`/topics/${topicId}/questions`),
+    getHomepageData: (sections = {}, options = {}) => {
+        const cacheKey = `homepageData_${JSON.stringify(sections)}_${JSON.stringify(options)}`;
+        const cachedData = getCachedData(cacheKey);
+
+        if (cachedData) {
+            return Promise.resolve(cachedData);
+        }
+
+        return api
+            .get('/homepage', {
+                params: { sections, options },
+            })
+            .then((data) => {
+                setCachedData(cacheKey, data);
+                return data;
+            });
+    },
 };
 
 export default api;

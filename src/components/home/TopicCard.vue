@@ -65,8 +65,6 @@ const props = defineProps({
     required: true
   }
 })
-console.log('TopicCard props:', props.topic)
-
 function onImageError(event) {
   // Fallback to Unsplash if image fails to load
   event.target.src = `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(props.topic.title)}`;

@@ -18,10 +18,10 @@ export async function fetchTopics() {
 }
 
 /**
- * Fetch a specific topic by its key.
+ * Fetch a specific topic.
  */
-export async function fetchTopicByKey(topicKey) {
-    return apiEndpoints.getTopicByKey(topicKey);
+export async function fetchTopic(topicId) {
+    return apiEndpoints.getTopicById(topicId);
 }
 
 /**
