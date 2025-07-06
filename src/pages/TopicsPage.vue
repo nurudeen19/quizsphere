@@ -40,7 +40,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useHead } from '@vueuse/head'
-import { fetchTopics } from '../quiz/quiz-utils'
+import { fetchTopics } from '../services/page-utils';
 import TopicCard from '../components/topics/TopicCard.vue'
 
 const emit = defineEmits(['selectTopic'])

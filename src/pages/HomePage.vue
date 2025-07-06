@@ -160,7 +160,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { fetchTopics } from '../quiz/quiz-utils'
+import { fetchHomepageData } from '../services/page-utils';
 import FeatureCard from '../components/home/FeatureCard.vue'
 import TopicCard from '../components/home/TopicCard.vue'
 import StatsCard from '../components/home/StatsCard.vue'
@@ -213,7 +213,8 @@ const features = [
 onMounted(async () => {
   try {
     // Fetch homepage data with optimized response
-    const response = await fetchTopics('/api/homepage')
+    let sections = {'featuredTopics': true, 'statistics': true};
+    const response = await fetchHomepageData(sections, { featured_topics_limit: 6 })
     if (response.status === 'success' && response.data) {
       const { featuredTopics: featured, statistics } = response.data
 

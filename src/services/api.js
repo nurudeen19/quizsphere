@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { config } from '../config';
-
+console.log('API Base URL:', config.apiBaseUrl);
 // Create axios instance with default config
 const api = axios.create({
     baseURL: config.apiBaseUrl,
+    withCredentials: true,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -44,10 +45,14 @@ api.interceptors.response.use(
 );
 
 // API endpoints
-export const topicsApi = {
-    getAll: () => api.get('/topics'),
-    getByKey: (topicKey) => api.get(`/topics/${topicKey}`),
-    getQuestions: (topicKey) => api.get(`/topics/${topicKey}/questions`)
+export const apiEndpoints = {
+    getTopics: () => api.get('/topics'),
+    getTopicByKey: (topicKey) => api.get(`/topics/${topicKey}`),
+    getTopicQuestions: (topicKey) => api.get(`/topics/${topicKey}/questions`),
+    getHomepageData: (sections = [], options = {}) =>
+        api.get('/homepage', {
+            params: { sections: sections, options: options }
+        }),
 };
 
 export default api;
