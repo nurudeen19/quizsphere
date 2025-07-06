@@ -7,7 +7,6 @@ import { apiEndpoints } from './api';
  * Other fields would be included in documentation.
  */
 export async function fetchHomepageData(sections = {'featuredTopics': true, 'statistics': true}, options = { featured_topics_limit: 6 }) {
-    console.log('Fetching homepage data for sections:', sections, 'with options:', options);
     return apiEndpoints.getHomepageData(sections, options);
 }
 
