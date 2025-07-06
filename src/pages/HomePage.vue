@@ -216,10 +216,9 @@ onMounted(async () => {
     let sections = {'featuredTopics': true, 'statistics': true};
     const response = await fetchHomepageData(sections, { featured_topics_limit: 6 })
     if (response.status === 'success' && response.data) {
-      const { featuredTopics: featured, statistics } = response.data
-
+      const { featuredTopics, statistics } = response.data
       // Set featured topics directly from API
-      featuredTopics.value = featured.map(topic => ({
+      featuredTopics.value = featuredTopics.map(topic => ({
         ...topic,
         image: topic.icon || `https://source.unsplash.com/featured/400x300/?${encodeURIComponent(topic.title)}`
       }))
