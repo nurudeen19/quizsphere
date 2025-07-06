@@ -1,4 +1,3 @@
-# Vue Topic Page Component
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
     <div class="container mx-auto px-4">
@@ -84,14 +83,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { fetchTopic } from '../quiz/quiz-utils'
+import { fetchTopic } from '../services/page-utils'
 
 const route = useRoute()
 const topic = ref(null)
 
 onMounted(async () => {
   try {
-    const response = await fetchTopic(route.params.topicKey)
+    const response = await fetchTopic(route.params.topicSlug)
     if (response.status === 'success' && response.data) {
       topic.value = response.data
       

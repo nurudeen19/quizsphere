@@ -26,7 +26,7 @@ const routes = [
     }
   },
   {
-    path: '/topic/:topicKey',
+    path: '/topic/:topicSlug',
     name: 'topic',
     component: () => import('../pages/TopicPage.vue'), // Lazy loaded
     props: true,

@@ -20,8 +20,8 @@ export async function fetchTopics() {
 /**
  * Fetch a specific topic.
  */
-export async function fetchTopic(topicId) {
-    return apiEndpoints.getTopicById(topicId);
+export async function fetchTopic(topicSlug) {
+    return apiEndpoints.getTopicBySlug(topicSlug);
 }
 
 /**

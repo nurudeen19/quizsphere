@@ -56,8 +56,8 @@ const setCachedData = (key, data) => {
 // API endpoints
 export const apiEndpoints = {
     getTopics: () => api.get('/topics'),
-    getTopicById: (topicId) => api.get(`/topics/${topicId}`),
-    getTopicQuestions: (topicId) => api.get(`/topics/${topicId}/questions`),
+    getTopicBySlug: (topicSlug) => api.get(`/topics/${topicSlug}`),
+    getTopicQuestions: (topicSlug) => api.get(`/topics/${topicSlug}/questions`),
     getHomepageData: (sections = {}, options = {}) => {
         const cacheKey = `homepageData_${JSON.stringify(sections)}_${JSON.stringify(options)}`;
         const cachedData = getCachedData(cacheKey);

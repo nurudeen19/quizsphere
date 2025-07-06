@@ -42,7 +42,7 @@
         </div>
         
         <router-link
-          :to="{ name: 'topic', params: { topicKey: topic.topic_key }}"
+          :to="{ name: 'topic', params: { topicSlug: topic.slug }}"
           class="group/btn inline-flex items-center px-4 py-2 text-blue-600 hover:text-white font-medium text-sm bg-blue-50 hover:bg-blue-600 rounded-lg transition-all duration-200 hover:shadow-lg"
         >
           Start
