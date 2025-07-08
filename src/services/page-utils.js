@@ -27,6 +27,6 @@ export async function fetchTopic(topicSlug) {
 /**
  * Fetch questions for a specific topic.
  */
-export async function fetchQuestionsForTopic(topicKey) {
-    return apiEndpoints.getTopicQuestions(topicKey);
+export async function fetchQuestionsForTopic(topicSlug, options = {}) {
+    return apiEndpoints.getTopicQuestions(topicSlug, options);
 }

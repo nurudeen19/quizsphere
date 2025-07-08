@@ -53,10 +53,10 @@
               {{ topic.questionsCount }} Questions
             </span>
             <button
-              @click="$router.push({ name: 'topic', params: { topicSlug: topic.slug } })"
+              @click="$router.push({ name: 'topic', params: { topicSlug: topic.slug || topic.topic_key } })"
               class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              {{ hasProgress ? 'Continue' : 'View Topic' }}
+              {{ hasProgress ? 'Continue' : 'Start Quiz' }}
             </button>
           </div>
         </div>

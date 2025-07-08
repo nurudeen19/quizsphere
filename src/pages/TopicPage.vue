@@ -1,6 +1,28 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
     <div class="container mx-auto px-4">
+      <!-- Quiz Completion Success Message -->
+      <div v-if="route.query.completed === 'true'" class="mb-8">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-semibold text-green-800">Quiz Completed Successfully! 🎉</h3>
+              <p class="text-green-700 mt-1">
+                You scored {{ route.query.score }}% ({{ route.query.correct }}/{{ route.query.questions }} correct)
+                <span v-if="route.query.score >= 80" class="ml-2 text-green-600 font-medium">- Excellent work!</span>
+                <span v-else-if="route.query.score >= 60" class="ml-2 text-green-600 font-medium">- Good job!</span>
+                <span v-else class="ml-2 text-blue-600 font-medium">- Keep practicing!</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div v-if="topic" class="space-y-8">
         <!-- Hero Section -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -437,6 +459,19 @@ onMounted(async () => {
     }
   } catch (error) {
     console.error('Failed to fetch topic:', error)
+    // Optionally redirect to topics page on error
+    router.push('/topics')
+  }
+  
+  // Clear success message from URL after 5 seconds
+  if (route.query.completed === 'true') {
+    setTimeout(() => {
+      router.replace({ 
+        name: 'topic', 
+        params: route.params,
+        query: {} 
+      })
+    }, 5000)
   }
 })
 

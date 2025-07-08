@@ -179,7 +179,6 @@
             v-for="topic in sortedTopics"
             :key="topic.topic"
             :topic="topic"
-            @select="$emit('selectTopic', topic)"
             class="transform transition-all duration-200 hover:scale-105 hover:shadow-xl"
           />
         </div>
@@ -237,7 +236,6 @@ import { useHead } from '@vueuse/head'
 import { fetchTopics } from '../services/page-utils';
 import TopicCard from '../components/topics/TopicCard.vue'
 
-const emit = defineEmits(['selectTopic'])
 const topics = ref([])
 const loadError = ref("")
 const isLoading = ref(true)

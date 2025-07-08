@@ -226,7 +226,7 @@
 <script setup>
 import { ref, watch, nextTick, computed, onMounted, defineEmits } from 'vue'
 import { PAGE_SIZE, fetchQuestions, getPageSize, getUserSettings } from '../quiz/quiz-utils.js'
-import Timer from './Timer.vue'
+import Timer from './quiz/ui/Timer.vue'
 import confetti from 'canvas-confetti'
 import { renderMarkdown } from '../quiz/markdown.js'
 

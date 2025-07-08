@@ -66,7 +66,8 @@
           </div>
           <Timer
             v-if="localSettings.showTimer"
-            :time="localSettings.timePerQuestion"
+            :duration="localSettings.timePerQuestion / 60"
+            :running="true"
             @timeout="handleTimeout"
           />
         </div>
@@ -139,7 +140,7 @@
 <script setup>
 import { ref, computed, watch, inject } from 'vue'
 import { marked } from 'marked'
-import Timer from './Timer.vue'
+import Timer from './ui/Timer.vue'
 
 const handleError = inject('handleError')
 
@@ -198,10 +199,63 @@ async function startQuiz() {
   }
 }
 
-function generateQuestions() {
-  // TODO: Implement question generation logic based on topic and settings
-  // This should mix questions from different chapters according to localSettings.questionsPerChapter
-  return []
+async function generateQuestions() {
+  try {
+    // For now, return some sample questions to test the component
+    // In a real implementation, this would fetch questions from the API
+    const sampleQuestions = [
+      {
+        id: 1,
+        question: "What is the primary purpose of containerization in modern software development?",
+        options: [
+          "To make applications run faster",
+          "To package applications with their dependencies for consistent deployment",
+          "To reduce the size of application files",
+          "To automatically scale applications"
+        ],
+        correct: "To package applications with their dependencies for consistent deployment",
+        difficulty: "Intermediate"
+      },
+      {
+        id: 2,
+        question: "Which command is used to create a new Docker container from an image?",
+        options: [
+          "docker build",
+          "docker create",
+          "docker run",
+          "docker start"
+        ],
+        correct: "docker run",
+        difficulty: "Beginner"
+      },
+      {
+        id: 3,
+        question: "What is the difference between a Docker image and a Docker container?",
+        options: [
+          "Images are running instances, containers are templates",
+          "Images are templates, containers are running instances",
+          "There is no difference",
+          "Images are smaller than containers"
+        ],
+        correct: "Images are templates, containers are running instances",
+        difficulty: "Intermediate"
+      }
+    ]
+
+    // Return a subset based on settings
+    const questionCount = Math.min(localSettings.value.questionsPerChapter || 10, sampleQuestions.length)
+    return sampleQuestions.slice(0, questionCount)
+    
+    // TODO: Replace with actual API call
+    // const response = await fetchQuestionsForTopic(props.topic.topic_key, {
+    //   count: localSettings.value.questionsPerChapter,
+    //   difficulty: localSettings.value.difficulty
+    // })
+    // return response.data
+  } catch (error) {
+    console.error('Error generating questions:', error)
+    throw new Error('Failed to load quiz questions. Please try again.')
+  }
 }
 
 function selectAnswer(answer) {
@@ -244,11 +298,16 @@ function handleTimeout() {
 function finishQuiz() {
   try {
     quizComplete.value = true
+    const score = (correctAnswers.value.length / totalQuestions.value) * 100
+    
     emit('complete', {
       topic: props.topic.topic,
-      score: (correctAnswers.value.length / totalQuestions.value) * 100,
+      score: score,
+      totalQuestions: totalQuestions.value,
+      correctAnswers: correctAnswers.value.length,
       answers: answers.value,
-      settings: localSettings.value
+      settings: localSettings.value,
+      timeTaken: 0 // TODO: Add actual time tracking
     })
   } catch (error) {
     handleError(error)
@@ -267,13 +326,13 @@ function restartQuiz() {
 
 <style scoped>
 .form-input {
-  @layer components {
-    display: block;
-    width: 100%;
-    border-radius: 0.375rem;
-    border-color: #D1D5DB;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
+  display: block;
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid #D1D5DB;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .form-input:focus {
@@ -283,15 +342,55 @@ function restartQuiz() {
 }
 
 .form-checkbox {
-  @layer components {
-    border-radius: 0.25rem;
-    border-color: #D1D5DB;
-    color: #2563EB;
-  }
+  border-radius: 0.25rem;
+  border: 1px solid #D1D5DB;
+  color: #2563EB;
+  width: 1rem;
+  height: 1rem;
 }
 
 .form-checkbox:focus {
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
   outline: none;
+}
+
+.quiz-container {
+  max-width: 4xl;
+  margin: 0 auto;
+}
+
+.question-container {
+  margin-bottom: 1.5rem;
+}
+
+.markdown {
+  line-height: 1.6;
+}
+
+.markdown h1, .markdown h2, .markdown h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.markdown p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Inconsolata, "Liberation Mono", "Courier New", monospace;
+}
+
+.markdown pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
 }
 </style>

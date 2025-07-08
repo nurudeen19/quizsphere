@@ -18,7 +18,7 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { fetchTopic } from '../quiz/quiz-utils'
+import { fetchTopic } from '../services/page-utils'
 import QuizView from '../components/quiz/QuizView.vue'
 
 const route = useRoute()
@@ -40,6 +40,21 @@ onMounted(async () => {
         topic: response.data.topic_key
       }
       
+      // Parse quiz configuration from query parameters
+      if (route.query) {
+        settings.value = {
+          difficulty: route.query.difficulty || 'mixed',
+          questionCount: parseInt(route.query.questionCount) || 25,
+          timedQuiz: route.query.timedQuiz === 'true',
+          timeLimit: route.query.timeLimit ? parseInt(route.query.timeLimit) : null,
+          allowOvertime: route.query.allowOvertime !== 'false',
+          // Legacy settings for compatibility
+          questionsPerChapter: parseInt(route.query.questionCount) || 10,
+          timePerQuestion: route.query.timeLimit ? Math.floor((parseInt(route.query.timeLimit) * 60) / parseInt(route.query.questionCount)) : 60,
+          showTimer: route.query.timedQuiz === 'true'
+        }
+      }
+      
       // Update document title for SEO
       document.title = `${topic.value.title} Quiz | QuizSphere`
       
@@ -48,7 +63,7 @@ onMounted(async () => {
       if (metaDescription) {
         metaDescription.setAttribute('content', 
           `Test your knowledge of ${topic.value.title} with interactive quizzes. ` +
-          `Practice ${topic.value.questions_count} questions across multiple chapters.`)
+          `Practice ${settings.value.questionCount} questions${settings.value.timedQuiz ? ` in ${settings.value.timeLimit} minutes` : ''}.`)
       }
     } else {
       throw new Error('Failed to load quiz topic')
@@ -64,14 +79,36 @@ onMounted(async () => {
 
 const handleQuizComplete = (results) => {
   try {
-    // TODO: Save results to localStorage or backend
+    // Save results to localStorage for persistence
+    const quizResults = {
+      topicKey: topic.value.topic_key,
+      topicTitle: topic.value.title,
+      score: results.score,
+      totalQuestions: results.totalQuestions,
+      correctAnswers: results.correctAnswers,
+      completedAt: new Date().toISOString(),
+      difficulty: settings.value.difficulty,
+      timeLimit: settings.value.timeLimit,
+      timeTaken: results.timeTaken
+    }
+    
+    // Store in localStorage
+    const existingResults = JSON.parse(localStorage.getItem('quizsphere-quiz-results') || '[]')
+    existingResults.unshift(quizResults) // Add to beginning
+    localStorage.setItem('quizsphere-quiz-results', JSON.stringify(existingResults.slice(0, 10))) // Keep only last 10 results
+    
     console.log('Quiz completed:', results)
     
     // Redirect to the topic page with results
     router.push({
       name: 'topic',
-      params: { topicKey: topic.value.topic_key },
-      query: { completed: 'true', score: Math.round(results.score) }
+      params: { topicSlug: topic.value.slug },
+      query: { 
+        completed: 'true', 
+        score: Math.round(results.score),
+        questions: results.totalQuestions,
+        correct: results.correctAnswers
+      }
     })
   } catch (error) {
     handleError(error)
