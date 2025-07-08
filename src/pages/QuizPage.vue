@@ -1,6 +1,6 @@
 # Vue Quiz Page Component
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
     <div class="container mx-auto px-4">
       <QuizView
         v-if="topic && questions.length > 0"
@@ -10,8 +10,14 @@
         @complete="handleQuizComplete"
       />
       <div v-else class="flex justify-center items-center min-h-[60vh]">
-        <div class="animate-pulse text-blue-600">
-          {{ topic ? 'Loading questions...' : 'Loading quiz...' }}
+        <div class="text-center">
+          <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mb-6"></div>
+          <div class="text-2xl text-blue-600 font-semibold mb-2">
+            {{ topic ? 'Loading questions...' : 'Loading quiz...' }}
+          </div>
+          <div class="text-gray-500">
+            {{ topic ? 'Preparing your personalized quiz experience' : 'Setting up your quiz environment' }}
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +45,7 @@ const getQuizSettings = () => {
   const hasValidSession = savedSession && savedSession.topicKey === route.params.topicKey
   
   if (hasValidSession) {
-    console.log('Using localStorage settings (most efficient)')
+    //console.log('Using localStorage settings (most efficient)')
     return {
       source: 'localStorage',
       settings: {
@@ -53,7 +59,7 @@ const getQuizSettings = () => {
     }
   }
   
-  console.log('Using route parameters (fallback)')
+  //console.log('Using route parameters (fallback)')
   return {
     source: 'routeParams',
     settings: {
@@ -97,47 +103,53 @@ onMounted(async () => {
           config: settings.value,
           startedAt: new Date().toISOString()
         })
-        console.log('Saved route parameter settings to localStorage for future efficiency')
+        //console.log('Saved route parameter settings to localStorage for future efficiency')
       }
       
-      // Now fetch questions from the backend
-      try {
-        const questionsResponse = await QuizAPI.fetchQuestions(topic.value.topic_key, {
-          questionCount: settings.value.questionCount,
-          difficulty: settings.value.difficulty !== 'mixed' ? settings.value.difficulty : null,
-          round: route.query.round || 1, // Use round from query or default to 1
-          topicArea: route.query.topicArea || null
-        })
-        
-        if (questionsResponse.success && questionsResponse.questions.length > 0) {
-          // Transform questions to match QuizView's expected format
-          questions.value = questionsResponse.questions.map(q => ({
-            ...q,
-            correct: q.correct_answer // Normalize field name
-          }))
+      // Check if we have questions in session first
+      const currentSession = StorageService.getQuizSession()
+      const hasStoredQuestions = currentSession && 
+                                currentSession.topicKey === topic.value.topic_key && 
+                                currentSession.questions && 
+                                currentSession.questions.length > 0
+      
+      if (hasStoredQuestions) {
+        questions.value = currentSession.questions
+      } else {
+        // Fetch questions from the backend
+        try {
+          const questionsResponse = await QuizAPI.fetchQuestions(topic.value.topic_key, {
+            questionCount: settings.value.questionCount,
+            difficulty: settings.value.difficulty !== 'mixed' ? settings.value.difficulty : null,
+            round: route.query.round || 1, // Use round from query or default to 1
+            topicArea: route.query.topicArea || null
+          })
           
-          // Update the session with loaded questions info
-          const currentSession = StorageService.getQuizSession()
-          if (currentSession && currentSession.topicKey === topic.value.topic_key) {
+          if (questionsResponse.success && questionsResponse.questions.length > 0) {
+            // Use questions as returned by backend
+            questions.value = questionsResponse.questions
+            
+            // Store questions in session for future use
             StorageService.saveQuizSession({
               ...currentSession,
+              questions: questions.value,
               questionsLoaded: true,
               questionsCount: questions.value.length,
               lastAccessed: new Date().toISOString()
             })
+            
+            //console.log(`Loaded and stored ${questions.value.length} questions from backend`)
+          } else {
+            throw new Error('No questions available for this topic')
           }
-          
-          console.log(`Loaded ${questions.value.length} questions from backend`)
-        } else {
-          throw new Error('No questions available for this topic')
+        } catch (questionsError) {
+          console.error('Error loading questions:', questionsError)
+          handleError(new Error('Failed to load quiz questions. Please try again.'))
+          setTimeout(() => {
+            router.push({ name: 'topic', params: { topicSlug: topic.value.slug } })
+          }, 2000)
+          return
         }
-      } catch (questionsError) {
-        console.error('Error loading questions:', questionsError)
-        handleError(new Error('Failed to load quiz questions. Please try again.'))
-        setTimeout(() => {
-          router.push({ name: 'topic', params: { topicSlug: topic.value.slug } })
-        }, 2000)
-        return
       }
       
       // Update document title for SEO
@@ -176,7 +188,7 @@ const handleQuizComplete = (results) => {
     // Clear the current quiz session
     StorageService.clearQuizSession()
     
-    console.log('Quiz completed:', results)
+    //console.log('Quiz completed:', results)
     
     // Redirect to the topic page with results
     router.push({

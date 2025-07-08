@@ -221,6 +221,47 @@ export class StorageService {
       console.error('Failed to clear all data:', error)
     }
   }
+
+  /**
+   * Debug method to inspect quiz session data
+   * @returns {Object} Current quiz session with detailed info
+   */
+  static inspectQuizSession() {
+    try {
+      const session = this.getQuizSession()
+      if (!session) {
+        console.log('No quiz session found in localStorage')
+        return null
+      }
+
+      console.log('=== Quiz Session Inspection ===')
+      console.log('Session keys:', Object.keys(session))
+      console.log('Topic Key:', session.topicKey)
+      console.log('Has questions:', !!session.questions)
+      
+      if (session.questions) {
+        console.log('Number of questions:', session.questions.length)
+        if (session.questions.length > 0) {
+          console.log('First question keys:', Object.keys(session.questions[0]))
+          console.log('First question sample:', {
+            id: session.questions[0].id,
+            question: session.questions[0].question ? session.questions[0].question.substring(0, 100) + '...' : 'NO QUESTION FIELD',
+            options: session.questions[0].options,
+            answer: session.questions[0].answer,
+            is_multiple: session.questions[0].is_multiple
+          })
+        }
+      }
+      
+      console.log('Config:', session.config)
+      console.log('================================')
+      
+      return session
+    } catch (error) {
+      console.error('Failed to inspect quiz session:', error)
+      return null
+    }
+  }
 }
 
 export default StorageService

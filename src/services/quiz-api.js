@@ -14,7 +14,7 @@ export class QuizAPI {
    */
   static async fetchQuestions(topicSlug, options = {}) {
     try {
-      console.log('Fetching questions with options:', options)
+      //console.log('Fetching questions with options:', options)
       
       // Use the existing API infrastructure with the quiz-specific endpoint
       const data = await apiEndpoints.getQuizQuestions(topicSlug, {
