@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { config } from '../config';
+import { config } from '../config/index.js';
 // Create axios instance with default config
 const api = axios.create({
     baseURL: config.apiBaseUrl,
@@ -57,7 +57,35 @@ const setCachedData = (key, data) => {
 export const apiEndpoints = {
     getTopics: () => api.get('/topics'),
     getTopicBySlug: (topicSlug) => api.get(`/topics/${topicSlug}`),
-    getTopicQuestions: (topicSlug) => api.get(`/topics/${topicSlug}/questions`),
+    getTopicQuestions: (topicSlug, params = {}) => api.get(`/topics/${topicSlug}/questions`, { params }),
+    
+    // Quiz-specific endpoints
+    getQuizQuestions: (topicSlug, options = {}) => {
+        const params = {}
+        
+        if (options.questionCount) params.count = options.questionCount
+        if (options.difficulty && options.difficulty !== 'mixed') params.difficulty = options.difficulty
+        if (options.round) params.round = options.round
+        if (options.topicArea) params.topic_area = options.topicArea
+        if (options.randomize) params.randomize = options.randomize
+        
+        return api.get(`/topics/${topicSlug}/questions`, { params })
+    },
+    
+    submitQuizResults: (topicSlug, results) => api.post(`/topics/${topicSlug}/quiz-results`, results),
+    
+    getQuizStatistics: (topicSlug) => api.get(`/topics/${topicSlug}/quiz-stats`),
+    
+    // User progress endpoints
+    getUserProgress: (topicSlug) => api.get(`/topics/${topicSlug}/progress`),
+    updateUserProgress: (topicSlug, progress) => api.post(`/topics/${topicSlug}/progress`, progress),
+    
+    // Topic areas and categorization
+    getTopicAreas: (topicSlug) => api.get(`/topics/${topicSlug}/areas`),
+    
+    // Question management (for potential admin features)
+    getQuestionById: (questionId) => api.get(`/questions/${questionId}`),
+    
     getHomepageData: (sections = {}, options = {}) => {
         const cacheKey = `homepageData_${JSON.stringify(sections)}_${JSON.stringify(options)}`;
         const cachedData = getCachedData(cacheKey);

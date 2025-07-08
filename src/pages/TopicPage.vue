@@ -118,76 +118,66 @@
           </div>
         </div>
 
-        <!-- Quick Start and Quiz Configuration -->
+        <!-- Quiz Options -->
         <div class="grid md:grid-cols-2 gap-8">
           <!-- Quick Start Quiz -->
           <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Quick Start Quiz</h2>
-            <p class="text-gray-600 mb-6">
-              Start a quiz immediately with default settings based on your topic's content.
-            </p>
-            
-            <!-- Default Settings Preview -->
-            <div class="bg-gray-50 rounded-lg p-4 mb-6">
-              <h3 class="text-sm font-medium text-gray-700 mb-3">Default Settings</h3>
-              <ul class="space-y-2 text-sm text-gray-600">
-                <li>• Questions: {{ Math.min(25, topic.questions_count) }}</li>
-                <li>• Difficulty: Mixed (All levels)</li>
-                <li>• Time: Unlimited</li>
-                <li>• Areas: All topic areas</li>
-              </ul>
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-semibold text-gray-800">Quick Start Quiz</h2>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Recommended
+              </span>
             </div>
-
-            <button
-              @click="startQuickQuiz"
-              class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent text-lg font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-all duration-200 hover:scale-105"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              Start Quick Quiz
-            </button>
-          </div>
-
-          <!-- Custom Quiz Configuration -->
-          <div class="bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Custom Quiz Configuration</h2>
             <p class="text-gray-600 mb-6">
-              Customize your quiz experience with specific settings.
+              Start a quiz immediately with optimized settings. Perfect for quick practice sessions.
             </p>
             
+            <!-- Quick Quiz Settings Panel -->
+            <QuizSettingsPanel
+              v-model="quickQuizSettings"
+              quiz-type="quick"
+              class="mb-6"
+            />
+
             <button
-              @click="toggleCustomConfiguration"
-              class="w-full inline-flex items-center justify-center px-6 py-3 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+              @click="existingQuizSession ? continueQuiz() : startQuickQuiz()"
+              :disabled="isStartingQuiz"
+              class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent text-lg font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <svg v-if="isStartingQuiz" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              {{ showConfiguration ? 'Hide Custom Options' : 'Customize Quiz Settings' }}
-              <svg class="w-4 h-4 ml-2 transition-transform duration-200" :class="{ 'rotate-180': showConfiguration }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              <svg v-else class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path v-if="!existingQuizSession" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-9-4V6a2 2 0 012-2h6a2 2 0 012 2v4M7 16a4 4 0 108 0v6H7v-6z" />
               </svg>
+              {{ isStartingQuiz ? 'Starting Quiz...' : (existingQuizSession ? 'Continue Quiz' : 'Start Quick Quiz') }}
             </button>
           </div>
-        </div>
 
-        <!-- Custom Quiz Configuration Panel -->
-        <div 
-          ref="configurationPanel"
-          v-if="showConfiguration" 
-          class="bg-white rounded-lg shadow-xl border-2 border-blue-200 p-8 transition-all duration-300 ease-in-out"
-          :class="{ 'ring-4 ring-blue-100 ring-opacity-75': isConfigurationHighlighted }"
-        >
-          <h2 class="text-2xl font-semibold text-gray-800 mb-6">Quiz Configuration</h2>
-          
-          <div class="grid md:grid-cols-2 gap-8">
+          <!-- Custom Quiz -->
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Custom Quiz</h2>
+            <p class="text-gray-600 mb-6">
+              Customize your quiz experience with specific difficulty levels and advanced settings.
+            </p>
+            
+            <!-- Custom Quiz Settings Panel -->
+            <QuizSettingsPanel
+              v-model="customQuizSettings"
+              quiz-type="custom"
+              class="mb-6"
+            />
+
             <!-- Difficulty Selection -->
-            <div>
+            <div class="mb-6">
               <label class="block text-sm font-medium text-gray-700 mb-3">Difficulty Level</label>
               <div class="space-y-2">
                 <div
-                  class="flex items-center p-3 border rounded-lg cursor-pointer transition-colors border-gray-200 hover:border-gray-300"
+                  class="flex items-center p-3 border rounded-lg cursor-pointer transition-colors"
+                  :class="selectedDifficulty === 'mixed' ? 
+                    'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'"
                   @click="selectedDifficulty = 'mixed'"
                 >
                   <input
@@ -199,6 +189,11 @@
                   <div class="ml-3">
                     <div class="text-sm font-medium text-gray-900">Mixed Difficulty</div>
                     <div class="text-xs text-gray-500">Questions from all difficulty levels</div>
+                  </div>
+                  <div class="ml-auto">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      {{ topic.questions_count }} questions
+                    </span>
                   </div>
                 </div>
                 <div
@@ -228,119 +223,35 @@
               </div>
             </div>
 
-            <!-- Quiz Settings -->
-            <div class="space-y-6">
-              <!-- Number of Questions -->
-              <div>
-                <label for="questionCount" class="block text-sm font-medium text-gray-700 mb-2">
-                  Number of Questions
-                </label>
-                <input
-                  id="questionCount"
-                  type="number"
-                  v-model="questionCount"
-                  min="5"
-                  :max="getMaxQuestions()"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-                <p class="text-xs text-gray-500 mt-1">
-                  Available: {{ getMaxQuestions() }} questions for selected difficulty
-                </p>
-              </div>
-
-              <!-- Timed Quiz -->
-              <div>
-                <div class="flex items-center">
-                  <input
-                    id="timedQuiz"
-                    type="checkbox"
-                    v-model="timedQuiz"
-                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <label for="timedQuiz" class="ml-2 text-sm font-medium text-gray-700">
-                    Enable Timed Quiz
-                  </label>
-                </div>
-                
-                <!-- Time Limit -->
-                <div v-if="timedQuiz" class="mt-3">
-                  <label for="timeLimit" class="block text-sm font-medium text-gray-700 mb-2">
-                    Time Limit (minutes)
-                  </label>
-                  <select
-                    id="timeLimit"
-                    v-model="timeLimit"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="10">10 minutes</option>
-                    <option value="15">15 minutes</option>
-                    <option value="20">20 minutes</option>
-                    <option value="30">30 minutes</option>
-                    <option value="45">45 minutes</option>
-                    <option value="60">60 minutes</option>
-                    <option value="90">90 minutes (1.5 hours)</option>
-                    <option value="120">120 minutes (2 hours)</option>
-                    <option value="180">180 minutes (3 hours)</option>
-                    <option value="custom">Custom time</option>
-                  </select>
-                  
-                  <!-- Custom Time Input -->
-                  <div v-if="timeLimit === 'custom'" class="mt-3">
-                    <label for="customTimeLimit" class="block text-sm font-medium text-gray-700 mb-2">
-                      Custom Time Limit (minutes)
-                    </label>
-                    <input
-                      id="customTimeLimit"
-                      type="number"
-                      v-model="customTimeLimit"
-                      min="5"
-                      max="180"
-                      placeholder="Enter minutes (5-180)"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <p class="text-xs text-gray-500 mt-1">
-                      Enter a time between 5 minutes and 3 hours (180 minutes)
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Allow Overtime -->
-              <div v-if="timedQuiz">
-                <div class="flex items-center">
-                  <input
-                    id="allowOvertime"
-                    type="checkbox"
-                    v-model="allowOvertime"
-                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <label for="allowOvertime" class="ml-2 text-sm font-medium text-gray-700">
-                    Allow overtime completion
-                  </label>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">
-                  Continue quiz even after time expires
-                </p>
-              </div>
+            <!-- Number of Questions -->
+            <div class="mb-6">
+              <label for="questionCount" class="block text-sm font-medium text-gray-700 mb-2">
+                Number of Questions
+              </label>
+              <input
+                id="questionCount"
+                type="number"
+                v-model="questionCount"
+                min="5"
+                :max="getMaxQuestions()"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <p class="text-xs text-gray-500 mt-1">
+                Available: {{ getMaxQuestions() }} questions for selected difficulty
+              </p>
             </div>
-          </div>
-
-          <!-- Start Custom Quiz Button -->
-          <div class="mt-8 text-center">
+            
             <button
               @click="startCustomQuiz"
-              class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition-all duration-200 hover:scale-105"
+              class="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent text-lg font-medium rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition-all duration-200 hover:scale-105"
             >
               <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM13 8h4" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               Start Custom Quiz
-              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
             </button>
-          </div>
-        </div>
+          </div>        </div>
       </div>
 
       <div v-else class="flex justify-center items-center min-h-[60vh]">
@@ -354,23 +265,26 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchTopic } from '../services/page-utils'
+import { StorageService } from '../services/storage.js'
+import QuizSettingsPanel from '../components/quiz/ui/QuizSettingsPanel.vue'
 
 const route = useRoute()
 const router = useRouter()
 const topic = ref(null)
-const configurationPanel = ref(null)
 
-// UI state
-const showConfiguration = ref(false)
-const isConfigurationHighlighted = ref(false)
+// Check for existing quiz session
+const existingQuizSession = ref(null)
+
+// Loading states
+const isStartingQuiz = ref(false)
 
 // Quiz configuration
 const selectedDifficulty = ref('mixed') // Default to mixed difficulty
 const questionCount = ref(25) // Default to 25 questions
-const timedQuiz = ref(false)
-const timeLimit = ref(15) // Default to 15 minutes
-const customTimeLimit = ref(30) // Default custom time
-const allowOvertime = ref(true)
+
+// Quiz settings from storage
+const quickQuizSettings = ref(StorageService.getQuizSettings().quick)
+const customQuizSettings = ref(StorageService.getQuizSettings().custom)
 
 // Difficulty levels based on backend enum
 const difficultyLevels = [
@@ -442,6 +356,12 @@ onMounted(async () => {
     if (response.status === 'success' && response.data) {
       topic.value = response.data
       
+      // Check for existing quiz session for this topic
+      const quizSession = StorageService.getQuizSession()
+      if (quizSession && quizSession.topicKey === topic.value.topic_key) {
+        existingQuizSession.value = quizSession
+      }
+      
       // Set default question count based on available questions
       questionCount.value = Math.min(25, topic.value.questions_count)
       
@@ -475,68 +395,102 @@ onMounted(async () => {
   }
 })
 
-// Toggle custom configuration with smooth scroll and highlight
-function toggleCustomConfiguration() {
-  showConfiguration.value = !showConfiguration.value
-  
-  if (showConfiguration.value) {
-    // Wait for DOM update, then scroll and highlight
-    setTimeout(() => {
-      if (configurationPanel.value) {
-        // Smooth scroll to the configuration panel
-        configurationPanel.value.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start',
-          inline: 'nearest'
-        })
-        
-        // Add highlight effect
-        isConfigurationHighlighted.value = true
-        
-        // Remove highlight after animation
-        setTimeout(() => {
-          isConfigurationHighlighted.value = false
-        }, 2000)
-      }
-    }, 100)
+// Continue existing quiz session
+function continueQuiz() {
+  if (existingQuizSession.value) {
+    router.push({
+      name: 'quiz',
+      params: { topicKey: topic.value.topic_key },
+      query: existingQuizSession.value.config
+    })
   }
 }
 
-// Quick quiz with default settings
-function startQuickQuiz() {
-  const quizConfig = {
-    difficulty: 'mixed',
-    questionCount: Math.min(25, topic.value.questions_count),
-    timedQuiz: false,
-    timeLimit: null,
-    allowOvertime: true
-  }
+// Quick quiz with default settings and user preferences
+async function startQuickQuiz() {
+  isStartingQuiz.value = true
+  
+  try {
+    const quizConfig = {
+      type: 'quick',
+      difficulty: 'mixed',
+      questionCount: Math.min(25, topic.value.questions_count),
+      enableTimer: quickQuizSettings.value.enableTimer,
+      timerDuration: quickQuizSettings.value.timerDuration,
+      showFeedback: quickQuizSettings.value.showFeedback,
+      showExplanations: quickQuizSettings.value.showExplanations
+    }
 
-  router.push({
-    name: 'quiz',
-    params: { topicKey: topic.value.topic_key },
-    query: quizConfig
-  })
+    // Save quiz settings to local storage
+    StorageService.saveQuizSettings({
+      quick: quickQuizSettings.value,
+      custom: customQuizSettings.value
+    })
+
+    // Save quiz session to local storage
+    StorageService.saveQuizSession({
+      topicKey: topic.value.topic_key,
+      topicTitle: topic.value.title,
+      config: quizConfig,
+      startedAt: new Date().toISOString()
+    })
+
+    console.log('Quiz settings saved to localStorage')
+
+    router.push({
+      name: 'quiz',
+      params: { topicKey: topic.value.topic_key },
+      query: quizConfig
+    })
+  } catch (error) {
+    console.error('Error starting quiz:', error)
+  } finally {
+    isStartingQuiz.value = false
+  }
 }
 
 // Custom quiz with user configuration
-function startCustomQuiz() {
-  // Determine the actual time limit to use
-  const actualTimeLimit = timeLimit.value === 'custom' ? customTimeLimit.value : timeLimit.value
+async function startCustomQuiz() {
+  isStartingQuiz.value = true
   
-  const quizConfig = {
-    difficulty: selectedDifficulty.value,
-    questionCount: questionCount.value,
-    timedQuiz: timedQuiz.value,
-    timeLimit: timedQuiz.value ? actualTimeLimit : null,
-    allowOvertime: allowOvertime.value
-  }
+  try {
+    const quizConfig = {
+      type: 'custom',
+      difficulty: selectedDifficulty.value,
+      questionCount: questionCount.value,
+      enableTimer: customQuizSettings.value.enableTimer,
+      timerDuration: customQuizSettings.value.timerDuration,
+      showFeedback: customQuizSettings.value.showFeedback,
+      showExplanations: customQuizSettings.value.showExplanations,
+      allowOvertime: customQuizSettings.value.allowOvertime
+    }
 
-  router.push({
-    name: 'quiz',
-    params: { topicKey: topic.value.topic_key },
-    query: quizConfig
-  })
+    // Save quiz settings to local storage
+    StorageService.saveQuizSettings({
+      quick: quickQuizSettings.value,
+      custom: customQuizSettings.value
+    })
+
+    // Save quiz session to local storage
+    StorageService.saveQuizSession({
+      topicKey: topic.value.topic_key,
+      topicTitle: topic.value.title,
+      config: quizConfig,
+      startedAt: new Date().toISOString()
+    })
+
+    console.log('Quiz settings saved to localStorage')
+
+    router.push({
+      name: 'quiz',
+      params: { topicKey: topic.value.topic_key },
+      query: quizConfig
+    })
+  } catch (error) {
+    console.error('Error starting quiz:', error)
+  } finally {
+    isStartingQuiz.value = false
+  }
 }
 
 // Watch for difficulty changes to update question count

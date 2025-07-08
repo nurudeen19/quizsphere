@@ -3,13 +3,16 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
     <div class="container mx-auto px-4">
       <QuizView
-        v-if="topic"
+        v-if="topic && questions.length > 0"
         :topic="topic"
+        :questions="questions"
         :settings="settings"
         @complete="handleQuizComplete"
       />
       <div v-else class="flex justify-center items-center min-h-[60vh]">
-        <div class="animate-pulse text-blue-600">Loading quiz...</div>
+        <div class="animate-pulse text-blue-600">
+          {{ topic ? 'Loading questions...' : 'Loading quiz...' }}
+        </div>
       </div>
     </div>
   </div>
@@ -19,20 +22,62 @@
 import { ref, onMounted, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { fetchTopic } from '../services/page-utils'
+import { StorageService } from '../services/storage.js'
+import { QuizAPI } from '../services/quiz-api.js'
 import QuizView from '../components/quiz/QuizView.vue'
 
 const route = useRoute()
 const router = useRouter()
 const handleError = inject('handleError')
 const topic = ref(null)
-const settings = ref({
-  questionsPerChapter: 10,
-  timePerQuestion: 60,
-  showTimer: true
-})
+const questions = ref([])
+const settings = ref({})
+
+// Utility function to get quiz settings from the most efficient source
+const getQuizSettings = () => {
+  const savedSession = StorageService.getQuizSession()
+  const hasValidSession = savedSession && savedSession.topicKey === route.params.topicKey
+  
+  if (hasValidSession) {
+    console.log('Using localStorage settings (most efficient)')
+    return {
+      source: 'localStorage',
+      settings: {
+        ...savedSession.config,
+        // Ensure legacy compatibility
+        questionsPerChapter: savedSession.config.questionCount || 10,
+        timePerQuestion: savedSession.config.enableTimer ? 
+          Math.floor((savedSession.config.timerDuration * 60) / savedSession.config.questionCount) : 60,
+        showTimer: savedSession.config.enableTimer
+      }
+    }
+  }
+  
+  console.log('Using route parameters (fallback)')
+  return {
+    source: 'routeParams',
+    settings: {
+      type: route.query.type || 'quick',
+      difficulty: route.query.difficulty || 'mixed',
+      questionCount: parseInt(route.query.questionCount) || 25,
+      enableTimer: route.query.enableTimer === 'true',
+      timerDuration: route.query.timerDuration ? parseInt(route.query.timerDuration) : 15,
+      showFeedback: route.query.showFeedback !== 'false',
+      showExplanations: route.query.showExplanations !== 'false',
+      allowOvertime: route.query.allowOvertime !== 'false',
+      
+      // Legacy settings for compatibility
+      questionsPerChapter: parseInt(route.query.questionCount) || 10,
+      timePerQuestion: route.query.enableTimer === 'true' ? 
+        Math.floor((parseInt(route.query.timerDuration || 15) * 60) / parseInt(route.query.questionCount || 25)) : 60,
+      showTimer: route.query.enableTimer === 'true'
+    }
+  }
+}
 
 onMounted(async () => {
   try {
+    // First, load the topic
     const response = await fetchTopic(route.params.topicKey)
     if (response.status === 'success' && response.data) {
       topic.value = {
@@ -40,19 +85,59 @@ onMounted(async () => {
         topic: response.data.topic_key
       }
       
-      // Parse quiz configuration from query parameters
-      if (route.query) {
-        settings.value = {
-          difficulty: route.query.difficulty || 'mixed',
-          questionCount: parseInt(route.query.questionCount) || 25,
-          timedQuiz: route.query.timedQuiz === 'true',
-          timeLimit: route.query.timeLimit ? parseInt(route.query.timeLimit) : null,
-          allowOvertime: route.query.allowOvertime !== 'false',
-          // Legacy settings for compatibility
-          questionsPerChapter: parseInt(route.query.questionCount) || 10,
-          timePerQuestion: route.query.timeLimit ? Math.floor((parseInt(route.query.timeLimit) * 60) / parseInt(route.query.questionCount)) : 60,
-          showTimer: route.query.timedQuiz === 'true'
+      // Get quiz settings from the most efficient source
+      const { source, settings: quizSettings } = getQuizSettings()
+      settings.value = quizSettings
+      
+      // If settings came from route params, save them for future efficiency
+      if (source === 'routeParams') {
+        StorageService.saveQuizSession({
+          topicKey: topic.value.topic_key,
+          topicTitle: topic.value.title,
+          config: settings.value,
+          startedAt: new Date().toISOString()
+        })
+        console.log('Saved route parameter settings to localStorage for future efficiency')
+      }
+      
+      // Now fetch questions from the backend
+      try {
+        const questionsResponse = await QuizAPI.fetchQuestions(topic.value.topic_key, {
+          questionCount: settings.value.questionCount,
+          difficulty: settings.value.difficulty !== 'mixed' ? settings.value.difficulty : null,
+          round: route.query.round || 1, // Use round from query or default to 1
+          topicArea: route.query.topicArea || null
+        })
+        
+        if (questionsResponse.success && questionsResponse.questions.length > 0) {
+          // Transform questions to match QuizView's expected format
+          questions.value = questionsResponse.questions.map(q => ({
+            ...q,
+            correct: q.correct_answer // Normalize field name
+          }))
+          
+          // Update the session with loaded questions info
+          const currentSession = StorageService.getQuizSession()
+          if (currentSession && currentSession.topicKey === topic.value.topic_key) {
+            StorageService.saveQuizSession({
+              ...currentSession,
+              questionsLoaded: true,
+              questionsCount: questions.value.length,
+              lastAccessed: new Date().toISOString()
+            })
+          }
+          
+          console.log(`Loaded ${questions.value.length} questions from backend`)
+        } else {
+          throw new Error('No questions available for this topic')
         }
+      } catch (questionsError) {
+        console.error('Error loading questions:', questionsError)
+        handleError(new Error('Failed to load quiz questions. Please try again.'))
+        setTimeout(() => {
+          router.push({ name: 'topic', params: { topicSlug: topic.value.slug } })
+        }, 2000)
+        return
       }
       
       // Update document title for SEO
@@ -63,7 +148,7 @@ onMounted(async () => {
       if (metaDescription) {
         metaDescription.setAttribute('content', 
           `Test your knowledge of ${topic.value.title} with interactive quizzes. ` +
-          `Practice ${settings.value.questionCount} questions${settings.value.timedQuiz ? ` in ${settings.value.timeLimit} minutes` : ''}.`)
+          `Practice ${settings.value.questionCount} questions${settings.value.enableTimer ? ` in ${settings.value.timerDuration} minutes` : ''}.`)
       }
     } else {
       throw new Error('Failed to load quiz topic')
@@ -79,23 +164,17 @@ onMounted(async () => {
 
 const handleQuizComplete = (results) => {
   try {
-    // Save results to localStorage for persistence
-    const quizResults = {
-      topicKey: topic.value.topic_key,
-      topicTitle: topic.value.title,
+    // Update quiz statistics using StorageService
+    StorageService.updateQuizStats(topic.value.topic_key, {
       score: results.score,
       totalQuestions: results.totalQuestions,
       correctAnswers: results.correctAnswers,
-      completedAt: new Date().toISOString(),
       difficulty: settings.value.difficulty,
-      timeLimit: settings.value.timeLimit,
       timeTaken: results.timeTaken
-    }
+    })
     
-    // Store in localStorage
-    const existingResults = JSON.parse(localStorage.getItem('quizsphere-quiz-results') || '[]')
-    existingResults.unshift(quizResults) // Add to beginning
-    localStorage.setItem('quizsphere-quiz-results', JSON.stringify(existingResults.slice(0, 10))) // Keep only last 10 results
+    // Clear the current quiz session
+    StorageService.clearQuizSession()
     
     console.log('Quiz completed:', results)
     
