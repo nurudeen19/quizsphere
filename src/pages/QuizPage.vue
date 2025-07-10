@@ -1,4 +1,3 @@
-# Vue Quiz Page Component
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
     <div class="container mx-auto px-4">
@@ -7,7 +6,10 @@
         :topic="topic"
         :questions="questions"
         :settings="settings"
+        :current-round="currentRound"
+        :resume-from-index="resumeFromIndex"
         @complete="handleQuizComplete"
+        @round-complete="handleRoundComplete"
       />
       <div v-else class="flex justify-center items-center min-h-[60vh]">
         <div class="text-center">
@@ -38,6 +40,8 @@ const handleError = inject('handleError')
 const topic = ref(null)
 const questions = ref([])
 const settings = ref({})
+const currentRound = ref(1)
+const resumeFromIndex = ref(0)
 
 // Utility function to get quiz settings from the most efficient source
 const getQuizSettings = () => {
@@ -45,7 +49,6 @@ const getQuizSettings = () => {
   const hasValidSession = savedSession && savedSession.topicKey === route.params.topicKey
   
   if (hasValidSession) {
-    //console.log('Using localStorage settings (most efficient)')
     return {
       source: 'localStorage',
       settings: {
@@ -59,7 +62,6 @@ const getQuizSettings = () => {
     }
   }
   
-  //console.log('Using route parameters (fallback)')
   return {
     source: 'routeParams',
     settings: {
@@ -103,7 +105,6 @@ onMounted(async () => {
           config: settings.value,
           startedAt: new Date().toISOString()
         })
-        //console.log('Saved route parameter settings to localStorage for future efficiency')
       }
       
       // Check if we have questions in session first
@@ -111,36 +112,57 @@ onMounted(async () => {
       const hasStoredQuestions = currentSession && 
                                 currentSession.topicKey === topic.value.topic_key && 
                                 currentSession.questions && 
-                                currentSession.questions.length > 0
+                                currentSession.questions.length > 0 &&
+                                !currentSession.completed
+
+      // Get current round number
+      const requestedRound = parseInt(route.query.round) || 1
+      const latestRound = StorageService.getLatestRoundNumber(topic.value.topic_key)
+      currentRound.value = requestedRound
       
-      if (hasStoredQuestions) {
+      if (hasStoredQuestions && StorageService.canResumeSession()) {
+        // Resume existing session
         questions.value = currentSession.questions
+        resumeFromIndex.value = currentSession.currentQuestionIndex || 0
+        currentRound.value = currentSession.round || 1
       } else {
         // Fetch questions from the backend
         try {
+          // Get previously answered question IDs to exclude
+          const previousRounds = StorageService.getQuizRounds(topic.value.topic_key)
+          const excludeIds = previousRounds
+            .filter(round => round.round < currentRound.value)
+            .flatMap(round => round.questionIds || [])
+
           const questionsResponse = await QuizAPI.fetchQuestions(topic.value.topic_key, {
             questionCount: settings.value.questionCount,
             difficulty: settings.value.difficulty !== 'mixed' ? settings.value.difficulty : null,
-            round: route.query.round || 1, // Use round from query or default to 1
-            topicArea: route.query.topicArea || null
+            round: currentRound.value,
+            topicArea: route.query.topicArea || null,
+            excludeIds
           })
           
           if (questionsResponse.success && questionsResponse.questions.length > 0) {
             // Use questions as returned by backend
             questions.value = questionsResponse.questions
+            resumeFromIndex.value = 0
             
             // Store questions in session for future use
             StorageService.saveQuizSession({
-              ...currentSession,
+              topicKey: topic.value.topic_key,
+              topicTitle: topic.value.title,
+              config: settings.value,
               questions: questions.value,
               questionsLoaded: true,
               questionsCount: questions.value.length,
+              currentQuestionIndex: 0,
+              round: currentRound.value,
+              completed: false,
+              startedAt: new Date().toISOString(),
               lastAccessed: new Date().toISOString()
             })
-            
-            //console.log(`Loaded and stored ${questions.value.length} questions from backend`)
           } else {
-            throw new Error('No questions available for this topic')
+            throw new Error('No questions available for this topic and round')
           }
         } catch (questionsError) {
           console.error('Error loading questions:', questionsError)
@@ -174,33 +196,30 @@ onMounted(async () => {
   }
 })
 
+const handleRoundComplete = (roundData) => {
+  try {
+    console.log('Round completed:', roundData)
+    
+    // Check if user wants to continue to next round
+    // This could be handled by showing a modal or redirecting
+    
+    // For now, just log the completion
+    console.log(`Round ${roundData.round} completed with score: ${Math.round(roundData.score)}%`)
+  } catch (error) {
+    handleError(error)
+  }
+}
+
 const handleQuizComplete = (results) => {
   try {
-    // Update quiz statistics using StorageService
-    StorageService.updateQuizStats(topic.value.topic_key, {
-      score: results.score,
-      totalQuestions: results.totalQuestions,
-      correctAnswers: results.correctAnswers,
-      difficulty: settings.value.difficulty,
-      timeTaken: results.timeTaken
-    })
-    
     // Clear the current quiz session
     StorageService.clearQuizSession()
     
-    //console.log('Quiz completed:', results)
+    // Log completion for debugging
+    console.log('Quiz completed:', results)
     
-    // Redirect to the topic page with results
-    router.push({
-      name: 'topic',
-      params: { topicSlug: topic.value.slug },
-      query: { 
-        completed: 'true', 
-        score: Math.round(results.score),
-        questions: results.totalQuestions,
-        correct: results.correctAnswers
-      }
-    })
+    // Don't auto-redirect - let the user manually navigate from the completion page
+    // The completion summary will be shown in QuizView component
   } catch (error) {
     handleError(error)
   }

@@ -45,6 +45,15 @@
           </div>
         </div>
 
+        <!-- Quiz Statistics Section -->
+        <QuizStatsPanel 
+          v-if="quizStats" 
+          :topic-key="topic.topic_key"
+          :topic-title="topic.title"
+          :stats="quizStats"
+          class="mb-8"
+        />
+
         <!-- Stats and Topic Areas -->
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white rounded-lg shadow-lg p-6">
@@ -152,7 +161,7 @@
                 <path v-if="!existingQuizSession" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-9-4V6a2 2 0 012-2h6a2 2 0 012 2v4M7 16a4 4 0 108 0v6H7v-6z" />
               </svg>
-              {{ isStartingQuiz ? 'Starting Quiz...' : (existingQuizSession ? 'Continue Quiz' : 'Start Quick Quiz') }}
+              {{ isStartingQuiz ? 'Starting Quiz...' : getQuizButtonText() }}
             </button>
           </div>
 
@@ -267,10 +276,12 @@ import { useRoute, useRouter } from 'vue-router'
 import { fetchTopic } from '../services/page-utils'
 import { StorageService } from '../services/storage.js'
 import QuizSettingsPanel from '../components/quiz/ui/QuizSettingsPanel.vue'
+import QuizStatsPanel from '../components/quiz/ui/QuizStatsPanel.vue'
 
 const route = useRoute()
 const router = useRouter()
 const topic = ref(null)
+const quizStats = ref(null)
 
 // Check for existing quiz session
 const existingQuizSession = ref(null)
@@ -362,6 +373,9 @@ onMounted(async () => {
         existingQuizSession.value = quizSession
       }
       
+      // Load quiz statistics for this topic
+      quizStats.value = StorageService.getTopicQuizStats(topic.value.topic_key)
+      
       // Set default question count based on available questions
       questionCount.value = Math.min(25, topic.value.questions_count)
       
@@ -395,13 +409,31 @@ onMounted(async () => {
   }
 })
 
-// Continue existing quiz session
+// Continue existing quiz session or start next round
 function continueQuiz() {
-  if (existingQuizSession.value) {
+  if (existingQuizSession.value && StorageService.canResumeSession()) {
+    // Resume incomplete session
     router.push({
       name: 'quiz',
       params: { topicKey: topic.value.topic_key },
-      query: existingQuizSession.value.config
+      query: {
+        ...existingQuizSession.value.config,
+        round: existingQuizSession.value.round || 1
+      }
+    })
+  } else {
+    // Start next round
+    const nextRound = StorageService.getLatestRoundNumber(topic.value.topic_key) + 1
+    router.push({
+      name: 'quiz',
+      params: { topicKey: topic.value.topic_key },
+      query: {
+        ...quickQuizSettings.value,
+        type: 'quick',
+        difficulty: 'mixed',
+        questionCount: Math.min(25, topic.value.questions_count),
+        round: nextRound
+      }
     })
   }
 }
@@ -411,6 +443,9 @@ async function startQuickQuiz() {
   isStartingQuiz.value = true
   
   try {
+    // Determine round number
+    const nextRound = StorageService.getLatestRoundNumber(topic.value.topic_key) + 1
+    
     const quizConfig = {
       type: 'quick',
       difficulty: 'mixed',
@@ -418,21 +453,14 @@ async function startQuickQuiz() {
       enableTimer: quickQuizSettings.value.enableTimer,
       timerDuration: quickQuizSettings.value.timerDuration,
       showFeedback: quickQuizSettings.value.showFeedback,
-      showExplanations: quickQuizSettings.value.showExplanations
+      showExplanations: quickQuizSettings.value.showExplanations,
+      round: nextRound
     }
 
     // Save quiz settings to local storage
     StorageService.saveQuizSettings({
       quick: quickQuizSettings.value,
       custom: customQuizSettings.value
-    })
-
-    // Save quiz session to local storage
-    StorageService.saveQuizSession({
-      topicKey: topic.value.topic_key,
-      topicTitle: topic.value.title,
-      config: quizConfig,
-      startedAt: new Date().toISOString()
     })
 
     console.log('Quiz settings saved to localStorage')
@@ -454,6 +482,9 @@ async function startCustomQuiz() {
   isStartingQuiz.value = true
   
   try {
+    // Determine round number
+    const nextRound = StorageService.getLatestRoundNumber(topic.value.topic_key) + 1
+    
     const quizConfig = {
       type: 'custom',
       difficulty: selectedDifficulty.value,
@@ -462,7 +493,8 @@ async function startCustomQuiz() {
       timerDuration: customQuizSettings.value.timerDuration,
       showFeedback: customQuizSettings.value.showFeedback,
       showExplanations: customQuizSettings.value.showExplanations,
-      allowOvertime: customQuizSettings.value.allowOvertime
+      allowOvertime: customQuizSettings.value.allowOvertime,
+      round: nextRound
     }
 
     // Save quiz settings to local storage
@@ -490,6 +522,20 @@ async function startCustomQuiz() {
     console.error('Error starting quiz:', error)
   } finally {
     isStartingQuiz.value = false
+  }
+}
+
+// Utility function to get the correct button text
+function getQuizButtonText() {
+  if (existingQuizSession.value && StorageService.canResumeSession()) {
+    return `Continue Quiz (Round ${existingQuizSession.value.round || 1})`
+  } else {
+    const nextRound = StorageService.getLatestRoundNumber(topic.value.topic_key) + 1
+    if (nextRound === 1) {
+      return 'Start Quiz'
+    } else {
+      return `Start Round ${nextRound}`
+    }
   }
 }
 
